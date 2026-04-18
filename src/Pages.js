@@ -21,7 +21,7 @@ export const DetailModal = ({ item, onClose, content }) => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.9, opacity: 0 }}
                     onClick={(e) => e.stopPropagation()}
-                    className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0a0f0d] border border-emerald-500/30 rounded-3xl relative"
+                    className="w-full max-w-4xl max-h-[90dvh] overflow-y-auto bg-[#0a0f0d] border border-emerald-500/30 rounded-3xl relative"
                 >
                     <button
                         onClick={onClose}
@@ -66,7 +66,7 @@ export const DetailModal = ({ item, onClose, content }) => {
 
 export const AllNewsPage = ({ content, lang }) => {
     return (
-        <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 min-h-screen">
+        <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 min-h-[100dvh]">
             <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-12 transition-colors">
                 <ArrowLeft size={16} />
                 <span>{content.all_news_page.back_button || "Back"}</span>
@@ -94,7 +94,7 @@ export const AllNewsPage = ({ content, lang }) => {
 
 export const AllProjectsPage = ({ content, setSelectedDetail }) => {
     return (
-        <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 min-h-screen">
+        <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 min-h-[100dvh]">
             <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-12 transition-colors">
                 <ArrowLeft size={16} />
                 <span>{content.all_projects_page.back_button || "Back"}</span>
@@ -132,7 +132,7 @@ export const NewsDetailPage = ({ content }) => {
     if (!newsItem) return <div className="pt-32 text-center text-white">News item not found</div>;
 
     return (
-        <article className="pt-32 pb-20 max-w-4xl mx-auto px-6 min-h-screen">
+        <article className="pt-32 pb-20 max-w-4xl mx-auto px-6 min-h-[100dvh]">
             <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors">
                 <ArrowLeft size={16} />
                 <span>Back</span>

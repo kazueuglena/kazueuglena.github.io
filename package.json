@@ -2,7 +2,7 @@
   "name": "github_pages",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kazueuglena.github.io/GitHub_pages/",
+  "homepage": "https://kazueuglena.github.io",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -12,6 +12,7 @@
     "lucide-react": "^0.561.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-ga4": "^2.1.0",
     "react-router-dom": "^6.30.2",
     "react-scripts": "5.0.1",
     "react-tsparticles": "^2.12.2",
@@ -19,9 +20,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "prestart": "node src/generate-news-images.js",
+    "prestart": "node src/generate-news-images.js && node scripts/generate-insight-images.js",
     "start": "react-scripts start",
-    "prebuild": "node src/generate-news-images.js",
+    "prebuild": "node src/generate-news-images.js && node scripts/generate-insight-images.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

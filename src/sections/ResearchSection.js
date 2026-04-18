@@ -12,7 +12,7 @@ const ResearchSection = ({ content }) => {
     const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
     return (
-        <section ref={targetRef} id="research" className="relative h-[300vh] bg-neutral-900/50">
+        <section ref={targetRef} id="research" className="relative h-[300dvh] bg-neutral-900/50">
             <div className="sticky top-0 flex h-screen items-center overflow-hidden">
                 <div className="absolute top-12 left-6 md:left-20 z-20">
                     <SectionHeader title={content.title} subtitle="Awards & Achievements" />
@@ -20,7 +20,7 @@ const ResearchSection = ({ content }) => {
 
                 <motion.div style={{ x }} className="flex gap-8 px-20">
                     {/* Intro Card */}
-                    <div className="flex-shrink-0 w-[400px] md:w-[600px] h-[60vh] flex flex-col justify-center p-10 bg-gradient-to-br from-emerald-900/40 to-black border border-emerald-500/20 backdrop-blur-md rounded-2xl">
+                    <div className="flex-shrink-0 w-[400px] md:w-[600px] h-[60dvh] flex flex-col justify-center p-10 bg-gradient-to-br from-emerald-900/40 to-black border border-emerald-500/20 backdrop-blur-md rounded-2xl">
                         <Trophy size={48} className="text-emerald-400 mb-6" />
                         <h3 className="text-3xl font-bold mb-6">{content.description}</h3>
                         <p className="text-gray-400 leading-relaxed mb-8">
@@ -34,7 +34,7 @@ const ResearchSection = ({ content }) => {
 
                     {/* Awards List */}
                     {content.awards.map((award, index) => (
-                        <div key={index} className="flex-shrink-0 w-[350px] md:w-[450px] h-[60vh] p-8 bg-neutral-900/80 border border-white/5 rounded-2xl flex flex-col hover:border-emerald-500/30 transition-colors duration-300">
+                        <div key={index} className="flex-shrink-0 w-[350px] md:w-[450px] h-[60dvh] p-8 bg-neutral-900/80 border border-white/5 rounded-2xl flex flex-col hover:border-emerald-500/30 transition-colors duration-300">
                             <div className="text-6xl font-bold text-white/5 mb-8">{award.year}</div>
                             <div className="flex-1">
                                 <div className="text-emerald-400 text-sm font-mono mb-2">{award.prize}</div>
@@ -49,7 +49,7 @@ const ResearchSection = ({ content }) => {
 
                     {/* Publications if available */}
                     {content.publications && content.publications.map((pub, index) => (
-                        <div key={`pub-${index}`} className="flex-shrink-0 w-[350px] md:w-[450px] h-[60vh] p-8 bg-neutral-900/80 border border-white/5 rounded-2xl flex flex-col hover:border-emerald-500/30 transition-colors duration-300">
+                        <div key={`pub-${index}`} className="flex-shrink-0 w-[350px] md:w-[450px] h-[60dvh] p-8 bg-neutral-900/80 border border-white/5 rounded-2xl flex flex-col hover:border-emerald-500/30 transition-colors duration-300">
                             <div className="text-6xl font-bold text-white/5 mb-8">{pub.year}</div>
                             <div className="flex-1">
                                 <div className="text-cyan-400 text-sm font-mono mb-2">{pub.journal}</div>

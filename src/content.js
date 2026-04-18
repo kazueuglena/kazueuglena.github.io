@@ -1666,6 +1666,7 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
                             data-hoverable="true"
                             className={`
                                 relative overflow-hidden group cursor-pointer border border-white/10 p-6 flex flex-col justify-end
+                                min-h-[350px] md:min-h-0
                                 ${isLarge ? 'md:col-span-2 md:row-span-2' : 'md:col-span-1 md:row-span-1'}
                                 bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors
                             `}
@@ -1721,7 +1722,7 @@ const NewsModal = ({ newsItem, onClose, ui }) => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.98, opacity: 0 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="bg-black/80 rounded-sm p-8 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[90vh] flex flex-col ring-1 ring-white/5"
+                    className="bg-black/80 rounded-sm p-8 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[90dvh] flex flex-col ring-1 ring-white/5"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <button data-hoverable="true" onClick={onClose} className="absolute top-6 right-6 text-gray-500 hover:text-white z-10 transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"><CloseIcon /></button>
@@ -1782,7 +1783,7 @@ const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
                     animate={{ y: 0, opacity: 1, scale: 1 }}
                     exit={{ y: 20, opacity: 0, scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[85vh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
+                    className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[85dvh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <button data-hoverable="true" onClick={onClose} className="absolute top-6 right-6 z-20 text-gray-500 hover:text-white transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"><CloseIcon /></button>
@@ -1936,7 +1937,7 @@ const AllProjectsPage = ({ content, setPage, setSelectedDetail, lang, setLang, s
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-black min-h-screen text-gray-200 relative overflow-hidden"
+            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
         >
             <BotanicalSynapse />
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
@@ -2017,7 +2018,7 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-black min-h-screen text-gray-200 relative overflow-hidden"
+            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
         >
             <BotanicalSynapse />
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
@@ -2132,7 +2133,7 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
 
     return (
         <ContentSection id="projects" title={content.projects.title}>
-            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-neutral-900/10">
+            <div className="relative w-full aspect-[4/5] md:aspect-[21/9] bg-neutral-900/10">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={projectIndex}
@@ -2150,12 +2151,12 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
                         data-hoverable="true"
                     >
                         {/* Image Side */}
-                        <div className="w-full md:w-3/5 h-3/5 md:h-full relative overflow-hidden">
+                        <div className="w-full md:w-3/5 h-1/2 md:h-full relative overflow-hidden">
                             <img src={featuredItems[projectIndex]?.image || ''} alt={featuredItems[projectIndex]?.title || ''} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/1200x675/171717/525252?text=Image+Not+Found'; }} />
                         </div>
 
                         {/* Content Side */}
-                        <div className="w-full md:w-2/5 h-2/5 md:h-full p-6 md:p-12 flex flex-col justify-center bg-transparent md:border-l border-white/5">
+                        <div className="w-full md:w-2/5 h-1/2 md:h-full p-6 md:p-12 flex flex-col justify-center bg-transparent md:border-l border-white/5">
                             <span className="block text-[10px] tracking-[0.3em] text-gray-500 mb-6 uppercase">{ui.featured_project}</span>
                             <h3 className="text-xl md:text-2xl font-normal text-gray-100 mb-4 leading-tight tracking-[0.1em] font-['Syne',sans-serif]"><AnimatedText text={featuredItems[projectIndex]?.title || ''} /></h3>
                             <p className="text-xs text-gray-500 line-clamp-3 tracking-wide leading-7"><AnimatedText text={featuredItems[projectIndex]?.description || ''} /></p>
@@ -2434,7 +2435,7 @@ export default function App() {
 
 
     return (
-        <div className="bg-black text-gray-200 font-['Noto_Sans_JP',_sans-serif] cursor-default md:cursor-none relative selection:bg-emerald-500/30 selection:text-white min-h-screen">
+        <div className="bg-black text-gray-200 font-['Noto_Sans_JP',_sans-serif] cursor-default md:cursor-none relative selection:bg-emerald-500/30 selection:text-white min-h-[100dvh]">
             <AnimatePresence>
                 {showIntro && <NodeIntro onFinish={() => setShowIntro(false)} />}
             </AnimatePresence>
