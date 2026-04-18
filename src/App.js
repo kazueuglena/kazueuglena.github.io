@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactGA from 'react-ga4';
 
 
 // --- News Image Context ---
@@ -15,7 +16,7 @@ const getNewsImages = (folderName) => {
 // --- 多言語コンテンツ ---
 const content = {
     ja: {
-        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", activities: "Activities", contact: "Contact" },
+        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", contact: "Contact" },
         ui: {
             read_more: "READ MORE",
             click_for_details: "詳細を見る",
@@ -29,7 +30,11 @@ const content = {
             view: "VIEW",
             designed_with: "Designed with Botanical Intelligence.",
             back_to_main: "Back to Main Page",
-            scroll: "SCROLL"
+            scroll: "SCROLL",
+            view_website: "関連情報を見る",
+            view_all_insights: "VIEW ALL",
+            insight_details: "詳細",
+            all: "すべて"
         },
         hero: {
             title: "Intelligence is Connection",
@@ -147,6 +152,41 @@ const content = {
                     fullContent: "2025年12月13日、東京科学大学（旧東京工業大学）にて開催された「サイエンスキャッスルワールド 2025」にポスター発表で参加しました。<br><br>今回は残念ながら受賞には至りませんでしたが、それ以上に得難い経験をすることができました。特にかねてよりお話ししたいと思っていた先輩と直接お会いできたことや、海外からの参加者と英語でディスカッションできたことは、自分にとって大きな刺激となりました。<br><br>また、これまでの科学活動を通じて親交のあった友人たちとも再会し、互いの研究や近況について語り合うことができました。結果以上に、研究を通じた「人との繋がり」を強く実感する、大変素晴らしい機会となりました。",
                     images: getNewsImages("SCWorld2025")
                 },
+                {
+                    id: "Gakkasyo-2025",
+                    date: "2025.12.19",
+                    title: "【速報】日本学生科学賞にて大臣賞受賞 & ISEF出場決定",
+                    summary: "日本学生科学賞にて「科学技術政策担当大臣賞」を受賞し、世界大会ISEFへの出場権を獲得しました。秋篠宮皇嗣殿下や小野田大臣より激励のお言葉を賜りました。",
+                    fullContent: "第69回日本学生科学賞の中央表彰式にて、「科学技術政策担当大臣賞」（全国5位相当）を受賞いたしました。また、これにより来年5月にアメリカで開催される世界最大の学生科学コンテスト「ISEF（国際学生科学技術フェア）」への日本代表派遣が決定しました。\n\n今回は優れた研究が数多くある中で選出いただき、運や巡り合わせにも恵まれたと感じています。また、現状の評価には「高校生である」というある種の加点が含まれていると自覚しています。今後はそうした枠組みを超え、一人の「研究者」として純粋に研究内容で評価されるよう、より一層精進したいという決意を新たにしました。\n\n式典後には、秋篠宮皇嗣殿下と懇談させていただく機会を賜りました。研究内容についてのご質問や背中を押していただくお言葉をいただき、大変励みになりました。また、小野田内閣府特命担当大臣（科学技術政策担当）とも握手をさせていただき、研究について直接お話しすることができました。\n\n会場で出会った同世代の優れた研究者たちとの繋がりも、私にとって大きな財産です。この縁を大切にしながら、世界の舞台でも全力を尽くしてきます。",
+                    images: getNewsImages("Gakkasyo-2025")
+                },
+                {
+                    id: "ABA-Symposium-2026",
+                    date: "2026.01.14",
+                    title: "【香港】第12回アジア生物物理学会にて口頭発表・ポスター発表",
+                    summary: "香港で開催されたABA Symposiumに参加し、英語でのポスター発表と自身初となる口頭発表を行いました。高校生ながら挑戦の機会をいただき、生物物理学の面白さと、海外単独渡航を通じた個人の成長を実感しました。",
+                    fullContent: "1月12日・13日に香港科技大学で開催された「The 12th Asian Biophysics Association (ABA) Symposium」に参加しました。今回は英語でのポスター発表に加え、自身初となるOral Presentation（口頭発表）にも挑戦しました。\n\n採択から本番までの期間が極めて短く、前日の夜まで原稿が完成しないという過酷な状況でしたが、いざ本番では「自分の研究を伝えたい」という熱意が勝り、自分でも驚くほどスムーズに発表を行うことができました（同時に、基礎的な英語力の不足も痛感しました）。\n\n学会では、膜タンパク質の専門家など今後の研究に不可欠な先生方と繋がることができました。これまでのマクロ的なアプローチに加え、今後は刺激受容センサー（膜タンパク）というミクロな視点も取り入れて研究を深化させていきます。生物物理学という分野の面白さに触れられたことも大きな収穫でした。\n\nまた、今回は完全な単独渡航でした。準備不足が災いし、ホテルや航空券の手配で深刻なトラブルに見舞われましたが、その分、周囲のサポートのありがたさを痛感しました。エキゾチックな香港の文化に触れ、研究者としてだけでなく、人としても一回り成長できた気がします。\n\n分野外かつ高校生の私を口頭発表に採択してくださった事務局の皆様、ご支援いただいた日本科学協会様、そしてトラブルの際に助けてくれた家族（特に母）に心から感謝申し上げます。",
+                    images: getNewsImages("ABA-Symposium-2026"),
+                    link: "https://xiiaba.hkust.edu.hk/"
+                },
+                {
+                    id: "isef-virtual-project-board-2026",
+                    date: "2026.04.18",
+                    title: "ISEF 2026のプロジェクトページが公開されました",
+                    summary: "アメリカで開催されるISEF(国際学生科学技術フェア)の公式Virtual Project Boardにて、私のプロジェクトページが公開されました。",
+                    fullContent: "2026年5月にアメリカのロサンゼルスで開催される「ISEF（国際学生科学技術フェア）」に向けて、公式のVirtual Project Boardにて私のプロジェクトページが公開されました。<br><br>プロジェクトのタイトルは「Stimulus Discrimination and Memory in M. pudica」です。世界中の方々に私のオジギソウ研究について知っていただく機会となることを大変嬉しく思います。皆様、ぜひ以下のリンクからご覧ください。",
+                    images: [],
+                    link: "https://isef.net/project/plnt017-stimulus-discrimination-and-memory-in-m-pudica"
+                },
+                {
+                    id: "rhabit-release-2026",
+                    date: "2026.04.18",
+                    title: "iOSアプリ「rHabit」をリリースしました",
+                    summary: "集中作業中の「無意識のクセ（口開きなど）」をAIで検知し、改善をサポートするトラッキングアプリを開発・公開しました。",
+                    fullContent: "勉強やPC作業に深く集中している最中に、無意識に口が開いてしまうことはありませんか？顔認識AIを用いてこれら「無意識のクセ」をリアルタイムに検知し、改善をサポートするiOSアプリ「rHabit」を独自開発し、App Storeにて公開しました。<br><br>iPhoneのFace ID技術を活用した完全ローカル処理により、集中を阻害することなくトラッキングします。「どれくらい口が開いたら検知するか」などのカスタマイズも可能で、クセが出た瞬間に静かなバイブレーションで気づきを与えます。自身の研究活動など長時間の集中での実体験に基づき開発したアプリです。<br><br>詳細は<a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>公式サイト</a>、または<a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>App Store</a>からご覧いただけます。",
+                    images: [],
+                    link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769"
+                },
                 /*
                 {
                     id: "-",
@@ -223,7 +263,7 @@ const content = {
                 {
                     year: "2025",
                     title: "第69回 日本学生科学賞（高等学校の部）",
-                    prize: "-",
+                    prize: "科学技術政策担当大臣賞",
                     details: "オジギソウにおける応答調節機構の実証について発表。長野県代表として選出され、中央審査にて研究成果を披露しました。",
                     link: "https://event.yomiuri.co.jp/jssa/",
                     featured: true
@@ -372,6 +412,63 @@ const content = {
 
             ]
         },
+        insights: {
+            title: "Insights",
+            description: "日々の研究や活動の中で感じた、小さな気づきや学びの記録。\n※ラフに書いているため文章がMessyです。",
+            view_more_button: "VIEW ALL",
+            items: [
+                {
+                    id: "data-and-emotion",
+                    date: "2026.03.14",
+                    title: "量子とオジギソウ",
+                    summary: "知覚できない現象を解釈し、意味づけすることの重要性について。",
+                    content: "東京都現代美術館の「ミッション∞インフィニティ｜宇宙＋量子＋芸術」を訪問した際に、もうひとつの気づきがあった。\n\n量子展では、量子のもつれや測定といった人間が直接知覚することのできない現象を、それぞれの美的感覚に基づいて解釈・意味付けしていくプロセスが展示の核心にあった。このプロセスは、私が取り組むオジギソウの研究と本質的に似ていると感じた。\n\nオジギソウの内部状態——たとえば運動細胞のイオン量やMSLチャネルの脱感作の程度——はセンサーを用いて計測・評価することができる。しかしそのデータは、そのままでは人間にとって何の意味も持たない。知覚不可能な現象を数値として取り出せても、それだけでは伝わらないという点において、量子の特性と構造的に同じである。\n\nそのような文脈で、私はオジギソウの馴化現象をはじめとする植物の情報処理の美しさや面白さを、単なるデータの提示にとどまらず、現象を解釈・意味付けすることで情動に直接訴えかけるような展示として伝えてみたいと、強く感じた。",
+                    tags: ["研究哲学", "芸術", "科学"],
+                    images: [],
+                    link: ""
+                },
+                {
+                    id: "embracing-unknown",
+                    date: "2026.03.14",
+                    title: "芸術と科学の連続性について",
+                    summary: "科学も芸術も、『世界の見え方を提示する取り組み』という点で本質的に同一である。",
+                    content: "先日、東京都現代美術館で開催されている「ミッション∞インフィニティ｜宇宙＋量子＋芸術」を訪問した。量子技術や宇宙開発における知見を、芸術的文脈で再定義し表現するという試みの展覧会である。この観覧を通して、科学と芸術の繋がりについて興味深い示唆を得た。\n\n科学も芸術も、「世界の見え方を提示する取り組み」という点で本質的に同一である。\n\nどちらも世界を表面的に捉えるのではなく、その裏側に存在する秩序や構造、連続性、法則を記述しようと試みている。科学がそれを「再現可能な形」に落とし込むのに対し、芸術は「知覚可能な形」に落とし込むという手法の違いはある。しかし、未知のものに対して問いを立て、見えにくい本質をすくい上げようとする姿勢には、深い連続性がある。いずれの営みも、複雑でカオスな世界に対して自ら「問い」を立てることから始まり、無数にある情報の中からノイズを削ぎ落とし、見えにくい本質だけをすくい上げる——すなわち抽象化する——プロセスを経るものである。\n実際、これまで多くの芸術家や科学者が世界の見え方を変えてきた。芸術においては印象派やキュビズム、科学においては地動説や遺伝子の発見など、その例を挙げればきりがない。\n\n昨年訪問した金沢21世紀美術館では、植物の知性（オジギソウの馴化など）を研究するステファノ・マンクーゾによる展示が行われていた。近年、このように研究者が美術館で展示を行うケースが増えている。これは単なる偶然ではなく、研究者の求めるものと芸術家の求めるものが、美術館という空間で合致しているからだと考える。\n\n科学者側には、研究活動の中で発見した事象の「情動に訴えかけるような美しさ」を、人々の感性に直接伝えたいというニーズがある。実験を通じて感じた生物の生命力、カオスに見える現象の中に潜む秩序。そういったものを見つけたときの感動は並一通りのものではない。私自身も、オジギソウの運動や、研究を通じて発見した種を超えた機構の連続性などに、何度感動したかわからない。しかしそれを、論文や学会発表という厳格なフォーマットのもとで伝えていくことは難しい。研究者が感じた美しさは研究の本質的な部分であると思うが、研究の客観性や信頼性を担保するために、個人の主観的な情動は論文や発表から排除されるべきでもある。そのため研究者が、文字や画像といったメディアや論文・学会発表という硬い枠組みを超え、より自由に情動へ直接訴えかける形でその美しさを伝えたいと考えるのは、自然なことである。\n\n一方、芸術家側のニーズとしては、現代の世界を解釈するための最先端の素材を求めているのだと考える。芸術家は、研究者が抽出したデータや法則性の奥に潜む哲学的な意味を見出し、それを社会の文脈へと接続する役割を担おうとしている。\n\n両者のニーズが交差する場において、客観的なデータは主観的な体験へと翻訳される。研究と芸術が融合した展示は、生命や宇宙の真理を誰もが知覚できる形で社会に共有するための、最も有効な手段のひとつとなっている。",
+                    tags: ["研究哲学", "芸術", "科学"],
+                    images: [],
+                    link: "https://hemokosa.com/QCA/QCAbook.pdf"
+                },
+                {
+                    id: "distributed-intelligence",
+                    date: "2026.03.14",
+                    title: "音楽は複雑系だ",
+                    summary: "音楽がひとつの巨大な「複雑系」として機能していることに気づいた。",
+                    content: "先日、サントリーホールで日本フィルハーモニー交響楽団によるサミー・ムサ作曲の『Elysium（エリュシオン）』（2022年）を聴いた。これまで私は、クラシック音楽によって心から感動したことはなかった。しかし、今回の体験は私の認識を変えた。\n\n演奏が始まると、不協和音にも聞こえる微細な「音の雲」が連続的に変化し、ホールに響く。それは単なる不協和音ではなく、大自然の雄大さや、生命がダイナミックに移ろいゆくプロセスを表現しているかのような美しさがあった。\n\nなぜ、これほどまでに惹きつけられたのか。それは、この音楽がひとつの巨大な「複雑系」として機能していたからだと思う。楽譜というミクロで厳密なアルゴリズムに従い、数十人の奏者が特定の周波数とリズムを刻む（ただそこには意図されたものも意図されてないものも含め微細なずれがある）。放たれた音波は空間で非線形に干渉し、予測可能だったはずの足し算の限界を突破して、「生命のうねり」をマクロな次元で作り出す。\n\nとても面白いと思った。研究してみたい。",
+                    tags: ["研究哲学", "複雑系"],
+                    images: [],
+                    link: "https://www.youtube.com/watch?v=cpaRD_ZWzTg&list=RDcpaRD_ZWzTg&start_radio=1"
+                },
+                {
+                    id: "rural-to-global",
+                    date: "2026.03.05",
+                    title: "地方から世界へ：距離は壁じゃない",
+                    summary: "長野にいることはハンデではなく、むしろアドバンテージ。",
+                    content: "長野という地方で研究をしていると、東京や海外の研究者との連携や学会参加、研究リソースの不足に不便を感じることもある。でも、オンラインツールやSNSの発達により、物理的な距離はもはや本質的な障壁ではなりつつある。地方にいることはハンデではなく、自分の視点をユニークにしてくれる明確なアドバンテージ。",
+                    tags: ["地方"],
+                    images: [],
+                    link: ""
+                },
+                {
+                    id: "science-for-kids",
+                    date: "2025.01.20",
+                    title: "子どもたちの『なぜ？』に救われる",
+                    summary: "サイエンス出前便で出会った純粋な好奇心が、研究の原点を思い出させてくれた。",
+                    content: "先日のサイエンス出前便で、小学2年生の女の子が『オジギソウはなんで夜になると葉っぱを閉じるの？』と聞いてきた。よく知っているなぁと感動した。学術的には概日リズムの話になるのだけど、自分もかつて同じような疑問を持って、オジギソウを見ていたことを思い出した。研究が高度になるほど、その原初的な『なぜ？』から離れがち。でも、あの問いこそが全ての出発点だった。子どもたちに教えているつもりが、実は自分が一番大切なことを教わっている。",
+                    tags: ["教育"],
+                    images: [],
+                    link: ""
+                },
+            ]
+        },
         contact: {
             title: "Connect",
             description: "あらゆる境界を超えて、新たな「繋がり」を築きましょう。",
@@ -379,7 +476,7 @@ const content = {
         },
         footer: {
             columns: [
-                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map"] },
+                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map", "Insights"] },
                 { title: "Activities", items: ["Activities", "ADvance Lab"] },
                 { title: "Connect", items: ["Contact", "X (Twitter)", "Instagram", "Facebook", "LinkedIn"] }
             ]
@@ -394,7 +491,7 @@ const content = {
         }
     },
     en: {
-        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", activities: "Activities", contact: "Contact" },
+        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", contact: "Contact" },
         ui: {
             read_more: "READ MORE",
             click_for_details: "Click for details",
@@ -407,7 +504,11 @@ const content = {
             view: "VIEW",
             designed_with: "Designed with Botanical Intelligence.",
             back_to_main: "Back to Main Page",
-            scroll: "SCROLL"
+            scroll: "SCROLL",
+            view_website: "VIEW RELATED INFO",
+            view_all_insights: "VIEW ALL",
+            insight_details: "Details",
+            all: "ALL"
         },
         hero: {
             title: "Intelligence is Connection",
@@ -524,6 +625,41 @@ const content = {
                     summary: "Presented a solution for mental illness in the year 2100 at Grand Green Osaka.",
                     fullContent: "On Sunday, September 28, 2025, I gave a presentation at the project results report meeting co-hosted by Rohto Pharmaceutical Co., Ltd. and Leave a Nest Co., Ltd., held at 'Grand Green Osaka' in front of Osaka Station.<br><br>This project aimed for high school students to explore future social issues and create 'future research themes' taking the opportunity of the Osaka Expo. As a team member, I tackled the magnificent theme of 'Mental Illness in 2100' for over two months.<br><br>Leading up to the presentation, in addition to repeated online discussions with the team, we actually visited the Osaka Expo to deepen our knowledge of future medical care and society. On the day, not only were we able to present the ideas we had refined, but we also had active discussions on proposals from other teams, making it a very fulfilling time.<br><br>Through this project, I became strongly conscious of the perspective of applied science: how to connect the knowledge of basic research such as Mimosa pudica and mathematical models that I have been working on to social implementation. This is a valuable experience that will be a major turning point in considering my career as a researcher.<br><br>I would like to express my sincere gratitude to everyone at Rohto Pharmaceutical Co., Ltd., Leave a Nest Co., Ltd., the team members who deepened their inquiries together, and everyone involved for giving me such a wonderful opportunity.",
                     images: getNewsImages("RohtoFuture2025")
+                },
+                {
+                    id: "Gakkasyo-2025",
+                    date: "Dec 19, 2025",
+                    title: "[Breaking] Received Minister's Award at JSSA & Selected for ISEF",
+                    summary: "Received the Minister of State for Science and Technology Policy Award at the Japan Student Science Awards and qualified for ISEF. Honored to receive encouraging words from H.I.H. Crown Prince Akishino and Minister Onoda.",
+                    fullContent: "At the 69th Japan Student Science Awards central ceremony, I received the Minister of State for Science and Technology Policy Award (5th place nationwide). This also confirmed my selection to represent Japan at ISEF (International Science and Engineering Fair), the world's largest student science contest held in the US next May.<br><br>I feel blessed to be chosen among many excellent researches. I am aware that the current evaluation includes a 'high school student bonus.' I renew my determination to go beyond such frameworks and devote myself further to be evaluated purely as a researcher.<br><br>After the ceremony, I had the honor of conversing with H.I.H. Crown Prince Akishino. His questions about my research and encouraging words were very inspiring. I also shook hands with Minister Onoda (Science and Technology Policy) and spoke directly about my research.<br><br>Connections with brilliant peer researchers met at the venue are a great asset. Cherishing these bonds, I will do my best on the world stage.",
+                    images: getNewsImages("Gakkasyo-2025")
+                },
+                {
+                    id: "ABA-Symposium-2026",
+                    date: "Jan 14, 2026",
+                    title: "[Hong Kong] Oral & Poster Presentation at the 12th Asian Biophysics Association Symposium",
+                    summary: "Participated in the ABA Symposium in Hong Kong, delivering an English poster presentation and my first-ever oral presentation. Grateful for the opportunity to challenge myself as a high school student, I experienced the fascination of biophysics and personal growth through solo overseas travel.",
+                    fullContent: "On January 12th and 13th, I participated in 'The 12th Asian Biophysics Association (ABA) Symposium' held at the Hong Kong University of Science and Technology. This time, in addition to an English poster presentation, I challenged myself with my first-ever Oral Presentation.<br><br>The period from acceptance to the actual event was extremely short, and it was a tough situation where the manuscript wasn't finished until the night before. However, the enthusiasm to 'convey my research' prevailed during the actual performance, and I was able to present surprisingly smoothly (at the same time, I keenly felt the lack of basic English proficiency).<br><br>At the conference, I was able to connect with professors who are indispensable for future research, such as experts in membrane proteins. In addition to the macroscopic approach so far, I will deepen my research by incorporating a microscopic perspective of stimulus receptor sensors (membrane proteins). Touching upon the fun of the field of biophysics was also a major harvest.<br><br>Also, this was a completely solo trip. Due to lack of preparation, I encountered serious troubles with hotel and flight arrangements, but I keenly felt the appreciation for the support of those around me. Touching the exotic culture of Hong Kong, I feel that I have grown not only as a researcher but also as a person.<br><br>I would like to express my sincere gratitude to the secretariat for accepting me, a high school student outside the field, for an oral presentation, the Japan Science Society for their support, and my family (especially my mother) who helped me during the troubles.",
+                    images: getNewsImages("ABA-Symposium-2026"),
+                    link: "https://xiiaba.hkust.edu.hk/"
+                },
+                {
+                    id: "isef-virtual-project-board-2026",
+                    date: "Apr 18, 2026",
+                    title: "ISEF 2026 Project Page Published",
+                    summary: "My project page has been published on the official Virtual Project Board for ISEF (International Science and Engineering Fair).",
+                    fullContent: "Ahead of the 'ISEF (International Science and Engineering Fair)' to be held in Los Angeles, USA in May 2026, my project page has been published on the official Virtual Project Board.<br><br>The project title is 'Stimulus Discrimination and Memory in M. pudica'. I am very happy to have this wonderful opportunity to let people all over the world know about my research on Mimosa pudica. Please take a look from the link below.",
+                    images: [],
+                    link: "https://isef.net/project/plnt017-stimulus-discrimination-and-memory-in-m-pudica"
+                },
+                {
+                    id: "rhabit-release-2026",
+                    date: "Apr 18, 2026",
+                    title: "Released iOS App 'rHabit'",
+                    summary: "Developed and published 'rHabit', an iOS tracking app that detects unconscious habits (like an open mouth) during focus using AI to support improvement.",
+                    fullContent: "Do you ever find your mouth opening unconsciously while deeply focused on work or study? I have developed and independently released 'rHabit', an iOS app that detects these 'unconscious habits' in real-time using facial recognition AI to support your improvement.<br><br>Utilizing the iPhone's Face ID technology for completely local processing, it tracks seamlessly without disturbing your concentration. You can customize settings like 'how wide the mouth opens to detect' and it provides a gentle vibration to make you aware the moment a habit occurs. This app was inspired by my own experiences during long hours of concentration in research activities.<br><br>You can find more details on the <a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>Official Website</a> or download it directly from the <a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>App Store</a>.",
+                    images: [],
+                    link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US"
                 }
             ],
             view_more_button: "VIEW ALL NEWS",
@@ -591,7 +727,7 @@ const content = {
                 {
                     year: "2025",
                     title: "The 69th Japan Student Science Awards (High School Division)",
-                    prize: "-",
+                    prize: "Minister of State for Science and Technology Policy Award",
                     details: "Presented on the demonstration of response regulation mechanisms in Mimosa pudica. Selected as a Nagano Prefecture representative and presented research results at the central review.",
                     link: "https://event.yomiuri.co.jp/jssa/",
                     featured: true
@@ -738,6 +874,63 @@ const content = {
                 { image: process.env.PUBLIC_URL + "/images/advancelab.png", year: "2024-", title: "ADvance Lab", event: "Vice Director", details: "Currently Involved in the operation of the lab as Vice Director. While creating new value by connecting the next generation and companies, I also plan events in rural areas to expand the circle of research.", link: "https://adlab.lne.st/" },
                 { image: process.env.PUBLIC_URL + "/images/aoki.png", year: "2022-2023", title: "Nagano Study Tour AOKI Kanrin Maru", event: "7th Cohort", details: "This program I participated in when I was a junior high school student is one of the origins of my current activities. During the training in Silicon Valley, I came into contact with a culture of challenging without fear of failure, which had a great influence on my own action guidelines.", link: "https://aoki-zaidan.or.jp/srv_kanrin.php" },
                 { image: process.env.PUBLIC_URL + "/images/Tsukuba.png", year: "2021-2022", title: "Tsukuba SKIP Academy", event: "Student", details: "Solidified the foundation of logical thinking necessary for scientific research by touching on university-level mathematics and physics online. The experience at this time helps me in handling mathematical models in my current research.", link: "https://skip.tsukuba.ac.jp/" }
+            ],
+        },
+        insights: {
+            title: "Insights",
+            description: "Small discoveries and reflections from my daily research and activities.",
+            view_more_button: "VIEW ALL",
+            items: [
+                {
+                    id: "data-and-emotion",
+                    date: "Mar 14, 2026",
+                    title: "Quantum and Mimosa",
+                    summary: "On the importance of interpreting and giving meaning to imperceptible phenomena.",
+                    content: "When I visited the 'Mission ∞ Infinity | Space + Quantum + Art' exhibition at the Museum of Contemporary Art Tokyo, I had another realization.\n\nIn the quantum exhibition, the core lay in the process of interpreting and bringing meaning to phenomena that humans cannot directly perceive—like quantum entanglement and measurement—based on individual aesthetic senses. I felt this process was fundamentally similar to my research on Mimosa pudica.\n\nThe internal state of Mimosa pudica—for instance, the ion concentration in motor cells or the degree of MSL channel desensitization—can be measured and evaluated using sensors. However, this data by itself holds no meaning for humans. Even if we extract imperceptible phenomena as numerical values, they do not convey the essence. In this aspect, it is structurally identical to the characteristics of quantum phenomena.\n\nIn this context, I strongly felt that I want to convey the beauty and fascination of plants' information processing, such as the habituation phenomenon in Mimosa pudica, not merely by presenting data, but as an exhibition that directly appeals to emotions through interpreting and bringing meaning to those phenomena.",
+                    tags: ["Research Philosophy", "Art", "Science"],
+                    images: [],
+                    link: ""
+                },
+                {
+                    id: "embracing-unknown",
+                    date: "Mar 14, 2026",
+                    title: "On the Continuity of Art and Science",
+                    summary: "Both science and art are essentially the same endeavor: presenting a way of seeing the world.",
+                    content: "I recently visited the 'Mission ∞ Infinity | Space + Quantum + Art' exhibition at the Museum of Contemporary Art Tokyo. It was an exhibition that attempts to redefine and express insights from quantum technology and space development in an artistic context. Through this visit, I gained fascinating insights into the connection between science and art.\n\nBoth science and art are essentially the same in that they are 'endeavors to present a way of seeing the world.'\n\nNeither captures the world superficially; both attempt to describe the order, structure, continuity, and laws that exist behind it. While science distills these into 'reproducible forms' and art into 'perceivable forms,' there is a deep continuity in the attitude of questioning the unknown and scooping up the hard-to-see essence. Both endeavors begin by posing 'questions' to a complex, chaotic world, and go through a process of stripping away noise from countless pieces of information to extract only the hard-to-see essence—that is, abstraction.\n\nAt the 21st Century Museum of Contemporary Art in Kanazawa, which I visited last year, there was an exhibition by Stefano Mancuso, who researches plant intelligence (such as habituation in Mimosa pudica). In recent years, there has been an increase in cases where researchers exhibit in museums. I believe this is not mere coincidence, but because what researchers seek and what artists seek align in the space of museums.\n\nOn the scientist's side, there is a need to directly convey the 'emotionally compelling beauty' of phenomena discovered through research. On the artist's side, they are seeking cutting-edge materials for interpreting the contemporary world. Where these needs intersect, objective data is translated into subjective experience.",
+                    tags: ["Research Philosophy", "Art", "Science"],
+                    images: [],
+                    link: "https://hemokosa.com/QCA/QCAbook.pdf"
+                },
+                {
+                    id: "distributed-intelligence",
+                    date: "Mar 14, 2026",
+                    title: "Music Is a Complex System",
+                    summary: "I realized that music functions as one giant \"complex system.\"",
+                    content: "The other day, I listened to \"Elysium\" (2022) composed by Samy Moussa, performed by the Japan Philharmonic Orchestra at Suntory Hall. Until now, I had never been truly moved by classical music. However, this experience changed my perception.\n\nWhen the performance began, microscopic \"clouds of sound\" that even sounded like dissonance changed continuously and resonated through the hall. It wasn't just dissonance; it had a beauty as if expressing the grandeur of nature or the dynamic process of shifting life.\n\nWhy was I so drawn to it? I think it's because this music was functioning as one giant \"complex system.\" Following the micro and strict algorithm of the musical score, dozens of performers carve out specific frequencies and rhythms (although there are minute deviations, both intended and unintended). The emitted sound waves interfere non-linearly in space, breaking through the limits of predictable addition, and creating a \"surge of life\" on a macro scale.\n\nI thought it was very interesting. I would like to research it.",
+                    tags: ["Research Philosophy", "Complex Systems"],
+                    images: [],
+                    link: "https://www.youtube.com/watch?v=cpaRD_ZWzTg&list=RDcpaRD_ZWzTg&start_radio=1"
+                },
+                {
+                    id: "rural-to-global",
+                    date: "Mar 5, 2026",
+                    title: "From Rural to Global: Distance Is Not a Barrier",
+                    summary: "Being in a rural area is not a handicap—it's an advantage.",
+                    content: "Conducting research in Nagano, a rural area, sometimes feels inconvenient in terms of collaboration with researchers in Tokyo or abroad, attending conferences, and lack of research resources. But with online tools and social media, physical distance is becoming less of a fundamental barrier. Being in a rural area is not a handicap—it's a clear advantage that makes your perspective unique.",
+                    tags: ["Rural"],
+                    images: [],
+                    link: ""
+                },
+                {
+                    id: "science-for-kids",
+                    date: "Jan 20, 2025",
+                    title: "Saved by Children's 'Why?'",
+                    summary: "The pure curiosity I encountered at the Science Delivery Service reminded me of my research origins.",
+                    content: "At a recent Science Delivery Service event, a second-grade girl asked me, 'Why does Mimosa close its leaves at night?' I was impressed she knew about it. Academically, it's about circadian rhythms, but I remembered that I once looked at Mimosa with a similar sense of wonder. As research becomes more advanced, we tend to drift from that primal 'why?' But that question was where everything began. I think I'm teaching the children, but really, they're teaching me the most important thing.",
+                    tags: ["Education"],
+                    images: [],
+                    link: ""
+                }
             ]
         },
         contact: {
@@ -747,7 +940,7 @@ const content = {
         },
         footer: {
             columns: [
-                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map"] },
+                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map", "Insights"] },
                 { title: "Activities", items: ["Activities", "ADvance Lab"] },
                 { title: "Connect", items: ["Contact", "X (Twitter)", "Instagram", "Facebook", "LinkedIn"] }
             ]
@@ -1326,8 +1519,13 @@ const ChevronRightIcon = (props) => (
     </svg>
 );
 const ExternalLinkIcon = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+    </svg>
+);
+const ArrowRightIcon = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
     </svg>
 );
 
@@ -1427,7 +1625,7 @@ const Header = ({ lang, setLang, content, setPage }) => {
 // --- ヒーローセクション (Minimal & Bottom-Right) ---
 const HeroSection = ({ content }) => {
     return (
-        <section id="hero" className="h-screen w-full relative overflow-hidden">
+        <section id="hero" className="h-[100dvh] w-full relative overflow-hidden">
             {/* Background Canvas */}
             <BotanicalSynapse />
 
@@ -1509,7 +1707,7 @@ const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
                         </div>
                         <div className="mt-2 md:mt-0 md:pl-8 flex items-center justify-between md:justify-end gap-4 min-w-[30%]">
                             {item.prize && <span className="text-xs text-gray-500 group-hover:text-emerald-400 transition-colors text-right flex-1 tracking-wider uppercase"><AnimatedText text={item.prize} /></span>}
-                            {item.link && item.link.trim() !== "" && <span className="text-xs text-gray-600 group-hover:text-white transition-colors">↗</span>}
+                            {item.link && item.link.trim() !== "" && <ExternalLinkIcon className="w-3 h-3 text-gray-600 group-hover:text-white transition-colors" />}
                         </div>
                     </div>
                 ))}
@@ -1539,7 +1737,7 @@ const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
                                     </div>
                                     <div className="mt-2 md:mt-0 md:pl-8 flex items-center justify-between md:justify-end gap-4 min-w-[30%]">
                                         {item.prize && <span className="text-xs text-gray-500 group-hover:text-emerald-400 transition-colors text-right flex-1 tracking-wider uppercase"><AnimatedText text={item.prize} /></span>}
-                                        {item.link && item.link.trim() !== "" && <span className="text-xs text-gray-600 group-hover:text-white transition-colors">↗</span>}
+                                        {item.link && item.link.trim() !== "" && <ExternalLinkIcon className="w-3 h-3 text-gray-600 group-hover:text-white transition-colors" />}
                                     </div>
                                 </div>
                             ))}
@@ -1625,13 +1823,14 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
                             data-hoverable="true"
                             className={`
                                 relative overflow-hidden group cursor-pointer border border-white/10 p-6 flex flex-col justify-end
+                                min-h-[350px] md:min-h-0
                                 ${isLarge ? 'md:col-span-2 md:row-span-2' : 'md:col-span-1 md:row-span-1'}
                                 bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors
                             `}
                         >
                             {thumbnail ? (
                                 <>
-                                    <img src={thumbnail} alt="News" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-700 grayscale hover:grayscale-0" />
+                                    <img src={thumbnail} alt="News" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-700 grayscale hover:grayscale-0" loading="lazy" decoding="async" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
                                 </>
                             ) : (
@@ -1646,7 +1845,7 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
                                     <AnimatedText text={item.title} />
                                 </h3>
                                 <div className="text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2 group-hover:text-emerald-400 transition-colors">
-                                    {ui.read_more} <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                                    {ui.read_more} <div className="transform group-hover:translate-x-1 transition-transform"><ArrowRightIcon className="w-3 h-3" /></div>
                                 </div>
                             </div>
                         </motion.div>
@@ -1663,7 +1862,7 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
 };
 
 // --- Newsモーダル (Dark Theme) ---
-const NewsModal = ({ newsItem, onClose }) => {
+const NewsModal = ({ newsItem, onClose, ui }) => {
     if (!newsItem) return null;
 
     return (
@@ -1680,7 +1879,7 @@ const NewsModal = ({ newsItem, onClose }) => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.98, opacity: 0 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="bg-black/80 rounded-sm p-8 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[90vh] flex flex-col ring-1 ring-white/5"
+                    className="bg-black/80 rounded-sm p-8 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[90dvh] flex flex-col ring-1 ring-white/5"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <button data-hoverable="true" onClick={onClose} className="absolute top-6 right-6 text-gray-500 hover:text-white z-10 transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"><CloseIcon /></button>
@@ -1688,6 +1887,20 @@ const NewsModal = ({ newsItem, onClose }) => {
                         <p className="text-xs text-emerald-500 font-mono mb-4 tracking-widest"><AnimatedText text={newsItem.date} /></p>
                         <h2 className="text-2xl font-bold text-gray-100 mb-8 leading-relaxed"><AnimatedText text={newsItem.title} /></h2>
                         <div className="text-sm text-gray-300 whitespace-pre-line prose prose-invert prose-sm leading-8 tracking-wide" dangerouslySetInnerHTML={{ __html: newsItem.fullContent.replace(/\n/g, '<br />') }} />
+
+                        {newsItem.link && (
+                            <div className="mt-8 mb-4">
+                                <a
+                                    href={newsItem.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-widest font-mono group"
+                                >
+                                    <span>{ui ? ui.view_website : "VIEW WEBSITE"}</span>
+                                    <ExternalLinkIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                                </a>
+                            </div>
+                        )}
 
                         {newsItem.images && newsItem.images.length > 0 && (
                             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1727,7 +1940,7 @@ const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
                     animate={{ y: 0, opacity: 1, scale: 1 }}
                     exit={{ y: 20, opacity: 0, scale: 0.98 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[85vh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
+                    className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[85dvh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <button data-hoverable="true" onClick={onClose} className="absolute top-6 right-6 z-20 text-gray-500 hover:text-white transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"><CloseIcon /></button>
@@ -1735,7 +1948,7 @@ const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
                     {/* Image Section */}
                     {item.image && (
                         <div className="w-full md:w-1/2 h-64 md:h-auto relative overflow-hidden flex-shrink-0">
-                            <img src={item.image} alt={item.title || item.name} className="w-full h-full object-cover grayscale opacity-80" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x400/171717/525252?text=Image+Not+Found'; }} />
+                            <img src={item.image} alt={item.title || item.name} className="w-full h-full object-cover grayscale opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x400/171717/525252?text=Image+Not+Found'; }} />
                             <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
                         </div>
                     )}
@@ -1808,21 +2021,27 @@ const Footer = ({ content, setPage, ui }) => {
         };
 
         if (externalLinks[targetId]) {
+            ReactGA.event({
+                category: "External_Link",
+                action: "Click",
+                label: targetId
+            });
             window.open(externalLinks[targetId], '_blank', 'noopener,noreferrer');
             return;
         }
 
-        const element = document.getElementById(targetId);
+        const element = document.getElementById(targetId === 'Insights' ? 'insights' : targetId);
         if (element) {
             setPage('home');
             setTimeout(() => {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
-        } else if (targetId === 'profile' || targetId === 'vision' || targetId === 'news' || targetId === 'research' || targetId === 'projects' || targetId === 'map' || targetId === 'activities' || targetId === 'contact') {
+        } else if (targetId === 'profile' || targetId === 'vision' || targetId === 'news' || targetId === 'research' || targetId === 'projects' || targetId === 'map' || targetId === 'activities' || targetId === 'contact' || targetId === 'Insights') {
             // If not found but is a main section, ensure we go home first
+            const actualId = targetId === 'Insights' ? 'insights' : targetId;
             setPage('home');
             setTimeout(() => {
-                document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById(actualId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
         }
     };
@@ -1881,7 +2100,7 @@ const AllProjectsPage = ({ content, setPage, setSelectedDetail, lang, setLang, s
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-black min-h-screen text-gray-200 relative overflow-hidden"
+            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
         >
             <BotanicalSynapse />
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
@@ -1912,7 +2131,7 @@ const AllProjectsPage = ({ content, setPage, setSelectedDetail, lang, setLang, s
                             className="group cursor-pointer"
                         >
                             <div className="aspect-video overflow-hidden relative mb-6">
-                                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
+                                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                             </div>
                             <div>
@@ -1962,7 +2181,7 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-black min-h-screen text-gray-200 relative overflow-hidden"
+            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
         >
             <BotanicalSynapse />
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
@@ -1973,6 +2192,20 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
                         <AnimatedText text={content.news.title} />
                     </h1>
                     <div className="flex items-center gap-6">
+                        <div className="flex gap-4 mr-4">
+                            <button
+                                onClick={() => setLang('ja')}
+                                className={`text-xs tracking-widest transition-colors ${lang === 'ja' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
+                            >
+                                JP
+                            </button>
+                            <button
+                                onClick={() => setLang('en')}
+                                className={`text-xs tracking-widest transition-colors ${lang === 'en' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
+                            >
+                                EN
+                            </button>
+                        </div>
                         <button
                             onClick={handleBack}
                             data-hoverable="true"
@@ -2077,7 +2310,7 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
 
     return (
         <ContentSection id="projects" title={content.projects.title}>
-            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-neutral-900/10">
+            <div className="relative w-full aspect-[4/5] md:aspect-[21/9] bg-neutral-900/10">
                 <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                         key={projectIndex}
@@ -2095,12 +2328,12 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
                         data-hoverable="true"
                     >
                         {/* Image Side */}
-                        <div className="w-full md:w-3/5 h-3/5 md:h-full relative overflow-hidden">
+                        <div className="w-full md:w-3/5 h-1/2 md:h-full relative overflow-hidden">
                             <img src={featuredItems[projectIndex]?.image || ''} alt={featuredItems[projectIndex]?.title || ''} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/1200x675/171717/525252?text=Image+Not+Found'; }} />
                         </div>
 
                         {/* Content Side */}
-                        <div className="w-full md:w-2/5 h-2/5 md:h-full p-6 md:p-12 flex flex-col justify-center bg-transparent md:border-l border-white/5">
+                        <div className="w-full md:w-2/5 h-1/2 md:h-full p-6 md:p-12 flex flex-col justify-center bg-transparent md:border-l border-white/5">
                             <span className="block text-[10px] tracking-[0.3em] text-gray-500 mb-6 uppercase">{ui.featured_project}</span>
                             <h3 className="text-xl md:text-2xl font-normal text-gray-100 mb-4 leading-tight tracking-[0.1em] font-['Syne',sans-serif]"><AnimatedText text={featuredItems[projectIndex]?.title || ''} /></h3>
                             <p className="text-xs text-gray-500 line-clamp-3 tracking-wide leading-7"><AnimatedText text={featuredItems[projectIndex]?.description || ''} /></p>
@@ -2123,6 +2356,366 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
     );
 };
 
+// --- Insight Accordion Card (shared by InsightsSection and AllInsightsPage) ---
+const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
+    const cardRef = useRef(null);
+    const [folderImages, setFolderImages] = useState([]);
+
+    useEffect(() => {
+        if (isExpanded && cardRef.current) {
+            setTimeout(() => {
+                cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+    }, [isExpanded]);
+
+    // Fetch folder-based images from manifest
+    useEffect(() => {
+        if (isExpanded && item.id) {
+            fetch(process.env.PUBLIC_URL + '/images/insights/manifest.json')
+                .then(r => r.ok ? r.json() : {})
+                .then(manifest => {
+                    const files = manifest[item.id] || [];
+                    setFolderImages(files.map(f =>
+                        process.env.PUBLIC_URL + '/images/insights/' + item.id + '/' + f
+                    ));
+                })
+                .catch(() => setFolderImages([]));
+        }
+    }, [isExpanded, item.id]);
+
+    return (
+        <motion.div
+            ref={cardRef}
+            id={`insight-${item.id}`}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.08 }}
+            className={`bg-black/50 backdrop-blur-sm rounded-sm border transition-colors ${isExpanded ? 'border-emerald-900/40 bg-black/70' : 'border-white/5 hover:bg-black/60'}`}
+        >
+            <div
+                onClick={onToggle}
+                data-hoverable="true"
+                className="p-6 md:p-8 cursor-pointer group"
+            >
+                <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                        <p className="text-xs text-emerald-500/80 font-mono mb-3 tracking-widest">
+                            <AnimatedText text={item.date} />
+                        </p>
+                        <h3 className="text-base md:text-lg font-normal text-gray-200 group-hover:text-white transition-colors tracking-wide font-['Syne',sans-serif] leading-relaxed mb-2">
+                            <AnimatedText text={item.title} />
+                        </h3>
+                        {!isExpanded && item.summary && (
+                            <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors tracking-wide leading-6">
+                                <AnimatedText text={item.summary} />
+                            </p>
+                        )}
+                    </div>
+                    <ChevronDownIcon isExpanded={isExpanded} />
+                </div>
+
+                {!isExpanded && item.tags && item.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4">
+                        {item.tags.map((tag, tagIndex) => (
+                            <span
+                                key={tagIndex}
+                                className="text-[10px] text-emerald-600/70 uppercase tracking-widest border border-emerald-900/30 px-2 py-0.5 rounded"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            <AnimatePresence>
+                {isExpanded && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        className="overflow-hidden"
+                    >
+                        <div className="px-6 md:px-8 pb-6 md:pb-8 border-t border-white/5 pt-6">
+                            {item.tags && item.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    {item.tags.map((tag, tagIndex) => (
+                                        <span key={tagIndex} className="text-[10px] text-emerald-600/70 uppercase tracking-widest border border-emerald-900/30 px-2 py-0.5 rounded">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+
+                            <p className="text-sm text-gray-400 leading-8 tracking-wide whitespace-pre-line">
+                                {item.content}
+                            </p>
+
+                            {item.link && item.link.trim() !== "" && (
+                                <div className="mt-8">
+                                    <a
+                                        href={item.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-hoverable="true"
+                                        className="inline-flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-widest font-mono group"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <span>{ui ? ui.view_website : "VIEW WEBSITE"}</span>
+                                        <ExternalLinkIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                                    </a>
+                                </div>
+                            )}
+
+                            {(() => {
+                                const allImages = [...folderImages, ...(item.images || [])];
+                                return allImages.length > 0 && (
+                                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {allImages.map((img, imgIndex) => (
+                                            <img
+                                                key={imgIndex}
+                                                src={img}
+                                                alt={item.title}
+                                                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100 rounded-sm"
+                                                onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }}
+                                            />
+                                        ))}
+                                    </div>
+                                );
+                            })()}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+};
+
+// --- Insights Section (Featured 3 Accordion + View All) ---
+const InsightsSection = ({ content, expandedInsightId, onInsightToggle, setPage, ui }) => {
+    const [selectedTag, setSelectedTag] = useState(null);
+
+    const parseDate = (dateStr) => {
+        if (!dateStr) return new Date(0);
+        const parts = dateStr.split('.');
+        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
+        return new Date(dateStr);
+    };
+
+    const allTags = useMemo(() => {
+        const tags = new Set();
+        content.insights.items.forEach(item => {
+            if (item.tags) {
+                item.tags.forEach(tag => tags.add(tag));
+            }
+        });
+        return Array.from(tags).sort();
+    }, [content.insights.items]);
+
+    const sortedInsights = useMemo(() => {
+        let items = content.insights.items;
+        if (selectedTag) {
+            items = items.filter(item => item.tags && item.tags.includes(selectedTag));
+        }
+        return [...items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    }, [content.insights.items, selectedTag]);
+
+    return (
+        <ContentSection id="insights" title={content.insights.title}>
+            <div className="text-center mb-12">
+                <p className="text-xs text-gray-500 tracking-[0.15em] bg-black/40 backdrop-blur-[2px] rounded-sm px-4 py-2 inline-block whitespace-pre-line">
+                    <AnimatedText text={content.insights.description} />
+                </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto mb-10">
+                <div className="flex flex-wrap justify-center gap-2">
+                    <button
+                        onClick={() => setSelectedTag(null)}
+                        className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${!selectedTag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
+                    >
+                        {ui?.all || 'ALL'}
+                    </button>
+                    {allTags.map(tag => (
+                        <button
+                            key={tag}
+                            onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                            className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${selectedTag === tag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
+                        >
+                            {tag}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="max-w-4xl mx-auto flex flex-col gap-4">
+                {sortedInsights.slice(0, 3).map((item, index) => (
+                    <InsightAccordionCard
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        isExpanded={expandedInsightId === item.id}
+                        onToggle={() => onInsightToggle(item.id)}
+                        ui={ui}
+                    />
+                ))}
+            </div>
+            <div className="text-right mt-12">
+                <a onClick={() => setPage('all-insights')} data-hoverable="true" className="inline-block text-xs text-gray-500 hover:text-white border-b border-transparent hover:border-white pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
+                    <AnimatedText text={content.insights.view_more_button} />
+                </a>
+            </div>
+        </ContentSection>
+    );
+};
+
+// --- All Insights Page (all items as accordion) ---
+const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle, lang, setLang, setScrollToSectionId, ui }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [selectedTag, setSelectedTag] = useState(null);
+    const itemsPerPage = 9;
+
+    const parseDate = (dateStr) => {
+        if (!dateStr) return new Date(0);
+        const parts = dateStr.split('.');
+        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
+        return new Date(dateStr);
+    };
+
+    const allTags = useMemo(() => {
+        const tags = new Set();
+        content.insights.items.forEach(item => {
+            if (item.tags) {
+                item.tags.forEach(tag => tags.add(tag));
+            }
+        });
+        return Array.from(tags).sort();
+    }, [content.insights.items]);
+
+    const filteredItems = useMemo(() => {
+        let items = content.insights.items;
+        if (selectedTag) {
+            items = items.filter(item => item.tags && item.tags.includes(selectedTag));
+        }
+        return [...items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    }, [content.insights.items, selectedTag]);
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [currentPage]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedTag]);
+
+    const handleBack = () => {
+        setScrollToSectionId('insights');
+        setPage('home');
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
+        >
+            <BotanicalSynapse />
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
+
+            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-32 relative z-10">
+                <div className="flex justify-between items-end mb-12 border-b border-white/10 pb-8">
+                    <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
+                        <AnimatedText text={content.insights.title} />
+                    </h1>
+                    <div className="flex items-center gap-6">
+                        <div className="flex gap-4 mr-4">
+                            <button
+                                onClick={() => setLang('ja')}
+                                className={`text-xs tracking-widest transition-colors ${lang === 'ja' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
+                            >
+                                JP
+                            </button>
+                            <button
+                                onClick={() => setLang('en')}
+                                className={`text-xs tracking-widest transition-colors ${lang === 'en' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
+                            >
+                                EN
+                            </button>
+                        </div>
+                        <button
+                            onClick={handleBack}
+                            data-hoverable="true"
+                            className="text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase"
+                        >
+                            <AnimatedText text={ui.back} />
+                        </button>
+                    </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-10">
+                    <button
+                        onClick={() => setSelectedTag(null)}
+                        className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${!selectedTag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
+                    >
+                        {ui?.all || 'ALL'}
+                    </button>
+                    {allTags.map(tag => (
+                        <button
+                            key={tag}
+                            onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                            className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${selectedTag === tag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
+                        >
+                            {tag}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-6">
+                    {currentItems.map((item, index) => (
+                        <InsightAccordionCard
+                            key={item.id}
+                            item={item}
+                            index={index}
+                            isExpanded={expandedInsightId === item.id}
+                            onToggle={() => onInsightToggle(item.id)}
+                            ui={ui}
+                        />
+                    ))}
+                </div>
+
+                {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-4 mt-16">
+                        {Array.from({ length: totalPages }, (_, i) => (
+                            <button
+                                key={i + 1}
+                                onClick={() => paginate(i + 1)}
+                                className={`w-8 h-8 rounded-full text-xs font-mono transition-colors ${currentPage === i + 1
+                                    ? 'bg-white text-black'
+                                    : 'bg-neutral-900 text-gray-500 hover:text-white hover:bg-neutral-800'
+                                    }`}
+                                data-hoverable="true"
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
+};
+
 // --- Main Content Component ---
 const MainContent = ({
     lang,
@@ -2133,6 +2726,8 @@ const MainContent = ({
     setScrollToSectionId,
     cvUrl,
     handleNewsSelect,
+    expandedInsightId,
+    handleInsightToggle,
     setSelectedDetail,
     handleCopyEmail,
     copied
@@ -2243,6 +2838,8 @@ const MainContent = ({
                 </div>
             </ContentSection>
 
+            <InsightsSection content={currentContent} expandedInsightId={expandedInsightId} onInsightToggle={handleInsightToggle} setPage={setPage} ui={currentContent.ui} />
+
             <ContentSection id="activities" title={currentContent.activities.title}>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12 max-w-5xl mx-auto">
                     {currentContent.activities.items.map((item, index) => (
@@ -2258,7 +2855,7 @@ const MainContent = ({
                         >
                             <div className="border-t border-white/10 pt-4 mb-4 flex justify-between items-start">
                                 <span className="text-[10px] text-gray-600 font-mono tracking-wider">{item.year}</span>
-                                {item.link && <span className="text-xs text-gray-600 group-hover:text-white transition-colors">↗</span>}
+                                {item.link && <ExternalLinkIcon className="w-3 h-3 text-gray-600 group-hover:text-white transition-colors" />}
                             </div>
                             <h3 className="text-sm font-normal text-gray-300 group-hover:text-white transition-colors mb-2 min-h-[2.5rem] tracking-wide"><AnimatedText text={item.title} /></h3>
                             <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors line-clamp-2 tracking-wide"><AnimatedText text={item.event} /></p>
@@ -2284,10 +2881,10 @@ const MainContent = ({
                         </motion.a>
 
                         <div className="flex gap-8 mt-12 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                            <motion.a data-hoverable="true" href="https://x.com/F7XUbvdcqB38059" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><TwitterIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.instagram.com/steamkazu/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><InstagramIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.facebook.com/share/1AjQu2jF5U/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><FacebookIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.linkedin.com/in/kazuhiro-komatsu-37302b289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><LinkedinIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://x.com/F7XUbvdcqB38059" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "x-(twitter)" })}><TwitterIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://www.instagram.com/steamkazu/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "instagram" })}><InstagramIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://www.facebook.com/share/1AjQu2jF5U/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "facebook" })}><FacebookIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://www.linkedin.com/in/kazuhiro-komatsu-37302b289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "linkedin" })}><LinkedinIcon /></motion.a>
                         </div>
                     </div>
                 </div>
@@ -2304,11 +2901,24 @@ export default function App() {
     const [page, setPage] = useState('home');
     const [selectedNews, setSelectedNews] = useState(null);
     const [selectedDetail, setSelectedDetail] = useState(null);
-    const [showIntro, setShowIntro] = useState(true);
+    const [showIntro, setShowIntro] = useState(() => {
+        // Check session storage to see if intro has been shown
+        return !sessionStorage.getItem('introShown');
+    });
     const [expandedItem, setExpandedItem] = useState(null);
     const [copied, setCopied] = useState(false);
     const [scrollToSectionId, setScrollToSectionId] = useState(null);
+    const [expandedInsightId, setExpandedInsightId] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        ReactGA.initialize('G-CQ3EC5TLMM');
+    }, []);
+
+    useEffect(() => {
+        const currentPath = `/${page}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
+        ReactGA.send({ hitType: "pageview", page: currentPath, title: page });
+    }, [page, searchParams]);
 
     const currentContent = content[lang];
     const cvUrl = "https://drive.google.com/file/d/1LUlTviJPBxVjce3lwcg-6IDZ1YOTdDn9/view?usp=sharing";
@@ -2348,7 +2958,40 @@ export default function App() {
         }
     }, [searchParams, lang]);
 
+    // --- Insight Accordion + URL Routing ---
+    const handleInsightToggle = (insightId) => {
+        if (expandedInsightId === insightId) {
+            // Collapse: remove hash
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+            setExpandedInsightId(null);
+        } else {
+            // Expand: set hash to insightId
+            window.history.replaceState(null, '', window.location.pathname + window.location.search + '#' + insightId);
+            setExpandedInsightId(insightId);
+        }
+    };
+
+    // Sync URL -> Accordion expand state for Insights
+    useEffect(() => {
+        const syncHash = () => {
+            const hash = window.location.hash.replace('#', '');
+            const allInsightIds = content[lang].insights.items.map(i => i.id);
+            if (hash && allInsightIds.includes(hash)) {
+                setExpandedInsightId(hash);
+            } else {
+                setExpandedInsightId(null);
+            }
+        };
+        syncHash();
+        window.addEventListener('hashchange', syncHash);
+        return () => window.removeEventListener('hashchange', syncHash);
+    }, [lang, content]);
+
     const handleCopyEmail = () => {
+        ReactGA.event({
+            category: "Contact",
+            action: "Copy_Email"
+        });
         const textArea = document.createElement("textarea");
         textArea.value = currentContent.contact.email;
         document.body.appendChild(textArea);
@@ -2365,6 +3008,11 @@ export default function App() {
 
     const handleDownload = (e, pdfPath) => {
         e.stopPropagation();
+        ReactGA.event({
+            category: "Engagement",
+            action: "Download_CV",
+            label: pdfPath
+        });
         const link = document.createElement('a');
         link.href = pdfPath;
 
@@ -2379,9 +3027,12 @@ export default function App() {
 
 
     return (
-        <div className="bg-black text-gray-200 font-['Noto_Sans_JP',_sans-serif] cursor-default md:cursor-none relative selection:bg-emerald-500/30 selection:text-white min-h-screen">
+        <div className="bg-black text-gray-200 font-['Noto_Sans_JP',_sans-serif] cursor-default md:cursor-none relative selection:bg-emerald-500/30 selection:text-white min-h-[100dvh]">
             <AnimatePresence>
-                {showIntro && <NodeIntro onFinish={() => setShowIntro(false)} />}
+                {showIntro && <NodeIntro onFinish={() => {
+                    setShowIntro(false);
+                    sessionStorage.setItem('introShown', 'true');
+                }} />}
             </AnimatePresence>
 
             {/* Fixed Background - Always Visible */}
@@ -2391,7 +3042,8 @@ export default function App() {
                 {!showIntro && (
                     <motion.div key={page} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="relative z-10">
                         <CustomCursor />
-                        <NewsModal newsItem={selectedNews} onClose={handleNewsClose} />
+                        <NewsModal newsItem={selectedNews} onClose={handleNewsClose} ui={currentContent.ui} />
+
                         <DetailModal item={selectedDetail} onClose={() => setSelectedDetail(null)} content={currentContent} handleDownload={handleDownload} ui={currentContent.ui} />
                         {page === 'home' && (
                             <MainContent
@@ -2403,6 +3055,8 @@ export default function App() {
                                 setScrollToSectionId={setScrollToSectionId}
                                 cvUrl={cvUrl}
                                 handleNewsSelect={handleNewsSelect}
+                                expandedInsightId={expandedInsightId}
+                                handleInsightToggle={handleInsightToggle}
                                 setSelectedDetail={setSelectedDetail}
                                 handleCopyEmail={handleCopyEmail}
                                 copied={copied}
@@ -2410,6 +3064,7 @@ export default function App() {
                         )}
                         {page === 'all-news' && <AllNewsPage content={currentContent} setPage={setPage} setSelectedNews={handleNewsSelect} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
                         {page === 'all-projects' && <AllProjectsPage content={currentContent} setPage={setPage} setSelectedDetail={setSelectedDetail} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
+                        {page === 'all-insights' && <AllInsightsPage content={currentContent} setPage={setPage} expandedInsightId={expandedInsightId} onInsightToggle={handleInsightToggle} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -2437,3 +3092,4 @@ export default function App() {
         </div>
     );
 }
+//test
