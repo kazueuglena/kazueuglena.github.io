@@ -13,10 +13,18 @@ const getNewsImages = (folderName) => {
         .map(key => newsContext(key));
 };
 
+// --- Media Image Context ---
+const mediaContext = require.context('./assets/images_media', false, /\.(png|jpe?g|svg)$/i);
+const getMediaImage = (fileName) => {
+    if (!fileName) return "";
+    const match = mediaContext.keys().find(key => key.includes(fileName));
+    return match ? mediaContext(match) : "";
+};
+
 // --- 多言語コンテンツ ---
 const content = {
     ja: {
-        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", contact: "Contact" },
+        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
         ui: {
             read_more: "READ MORE",
             click_for_details: "詳細を見る",
@@ -44,7 +52,7 @@ const content = {
         profile: {
             title: "Profile",
             name: "小松 和滉",
-            affiliation: "長野県諏訪清陵高等学校 | 次世代研究所 ADvance Lab 副所長",
+            affiliation: "長野県諏訪清陵高等学校",
             description: "異なる領域が繋がることでこそ、新たな「知」が生まれると信じています。\n\n私は、長野県を拠点に「生物学×情報工学」という学際的な視点からオジギソウの研究に取り組むとともに、地方と都市の教育格差を解消するための科学教育活動を展開してきました。\n研究室の知見と社会の課題、最先端のテクノロジーと地方の子どもたち。それら分断されがちな世界を滑らかにつなぐ「架け橋」となることで、新たな可能性を拓いていきます。",
             cv_button: "CVを見る"
         },
@@ -58,6 +66,7 @@ const content = {
             items: [
                 {
                     id: "new-website",
+                    published: true,
                     date: "2025.07.15",
                     title: "ポートフォリオサイトを大幅リニューアル",
                     summary: "インタラクティブな機能を追加し、ウェブサイトを全面的に更新しました。",
@@ -66,6 +75,7 @@ const content = {
                 },
                 {
                     id: "acmb-jsmb-2025",
+                    published: true,
                     date: "2025.07.11",
                     title: "ACMB-JSMB2025にてポスター発表",
                     summary: "ACMB-JSMB2025にて、植物の刺激馴化メカニズムに関する研究成果をポスター発表しました。",
@@ -74,6 +84,7 @@ const content = {
                 },
                 {
                     id: "asc-2025",
+                    published: true,
                     date: "2025.08.07",
                     title: "Asian Science Camp 2025に参加",
                     summary: "ノーベル賞受賞者を含めた数多くの研究者の方やアジア各国からの高校生大学生参加者と交流しました。",
@@ -82,6 +93,7 @@ const content = {
                 },
                 {
                     id: "expo-workshop-announce",
+                    published: true,
                     date: "2025.08.11",
                     title: "【告知】8/24 大阪万博にてWS開催",
                     summary: "植物に関するワークショップを8月24日に大阪・関西万博2025「いのちの遊び場 クラゲ館」にて行います。",
@@ -90,6 +102,7 @@ const content = {
                 },
                 {
                     id: "expo-workshop-report",
+                    published: true,
                     date: "2025.08.24",
                     title: "大阪・関西万博2025にてワークショップを開催しました",
                     summary: "大阪・関西万博のパビリオン『いのちの遊び場 クラゲ館』にて、オジギソウをテーマにした科学ワークショップを企画・開催しました。",
@@ -98,6 +111,7 @@ const content = {
                 },
                 {
                     id: "jbs-2025",
+                    published: true,
                     date: "2025.09.20",
                     title: "第89回日本植物学会 高校生ポスター発表にて発表&受賞",
                     summary: "日本植物学会にてポスター発表を行いました。多くの研究者の方々と議論でき、大変貴重な経験となりました。",
@@ -106,6 +120,7 @@ const content = {
                 },
                 {
                     id: "rohto-future-2025",
+                    published: true,
                     date: "2025.09.28",
                     title: "ロート製薬・リバネス共創プロジェクトにて未来提案プレゼンを実施",
                     summary: "2100年における精神疾患に対する解決策を大阪駅前で発表しました。",
@@ -114,6 +129,7 @@ const content = {
                 },
                 {
                     id: "nagano-gakkasyo2025",
+                    published: true,
                     date: "2025.10.04",
                     title: "長野県学生科学賞にて県知事賞を受賞",
                     summary: "オジギソウの「馴化様」現象を画像解析技術を用いて解明した研究により、最高賞である長野県知事賞を受賞しました。",
@@ -122,6 +138,7 @@ const content = {
                 },
                 {
                     id: "UTokyoGSC-seika",
+                    published: true,
                     date: "2025.11.15",
                     title: "UTokyoGSC-NEXT 第3段階 成果発表会にて研究成果を発表",
                     summary: "東京大学・末次研究室での指導のもと取り組んだオジギソウの研究成果を発表。多くの刺激を受けました。",
@@ -130,6 +147,7 @@ const content = {
                 },
                 {
                     id: "koushien",
+                    published: true,
                     date: "2025.11.29",
                     title: "科学の甲子園 長野県予選にて準優勝（実技部門1位）",
                     summary: "生物担当としてチームに貢献。実技競技では全体1位を獲得しましたが、惜しくも総合2位で全国大会出場はなりませんでした。",
@@ -138,6 +156,7 @@ const content = {
                 },
                 {
                     id: "mbsj-2025",
+                    published: true,
                     date: "2025.12.05",
                     title: "第48回日本分子生物学会年会にてポスター発表",
                     summary: "パシフィコ横浜で開催された国内最大級の学会にて、オジギソウとヒドラに関する2つの研究成果を発表しました。",
@@ -146,6 +165,7 @@ const content = {
                 },
                 {
                     id: "sc-world-2025",
+                    published: true,
                     date: "2025.12.13",
                     title: "サイエンスキャッスルワールド2025にて発表",
                     summary: "東京科学大学で開催された研究発表会に参加。受賞は逃しましたが、国内外の仲間との貴重な交流の機会となりました。",
@@ -154,6 +174,7 @@ const content = {
                 },
                 {
                     id: "Gakkasyo-2025",
+                    published: true,
                     date: "2025.12.19",
                     title: "【速報】日本学生科学賞にて大臣賞受賞 & ISEF出場決定",
                     summary: "日本学生科学賞にて「科学技術政策担当大臣賞」を受賞し、世界大会ISEFへの出場権を獲得しました。秋篠宮皇嗣殿下や小野田大臣より激励のお言葉を賜りました。",
@@ -162,6 +183,7 @@ const content = {
                 },
                 {
                     id: "ABA-Symposium-2026",
+                    published: true,
                     date: "2026.01.14",
                     title: "【香港】第12回アジア生物物理学会にて口頭発表・ポスター発表",
                     summary: "香港で開催されたABA Symposiumに参加し、英語でのポスター発表と自身初となる口頭発表を行いました。高校生ながら挑戦の機会をいただき、生物物理学の面白さと、海外単独渡航を通じた個人の成長を実感しました。",
@@ -171,25 +193,58 @@ const content = {
                 },
                 {
                     id: "isef-virtual-project-board-2026",
+                    published: true,
                     date: "2026.04.18",
                     title: "ISEF 2026のプロジェクトページが公開されました",
                     summary: "アメリカで開催されるISEF(国際学生科学技術フェア)の公式Virtual Project Boardにて、私のプロジェクトページが公開されました。",
                     fullContent: "2026年5月にアメリカのロサンゼルスで開催される「ISEF（国際学生科学技術フェア）」に向けて、公式のVirtual Project Boardにて私のプロジェクトページが公開されました。<br><br>プロジェクトのタイトルは「Stimulus Discrimination and Memory in M. pudica」です。世界中の方々に私のオジギソウ研究について知っていただく機会となることを大変嬉しく思います。皆様、ぜひ以下のリンクからご覧ください。",
-                    images: [],
+                    images: getNewsImages("ISEF-pre"),
                     link: "https://isef.net/project/plnt017-stimulus-discrimination-and-memory-in-m-pudica"
                 },
                 {
                     id: "rhabit-release-2026",
+                    published: true,
                     date: "2026.04.18",
                     title: "iOSアプリ「rHabit」をリリースしました",
                     summary: "集中作業中の「無意識のクセ（口開きなど）」をAIで検知し、改善をサポートするトラッキングアプリを開発・公開しました。",
                     fullContent: "勉強やPC作業に深く集中している最中に、無意識に口が開いてしまうことはありませんか？顔認識AIを用いてこれら「無意識のクセ」をリアルタイムに検知し、改善をサポートするiOSアプリ「rHabit」を独自開発し、App Storeにて公開しました。<br><br>iPhoneのFace ID技術を活用した完全ローカル処理により、集中を阻害することなくトラッキングします。「どれくらい口が開いたら検知するか」などのカスタマイズも可能で、クセが出た瞬間に静かなバイブレーションで気づきを与えます。自身の研究活動など長時間の集中での実体験に基づき開発したアプリです。<br><br>詳細は<a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>公式サイト</a>、または<a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>App Store</a>からご覧いただけます。",
-                    images: [],
+                    images: getNewsImages("rHabit"),
                     link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769"
+                },
+                {
+                    id: "isef-award-2026",
+                    published: true,
+                    date: "2026.05.15",
+                    title: "【速報】Regeneron ISEF 2026にて3賞同時受賞",
+                    summary: "リジェネロン国際学生科学技術フェア（ISEF 2026）にて、植物科学部門優秀賞2等（世界2位）をはじめ、アリゾナ州立大学賞、TÜBİTAK賞1等の計3賞を同時受賞しました。",
+                    fullContent: "アメリカ・アリゾナ州フェニックスにて開催された、高校生の国際的な科学研究コンテスト「リジェネロン国際学生科学技術フェア（Regeneron ISEF 2026）」に日本代表の一員として出場し、植物科学（Plant Sciences）部門にて研究発表を行いました。<br><br>現地時間5月14日午後の特別賞授賞式（Special Award Ceremony）、翌15日午前の優秀賞授賞式（Grand Award Ceremony）にて、部門優秀賞2等（世界2位）をはじめ、協賛団体から贈られる特別賞のアリゾナ州立大学賞、およびトルコ科学技術研究会議（TÜBİTAK）賞1等の計3つの賞を同時に受賞いたしました。日本代表のファイナリストが優秀賞と2つの特別賞を同時に受賞するのは、12年ぶりの快挙です。<br><br>研究タイトルは「Learning Without a Brain: Habituation and Stimulus Discrimination in <i>Mimosa pudica</i> Explained by Mechanosensitive Channel Desensitization?」（脳なき学習: <i>Mimosa pudica</i> における馴化と刺激識別は機械受容チャネルの脱感作により説明される？）です。<br><br>会期中は、世界約70カ国・地域から集まった約1,800名のファイナリストとの交流や、各分野の専門家による英語での審査が行われ、大変有意義な国際交流の機会となりました。今回の貴重な経験を糧に、今後もさらなる研究の深化に努めてまいります。<br><br>日頃よりご支援・ご指導いただいている全ての皆様に、心より感謝申し上げます。",
+                    images: getNewsImages("ISEF"),
+                    link: ""
+                },
+                {
+                    id: "mitoh-target-2026",
+                    published: false,
+                    date: "2026.05.23",
+                    title: "2026年度 未踏ターゲット事業に採択されました",
+                    summary: "IPA（独立行政法人情報処理推進機構）の未踏ターゲット事業（リザバーコンピューティング分野）に採択されました。",
+                    fullContent: "2026年度の未踏ターゲット事業（リザバーコンピューティング技術を活用したソフトウェア開発分野）に採択されました。<br><br>テーマは「植物の馴化を更新則へ：オジギソウのリザバー計算的理解と計算を休むリザバー Habituation-RC（HRC）の開発」です。<br><br>本事業は、IPA（独立行政法人情報処理推進機構）が主催する、突出したIT人材を発掘・育成するためのプログラムです。今回は、私の研究テーマであるオジギソウの「馴化」現象を、リザバーコンピューティングの枠組みで再解釈し、新たな計算パラダイムの開発に挑みます。<br><br>植物の知性と情報工学を「繋ぐ」この挑戦的なプロジェクトに全力で取り組んでまいります。",
+                    images: getNewsImages("Mitou"),
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html"
+                },
+                {
+                    id: "jsai-2026",
+                    published: false,
+                    date: "2026.06.09",
+                    title: "【告知】人工知能学会 40周年記念企画「AI for Science」にてパネルディスカッションに参加",
+                    summary: "人工知能学会全国大会（JSAI2026）の40周年記念企画セッション「次世代のAI for Science」にて、プレゼンテーションとパネルディスカッションに参加します。",
+                    fullContent: "2026年6月9日（火）に開催される人工知能学会全国大会（JSAI2026）の40周年記念企画セッション「次世代の『AI for Science』〜何を目指し、どう進めるか〜」にて、プレゼンテーションとパネルディスカッションに参加します。<br><br>本セッションは、10年後・20年後の科学研究を見据えた次世代の「AI for Science」を展望する企画です。人工知能学会会長の栗原聡先生による講演とともに、AIが拓く科学研究の未来と今後の研究の方向性について議論します。<br><br>【開催概要】<br>■日時: 2026年6月9日（火） 9:00 〜 10:30<br>■場所: A会場（展示ホールC）<br>■セッション: [2A1-KS-36] 40周年記念企画4：次世代の「AI for Science」〜何を目指し、どう進めるか〜<br><br>科学とAIの接点という、自身の研究にも深く関わるテーマについて、第一線の研究者の方々と議論できる貴重な機会を大変楽しみにしています。",
+                    images: getNewsImages("JSAI"),
+                    link: ""
                 },
                 /*
                 {
                     id: "-",
+                    published: true,
                     date: "2025.XX.XX",
                     title: "-",
                     summary: "-",
@@ -207,6 +262,13 @@ const content = {
             heading_awards: "研究発表・学会",
             description: "オジギソウの応答調節の検証や数理的解析、ヒドラの古典的条件付けなどの様々な研究を進めています。",
             grants: [
+                {
+                    year: "2026",
+                    title: "2026年度未踏ターゲット事業(リザバーコンピューティング技術を活用したソフトウェア開発分野)",
+                    details: "植物の馴化を更新則へ : オジギソウのリザバー計算的理解と計算を休むリザバー  Habituation-RC（HRC）の開発",
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html",
+                    featured: true
+                },
                 {
                     year: "2025",
                     title: "株式会社LINOA（旧株式会社ADvance Lab） 研究費",
@@ -260,6 +322,28 @@ const content = {
                 },
             ],
             awards: [
+                {
+                    year: "2026",
+                    title: "リジェネロン国際学生科学技術フェア",
+                    prize: "植物科学部門 優秀賞2等 (世界2位)",
+                    details: "Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?というタイトルで発表。",
+                    link: "https://event.yomiuri.co.jp/jssa/",
+                    featured: true
+                },
+                {
+                    year: "2026",
+                    title: "リジェネロン国際学生科学技術フェア",
+                    prize: "アリゾナ州立大学賞",
+                    details: "Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?というタイトルで発表。",
+                    link: "https://event.yomiuri.co.jp/jssa/",
+                },
+                {
+                    year: "2026",
+                    title: "リジェネロン国際学生科学技術フェア",
+                    prize: "トルコ科学技術研究会議賞 1等",
+                    details: "Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?というタイトルで発表。",
+                    link: "https://event.yomiuri.co.jp/jssa/",
+                },
                 {
                     year: "2025",
                     title: "第69回 日本学生科学賞（高等学校の部）",
@@ -375,6 +459,14 @@ const content = {
             title: "Projects",
             view_all_button: "VIEW ALL",
             items: [
+                {
+                    image: process.env.PUBLIC_URL + "/images/mitou.png",
+                    title: "Habituation-RC（HRC）の開発：植物の知性を情報工学へ",
+                    description: "オジギソウの「馴化」をリザバーコンピューティングの枠組みで再解釈し、新たな計算モデル「HRC」の開発に挑んでいます。",
+                    period: "26.05 - Present",
+                    details: "IPA（独立行政法人情報処理推進機構）の2026年度未踏ターゲット事業に採択されたプロジェクトです。脳や神経系を持たないオジギソウが刺激に「慣れる」プロセス（馴化）を数学的にモデル化し、ニューラルネットワークの一種であるリザバーコンピューティングの更新則（学習則）へと応用します。これにより、環境変化に適応しながら必要な時だけ計算を行う省電力で自律的な新計算モデル「Habituation-RC（HRC）」の構築を目指します。",
+                    featured: true
+                },
                 { image: process.env.PUBLIC_URL + "/images/mimosa2.png", title: "オジギソウの応答調節（馴化）の機構解明", description: "オジギソウの「馴化」メカニズムを、数理モデルとカルシウムイメージング技術の双方から解明しています。", period: "25.11 - Present", details: "オジギソウが刺激を「記憶」し応答を制御する仕組みに迫るため、細胞の局所的疲労をモデル化する数理的なアプローチに加え、埼玉大学・豊田研究室でのカルシウムイメージング実験によって細胞内シグナル伝達を可視化し、理論と実験の両面から植物の知性（情報処理）の実体を解き明かそうとしています。", featured: false },
                 { image: process.env.PUBLIC_URL + "/images/hydra.png", title: "ヒドラにおける古典的条件付けの解明", description: "単純な散在神経系を持つHydra vulgarisにおいて、学習の一種である古典的条件付けが存在するのかを検証しています", period: "25.04 - Present", details: "本研究は、脳を持たないヒドラ（Hydra vulgaris）が連合学習（古典的条件付け）を示すかを検証します。採食行動を引き起こす還元型グルタチオン（無条件刺激）と、体収縮を誘発する青色光（条件刺激）を繰り返し対提示し、その後、青色光のみで採食行動が誘発されるかをAIを用いた行動解析により評価します。これにより、学習能力の進化的起源に迫り、ヒドラの神経科学における新たなモデル生物としての可能性を探ります。", featured: true },
                 { image: process.env.PUBLIC_URL + "/images/mimosa1.png", title: "オジギソウの応答調節（馴化）の生態学的意義の解明", description: "オジギソウの「馴化」がエネルギー収支に与える影響を、数理モデルを用いて定量的に解析しています。", period: "24.11 - Present", details: "オジギソウの「馴化」現象が持つ生存上の利点を解明するため、葉の開閉に伴うエネルギーコストと食害リスクのトレードオフを考慮した数理モデルを構築し、異なる生存戦略間での優位性を定量的に検証しています。", featured: false },
@@ -469,6 +561,111 @@ const content = {
                 },
             ]
         },
+        media: {
+            title: "Media",
+            items: [
+                {
+                    date: "2026.05.21",
+                    mediaName: "TBS",
+                    title: "日本学生科学賞受賞と研究内容に関する報道",
+                    link: "https://vt.tiktok.com/ZSxARN8Mv/",
+                    image: getMediaImage("TBS"),
+                    type: "TV",
+                    description: "TBSの朝の情報番組The timeの「全国中高生ニュース」において、日本学生科学賞における科学技術政策担当大臣賞受賞とその研究内容に関して報道されました。",
+                },
+                {
+                    date: "2026.05.17",
+                    mediaName: "読売新聞 (全国版) / 各種メディア",
+                    title: "世界大会「Regeneron ISEF 2026」優秀賞2等＆特別賞受賞に関する報道",
+                    link: "https://www.itmedia.co.jp/news/articles/2605/18/news123.html",
+                    image: "",
+                    type: "newspaper | Web news",
+                    description: "世界最大の学生科学フェア「ISEF 2026」にて、植物科学部門優秀賞2等、および特別賞2つを受賞したことが報道されました。",
+                },
+                {
+                    date: "2026.03.26",
+                    mediaName: "読売新聞 (地方版)",
+                    title: "第69回日本学生科学賞受賞に関する報道（科学技術政策担当大臣賞）",
+                    link: "",
+                    image: "",
+                    type: "newspaper",
+                    description: "日本学生科学賞における「科学技術政策担当大臣賞」の受賞と、ISEF日本代表選出について報じられました。",
+                },
+                {
+                    date: "2026.1.25",
+                    mediaName: "長野日報",
+                    title: "長野県学生科学賞 県知事賞受賞に関する報道",
+                    link: "https://www.nagano-np.co.jp/news/detail.php?id=5159",
+                    image: "",
+                    type: "newspaper",
+                    description: "オジギソウの馴化様現象を独自に開発した画像解析システムで解明した成果により、最高賞の長野県知事賞を受賞した際の報道。",
+                },
+                {
+                    date: "2026.1.25",
+                    mediaName: "信州・市民新聞",
+                    title: "長野県学生科学賞 県知事賞受賞に関する報道",
+                    link: "https://www.shimin.co.jp/archives/12214",
+                    image: "",
+                    type: "newspaper",
+                    description: "オジギソウの馴化様現象を独自に開発した画像解析システムで解明した成果により、最高賞の長野県知事賞を受賞した際の報道。",
+                },
+                {
+                    date: "2025.12.20",
+                    mediaName: "読売新聞 (全国版)",
+                    title: "第69回日本学生科学賞受賞に関する報道（科学技術政策担当大臣賞）",
+                    link: "",
+                    image: "",
+                    type: "newspaper",
+                    description: "日本学生科学賞における「科学技術政策担当大臣賞」の受賞と、ISEF日本代表選出について報じられました。",
+                },
+                {
+                    date: "2025.12.17",
+                    mediaName: "イクジィ (ikuzy)",
+                    title: "高校生が子どもたちに伝える“科学のときめき” –––– サイエンス出前便の挑戦",
+                    link: "https://ikuzy.com/babykids/%e9%ab%98%e6%a0%a1%e7%94%9f%e3%81%8c%e5%ad%90%e3%81%a9%e3%82%82%e3%81%9f%e3%81%a1%e3%81%ab%e4%bc%9d%e3%81%88%e3%82%8b%e7%a7%91%e5%ad%a6%e3%81%ae%e3%81%a8%e3%81%8d%e3%82%81%e3%81%8d/",
+                    image: "",
+                    type: "web",
+                    description: "「イオンモール松本×イクジィ」のコラボイベントにおいて、小学生向けに科学工作教室を実施した諏訪清陵高校の有志チーム「サイエンス出前便」の取り組みやインタビューが掲載されました。",
+                },
+                {
+                    date: "2025.11.22",
+                    mediaName: "読売新聞 (地方版)",
+                    title: "長野県学生科学賞受賞に関する報道（県知事賞）",
+                    link: "",
+                    image: "",
+                    type: "newspaper",
+                    description: "長野県学生科学賞における最高賞の県知事賞を受賞したことについて報じられました。",
+                },
+                {
+                    date: "2025.10.12",
+                    mediaName: "Steenz",
+                    title: "オジギソウは“記憶する”？地元・長野からオジギソウ研究と教育普及に熱中する高校生【小松和滉・17歳】",
+                    link: "https://steenz.jp/48492/",
+                    image: getMediaImage("steenz-25-10"),
+                    type: "interview",
+                    description: "10代の活動を紹介するメディア「Steenz」のインタビューにおいて、オジギソウに関する研究や、地方と都会の教育格差に対する想いを語りました。",
+                },
+                {
+                    date: "2024.12.28",
+                    mediaName: "長野日報",
+                    title: "清陵高生が講師に　冬休みの児童に科学教室",
+                    link: "https://www.nagano-np.co.jp/news/detail.php?id=2870",
+                    image: getMediaImage("nippo-24-12"),
+                    type: "newspaper",
+                    description: "諏訪清陵高校の生徒が講師となり、冬休み期間中の小学生を対象に紙飛行機の実験を通じた科学教室を開催したことが報じられました。",
+                },
+                {
+                    date: "2024.12.28",
+                    mediaName: "NHK (地方版）",
+                    title: "清陵高生が講師に　冬休みの児童に科学教室",
+                    link: "https://www.nagano-np.co.jp/news/detail.php?id=2870",
+                    image: getMediaImage("NHK-24-12"),
+                    type: "TV",
+                    description: "諏訪清陵高校の生徒が講師となり、冬休み期間中の小学生を対象に紙飛行機の実験を通じた科学教室を開催したことが報じられました。",
+                },
+
+            ]
+        },
         contact: {
             title: "Connect",
             description: "あらゆる境界を超えて、新たな「繋がり」を築きましょう。",
@@ -476,9 +673,9 @@ const content = {
         },
         footer: {
             columns: [
-                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map", "Insights"] },
+                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map", "Insights", "Media"] },
                 { title: "Activities", items: ["Activities", "ADvance Lab"] },
-                { title: "Connect", items: ["Contact", "X (Twitter)", "Instagram", "Facebook", "LinkedIn"] }
+                { title: "Connect", items: ["Contact", "X (Twitter)", "Instagram", "Facebook", "LinkedIn", "GitHub"] }
             ]
         },
         all_news_page: {
@@ -491,7 +688,7 @@ const content = {
         }
     },
     en: {
-        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", contact: "Contact" },
+        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
         ui: {
             read_more: "READ MORE",
             click_for_details: "Click for details",
@@ -518,7 +715,7 @@ const content = {
         profile: {
             title: "Profile",
             name: "Kazuhiro Komatsu",
-            affiliation: "Suwa Seiryo High School | Vice Director, ADvance Lab",
+            affiliation: "Suwa Seiryo High School",
             description: "I believe that new 'intelligence' is born precisely when different fields connect.\n\nBased in Nagano, I conduct research on Mimosa pudica from the interdisciplinary perspective of 'Biology × Informatics,' while also leading science education initiatives to bridge the educational gap between rural and urban areas.\nConnecting laboratory insights with social issues, and cutting-edge technology with children in rural regions. By acting as a 'bridge' that smoothly connects these often divided worlds, I aim to unlock new possibilities.",
             cv_button: "View CV"
         },
@@ -532,6 +729,7 @@ const content = {
             items: [
                 {
                     id: "new-website",
+                    published: true,
                     date: "July 15, 2025",
                     title: "Major Portfolio Site Renewal",
                     summary: "Refreshed the website with the concept of 'The Rhizome of Intelligence'.",
@@ -540,6 +738,7 @@ const content = {
                 },
                 {
                     id: "nagano-gakkasyo2025",
+                    published: true,
                     date: "Oct 4, 2025",
                     title: "Governor's Prize at Nagano Prefecture Student Science Award",
                     summary: "Received the top award for research elucidating the 'habituation-like' phenomenon in Mimosa pudica using image analysis technology.",
@@ -548,6 +747,7 @@ const content = {
                 },
                 {
                     id: "UTokyoGSC-seika",
+                    published: true,
                     date: "Nov 15, 2025",
                     title: "Research Presentation at UTokyoGSC-NEXT Stage 3 Achievement Presentation",
                     summary: "Presented research results on Mimosa pudica conducted under the guidance of the Suetsugu Laboratory at the University of Tokyo.",
@@ -556,6 +756,7 @@ const content = {
                 },
                 {
                     id: "koushien",
+                    published: true,
                     date: "Nov 29, 2025",
                     title: "Runner-up at Science Koushien Nagano Prefecture Qualifier (1st in Practical Skills)",
                     summary: "Contributed to the team as a biology specialist. Although we won 1st place overall in the practical competition, we unfortunately finished 2nd overall and missed the national tournament.",
@@ -564,6 +765,7 @@ const content = {
                 },
                 {
                     id: "mbsj-2025",
+                    published: true,
                     date: "Dec 5, 2025",
                     title: "Poster Presentation at the 48th Annual Meeting of the Molecular Biology Society of Japan",
                     summary: "Presented two research results on Mimosa pudica and Hydra at one of the largest domestic conferences held at Pacifico Yokohama.",
@@ -572,6 +774,7 @@ const content = {
                 },
                 {
                     id: "sc-world-2025",
+                    published: true,
                     date: "Dec 13, 2025",
                     title: "Presentation at Science Castle World 2025",
                     summary: "Participated in the research presentation held at the Institute of Science Tokyo. It was a valuable opportunity for exchange with peers from Japan and abroad.",
@@ -580,6 +783,7 @@ const content = {
                 },
                 {
                     id: "acmb-jsmb-2025",
+                    published: true,
                     date: "July 11, 2025",
                     title: "Poster Presentation at ACMB-JSMB2025",
                     summary: "Presented a mathematical model on the stimulus habituation mechanism of plants.",
@@ -588,6 +792,7 @@ const content = {
                 },
                 {
                     id: "asc-2025",
+                    published: true,
                     date: "Aug 7, 2025",
                     title: "Participated in Asian Science Camp 2025",
                     summary: "Exchange with young researchers from Asian countries.",
@@ -596,6 +801,7 @@ const content = {
                 },
                 {
                     id: "expo-workshop-announce",
+                    published: true,
                     date: "Aug 11, 2025",
                     title: "[Announcement] Workshop at Osaka Expo",
                     summary: "Workshop to learn plant abilities through touch.",
@@ -604,6 +810,7 @@ const content = {
                 },
                 {
                     id: "expo-workshop-report",
+                    published: true,
                     date: "Aug 24, 2025",
                     title: "Hosted a Workshop at Expo 2025 Osaka, Kansai",
                     summary: "Organized and hosted a science workshop on Mimosa pudica at the 'Playground of Life: Jellyfish Pavilion' in Expo 2025 Osaka, Kansai.",
@@ -612,6 +819,7 @@ const content = {
                 },
                 {
                     id: "jbs-2025",
+                    published: true,
                     date: "Sep 20, 2025",
                     title: "Presentation & Award at the 89th Annual Meeting of the Botanical Society of Japan",
                     summary: "Presented a poster and received an award at the Botanical Society of Japan. It was a valuable experience to discuss with many researchers.",
@@ -620,6 +828,7 @@ const content = {
                 },
                 {
                     id: "rohto-future-2025",
+                    published: true,
                     date: "Sep 28, 2025",
                     title: "Future Proposal Presentation at Rohto/Leave a Nest Co-Creation Project",
                     summary: "Presented a solution for mental illness in the year 2100 at Grand Green Osaka.",
@@ -628,6 +837,7 @@ const content = {
                 },
                 {
                     id: "Gakkasyo-2025",
+                    published: true,
                     date: "Dec 19, 2025",
                     title: "[Breaking] Received Minister's Award at JSSA & Selected for ISEF",
                     summary: "Received the Minister of State for Science and Technology Policy Award at the Japan Student Science Awards and qualified for ISEF. Honored to receive encouraging words from H.I.H. Crown Prince Akishino and Minister Onoda.",
@@ -636,6 +846,7 @@ const content = {
                 },
                 {
                     id: "ABA-Symposium-2026",
+                    published: true,
                     date: "Jan 14, 2026",
                     title: "[Hong Kong] Oral & Poster Presentation at the 12th Asian Biophysics Association Symposium",
                     summary: "Participated in the ABA Symposium in Hong Kong, delivering an English poster presentation and my first-ever oral presentation. Grateful for the opportunity to challenge myself as a high school student, I experienced the fascination of biophysics and personal growth through solo overseas travel.",
@@ -645,6 +856,7 @@ const content = {
                 },
                 {
                     id: "isef-virtual-project-board-2026",
+                    published: true,
                     date: "Apr 18, 2026",
                     title: "ISEF 2026 Project Page Published",
                     summary: "My project page has been published on the official Virtual Project Board for ISEF (International Science and Engineering Fair).",
@@ -654,12 +866,43 @@ const content = {
                 },
                 {
                     id: "rhabit-release-2026",
+                    published: true,
                     date: "Apr 18, 2026",
                     title: "Released iOS App 'rHabit'",
                     summary: "Developed and published 'rHabit', an iOS tracking app that detects unconscious habits (like an open mouth) during focus using AI to support improvement.",
                     fullContent: "Do you ever find your mouth opening unconsciously while deeply focused on work or study? I have developed and independently released 'rHabit', an iOS app that detects these 'unconscious habits' in real-time using facial recognition AI to support your improvement.<br><br>Utilizing the iPhone's Face ID technology for completely local processing, it tracks seamlessly without disturbing your concentration. You can customize settings like 'how wide the mouth opens to detect' and it provides a gentle vibration to make you aware the moment a habit occurs. This app was inspired by my own experiences during long hours of concentration in research activities.<br><br>You can find more details on the <a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>Official Website</a> or download it directly from the <a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>App Store</a>.",
                     images: [],
                     link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US"
+                },
+                {
+                    id: "isef-award-2026",
+                    published: true,
+                    date: "May 15, 2026",
+                    title: "[Breaking] Won 3 Awards at Regeneron ISEF 2026",
+                    summary: "Won three awards simultaneously at the Regeneron International Science and Engineering Fair (ISEF 2026): Plant Sciences Grand Award 2nd Place (2nd in the world), Arizona State University Award, and TÜBİTAK Award 1st Place.",
+                    fullContent: "I participated as a member of the Japanese delegation in the Regeneron International Science and Engineering Fair (ISEF 2026), an international science research contest for high school students held in Phoenix, Arizona, USA, and presented my research in the Plant Sciences category.<br><br>At the Special Award Ceremony on the afternoon of May 14th and the Grand Award Ceremony on the morning of May 15th (local time), I was honored to receive three awards simultaneously: the Plant Sciences Grand Award 2nd Place (2nd in the world), the Arizona State University Award, and The Scientific and Technological Research Council of Türkiye (TÜBİTAK) Award 1st Place. This is the first time in 12 years that a Japanese finalist has won a Grand Award and two Special Awards simultaneously.<br><br>The research title was 'Learning Without a Brain: Habituation and Stimulus Discrimination in <i>Mimosa pudica</i> Explained by Mechanosensitive Channel Desensitization?'<br><br>During the fair, I had the opportunity to interact with approximately 1,800 finalists from about 70 countries and regions around the world, and undergo judging in English by experts in various fields. It was an incredibly meaningful opportunity for international exchange. I will continue to deepen my research, drawing on this invaluable experience.<br><br>I would like to express my heartfelt gratitude to everyone who has supported and guided me.",
+                    images: getNewsImages("ISEF"),
+                    link: ""
+                },
+                {
+                    id: "mitoh-target-2026",
+                    published: false,
+                    date: "May 23, 2026",
+                    title: "Selected for the 2026 Mitoh Target Program",
+                    summary: "Selected for the Information-technology Promotion Agency (IPA) Mitoh Target Program in the Reservoir Computing division.",
+                    fullContent: "I have been selected for the 2026 Mitoh Target Program (Software Development Division utilizing Reservoir Computing Technology).<br><br>The project theme is 'Turning Plant Habituation into Update Rules: Reservoir Computing Understanding of Mimosa pudica and Development of a Reservoir that Rests Computing — Habituation-RC (HRC).'<br><br>This program, hosted by the Information-technology Promotion Agency, Japan (IPA), aims to discover and nurture outstanding IT talent. In this project, I will reinterpret the 'habituation' phenomenon of Mimosa pudica—my core research subject—within the framework of reservoir computing, and challenge the development of a new computational paradigm.<br><br>I will devote my full effort to this challenging project that 'connects' plant intelligence and information engineering.",
+                    images: getNewsImages("Mitou"),
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html"
+                },
+                {
+                    id: "jsai-2026",
+                    published: false,
+                    date: "Jun 9, 2026",
+                    title: "[Announcement] Panel Discussion at JSAI 40th Anniversary 'AI for Science' Session",
+                    summary: "Participating in a presentation and panel discussion at the 40th Anniversary Special Session 'Next-Generation AI for Science' at the Japanese Society for Artificial Intelligence National Conference (JSAI2026).",
+                    fullContent: "I will participate in a presentation and panel discussion at the 40th Anniversary Special Session 'Next-Generation AI for Science — What to Aim for and How to Proceed' at the Japanese Society for Artificial Intelligence National Conference (JSAI2026) on June 9, 2026.<br><br>This session looks ahead to the next generation of 'AI for Science' with a view to scientific research 10 and 20 years from now. Alongside a keynote by JSAI President Professor Satoshi Kurihara, we will discuss the future of scientific research opened up by AI and the direction of future research.<br><br>【Event Details】<br>■Date: June 9, 2026 (Tue) 9:00 – 10:30<br>■Venue: Hall A (Exhibition Hall C)<br>■Session: [2A1-KS-36] 40th Anniversary Special 4: Next-Generation 'AI for Science' — What to Aim for and How to Proceed<br><br>I am very much looking forward to this valuable opportunity to discuss the intersection of science and AI—a theme deeply connected to my own research—with leading researchers in the field.",
+                    images: getNewsImages("JSAI"),
+                    link: ""
                 }
             ],
             view_more_button: "VIEW ALL NEWS",
@@ -671,6 +914,13 @@ const content = {
             heading_awards: "Conferences & Presentations",
             description: "Conducting diverse research including verification and mathematical analysis of response regulation in Mimosa pudica, and classical conditioning in Hydra.",
             grants: [
+                {
+                    year: "2026",
+                    title: "Information-technology Promotion Agency, Japan (IPA) Mitoh Target Program (Software Development Division utilizing Reservoir Computing)",
+                    details: "Turning Plant Habituation into Update Rules: Reservoir Computing Understanding of Mimosa pudica and Development of a Reservoir that Rests Computing - Habituation-RC (HRC)",
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html",
+                    featured: true
+                },
                 {
                     year: "2025",
                     title: "LINOA Inc. (formerly ADvance Lab Inc.) Research Grant",
@@ -724,6 +974,28 @@ const content = {
                 },
             ],
             awards: [
+                {
+                    year: "2026",
+                    title: "Regeneron International Science and Engineering Fair",
+                    prize: "Plant Sciences Category 2nd Place Grand Award (2nd in the world)",
+                    details: "Presented under the title \"Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?\".",
+                    link: "https://event.yomiuri.co.jp/jssa/",
+                    featured: true
+                },
+                {
+                    year: "2026",
+                    title: "Regeneron International Science and Engineering Fair",
+                    prize: "Arizona State University",
+                    details: "Presented under the title \"Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?\".",
+                    link: "https://event.yomiuri.co.jp/jssa/",
+                },
+                {
+                    year: "2026",
+                    title: "Regeneron International Science and Engineering Fair",
+                    prize: "The Scientific and Technological ResearchCouncil of Türkiye TUBITAK",
+                    details: "Presented under the title \"Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?\".",
+                    link: "https://event.yomiuri.co.jp/jssa/",
+                },
                 {
                     year: "2025",
                     title: "The 69th Japan Student Science Awards (High School Division)",
@@ -840,6 +1112,14 @@ const content = {
             title: "Projects",
             view_all_button: "VIEW ALL",
             items: [
+                {
+                    image: process.env.PUBLIC_URL + "/images/mitou.png",
+                    title: "Development of Habituation-RC (HRC)",
+                    description: "Reinterpreting Mimosa habituation under the reservoir computing framework to develop a novel computational model 'HRC (Habituation-RC)'.",
+                    period: "26.05 - Present",
+                    details: "A project selected for the 2026 Mitou Target Program by the Information-technology Promotion Agency, Japan (IPA). This project mathematically models the process of Mimosa pudica habituating to stimuli without a brain or nervous system, applying it to the update rules (learning rules) of reservoir computing. We aim to construct a novel, power-efficient, and autonomous computational paradigm named 'Habituation-RC' (HRC) that dynamically adapts to environmental changes and rests its computation when inactive.",
+                    featured: true
+                },
                 { image: process.env.PUBLIC_URL + "/images/mimosa2.png", title: "Mechanism of Habituation", description: "Elucidating the mechanism of 'habituation' through both mathematical models and calcium imaging.", period: "25.11 - Present", details: "To approach the mechanism by which Mimosa pudica 'remembers' stimuli and controls responses, we are visualizing intracellular signal transduction via calcium imaging experiments at Saitama University (Toyota Lab), in addition to mathematical approaches modeling local cellular fatigue. We aim to reveal the entity of plant intelligence (information processing) from both theoretical and experimental sides.", featured: false },
                 { image: process.env.PUBLIC_URL + "/images/hydra.png", title: "Classical Conditioning in Hydra", description: "Verifying the existence of classical conditioning in Hydra vulgaris, which has a simple diffuse nervous system.", period: "25.04 - Present", details: "Verifying whether Hydra vulgaris, which lacks a brain, exhibits associative learning (classical conditioning). Repeatedly presenting reduced glutathione (unconditioned stimulus) and blue light (conditioned stimulus), and evaluating whether feeding behavior is induced by blue light alone using AI behavioral analysis. Approaching the evolutionary origin of learning ability.", featured: true },
                 { image: process.env.PUBLIC_URL + "/images/mimosa1.png", title: "Ecological Significance of Habituation", description: "Quantitatively analyzing the impact of 'habituation' on energy balance using mathematical models.", period: "24.11 - Present", details: "To elucidate the survival advantages of 'habituation,' we constructed a mathematical model considering the trade-off between energy costs of leaf movement and predation risk, quantitatively verifying its superiority among different survival strategies.", featured: false },
@@ -933,6 +1213,110 @@ const content = {
                 }
             ]
         },
+        media: {
+            title: "Media",
+            items: [
+                {
+                    date: "2026.05.21",
+                    mediaName: "TBS",
+                    title: "Report on Receiving the Japan Student Science Award and Research Details",
+                    link: "https://vt.tiktok.com/ZSxARN8Mv/",
+                    image: getMediaImage("TBS"),
+                    type: "TV",
+                    description: "Reported on TBS's morning news program 'THE TIME,' specifically in the 'National High School Student News' segment, regarding my receiving the Minister of State for Science and Technology Policy Award at the Japan Student Science Awards and my research content.",
+                },
+                {
+                    date: "2026.05.17",
+                    mediaName: "Yomiuri Shimbun (National Edition) / Various Media",
+                    title: "Reports on Receiving the 2nd Place Grand Award and Special Awards at Regeneron ISEF 2026",
+                    link: "https://www.itmedia.co.jp/news/articles/2605/18/news123.html",
+                    image: "",
+                    type: "newspaper | Web news",
+                    description: "Coverage on achieving the 2nd Place Grand Award in Plant Sciences, along with two Special Awards at the world's largest pre-college science competition, Regeneron ISEF 2026.",
+                },
+                {
+                    date: "2026.03.26",
+                    mediaName: "Yomiuri Shimbun (Local Edition)",
+                    title: "Report on Receiving the Minister of State for Science and Technology Policy Award at the 69th Japan Student Science Awards",
+                    link: "",
+                    image: "",
+                    type: "newspaper",
+                    description: "Report on receiving the Minister of State for Science and Technology Policy Award at the Japan Student Science Awards and selection as an ISEF national representative of Japan.",
+                },
+                {
+                    date: "2026.1.25",
+                    mediaName: "Nagano Nippo",
+                    title: "Report on Receiving the Governor's Prize at the Nagano Prefecture Student Science Award",
+                    link: "https://www.nagano-np.co.jp/news/detail.php?id=5159",
+                    image: "",
+                    type: "newspaper",
+                    description: "Report on receiving the top Governor's Prize for my research utilizing a custom-made image analysis system to clarify Mimosa habituation-like behavior.",
+                },
+                {
+                    date: "2026.1.25",
+                    mediaName: "Shinshu Shimin Shimbun",
+                    title: "Report on Receiving the Governor's Prize at the Nagano Prefecture Student Science Award",
+                    link: "https://www.shimin.co.jp/archives/12214",
+                    image: "",
+                    type: "newspaper",
+                    description: "Report on receiving the top Governor's Prize for my research utilizing a custom-made image analysis system to clarify Mimosa habituation-like behavior.",
+                },
+                {
+                    date: "2025.12.20",
+                    mediaName: "Yomiuri Shimbun (National Edition)",
+                    title: "Report on Receiving the Minister of State for Science and Technology Policy Award at the 69th Japan Student Science Awards",
+                    link: "",
+                    image: "",
+                    type: "newspaper",
+                    description: "Report on receiving the Minister of State for Science and Technology Policy Award at the Japan Student Science Awards and selection as an ISEF national representative of Japan.",
+                },
+                {
+                    date: "2025.12.17",
+                    mediaName: "ikuzy",
+                    title: "Conveying the 'Excitement of Science' to Children – The Challenge of 'Science Demaebin'",
+                    link: "https://ikuzy.com/babykids/%e9%ab%98%e6%a0%a1%e7%94%9f%e3%81%8c%e5%ad%90%e3%81%a9%e3%82%82%e3%81%9f%e3%81%a1%e3%81%ab%e4%bc%9d%e3%81%88%e3%82%8b%e7%a7%91%e5%ad%a6%e3%81%ae%e3%81%a8%e3%81%8d%e3%82%81%e3%81%8d/",
+                    image: "",
+                    type: "web",
+                    description: "Introduction and interview about the initiatives of the volunteer team 'Science Demaebin' from Suwa Seiryo High School, which conducted a science workshop for elementary school children at the 'Aeon Mall Matsumoto x ikuzy' collaboration event.",
+                },
+                {
+                    date: "2025.11.22",
+                    mediaName: "Yomiuri Shimbun (Local Edition)",
+                    title: "Report on Receiving the Nagano Prefecture Student Science Award (Governor's Prize)",
+                    link: "",
+                    image: "",
+                    type: "newspaper",
+                    description: "Report on receiving the top Governor's Prize at the Nagano Prefecture Student Science Award.",
+                },
+                {
+                    date: "2025.10.12",
+                    mediaName: "Steenz",
+                    title: "Does Mimosa pudica 'remember'? A high school student passionate about Mimosa pudica research and science education from his hometown, Nagano [Kazuhiro Komatsu, 17 years old]",
+                    link: "https://steenz.jp/48492/",
+                    image: getMediaImage("steenz-25-10"),
+                    type: "interview",
+                    description: "An interview with 'Steenz,' a media platform showcasing active teens. I shared my passion for the memory mechanism of Mimosa pudica and my perspective on the educational gap between rural and urban areas.",
+                },
+                {
+                    date: "2024.12.28",
+                    mediaName: "Nagano Nippo",
+                    title: "Seiryo High School Students as Lecturers: Science Class for Elementary School Children During Winter Break",
+                    link: "https://www.nagano-np.co.jp/news/detail.php?id=2870",
+                    image: getMediaImage("nippo-24-12"),
+                    type: "newspaper",
+                    description: "Report on a science class held by students of Suwa Seiryo High School for elementary school students during winter break, experimenting with paper airplanes.",
+                },
+                {
+                    date: "2024.12.28",
+                    mediaName: "NHK (Local Edition)",
+                    title: "Seiryo High School Students as Lecturers: Science Class for Elementary School Children During Winter Break",
+                    link: "https://www.nagano-np.co.jp/news/detail.php?id=2870",
+                    image: getMediaImage("NHK-24-12"),
+                    type: "TV",
+                    description: "Report on a science class held by students of Suwa Seiryo High School for elementary school students during winter break, experimenting with paper airplanes.",
+                },
+            ]
+        },
         contact: {
             title: "Connect",
             description: "Research, Co-creation, Dialogue.\nI look forward to connecting new synapses beyond all boundaries.",
@@ -940,9 +1324,9 @@ const content = {
         },
         footer: {
             columns: [
-                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map", "Insights"] },
+                { title: "Explore", items: ["Profile", "Vision", "News", "Research", "Projects", "Map", "Insights", "Media"] },
                 { title: "Activities", items: ["Activities", "ADvance Lab"] },
-                { title: "Connect", items: ["Contact", "X (Twitter)", "Instagram", "Facebook", "LinkedIn"] }
+                { title: "Connect", items: ["Contact", "X (Twitter)", "Instagram", "Facebook", "LinkedIn", "GitHub"] }
             ]
         },
         all_news_page: {
@@ -955,6 +1339,11 @@ const content = {
         }
     }
 };
+
+// Filter news items based on their published status
+content.ja.news.items = content.ja.news.items.filter(item => item.published === true);
+content.en.news.items = content.en.news.items.filter(item => item.published === true);
+
 
 // --- Botanical Synapse Component (Fixed Background) ---
 const BotanicalSynapse = () => {
@@ -1484,6 +1873,7 @@ const GlobeIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" fill="none" vie
 const InstagramIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.451 2.535c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" /></svg>);
 const FacebookIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" /></svg>);
 const LinkedinIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>);
+const GitHubIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>);
 const ChevronDownIcon = ({ isExpanded }) => (
     <motion.svg
         xmlns="http://www.w3.org/2000/svg"
@@ -2012,10 +2402,11 @@ const Footer = ({ content, setPage, ui }) => {
         const targetId = itemText.toLowerCase().replace(/\s+/g, '-');
 
         const externalLinks = {
-            'x-(twitter)': 'https://x.com/F7XUbvdcqB38059',
-            'linkedin': 'https://www.linkedin.com/in/kazuhiro-komatsu-37302b289/',
-            'instagram': 'https://www.instagram.com/steamkazu/',
-            'facebook': 'https://www.facebook.com/share/1AjQu2jF5U/?mibextid=wwXIfr',
+            'x-(twitter)': 'https://x.com/kazu_koma08',
+            'linkedin': 'https://www.linkedin.com/in/kazukoma08/?locale=ja',
+            'instagram': 'https://www.instagram.com/kazu.koma08/',
+            'facebook': 'https://www.facebook.com/kazu.koma08',
+            'github': 'https://github.com/kazueuglena',
             'former-site': 'https://sites.google.com/view/kazuhirokomatsu',
             'advance-lab': 'https://adlab.lne.st/'
         };
@@ -2052,6 +2443,7 @@ const Footer = ({ content, setPage, ui }) => {
         if (lower.includes('linkedin')) return <LinkedinIcon />;
         if (lower.includes('instagram')) return <InstagramIcon />;
         if (lower.includes('facebook')) return <FacebookIcon />;
+        if (lower.includes('github')) return <GitHubIcon />;
         return <ExternalLinkIcon className="w-4 h-4" />;
     };
     return (
@@ -2716,6 +3108,80 @@ const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle,
     );
 };
 
+// --- Media Coverage Section ---
+const MediaSection = ({ content, ui }) => {
+    const parseDate = (dateStr) => {
+        if (!dateStr) return new Date(0);
+        const parts = dateStr.split('.');
+        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
+        return new Date(dateStr);
+    };
+    const sortedMedia = [...content.media.items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+    return (
+        <ContentSection id="media" title={content.media.title}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {sortedMedia.map((item, index) => (
+                    <motion.div
+                        key={`media-${index}`}
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        className="group relative bg-neutral-900/30 backdrop-blur-sm hover:bg-neutral-800/40 p-8 rounded-sm border border-white/5 hover:border-emerald-500/20 transition-all duration-500 flex flex-col justify-between"
+                    >
+                        <div>
+                            <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[10px] text-emerald-500/80 font-mono tracking-widest uppercase border border-emerald-500/20 px-2 py-0.5 rounded-sm">
+                                        {item.type}
+                                    </span>
+                                    <span className="text-xs text-gray-400 font-medium tracking-wide">
+                                        {item.mediaName}
+                                    </span>
+                                </div>
+                                <span className="text-[10px] text-gray-600 font-mono tracking-wider">{item.date}</span>
+                            </div>
+                            <h3 className="text-base font-normal text-gray-200 group-hover:text-white transition-colors mb-4 tracking-wide leading-relaxed">
+                                <AnimatedText text={item.title} />
+                            </h3>
+                            <p className="text-xs text-gray-500 leading-relaxed tracking-wide group-hover:text-gray-400 transition-colors">
+                                <AnimatedText text={item.description} />
+                            </p>
+                            {/* Note: Media images are not displayed on the top page directly per requirement */}
+                        </div>
+                        {item.link && (typeof item.link === 'string' ? item.link.trim() !== '' : item.link.length > 0) ? (
+                            <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
+                                <a
+                                    href={Array.isArray(item.link) ? item.link[0] : item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    data-hoverable="true"
+                                    className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer"
+                                >
+                                    {ui.view_website || "READ ARTICLE"} <ExternalLinkIcon className="w-3 h-3" />
+                                </a>
+                            </div>
+                        ) : (item.image && (typeof item.image === 'string' ? item.image.trim() !== '' : item.image.length > 0)) ? (
+                            <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
+                                <a
+                                    href={Array.isArray(item.image) ? item.image[0] : item.image}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    data-hoverable="true"
+                                    className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer"
+                                >
+                                    {ui.view || "VIEW"} <ExternalLinkIcon className="w-3 h-3" />
+                                </a>
+                            </div>
+                        ) : null}
+                    </motion.div>
+                ))}
+            </div>
+        </ContentSection>
+    );
+};
+
 // --- Main Content Component ---
 const MainContent = ({
     lang,
@@ -2840,6 +3306,8 @@ const MainContent = ({
 
             <InsightsSection content={currentContent} expandedInsightId={expandedInsightId} onInsightToggle={handleInsightToggle} setPage={setPage} ui={currentContent.ui} />
 
+            <MediaSection content={currentContent} ui={currentContent.ui} />
+
             <ContentSection id="activities" title={currentContent.activities.title}>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12 max-w-5xl mx-auto">
                     {currentContent.activities.items.map((item, index) => (
@@ -2881,10 +3349,11 @@ const MainContent = ({
                         </motion.a>
 
                         <div className="flex gap-8 mt-12 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                            <motion.a data-hoverable="true" href="https://x.com/F7XUbvdcqB38059" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "x-(twitter)" })}><TwitterIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.instagram.com/steamkazu/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "instagram" })}><InstagramIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.facebook.com/share/1AjQu2jF5U/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "facebook" })}><FacebookIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.linkedin.com/in/kazuhiro-komatsu-37302b289/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "linkedin" })}><LinkedinIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://x.com/kazu_koma08" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "x-(twitter)" })}><TwitterIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://www.instagram.com/kazu.koma08/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "instagram" })}><InstagramIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://www.facebook.com/kazu.koma08" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "facebook" })}><FacebookIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://www.linkedin.com/in/kazukoma08/?locale=ja" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "linkedin" })}><LinkedinIcon /></motion.a>
+                            <motion.a data-hoverable="true" href="https://github.com/kazueuglena" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "github" })}><GitHubIcon /></motion.a>
                         </div>
                     </div>
                 </div>
