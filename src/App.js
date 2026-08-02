@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring, useMotionValue } from 'framer-motion';
 import ReactGA from 'react-ga4';
 
 
@@ -46,20 +46,20 @@ const content = {
         },
         hero: {
             title: "Intelligence is Connection",
-            subtitle: "知性は、つながりの中に。",
+            subtitle: "知能は、つながりから立ち現れるのか。",
             name_label: "Kazuhiro Komatsu | Student"
         },
         profile: {
             title: "Profile",
             name: "小松 和滉",
             affiliation: "長野県諏訪清陵高等学校",
-            description: "異なる領域が繋がることでこそ、新たな「知」が生まれると信じています。\n\n私は、長野県を拠点に「生物学×情報工学」という学際的な視点からオジギソウの研究に取り組むとともに、地方と都市の教育格差を解消するための科学教育活動を展開してきました。\n研究室の知見と社会の課題、最先端のテクノロジーと地方の子どもたち。それら分断されがちな世界を滑らかにつなぐ「架け橋」となることで、新たな可能性を拓いていきます。",
+            description: "異なる領域が繋がることでこそ、新たな「知」が生まれると信じています。\n\n私は、長野県を拠点に「生物学×情報工学」という学際的な視点からオジギソウの環境ストレスへの応答（馴化）を研究するとともに、地方と都市の教育格差を解消するための科学教育活動を展開してきました。脳を持たない植物が、いかに環境の変化を感じ取り、応答を最適化していくのか——その仕組みの解明は、気候変動が進む世界でも安定して実る作物の育種や、持続可能な食料生産という農学の課題へと必ずつながっていくと考えています。\n研究室の知見と社会の課題、最先端のテクノロジーと地方の子どもたち。それら分断されがちな世界を滑らかにつなぐ「架け橋」となることで、新たな可能性を拓いていきます。",
             cv_button: "CVを見る"
         },
         vision: {
             title: "Vision",
-            heading: "知性の定義を、拡張する。",
-            description: "これまで知性とは、脳や神経系を持つ動物だけの特権であるとされてきました。\n\nしかし私は、知性は、特定の器官に宿るのではなく、無数の要素が相互作用する「ネットワーク（つながり）」そのものに創発する現象だと考えています。植物は、脳という中央処理装置を持たない代わりに、全身に広がる分散的なネットワークを用いて高度な情報処理を行っています。この事実は、知性が必ずしも神経系を必要としない可能性を示しています。私は植物の研究を通じて、知性の定義を「構造」から「システム」へと拡張し、生命が持つ知の普遍性を明らかにすることを目指しています。",
+            heading: "知能の定義を、問い直す。",
+            description: "知能とは、脳や神経系を持つ生き物だけのものなのでしょうか。私はこの前提そのものを問い直したいと考えています。\n\nオジギソウは、脳という中枢を持たないまま、全身に広がる分散的なネットワークで刺激に応答し、馴化様の振る舞いを見せます。こうした現象は、統合情報理論や基底的認知（basal cognition）といった枠組みが投げかける問い——知能を器官にではなく、要素の相互作用というシステムの側に見いだせるか——と静かに響き合います。もちろん、植物が意識や感情を持つと主張するつもりはありません。応答の減弱が「学習」なのか、より単純な生理過程なのかも、まだ開かれた問いです。だからこそ私は、断定ではなく検証を積み重ね、生命に共通する情報処理の原理がありうるのかを、実証と理論の両面から確かめていきたいと思っています。\n\nそして、脳を持たない植物が環境ストレスに適応する原理を解き明かすことは、知能の謎に迫るだけにとどまりません。それは、気候変動が進む世界でも安定して実る作物の育種や、持続可能な食料生産という農学の課題へと確かにつながっており、私は基礎研究で得た知を、最終的には人類の食と農を支える力へと還元していきたいと考えています。",
         },
         news: {
             title: "News",
@@ -223,23 +223,33 @@ const content = {
                 },
                 {
                     id: "mitoh-target-2026",
-                    published: false,
-                    date: "2026.05.23",
+                    published: true,
+                    date: "2026.05.29",
                     title: "2026年度 未踏ターゲット事業に採択されました",
-                    summary: "IPA（独立行政法人情報処理推進機構）の未踏ターゲット事業（リザバーコンピューティング分野）に採択されました。",
-                    fullContent: "2026年度の未踏ターゲット事業（リザバーコンピューティング技術を活用したソフトウェア開発分野）に採択されました。<br><br>テーマは「植物の馴化を更新則へ：オジギソウのリザバー計算的理解と計算を休むリザバー Habituation-RC（HRC）の開発」です。<br><br>本事業は、IPA（独立行政法人情報処理推進機構）が主催する、突出したIT人材を発掘・育成するためのプログラムです。今回は、私の研究テーマであるオジギソウの「馴化」現象を、リザバーコンピューティングの枠組みで再解釈し、新たな計算パラダイムの開発に挑みます。<br><br>植物の知性と情報工学を「繋ぐ」この挑戦的なプロジェクトに全力で取り組んでまいります。",
+                    summary: "IPA（独立行政法人情報処理推進機構）の2026年度未踏ターゲット事業（リザバーコンピューティング分野）に採択されました。",
+                    fullContent: "IPAが実施する「2026年度未踏ターゲット事業（リザバーコンピューティング技術を活用したソフトウェア開発分野）」に採択されました。<br><br>テーマは「植物の馴化を更新則へ：オジギソウのリザバー計算的理解と計算を休むリザバー Habituation-RC（HRC）の開発」です。本プロジェクトでは、名古屋工業大学の田中剛平教授にプロジェクトマネージャー（メンター）としてご指導いただきながら、研究開発を進めます（採択金額：2,288,000円）。<br><br>今回は、私の研究テーマであるオジギソウの「馴化」現象をリザバーコンピューティングの枠組みで再解釈し、入力の定常性に応じて一部の計算を自律的にスキップする新たな動的リザバー「HRC」の開発に挑みます。計算資源の制約下で大次元の記憶容量とイベント駆動型の超低消費電力を両立させる次世代エッジAIの創出を目指します。<br><br>植物の知能と情報工学を「繋ぐ」この挑戦的なプロジェクトに全力で取り組んでまいります。",
                     images: getNewsImages("Mitou"),
-                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html"
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/gaiyou-tg-2.html"
                 },
                 {
                     id: "jsai-2026",
-                    published: false,
+                    published: true,
                     date: "2026.06.09",
-                    title: "【告知】人工知能学会 40周年記念企画「AI for Science」にてパネルディスカッションに参加",
-                    summary: "人工知能学会全国大会（JSAI2026）の40周年記念企画セッション「次世代のAI for Science」にて、プレゼンテーションとパネルディスカッションに参加します。",
-                    fullContent: "2026年6月9日（火）に開催される人工知能学会全国大会（JSAI2026）の40周年記念企画セッション「次世代の『AI for Science』〜何を目指し、どう進めるか〜」にて、プレゼンテーションとパネルディスカッションに参加します。<br><br>本セッションは、10年後・20年後の科学研究を見据えた次世代の「AI for Science」を展望する企画です。人工知能学会会長の栗原聡先生による講演とともに、AIが拓く科学研究の未来と今後の研究の方向性について議論します。<br><br>【開催概要】<br>■日時: 2026年6月9日（火） 9:00 〜 10:30<br>■場所: A会場（展示ホールC）<br>■セッション: [2A1-KS-36] 40周年記念企画4：次世代の「AI for Science」〜何を目指し、どう進めるか〜<br><br>科学とAIの接点という、自身の研究にも深く関わるテーマについて、第一線の研究者の方々と議論できる貴重な機会を大変楽しみにしています。",
+                    title: "人工知能学会全国大会（JSAI2026）にてプレゼンテーションとパネルディスカッションに登壇",
+                    summary: "人工知能学会全国大会（JSAI2026）の40周年記念企画セッション「次世代のAI for Science」にて、オジギソウ研究とAIの接点について発表し、パネルディスカッションを行いました。",
+                    fullContent: "2026年6月9日に開催された人工知能学会全国大会（JSAI2026）の40周年記念企画セッション「次世代の『AI for Science』〜何を目指し、どう進めるか〜」にて、プレゼンテーションおよびパネルディスカッションに登壇しました。<br><br>プレゼンテーションでは、これまでのオジギソウを用いた実験を「AI for Science」の視点からお話しするとともに、オジギソウとAIの情報処理のアナロジー、オジギソウの情報処理からインスパイアされたAIの開発、そして高校生研究者がAIとどのように付き合っているのかについてお話ししました。<br><br>またパネルディスカッションでは、AIが発展してくる社会において次世代はどのようにAIと関わり、考えを深め、成長していけばいいのか、さらにAIとはどのような存在で、どのような時にそれに心を感じるのか、心や意識とは何かといったテーマについて、第一線でご活躍される先生方と深く議論を交わすことができ、大変貴重な経験となりました。",
                     images: getNewsImages("JSAI"),
-                    link: ""
+                    link: "https://conf.ai-gakkai.or.jp/jsai2026/ks/#ks-36"
+                },
+                {
+                    id: "neuro-2026",
+                    published: true,
+                    date: "2026.08.01",
+                    title: "NEURO2026 高校生ポスター発表にて最優秀賞を受賞",
+                    summary: "NEURO2026(第49回日本神経科学大会・第69回日本神経化学会大会・第36回日本神経回路学会大会 合同大会)の高校生ポスター発表にて最優秀賞を受賞しました。",
+                    fullContent: "2026年8月1日、神戸国際会議場・神戸国際展示場で開催されたNEURO2026(第49回日本神経科学大会・第69回日本神経化学会大会・第36回日本神経回路学会大会 合同大会)の高校生ポスター発表に参加し、最優秀賞をいただきました。<br><br>今回発表したのは、「オジギソウはなぜ刺激に馴化するのか」という、長年問い続けてきたテーマについての研究です。脳を持たない植物が経験に応じて反応を変化させる仕組みを、装置とAIを用いて定量的に検証してきました。<br><br>会場では、同世代の高校生研究者から第一線で活躍される研究者の方まで、本当に多くの方とディスカッションする機会に恵まれました。特に、3年ほど前にお話しさせていただいた研究者の方が覚えていてくださり、ポスターを見にきてくださった際はとても嬉しかったです。それぞれの視点からいただいた質問やコメントは、自分ひとりでは辿り着けなかった新しい問いにつながるものばかりで、学会という場の価値を改めて実感しました。<br><br>このような機会をくださったNEURO2026運営の皆様、そして日頃から研究を支えてくださっている先生方・家族・関係者の皆様に、心より感謝申し上げます。",
+                    images: getNewsImages("NEURO2026"),
+                    link: "https://neuro2026.jnss.org/"
                 },
                 /*
                 {
@@ -260,13 +270,13 @@ const content = {
             title: "Research",
             heading_grants: "研究助成・競争的資金",
             heading_awards: "研究発表・学会",
-            description: "オジギソウの応答調節の検証や数理的解析、ヒドラの古典的条件付けなどの様々な研究を進めています。",
+            description: "オジギソウの環境ストレスへの応答調節（馴化様応答）の検証と数理的解析を軸に、植物生理学から作物の環境適応・農業応用までを見据えた研究を進めています。ヒドラの学習など、生命に共通する情報処理の原理にも関心を広げています。",
             grants: [
                 {
                     year: "2026",
-                    title: "2026年度未踏ターゲット事業(リザバーコンピューティング技術を活用したソフトウェア開発分野)",
+                    title: "2026年度 未踏ターゲット事業(リザバーコンピューティング技術を活用したソフトウェア開発分野)",
                     details: "植物の馴化を更新則へ : オジギソウのリザバー計算的理解と計算を休むリザバー  Habituation-RC（HRC）の開発",
-                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html",
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/gaiyou-tg-2.html",
                     featured: true
                 },
                 {
@@ -322,6 +332,22 @@ const content = {
                 },
             ],
             awards: [
+                {
+                    year: "2026",
+                    title: "NEURO2026 (第49回日本神経科学大会・第69回日本神経化学会大会・第36回日本神経回路学会大会 合同大会)",
+                    prize: "高校生ポスター発表 最優秀賞",
+                    details: "「オジギソウはなぜ刺激に馴化するのか」というテーマで高校生ポスター発表を行い、最優秀賞を受賞しました。",
+                    link: "https://neuro2026.jnss.org/",
+                    featured: true
+                },
+                {
+                    year: "2026",
+                    title: "人工知能学会全国大会（JSAI2026） 40周年記念企画「AI for Science」",
+                    prize: "登壇・パネリスト",
+                    details: "オジギソウとAIの情報処理のアナロジーやAIを用いた研究について発表し、次世代のAIとの関わり方や心・意識について専門家とパネルディスカッションを行いました。",
+                    link: "https://www.ai-gakkai.or.jp/jsai2026/",
+                    featured: true
+                },
                 {
                     year: "2026",
                     title: "リジェネロン国際学生科学技術フェア",
@@ -458,22 +484,219 @@ const content = {
         projects: {
             title: "Projects",
             view_all_button: "VIEW ALL",
+            categories: {
+                foundation: { title: "Foundation (Past Projects)", period: "Past", status: "Done", color: "border-gray-500" },
+                engineering: { title: "Engineering", period: "2024-2025", status: "Done", color: "border-white/40" },
+                physiology: { title: "Physiology", period: "2025-", status: "Done", color: "border-white/40" },
+                mechanism: { title: "Mechanism", period: "2026-", status: "Ongoing", color: "border-teal-500" },
+                application: { title: "Application", period: "Present", status: "Ongoing", color: "border-teal-500" },
+                vision: { title: "Vision", period: "2031-20XX", status: "Planning", color: "border-rose-500" }
+            },
             items: [
+                // --- Foundation ---
                 {
-                    image: process.env.PUBLIC_URL + "/images/mitou.png",
-                    title: "Habituation-RC（HRC）の開発：植物の知性を情報工学へ",
-                    description: "オジギソウの「馴化」をリザバーコンピューティングの枠組みで再解釈し、新たな計算モデル「HRC」の開発に挑んでいます。",
-                    period: "26.05 - Present",
-                    details: "IPA（独立行政法人情報処理推進機構）の2026年度未踏ターゲット事業に採択されたプロジェクトです。脳や神経系を持たないオジギソウが刺激に「慣れる」プロセス（馴化）を数学的にモデル化し、ニューラルネットワークの一種であるリザバーコンピューティングの更新則（学習則）へと応用します。これにより、環境変化に適応しながら必要な時だけ計算を行う省電力で自律的な新計算モデル「Habituation-RC（HRC）」の構築を目指します。",
-                    featured: true
+                    id: "hydra-conditioning",
+                    category: "foundation",
+                    image: process.env.PUBLIC_URL + "/images/hydra.png",
+                    title: "ヒドラにおける古典的条件付けの解明",
+                    description: "散在神経系を持つHydra vulgarisにおける連合学習（古典的条件付け）の検証。",
+                    period: "Past Project",
+                    details: "脳を持たないヒドラが連合学習を示すかを検証しました。採食行動を引き起こす還元型グルタチオンと青色光、また電気刺激と青色光を繰り返し対提示し、AIを用いた行動解析により評価を行い、学習能力の進化的起源に迫りました。",
+                    featured: true,
+                    techStack: ["行動実験", "AI解析", "条件付け"],
+                    outcomes: ["ヒドラの連合学習の可能性を検証", "散在神経系における記憶形成の起源への示唆"],
+                    supports: [{ role: "協力", name: "九州大学 伊藤先生" }],
+                    funding: ["長野県科学振興会 研究費"],
                 },
-                { image: process.env.PUBLIC_URL + "/images/mimosa2.png", title: "オジギソウの応答調節（馴化）の機構解明", description: "オジギソウの「馴化」メカニズムを、数理モデルとカルシウムイメージング技術の双方から解明しています。", period: "25.11 - Present", details: "オジギソウが刺激を「記憶」し応答を制御する仕組みに迫るため、細胞の局所的疲労をモデル化する数理的なアプローチに加え、埼玉大学・豊田研究室でのカルシウムイメージング実験によって細胞内シグナル伝達を可視化し、理論と実験の両面から植物の知性（情報処理）の実体を解き明かそうとしています。", featured: false },
-                { image: process.env.PUBLIC_URL + "/images/hydra.png", title: "ヒドラにおける古典的条件付けの解明", description: "単純な散在神経系を持つHydra vulgarisにおいて、学習の一種である古典的条件付けが存在するのかを検証しています", period: "25.04 - Present", details: "本研究は、脳を持たないヒドラ（Hydra vulgaris）が連合学習（古典的条件付け）を示すかを検証します。採食行動を引き起こす還元型グルタチオン（無条件刺激）と、体収縮を誘発する青色光（条件刺激）を繰り返し対提示し、その後、青色光のみで採食行動が誘発されるかをAIを用いた行動解析により評価します。これにより、学習能力の進化的起源に迫り、ヒドラの神経科学における新たなモデル生物としての可能性を探ります。", featured: true },
-                { image: process.env.PUBLIC_URL + "/images/mimosa1.png", title: "オジギソウの応答調節（馴化）の生態学的意義の解明", description: "オジギソウの「馴化」がエネルギー収支に与える影響を、数理モデルを用いて定量的に解析しています。", period: "24.11 - Present", details: "オジギソウの「馴化」現象が持つ生存上の利点を解明するため、葉の開閉に伴うエネルギーコストと食害リスクのトレードオフを考慮した数理モデルを構築し、異なる生存戦略間での優位性を定量的に検証しています。", featured: false },
-                { image: process.env.PUBLIC_URL + "/images/science.png", title: "サイエンス出前便", description: "地方と都市部の教育格差を是正し、子供たちが科学に触れ合う機会を増やすため科学教室を企画しています。", period: "24.11 - Present", details: "自身の経験から地方における科学教育の機会格差に問題意識を持ち、立ち上げたプロジェクトです。長野県内の小学生を対象に、身近な自然をテーマにした科学教室を企画・運営。観察や実験を通じて、子どもたちの知的好奇心を引き出し、科学の面白さを伝える活動を継続的に行っています。", featured: true },
-                { image: process.env.PUBLIC_URL + "/images/mimosa_hab.jpg", title: "オジギソウの応答調節（馴化）の実証", description: "オジギソウの刺激に対する馴化能力（慣れ）を独自開発した葉開閉度定量化技術と全方位刺激装置により研究しています。", period: "24.03 - Present", details: "オジギソウが特定の刺激に対して応答を調節する能力を持つこと、そして刺激を学習する（馴化能力）能力を持つことを実証します。独自に開発した全方位刺激装置と、深層学習を用いた葉開閉度定量化技術を組み合わせることで、刺激の方向や強度とオジギソウの応答の関係性を定量的に評価します。将来的には、この能力がどのようなメカニズムで維持されているのかを明らかにします。", featured: true },
-                { image: process.env.PUBLIC_URL + "/images/euglena.png", title: "ミドリムシにおける光驚動反応の解明", description: "走行性を持つミドリムシ（Euglena gracilis）が、光によって体収縮と方向転換をする光驚動反応を解析しました。", period: "21.04 - 24.03", details: "深層学習モデル（YOLO）とセグメンテーション技術を用いてミドリムシ（Euglena gracilis）の個体追跡を行い、その遊泳速度と回転数を定量化しました 。実験の結果、青色光の強度が急激に上昇するほど、遊泳速度が上がり、回転運動が激しくなる傾向（光驚動反応）を確認しました 。また、物理的な振動に対しても同様の逃避的な回転行動が見られることを発見し、これを「振動驚動反応」と定義しました 。なお、これらの反応強度に対して、飼育時の明暗周期（生物時計）による有意な影響は見られませんでした 。", featured: false },
-                { image: process.env.PUBLIC_URL + "/images/mimosa.jpg", title: "オジギソウの就眠運動（概日リズム）", description: "オジギソウの概日リズムをその一つの出力系である就眠運動を観察することで研究しました。", period: "21.04 - 24.02", details: "植物が持つ体内時計（概日リズム）の出力の一つとして、夜間に葉を閉じる「就眠運動」に着目。深層学習を用いて24時間体制で葉の開閉度を自動定量化するシステムを構築しました。これにより、オジギソウが日没を予測して葉を閉じ始める行動や、光強度に応じて開度を微調整する様子を明らかにしました。", featured: false },
+                {
+                    id: "euglena-response",
+                    category: "foundation",
+                    image: process.env.PUBLIC_URL + "/images/euglena.png",
+                    title: "ミドリムシにおける光驚動反応の解明",
+                    description: "光によって体収縮と方向転換をするミドリムシの光驚動反応の解析。",
+                    period: "Past Project",
+                    details: "深層学習モデルを用いてミドリムシ（Euglena gracilis）の個体追跡を行い、青色光の急激な上昇に対して遊泳速度と回転運動が激しくなる「光驚動反応」を確認しました。また振動に対する同様の反応も発見しました。",
+                    featured: false,
+                    techStack: ["深層学習", "個体追跡", "行動解析"],
+                    outcomes: ["青色光による光驚動反応を確認", "振動に対する同調反応の発見"],
+                },
+                // --- Engineering ---
+                {
+                    id: "stimulator",
+                    category: "engineering",
+                    image: process.env.PUBLIC_URL + "/images/stimulation-device.png",
+                    title: "全方位刺激装置の開発",
+                    description: "オジギソウに統制された刺激を与えるための独自の全方位刺激装置を開発。",
+                    period: "2024-2025",
+                    details: "オジギソウの刺激に対する応答を定量的に評価するため、前後左右や上下から精密にコントロールされた刺激を与えることができる全方位刺激装置を独自に開発しました。これにより、刺激の方向や強度に応じたオジギソウの応答の関係性を定量的に評価することが可能になりました。",
+                    featured: false,
+                    techStack: ["3Dプリンタ", "制御工学", "Raspberry pi"],
+                    outcomes: ["任意の方向から精密に刺激を与えられる装置の開発に成功", "定量的な応答評価基盤の確立"],
+                    supports: [{ role: "協力", name: "株式会社 THK 原子内様" }],
+                    funding: ["株式会社 THK"]
+                },
+                {
+                    id: "leaf-quantification",
+                    category: "engineering",
+                    image: process.env.PUBLIC_URL + "/images/detect.png",
+                    title: "葉開閉度定量化システムの開発",
+                    description: "深層学習を用いたオジギソウの葉開閉度の定量的解析システムを構築。",
+                    period: "2024-2025",
+                    details: "目視や単純な計測に頼っていた植物の挙動を高精度な定量データとして捉え直すため、AI（YOLOv9やConvNeXtなど）を用いた画像解析技術を活用し、オジギソウの葉の開度を連続的かつ定量的に評価するシステムを構築しました。",
+                    featured: false,
+                    techStack: ["YOLOv9", "ConvNeXt", "深層学習", "Python"],
+                    outcomes: ["植物の挙動を連続的な定量データとして評価することに成功", "解析プロセスの完全自動化を実現"],
+                    mentor: [{ role: "メンター", name: "九州大学 野下先生" }],
+                    funding: ["日本科学協会"],
+                },
+                // --- Physiology ---
+                {
+                    id: "mimosa-habituation",
+                    category: "physiology",
+                    image: process.env.PUBLIC_URL + "/images/mimosa_hab.jpg",
+                    title: "馴化様応答の検証：オジギソウは刺激を識別し、選択的に応答を調節するか",
+                    description: "オジギソウが反復刺激に対して応答を減弱させる「馴化様応答」を示すことを、独自開発のシステムで定量的に観察・検討。",
+                    period: "2025",
+                    details: "独自開発の刺激装置と開閉度定量化技術を組み合わせ、オジギソウが反復刺激に対して応答を減弱させる「馴化様応答」を示すことを定量的に観察・検討しました。応答の減弱を「学習」とみなせるのか、それともより単純な生理的疲労によるものなのか——馴化研究に古くからあるこの論点（Gagliano et al. 2014 とその再現性をめぐる議論）に、定量的な手法で向き合うことを大切にしています。",
+                    featured: true,
+                    techStack: ["馴化様応答", "基底的認知", "定量解析"],
+                    outcomes: ["オジギソウが馴化様応答を示すことを定量的に観察", "植物の基底的な情報処理（馴化様応答）に関する行動学的データの提示"],
+                    mentor: [{ role: "メンター", name: "東京大学 末次先生" }],
+                    funding: ["UTokyoGSC-Next (JST STELLA)"],
+                },
+                {
+                    id: "ecological-habituation",
+                    category: "physiology",
+                    subProject: true,
+                    image: process.env.PUBLIC_URL + "/images/ecological.png",
+                    title: "馴化様応答の生態学的意義（Sub Project）",
+                    description: "オジギソウの「馴化様応答」がエネルギー収支に与える影響を数理モデルを用いて解析。",
+                    period: "2025",
+                    details: "オジギソウの「馴化様応答」が持ちうる生存上の利点を評価するため、葉の開閉に伴うエネルギーコストと食害リスクのトレードオフを考慮した数理モデルを構築し、異なる生存戦略間での優位性を定量的に検討しました。このエネルギーコストと防御のトレードオフという視点は、限られた資源のなかで環境ストレスや食害にいかに適応するかという、作物の環境適応戦略や耐性育種にも通じる普遍的な問いだと考えています。",
+                    featured: false,
+                    techStack: ["数理モデル化", "シミュレーション", "生態学"],
+                    outcomes: ["エネルギーコストと食害リスクのトレードオフをモデル化", "馴化様応答がもたらしうる生存上の利点を数理モデルにより定量的に評価"],
+                    mentor: [{ role: "メンター", name: "埼玉医科大学 別所先生" }],
+                    funding: ["N高校研究部"],
+                },
+                // --- Mechanism ---
+                {
+                    id: "math-modeling",
+                    category: "mechanism",
+                    image: process.env.PUBLIC_URL + "/images/mechanism-vivo.png",
+                    title: "馴化様応答の数理モデル化",
+                    description: "局所的脱感作仮説に基づく、オジギソウの「馴化様応答」の数学的解明。",
+                    period: "2026-Present",
+                    details: "オジギソウが刺激情報を「識別・保持・選択」しているように見える仕組みに迫るため、細胞の局所的な脱感作をモデル化する数理的なアプローチから、馴化様応答を支えると考えられるメカニズムを記述・検証しようとしています。",
+                    featured: false,
+                    techStack: ["数理生物学", "微分方程式", "Python"],
+                    outcomes: ["局所的脱感作仮説に基づく数理モデルの構築", "馴化様応答のメカニズムに関する理論的基盤の構築（進行中）"],
+                    mentor: [{ role: "メンター", name: "埼玉医科大学 別所先生" }],
+                    funding: [],
+                },
+                {
+                    id: "molecular-basis",
+                    category: "mechanism",
+                    image: process.env.PUBLIC_URL + "/images/mechanism-invitro.png",
+                    title: "馴化様応答の分子基盤",
+                    description: "カルシウムイメージング技術を用いた局所的脱感作仮説の検証。",
+                    period: "2026-Present",
+                    details: "数理モデルで予測された細胞の局所的な脱感作を、ゲノム編集によりGCaMPを発現するオジギソウを用いたカルシウムイメージング実験によって検証します。細胞内シグナル伝達を可視化し、分子レベルでの馴化様応答の仕組みに迫ります。",
+                    featured: false,
+                    techStack: ["カルシウムイメージング", "細胞生物学", "分子生物学"],
+                    outcomes: ["数理モデルの予測を生物学的に検証する実験系の確立", "細胞レベルでの馴化メカニズムの可視化"],
+                    funding: [],
+                    supports: [{ role: "協力", name: "埼玉大学 豊田研究室" }],
+                },
+                // --- Application ---
+                {
+                    id: "hrc",
+                    category: "application",
+                    image: process.env.PUBLIC_URL + "/images/hrc.png",
+                    title: "Habituation Reservoir Computing (HRC) の開発",
+                    description: "オジギソウの「馴化」に着想を得た効率的な時系列情報処理アルゴリズムの開発。",
+                    period: "2026-Present",
+                    details: "脳や神経系を持たないオジギソウが刺激に「慣れる」プロセスを数学的にモデル化し、ニューラルネットワークの一種であるリザバーコンピューティング(RC)の更新則へと応用します。これにより、必要な時だけ計算を行う省電力で自律的な新計算モデル「Habituation-RC（HRC）」の構築を目指します。",
+                    featured: true,
+                    techStack: ["リザバーコンピューティング", "ニューラルネットワーク", "数理最適化"],
+                    outcomes: ["バイオインスパイアードAIの提案", "省電力で自律的な新計算モデル『HRC』の設計"],
+                    mentor: [{ role: "PM (メンター)", name: "名古屋工業大学 田中先生" }],
+                    funding: ["IPA 2026年度未踏ターゲット事業"],
+                },
+                {
+                    id: "physical-reservoir",
+                    category: "application",
+                    image: process.env.PUBLIC_URL + "/images/mimosa-rc.png",
+                    title: "物理リザバーとしてのオジギソウの情報処理機能の実証",
+                    description: "オジギソウ自体が「事前学習済み」の物理リザバーモデルとして機能するかを検証。",
+                    period: "2026-Present",
+                    details: "自然界の植物が持つ情報処理能力を、物理リザバー計算の枠組みで評価します。オジギソウが環境から受け取った刺激をいかにして計算しているかを実証し、AIの情報処理とのアナロジーを調べます",
+                    featured: false,
+                    techStack: ["物理リザバー計算", "情報理論", "生体計測"],
+                    outcomes: ["植物自体を計算資源として活用する概念の実証", "AIの情報処理とのアナロジーの解明"],
+                    mentor: [{ role: "PM (メンター)", name: "名古屋工業大学 田中先生" }],
+                    funding: ["IPA 2026年度未踏ターゲット事業"],
+                },
+                {
+                    id: "stress-crop",
+                    category: "application",
+                    image: process.env.PUBLIC_URL + "/images/crop.png",
+                    title: "馴化を利用した環境ストレス耐性作物の開発",
+                    description: "気候変動下の食料生産を支えるため、馴化の知見を作物の環境ストレス耐性へ応用。",
+                    period: "2026-Present",
+                    details: "オジギソウの馴化研究で得た「植物が環境刺激を識別し、応答を最適化する」という知見を、乾燥・高温・食害といった環境ストレスへの耐性という観点から作物へ展開します。過剰な防御応答による生育コストを抑えつつ、必要なときにだけ適切に応答する——そんな環境適応能力の高い次世代作物の育種基盤を築き、気候変動が進む世界での食料生産のレジリエンス向上に貢献することを目指す、農学の応用プロジェクトです。",
+                    featured: false,
+                    techStack: ["作物学", "植物生理学", "環境ストレス耐性育種"],
+                    outcomes: ["馴化メカニズムの作物・農業応用への展開", "環境適応能力の高い次世代作物の育種基盤の構築"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Vision ---
+                {
+                    id: "universal-intelligence",
+                    category: "vision",
+                    image: process.env.PUBLIC_URL + "/images/intelligence.png",
+                    title: "基盤を超えた知能の普遍的原理を問う",
+                    description: "脳の有無やハードウェアの違いを超えて、情報処理に共通する原理がありうるかを問う。",
+                    period: "2028-20XX",
+                    details: "本プロジェクトが問いたいのは、動物の神経系、植物の分散的なネットワーク、そして人工知能（シリコン基質）といった異なる基盤の情報処理に、共通する原理がありうるのか、ということです。統合情報理論やリザバーコンピューティングといった枠組みを、答えではなく探索の道具として用いながら、知能の定義そのものを問い直していきます。そしてこの探究は、脳を持たない植物が過酷な環境を生き抜く戦略の理解へと還元され、気候変動下でも安定して実る作物の育種や持続可能な食料生産という、人類の食を支える農学の課題への貢献にもつながると考えています。",
+                    featured: true,
+                    techStack: ["基底的認知", "複雑系科学", "システム論"],
+                    outcomes: ["多様なシステムに共通する情報処理の枠組みの探索（今後の目標）", "知能の定義を問い直すための理論的枠組みの構築（今後の目標）"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Outreach ---
+                {
+                    id: "advancelab-vice",
+                    category: "outreach",
+                    image: process.env.PUBLIC_URL + "/images/advancelab.png",
+                    title: "ADvance Lab 副所長",
+                    description: "中高大学生の研究コミュニティの運営と、新たな価値創造の場の構築。",
+                    period: "Past Role",
+                    details: "ADvance Labという団体で副所長を歴任しました。中学生・高校生・大学生が学年や分野の垣根を越えて集い、活発に議論や共同研究を行えるコミュニティの形成に尽力しました。若手研究者同士のネットワーク構築を通じて、次世代の科学コミュニティにおける価値創造に貢献しました。",
+                    featured: false,
+                    techStack: ["コミュニティ運営", "メンタリング", "組織マネジメント"],
+                    outcomes: ["異分野の学生が交流する研究コミュニティの形成", "若手研究者による新たな価値創造の場の提供"],
+                    mentor: [],
+                    funding: [],
+                    role: "副所長",
+                },
+                {
+                    id: "science-outreach",
+                    category: "outreach",
+                    image: process.env.PUBLIC_URL + "/images/science.png",
+                    title: "サイエンス出前便（Outreach）",
+                    description: "地方と都市部の教育格差を是正し、子供たちが科学に触れ合う機会を増やすため科学教室を企画。",
+                    period: "2024.11 - Present",
+                    details: "自身の経験から地方における科学教育の機会格差に問題意識を持ち、立ち上げたプロジェクトです。長野県内の小学生を対象に、身近な自然をテーマにした科学教室を企画・運営。観察や実験を通じて、子どもたちの知的好奇心を引き出し、科学の面白さを伝える活動を継続的に行っています。",
+                    featured: true,
+                    techStack: ["科学教育", "イベント企画", "コミュニケーション"],
+                    outcomes: ["長野県内の小学生向けに多数の科学教室を実施", "地方の教育格差是正への草の根的な貢献"],
+                    mentor: [],
+                    funding: [],
+                    role: "企画・運営代表",
+                }
             ]
         },
         map: {
@@ -485,22 +708,23 @@ const content = {
                 { id: "utah", name: "アメリカ ユタ州", x: 20, y: 47, image: process.env.PUBLIC_URL + "/images/utah.png", details: "小学5年生の時、1ヶ月間のホームステイを経験。初めての海外で大きなカルチャーショックを受け、国際的な視野を広げるきっかけとなりました。" },
                 { id: "shanghai", name: "中国 上海", x: 75, y: 52, image: process.env.PUBLIC_URL + "/images/shanghai.jpg", details: "中学3年生の時、2週間の学校寮滞在を経験。現地の有名観光地を訪れると共に、学校の授業に参加し、文化交流を深めました。" },
                 { id: "singapore", name: "シンガポール", x: 71.5, y: 65.7, image: process.env.PUBLIC_URL + "/images/singapore.png", details: "中学3年生の時、2週間のホームステイを経験。ムスリムのホストファミリーとの交流を通じて、文化的な違いを乗り越え、互いの理解を深めました。" },
-                { id: "thailand", name: "タイ", x: 71, y: 60, image: process.env.PUBLIC_URL + "/images/asc2025.png", details: "「Asia Science Camp 2025」に日本代表団の一員として参加。アジア各国から集まった学生やノーベル賞受賞者と交流し、科学的な議論を通じて国際的な視点と人的な繋がりを深めました。" }
+                { id: "thailand", name: "タイ", x: 71, y: 60, image: process.env.PUBLIC_URL + "/images/asc2025.png", details: "「Asian Science Camp 2025」に日本代表団の一員として参加。アジア各国から集まった学生やノーベル賞受賞者と交流し、科学的な議論を通じて国際的な視点と人的な繋がりを深めました。" },
+                { id: "phoenix", name: "アメリカ フェニックス", x: 20, y: 50, image: process.env.PUBLIC_URL + "/images/ISEF2026.jpg", details: "「Regeneron ISEF2026」に日本代表団の一員として参加。植物部門において発表を行い3つの賞を受賞したほか、各国からの参加者と交流しました。" }
             ]
         },
         activities: {
             title: "Activities & Involvements",
             site_button: "公式サイト",
             items: [
-                { image: process.env.PUBLIC_URL + "/images/Matsuo2.png", year: "2025", title: "松尾研 GCI", event: "受講生", details: "東京大学松尾研究室主催のデータサイエンス講座にて、Pythonを用いたデータ解析や機械学習の実装を体系的に習得。コンペティション形式の課題を通じて実践力を磨き、現在の研究における実験データの定量化や解析基盤を確立しました。", link: "https://weblab.t.u-tokyo.ac.jp/news/gci-2025-summer-%e3%81%ae%e5%8b%9f%e9%9b%86%e9%96%8b%e5%a7%8b/" },
-                { image: process.env.PUBLIC_URL + "/images/Matsuo1.png", year: "2025", title: "松尾研 LLM", event: "受講生", details: "大規模言語モデル（LLM）の仕組みや応用技術について、最先端の工学的知見を学習。生成AIのアーキテクチャへの理解を深め、科学研究プロセスへのAI導入や、生物学と情報学を繋ぐ新たなアプローチを模索する契機となりました。", link: "https://weblab.t.u-tokyo.ac.jp/large-language-model/" },
-                { image: process.env.PUBLIC_URL + "/images/SPICE_entre.png", year: "2024-2025", title: "Stanford e-Entrepreneurship", event: "受講生", details: "スタンフォード大学の講師陣によるオンライン講義を通じて、起業家精神やビジネスプランニングの基礎を学びました。最終的には、教育格差問題に取り組むためのプロジェクトをチームで立案し、英語で発表しました。", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-entrepreneurship-japan" },
-                { image: process.env.PUBLIC_URL + "/images/SPICE.png", year: "2025", title: "Stanford e-Japan", event: "受講生", details: "日米関係の専門家による講義を受け、外交、文化、経済など多角的な視点から日米関係について学びました。他の参加者との英語でのディスカッションを通じて、国際的な視野と議論のスキルを深めました。", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-japan" },
-                { image: process.env.PUBLIC_URL + "/images/n1.png", year: "2024-2025", title: "エヌイチ道場", event: "5期生", details: "自身の「サイエンス出前便」プロジェクトを事業として発展させるため、メンターの指導のもと、事業計画の策定、ターゲット顧客の分析、収益モデルの検討など、実践的な起業プロセスを学びました。", link: "https://www.sunaba.org/n1dojo" },
-                { image: process.env.PUBLIC_URL + "/images/UTokyo.jpg", year: "2024-", title: "UTokyoGSC-NEXT", event: "6期生", details: "東京大学の教授陣から最先端の科学技術に関する講義を受け、自身の研究テーマを深める機会を得ました。全国から集まった意欲の高い同世代の仲間と交流し、大きな刺激を受けています。", link: "https://gsc.iis.u-tokyo.ac.jp/" },
-                { image: process.env.PUBLIC_URL + "/images/advancelab.png", year: "2024-", title: "ADvance Lab", event: "副所長", details: "現在は副所長として、ラボの運営にも関わっています。次世代と企業をつなぎ新たな価値を創造するとともに、地方におけるイベントなども企画し研究の輪を広げています。", link: "https://adlab.lne.st/" },
-                { image: process.env.PUBLIC_URL + "/images/aoki.png", year: "2022-2023", title: "ながの視察団 AOKI咸臨丸", event: "7期生", details: "中学生の時に参加したこのプログラムが、現在の活動の原点の一つです。シリコンバレーでの研修では、失敗を恐れずに挑戦する文化に触れ、自身の行動指針に大きな影響を受けました。", link: "https://aoki-zaidan.or.jp/srv_kanrin.php" },
-                { image: process.env.PUBLIC_URL + "/images/Tsukuba.png", year: "2021-2022", title: "つくば SKIP Academy", event: "受講生", details: "オンラインで大学レベルの数学や物理学に触れることで、科学研究に必要な論理的思考の基礎を固めました。この時の経験が、現在の研究で数理モデルを扱う上での助けとなっています。", link: "https://skip.tsukuba.ac.jp/" },
+                { id: "gci", image: process.env.PUBLIC_URL + "/images/Matsuo2.png", year: "2025", title: "松尾研 GCI", event: "受講生", details: "東京大学松尾研究室主催のデータサイエンス講座にて、Pythonを用いたデータ解析や機械学習の実装を体系的に習得。コンペティション形式の課題を通じて実践力を磨き、現在の研究における実験データの定量化や解析基盤を確立しました。", link: "https://weblab.t.u-tokyo.ac.jp/news/gci-2025-summer-%e3%81%ae%e5%8b%9f%e9%9b%86%e9%96%8b%e5%a7%8b/" },
+                { id: "llm", image: process.env.PUBLIC_URL + "/images/Matsuo1.png", year: "2025", title: "松尾研 LLM", event: "受講生", details: "大規模言語モデル（LLM）の仕組みや応用技術について、最先端の工学的知見を学習。生成AIのアーキテクチャへの理解を深め、科学研究プロセスへのAI導入や、生物学と情報学を繋ぐ新たなアプローチを模索する契機となりました。", link: "https://weblab.t.u-tokyo.ac.jp/large-language-model/" },
+                { id: "stanford-entrepreneur", image: process.env.PUBLIC_URL + "/images/SPICE_entre.png", year: "2024-2025", title: "Stanford e-Entrepreneurship", event: "受講生", details: "スタンフォード大学の講師陣によるオンライン講義を通じて、起業家精神やビジネスプランニングの基礎を学びました。最終的には、教育格差問題に取り組むためのプロジェクトをチームで立案し、英語で発表しました。", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-entrepreneurship-japan" },
+                { id: "stanford-japan", image: process.env.PUBLIC_URL + "/images/SPICE.png", year: "2025", title: "Stanford e-Japan", event: "受講生", details: "日米関係の専門家による講義を受け、外交、文化、経済など多角的な視点から日米関係について学びました。他の参加者との英語でのディスカッションを通じて、国際的な視野と議論のスキルを深めました。", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-japan" },
+                { id: "n1-dojo", image: process.env.PUBLIC_URL + "/images/n1.png", year: "2024-2025", title: "エヌイチ道場", event: "5期生", details: "自身の「サイエンス出前便」プロジェクトを事業として発展させるため、メンターの指導のもと、事業計画の策定、ターゲット顧客の分析、収益モデルの検討など、実践的な起業プロセスを学びました。", link: "https://www.sunaba.org/n1dojo" },
+                { id: "gsc-next", image: process.env.PUBLIC_URL + "/images/UTokyo.jpg", year: "2024-", title: "UTokyoGSC-NEXT", event: "6期生", details: "東京大学の教授陣から最先端の科学技術に関する講義を受け、自身の研究テーマを深める機会を得ました。全国から集まった意欲の高い同世代の仲間と交流し、大きな刺激を受けています。", link: "https://gsc.iis.u-tokyo.ac.jp/" },
+                { id: "advancelab", image: process.env.PUBLIC_URL + "/images/advancelab.png", year: "2024-", title: "ADvance Lab", event: "副所長", details: "現在は副所長として、ラボの運営にも関わっています。次世代と企業をつなぎ新たな価値を創造するとともに、地方におけるイベントなども企画し研究の輪を広げています。", link: "https://adlab.lne.st/" },
+                { id: "aoki-kanrinmaru", image: process.env.PUBLIC_URL + "/images/aoki.png", year: "2022-2023", title: "ながの視察団 AOKI咸臨丸", event: "7期生", details: "中学生の時に参加したこのプログラムが、現在の活動の原点の一つです。シリコンバレーでの研修では、失敗を恐れずに挑戦する文化に触れ、自身の行動指針に大きな影響を受けました。", link: "https://aoki-zaidan.or.jp/srv_kanrin.php" },
+                { id: "tsukuba-skip", image: process.env.PUBLIC_URL + "/images/Tsukuba.png", year: "2021-2022", title: "つくば SKIP Academy", event: "受講生", details: "オンラインで大学レベルの数学や物理学に触れることで、科学研究に必要な論理的思考の基礎を固めました。この時の経験が、現在の研究で数理モデルを扱う上での助けとなっています。", link: "https://skip.tsukuba.ac.jp/" },
 
             ]
         },
@@ -524,7 +748,7 @@ const content = {
                     date: "2026.03.14",
                     title: "芸術と科学の連続性について",
                     summary: "科学も芸術も、『世界の見え方を提示する取り組み』という点で本質的に同一である。",
-                    content: "先日、東京都現代美術館で開催されている「ミッション∞インフィニティ｜宇宙＋量子＋芸術」を訪問した。量子技術や宇宙開発における知見を、芸術的文脈で再定義し表現するという試みの展覧会である。この観覧を通して、科学と芸術の繋がりについて興味深い示唆を得た。\n\n科学も芸術も、「世界の見え方を提示する取り組み」という点で本質的に同一である。\n\nどちらも世界を表面的に捉えるのではなく、その裏側に存在する秩序や構造、連続性、法則を記述しようと試みている。科学がそれを「再現可能な形」に落とし込むのに対し、芸術は「知覚可能な形」に落とし込むという手法の違いはある。しかし、未知のものに対して問いを立て、見えにくい本質をすくい上げようとする姿勢には、深い連続性がある。いずれの営みも、複雑でカオスな世界に対して自ら「問い」を立てることから始まり、無数にある情報の中からノイズを削ぎ落とし、見えにくい本質だけをすくい上げる——すなわち抽象化する——プロセスを経るものである。\n実際、これまで多くの芸術家や科学者が世界の見え方を変えてきた。芸術においては印象派やキュビズム、科学においては地動説や遺伝子の発見など、その例を挙げればきりがない。\n\n昨年訪問した金沢21世紀美術館では、植物の知性（オジギソウの馴化など）を研究するステファノ・マンクーゾによる展示が行われていた。近年、このように研究者が美術館で展示を行うケースが増えている。これは単なる偶然ではなく、研究者の求めるものと芸術家の求めるものが、美術館という空間で合致しているからだと考える。\n\n科学者側には、研究活動の中で発見した事象の「情動に訴えかけるような美しさ」を、人々の感性に直接伝えたいというニーズがある。実験を通じて感じた生物の生命力、カオスに見える現象の中に潜む秩序。そういったものを見つけたときの感動は並一通りのものではない。私自身も、オジギソウの運動や、研究を通じて発見した種を超えた機構の連続性などに、何度感動したかわからない。しかしそれを、論文や学会発表という厳格なフォーマットのもとで伝えていくことは難しい。研究者が感じた美しさは研究の本質的な部分であると思うが、研究の客観性や信頼性を担保するために、個人の主観的な情動は論文や発表から排除されるべきでもある。そのため研究者が、文字や画像といったメディアや論文・学会発表という硬い枠組みを超え、より自由に情動へ直接訴えかける形でその美しさを伝えたいと考えるのは、自然なことである。\n\n一方、芸術家側のニーズとしては、現代の世界を解釈するための最先端の素材を求めているのだと考える。芸術家は、研究者が抽出したデータや法則性の奥に潜む哲学的な意味を見出し、それを社会の文脈へと接続する役割を担おうとしている。\n\n両者のニーズが交差する場において、客観的なデータは主観的な体験へと翻訳される。研究と芸術が融合した展示は、生命や宇宙の真理を誰もが知覚できる形で社会に共有するための、最も有効な手段のひとつとなっている。",
+                    content: "先日、東京都現代美術館で開催されている「ミッション∞インフィニティ｜宇宙＋量子＋芸術」を訪問した。量子技術や宇宙開発における知見を、芸術的文脈で再定義し表現するという試みの展覧会である。この観覧を通して、科学と芸術の繋がりについて興味深い示唆を得た。\n\n科学も芸術も、「世界の見え方を提示する取り組み」という点で本質的に同一である。\n\nどちらも世界を表面的に捉えるのではなく、その裏側に存在する秩序や構造、連続性、法則を記述しようと試みている。科学がそれを「再現可能な形」に落とし込むのに対し、芸術は「知覚可能な形」に落とし込むという手法の違いはある。しかし、未知のものに対して問いを立て、見えにくい本質をすくい上げようとする姿勢には、深い連続性がある。いずれの営みも、複雑でカオスな世界に対して自ら「問い」を立てることから始まり、無数にある情報の中からノイズを削ぎ落とし、見えにくい本質だけをすくい上げる——すなわち抽象化する——プロセスを経るものである。\n実際、これまで多くの芸術家や科学者が世界の見え方を変えてきた。芸術においては印象派やキュビズム、科学においては地動説や遺伝子の発見など、その例を挙げればきりがない。\n\n昨年訪問した金沢21世紀美術館では、植物の知能（オジギソウの馴化など）を研究するステファノ・マンクーゾによる展示が行われていた。近年、このように研究者が美術館で展示を行うケースが増えている。これは単なる偶然ではなく、研究者の求めるものと芸術家の求めるものが、美術館という空間で合致しているからだと考える。\n\n科学者側には、研究活動の中で発見した事象の「情動に訴えかけるような美しさ」を、人々の感性に直接伝えたいというニーズがある。実験を通じて感じた生物の生命力、カオスに見える現象の中に潜む秩序。そういったものを見つけたときの感動は並一通りのものではない。私自身も、オジギソウの運動や、研究を通じて発見した種を超えた機構の連続性などに、何度感動したかわからない。しかしそれを、論文や学会発表という厳格なフォーマットのもとで伝えていくことは難しい。研究者が感じた美しさは研究の本質的な部分であると思うが、研究の客観性や信頼性を担保するために、個人の主観的な情動は論文や発表から排除されるべきでもある。そのため研究者が、文字や画像といったメディアや論文・学会発表という硬い枠組みを超え、より自由に情動へ直接訴えかける形でその美しさを伝えたいと考えるのは、自然なことである。\n\n一方、芸術家側のニーズとしては、現代の世界を解釈するための最先端の素材を求めているのだと考える。芸術家は、研究者が抽出したデータや法則性の奥に潜む哲学的な意味を見出し、それを社会の文脈へと接続する役割を担おうとしている。\n\n両者のニーズが交差する場において、客観的なデータは主観的な体験へと翻訳される。研究と芸術が融合した展示は、生命や宇宙の真理を誰もが知覚できる形で社会に共有するための、最も有効な手段のひとつとなっている。",
                     tags: ["研究哲学", "芸術", "科学"],
                     images: [],
                     link: "https://hemokosa.com/QCA/QCAbook.pdf"
@@ -564,6 +788,15 @@ const content = {
         media: {
             title: "Media",
             items: [
+                {
+                    date: "2026.05.25",
+                    mediaName: "読売新聞 (全国版 / オンライン)",
+                    title: "日本学生科学賞の３研究　優秀賞　国際学生科学技術フェア",
+                    link: "https://www.yomiuri.co.jp/science/20260524-GYT8T00095",
+                    image: "",
+                    type: "newspaper | Web news",
+                    description: "読売新聞の朝刊（全国版）および読売新聞オンラインにて、日本学生科学賞受賞者の代表として、ISEF（国際学生科学技術フェア）での受賞の様子が紹介されました。",
+                },
                 {
                     date: "2026.05.21",
                     mediaName: "TBS",
@@ -716,13 +949,13 @@ const content = {
             title: "Profile",
             name: "Kazuhiro Komatsu",
             affiliation: "Suwa Seiryo High School",
-            description: "I believe that new 'intelligence' is born precisely when different fields connect.\n\nBased in Nagano, I conduct research on Mimosa pudica from the interdisciplinary perspective of 'Biology × Informatics,' while also leading science education initiatives to bridge the educational gap between rural and urban areas.\nConnecting laboratory insights with social issues, and cutting-edge technology with children in rural regions. By acting as a 'bridge' that smoothly connects these often divided worlds, I aim to unlock new possibilities.",
+            description: "I believe that new 'intelligence' is born precisely when different fields connect.\n\nBased in Nagano, I research the environmental stress responses (habituation) of Mimosa pudica from the interdisciplinary perspective of 'Biology × Informatics,' while also leading science education initiatives to bridge the educational gap between rural and urban areas. How does a plant with no brain sense changes in its environment and optimize its responses? I believe unraveling this mechanism connects to the breeding of crops that yield reliably even in a changing climate, and to sustainable food production—challenges at the very heart of agricultural science.\nConnecting laboratory insights with social issues, and cutting-edge technology with children in rural regions. By acting as a 'bridge' that smoothly connects these often divided worlds, I aim to unlock new possibilities.",
             cv_button: "View CV"
         },
         vision: {
             title: "Vision",
-            heading: "Redefining Intelligence",
-            description: "Previously, intelligence was considered a privilege of animals with brains and nervous systems.\n\nHowever, I believe that intelligence does not reside in specific organs but emerges from the 'network (connection)' itself where countless elements interact. Plants, without a central processing unit like a brain, perform advanced information processing using a distributed network spread throughout their bodies. This fact suggests that intelligence does not necessarily require a nervous system.\nThrough plant research, I aim to extend the definition of intelligence from 'structure' to 'system' and reveal the universality of intelligence possessed by life.",
+            heading: "Rethinking Intelligence",
+            description: "Is intelligence something reserved only for animals with brains and nervous systems? I want to question this very premise.\n\nWithout a central brain, Mimosa pudica responds to stimuli through a distributed network spread across its whole body, showing habituation-like behavior. Phenomena like this resonate with the questions raised by frameworks such as Integrated Information Theory and basal cognition—whether intelligence might be found not in a specific organ, but on the side of the system, in the interaction of its elements. Of course, I do not claim that plants possess consciousness or emotions, and whether the observed decline in response reflects 'learning' or a simpler physiological process remains an open question. That is precisely why I want to accumulate evidence rather than assert conclusions, and examine—both empirically and theoretically—whether there might be principles of information processing common to all life.\n\nAnd understanding how brainless plants adapt to environmental stress is not only about approaching the riddle of intelligence. I am convinced it also connects to the challenges of agriculture—breeding crops that yield reliably even in a changing climate, and sustainable food production—and I hope to return the knowledge gained from basic research to supporting humanity's food and farming.",
         },
         news: {
             title: "News",
@@ -886,23 +1119,33 @@ const content = {
                 },
                 {
                     id: "mitoh-target-2026",
-                    published: false,
-                    date: "May 23, 2026",
+                    published: true,
+                    date: "May 29, 2026",
                     title: "Selected for the 2026 Mitoh Target Program",
-                    summary: "Selected for the Information-technology Promotion Agency (IPA) Mitoh Target Program in the Reservoir Computing division.",
-                    fullContent: "I have been selected for the 2026 Mitoh Target Program (Software Development Division utilizing Reservoir Computing Technology).<br><br>The project theme is 'Turning Plant Habituation into Update Rules: Reservoir Computing Understanding of Mimosa pudica and Development of a Reservoir that Rests Computing — Habituation-RC (HRC).'<br><br>This program, hosted by the Information-technology Promotion Agency, Japan (IPA), aims to discover and nurture outstanding IT talent. In this project, I will reinterpret the 'habituation' phenomenon of Mimosa pudica—my core research subject—within the framework of reservoir computing, and challenge the development of a new computational paradigm.<br><br>I will devote my full effort to this challenging project that 'connects' plant intelligence and information engineering.",
+                    summary: "Selected for the Information-technology Promotion Agency (IPA) 2026 Mitoh Target Program in the Reservoir Computing division.",
+                    fullContent: "I have been selected for the 2026 Mitoh Target Program (Software Development Division utilizing Reservoir Computing Technology) conducted by the Information-technology Promotion Agency, Japan (IPA).<br><br>The project theme is 'Turning Plant Habituation into Update Rules: Reservoir Computing Understanding of Mimosa pudica and Development of a Reservoir that Rests Computing — Habituation-RC (HRC).' I will be working on this research and development under the mentorship of Project Manager Prof. Gouhei Tanaka from the Nagoya Institute of Technology (Funding amount: 2,288,000 JPY).<br><br>In this project, I will reinterpret the 'habituation' phenomenon of Mimosa pudica—my core research subject—within the framework of reservoir computing, and challenge the development of a new dynamic reservoir 'HRC' that autonomously skips matrix operations for some nodes depending on the stationarity of the input. I aim to create next-generation edge AI that balances large memory capacity and event-driven ultra-low power consumption under constrained computational resources.<br><br>I will devote my full effort to this challenging project that 'connects' plant intelligence and information engineering.",
                     images: getNewsImages("Mitou"),
-                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html"
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/gaiyou-tg-2.html"
                 },
                 {
                     id: "jsai-2026",
-                    published: false,
+                    published: true,
                     date: "Jun 9, 2026",
-                    title: "[Announcement] Panel Discussion at JSAI 40th Anniversary 'AI for Science' Session",
-                    summary: "Participating in a presentation and panel discussion at the 40th Anniversary Special Session 'Next-Generation AI for Science' at the Japanese Society for Artificial Intelligence National Conference (JSAI2026).",
-                    fullContent: "I will participate in a presentation and panel discussion at the 40th Anniversary Special Session 'Next-Generation AI for Science — What to Aim for and How to Proceed' at the Japanese Society for Artificial Intelligence National Conference (JSAI2026) on June 9, 2026.<br><br>This session looks ahead to the next generation of 'AI for Science' with a view to scientific research 10 and 20 years from now. Alongside a keynote by JSAI President Professor Satoshi Kurihara, we will discuss the future of scientific research opened up by AI and the direction of future research.<br><br>【Event Details】<br>■Date: June 9, 2026 (Tue) 9:00 – 10:30<br>■Venue: Hall A (Exhibition Hall C)<br>■Session: [2A1-KS-36] 40th Anniversary Special 4: Next-Generation 'AI for Science' — What to Aim for and How to Proceed<br><br>I am very much looking forward to this valuable opportunity to discuss the intersection of science and AI—a theme deeply connected to my own research—with leading researchers in the field.",
+                    title: "Presentation and Panel Discussion at JSAI 2026 National Conference",
+                    summary: "Presented on the intersection of Mimosa pudica research and AI, and participated in a panel discussion at the JSAI 40th Anniversary Special Session 'Next-Generation AI for Science'.",
+                    fullContent: "On June 9, 2026, I participated in a presentation and panel discussion at the 40th Anniversary Special Session 'Next-Generation AI for Science — What to Aim for and How to Proceed' at the Japanese Society for Artificial Intelligence National Conference (JSAI 2026).<br><br>In my presentation, I discussed my past experiments using Mimosa pudica from the perspective of 'AI for Science', the analogy between Mimosa pudica and AI information processing, AI development inspired by Mimosa pudica's information processing, and how a high school researcher interacts with AI.<br><br>In the panel discussion, we deeply debated how the next generation should interact with AI, deepen their thoughts, and grow in a society where AI is developing. We also touched upon what kind of existence AI is, when we feel a mind in it, and what mind or consciousness is, together with leading experts. It was a highly valuable experience.",
                     images: getNewsImages("JSAI"),
-                    link: ""
+                    link: "https://conf.ai-gakkai.or.jp/jsai2026/ks/#ks-36"
+                },
+                {
+                    id: "neuro-2026",
+                    published: true,
+                    date: "Aug 1, 2026",
+                    title: "Received Top Award at NEURO2026 High School Poster Presentation",
+                    summary: "Won the Top Award (最優秀賞) in the High School Poster Presentation at NEURO2026 for research on Mimosa pudica habituation.",
+                    fullContent: "On August 1, 2026, I participated in the High School Student Poster Presentation at NEURO2026 (Joint Meeting of the 49th Annual Meeting of the Japan Neuroscience Society, the 69th Annual Meeting of the Japanese Society for Neurochemistry, and the 36th Annual Meeting of the Neural Network Society) held at Kobe International Conference Center and Kobe International Exhibition Hall, and was honored to receive the Top Award (最優秀賞).<br><br>The presentation focused on my long-standing research theme: 'Why does Mimosa pudica habituate to stimuli?' I presented quantitative evaluations using custom devices and AI to elucidate how brainless plants alter their responses based on experience.<br><br>I was fortunate to engage in fruitful discussions with many people, from high school peers to leading researchers. I was especially delighted when a researcher I had spoken with three years ago remembered me and visited my poster. The questions and comments from various perspectives inspired new questions I could not have reached alone, reaffirming the immense value of academic conferences.<br><br>I would like to express my sincere gratitude to the NEURO2026 organizers, my advisors, family, and everyone who continuously supports my research.",
+                    images: getNewsImages("NEURO2026"),
+                    link: "https://neuro2026.jnss.org/"
                 }
             ],
             view_more_button: "VIEW ALL NEWS",
@@ -918,7 +1161,7 @@ const content = {
                     year: "2026",
                     title: "Information-technology Promotion Agency, Japan (IPA) Mitoh Target Program (Software Development Division utilizing Reservoir Computing)",
                     details: "Turning Plant Habituation into Update Rules: Reservoir Computing Understanding of Mimosa pudica and Development of a Reservoir that Rests Computing - Habituation-RC (HRC)",
-                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/index.html",
+                    link: "https://www.ipa.go.jp/jinzai/mitou/target/2026-reservoir/gaiyou-tg-2.html",
                     featured: true
                 },
                 {
@@ -976,10 +1219,26 @@ const content = {
             awards: [
                 {
                     year: "2026",
+                    title: "NEURO2026 (Joint Meeting of JNS, JSN, and JNNS)",
+                    prize: "High School Poster Presentation Top Award",
+                    details: "Presented on 'Why does Mimosa pudica habituate to stimuli?' and received the Top Award (最優秀賞).",
+                    link: "https://neuro2026.jnss.org/",
+                    featured: true
+                },
+                {
+                    year: "2026",
                     title: "Regeneron International Science and Engineering Fair",
                     prize: "Plant Sciences Category 2nd Place Grand Award (2nd in the world)",
                     details: "Presented under the title \"Learning Without a Brain: Habituation and Stimulus Discrimination in Mimosa pudica Explained by Mechanosensitive Channel Desensitization?\".",
                     link: "https://event.yomiuri.co.jp/jssa/",
+                    featured: true
+                },
+                {
+                    year: "2026",
+                    title: "JSAI 2026 40th Anniversary Special Session 'AI for Science'",
+                    prize: "Speaker & Panelist",
+                    details: "Presented on the analogy between Mimosa pudica and AI information processing, and participated in a panel discussion with experts on how the next generation should interact with AI, mind, and consciousness.",
+                    link: "https://www.ai-gakkai.or.jp/jsai2026/",
                     featured: true
                 },
                 {
@@ -1111,22 +1370,222 @@ const content = {
         projects: {
             title: "Projects",
             view_all_button: "VIEW ALL",
+            categories: {
+                foundation: { title: "Foundation (Past Projects)", period: "Past", status: "Done", color: "border-gray-500" },
+                engineering: { title: "Engineering", period: "2024-2025", status: "Done", color: "border-white/40" },
+                physiology: { title: "Physiology", period: "2025-", status: "Done", color: "border-white/40" },
+                mechanism: { title: "Mechanism", period: "2026-", status: "Ongoing", color: "border-teal-500" },
+                application: { title: "Application", period: "Present", status: "Ongoing", color: "border-teal-500" },
+                vision: { title: "Vision", period: "2031-20XX", status: "Planning", color: "border-rose-500" }
+            },
             items: [
+                // --- Foundation ---
                 {
-                    image: process.env.PUBLIC_URL + "/images/mitou.png",
-                    title: "Development of Habituation-RC (HRC)",
-                    description: "Reinterpreting Mimosa habituation under the reservoir computing framework to develop a novel computational model 'HRC (Habituation-RC)'.",
-                    period: "26.05 - Present",
-                    details: "A project selected for the 2026 Mitou Target Program by the Information-technology Promotion Agency, Japan (IPA). This project mathematically models the process of Mimosa pudica habituating to stimuli without a brain or nervous system, applying it to the update rules (learning rules) of reservoir computing. We aim to construct a novel, power-efficient, and autonomous computational paradigm named 'Habituation-RC' (HRC) that dynamically adapts to environmental changes and rests its computation when inactive.",
-                    featured: true
+                    id: "hydra-conditioning",
+                    category: "foundation",
+                    image: process.env.PUBLIC_URL + "/images/hydra.png",
+                    title: "Behavioral Conditioning in Hydra vulgaris",
+                    description: "Investigating associative learning (classical conditioning) in Hydra vulgaris, a species with a diffuse nervous system.",
+                    period: "Past Project",
+                    details: "Verified whether brainless Hydra exhibit associative learning. We repeatedly paired reduced glutathione (inducing feeding behavior) and blue light, and evaluated the responses using AI-based behavioral analysis, approaching the evolutionary origins of learning.",
+                    featured: true,
+                    techStack: ["Behavioral Experiments", "AI Analysis", "Evolutionary Approach"],
+                    outcomes: ["Verified potential associative learning in Hydra", "Suggested evolutionary origins of memory formation"],
+                    mentor: [],
+                    funding: [],
                 },
-                { image: process.env.PUBLIC_URL + "/images/mimosa2.png", title: "Mechanism of Habituation", description: "Elucidating the mechanism of 'habituation' through both mathematical models and calcium imaging.", period: "25.11 - Present", details: "To approach the mechanism by which Mimosa pudica 'remembers' stimuli and controls responses, we are visualizing intracellular signal transduction via calcium imaging experiments at Saitama University (Toyota Lab), in addition to mathematical approaches modeling local cellular fatigue. We aim to reveal the entity of plant intelligence (information processing) from both theoretical and experimental sides.", featured: false },
-                { image: process.env.PUBLIC_URL + "/images/hydra.png", title: "Classical Conditioning in Hydra", description: "Verifying the existence of classical conditioning in Hydra vulgaris, which has a simple diffuse nervous system.", period: "25.04 - Present", details: "Verifying whether Hydra vulgaris, which lacks a brain, exhibits associative learning (classical conditioning). Repeatedly presenting reduced glutathione (unconditioned stimulus) and blue light (conditioned stimulus), and evaluating whether feeding behavior is induced by blue light alone using AI behavioral analysis. Approaching the evolutionary origin of learning ability.", featured: true },
-                { image: process.env.PUBLIC_URL + "/images/mimosa1.png", title: "Ecological Significance of Habituation", description: "Quantitatively analyzing the impact of 'habituation' on energy balance using mathematical models.", period: "24.11 - Present", details: "To elucidate the survival advantages of 'habituation,' we constructed a mathematical model considering the trade-off between energy costs of leaf movement and predation risk, quantitatively verifying its superiority among different survival strategies.", featured: false },
-                { image: process.env.PUBLIC_URL + "/images/science.png", title: "Science Delivery Service", description: "Planning science classrooms to bridge the educational gap between rural and urban areas.", period: "24.11 - Present", details: "A project launched from personal awareness of the opportunity gap in science education in rural areas. Planning and operating science classrooms for elementary students in Nagano Prefecture with familiar nature themes. Continuously conducting activities to bring out children's intellectual curiosity and convey the fun of science.", featured: true },
-                { image: process.env.PUBLIC_URL + "/images/mimosa_hab.jpg", title: "Habituation in Mimosa pudica", description: "Demonstrating habituation capability in Mimosa pudica using original leaf quantifying technology.", period: "24.03 - Present", details: "Demonstrating that Mimosa pudica possesses the ability to regulate responses to specific stimuli and to learn (habituate). By combining a uniquely devised omnidirectional stimulation device with deep-learning-based leaf movement quantification, we quantitatively evaluate the relationship between stimulus direction/intensity and response. We aim to clarify the mechanism maintaining this ability.", featured: true },
-                { image: process.env.PUBLIC_URL + "/images/euglena.png", title: "Photophobic Response in Euglena", description: "Analyzed the photophobic response where Euglena gracilis contracts and changes direction due to light.", period: "21.04 - 24.03", details: "Quantified swimming speed and rotation of Euglena gracilis using deep learning (YOLO) and segmentation for tracking. Confirmed a tendency (photophobic response) where swimming speed increases and rotation becomes more intense as blue light intensity increases rapidly. Also discovered similar evasive rotation behavior against physical vibration, defining it as 'Vibration Phobic Response'.", featured: false },
-                { image: process.env.PUBLIC_URL + "/images/mimosa.jpg", title: "Nyctinasty & Circadian Rhythm", description: "Studied the circadian rhythm of Mimosa pudica by observing its nyctinastic movement.", period: "21.04 - 24.02", details: "Focused on 'nyctinastic movement' (closing leaves at night) as one output of the plant's biological clock. Built a system to automatically quantify leaf opening/closing 24/7 using deep learning. Revealed behaviors such as predicting sunset to close leaves and fine-tuning opening degree according to light intensity.", featured: false },
+                {
+                    id: "euglena-response",
+                    category: "foundation",
+                    image: process.env.PUBLIC_URL + "/images/euglena.png",
+                    title: "Photophobic Response in Euglena",
+                    description: "Analyzing the photophobic response of Euglena gracilis, which contract and change direction upon light exposure.",
+                    period: "Past Project",
+                    details: "Using deep learning models and segmentation for individual tracking, we confirmed a 'photophobic response' where swimming speed and rotational movement intensify in response to a rapid increase in blue light. We also discovered a similar response to physical vibrations.",
+                    featured: false,
+                    techStack: ["Deep Learning", "Segmentation", "Individual Tracking"],
+                    outcomes: ["Confirmed photophobic response to blue light", "Discovered synchronized response to physical vibrations"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Engineering ---
+                {
+                    id: "stimulator",
+                    category: "engineering",
+                    image: process.env.PUBLIC_URL + "/images/stimulation-device.png",
+                    title: "Development of a Stimulation Device",
+                    description: "Developed an original omnidirectional stimulation device to deliver controlled stimuli to Mimosa pudica.",
+                    period: "2024-2025",
+                    details: "To quantitatively evaluate the response of Mimosa pudica to stimuli, we independently developed an omnidirectional stimulation device capable of delivering precisely controlled stimuli from all directions. This enabled us to quantitatively evaluate the relationship between the plant's response and the direction and intensity of the stimulus.",
+                    featured: false,
+                    techStack: ["Hardware Design", "Control Engineering", "Arduino"],
+                    outcomes: ["Successfully developed a device to deliver precise stimuli from any direction", "Established a foundation for quantitative response evaluation"],
+                    mentor: [],
+                    funding: [],
+                },
+                {
+                    id: "leaf-quantification",
+                    category: "engineering",
+                    image: process.env.PUBLIC_URL + "/images/mimosa.jpg",
+                    title: "Development of a Leaf Movement Quantification System",
+                    description: "Constructed a quantitative analysis system for leaf opening/closing movements using deep learning.",
+                    period: "2024-2025",
+                    details: "To capture plant behaviors—which traditionally relied on visual inspection or simple measurements—as highly accurate continuous data, we constructed a system that continuously and quantitatively evaluates the opening degree of Mimosa pudica leaves utilizing image analysis technologies such as YOLOv9 and ConvNeXt.",
+                    featured: false,
+                    techStack: ["YOLOv9", "ConvNeXt", "Deep Learning", "Python"],
+                    outcomes: ["Successfully acquired continuous digital image data of plant behaviors", "Achieved full automation of the analysis process"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Physiology ---
+                {
+                    id: "mimosa-habituation",
+                    category: "physiology",
+                    image: process.env.PUBLIC_URL + "/images/mimosa_hab.jpg",
+                    title: "Validation of Habituation in M. pudica",
+                    description: "Demonstrated the capability of Mimosa pudica to learn (habituate) to stimuli and selectively regulate its responses.",
+                    period: "2025",
+                    details: "By combining the uniquely developed stimulation device and quantification technology, we behaviorally demonstrated that Mimosa pudica possesses the ability to identify stimuli and selectively regulate its responses (habituation-like response).",
+                    featured: true,
+                    techStack: ["Behavioral Science", "Quantitative Analysis", "Experimental Design"],
+                    outcomes: ["Demonstrated M. pudica's ability to learn and discriminate stimuli", "Presented new behavioral evidence regarding plant 'intelligence'"],
+                    mentor: [],
+                    funding: [],
+                },
+                {
+                    id: "ecological-habituation",
+                    category: "physiology",
+                    subProject: true,
+                    image: process.env.PUBLIC_URL + "/images/ecological.png",
+                    title: "Ecological Significance of Habituation in M. pudica (Sub project)",
+                    description: "Analyzed the impact of 'habituation-like responses' on energy balance using a mathematical model.",
+                    period: "2025",
+                    details: "To elucidate the survival advantages of the 'habituation' phenomenon, we constructed a mathematical model considering the trade-off between the energy cost of leaf movement and predation risk, and quantitatively verified its superiority among different survival strategies.",
+                    featured: false,
+                    techStack: ["Mathematical Modeling", "Simulation", "Ecology"],
+                    outcomes: ["Modeled the trade-off between energy cost and predation risk", "Quantitatively proved the survival advantage of habituation"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Mechanism ---
+                {
+                    id: "math-modeling",
+                    category: "mechanism",
+                    image: process.env.PUBLIC_URL + "/images/mechanism-vivo.png",
+                    title: "Mathematical Modeling of the Habituation-Like Response",
+                    description: "Mathematical elucidation of the 'habituation-like response' based on the local desensitization hypothesis.",
+                    period: "2026-Present",
+                    details: "To reveal the mechanism by which Mimosa pudica 'remembers' stimuli and controls its response, we are approaching the entity of plant intelligence (information processing) through a mathematical approach that models local cellular fatigue (desensitization).",
+                    featured: false,
+                    techStack: ["Mathematical Biology", "ODEs", "Python"],
+                    outcomes: ["Constructed a mathematical model based on the local desensitization hypothesis", "Provided a theoretical foundation for plant memory mechanisms"],
+                    mentor: [],
+                    funding: [],
+                },
+                {
+                    id: "molecular-basis",
+                    category: "mechanism",
+                    image: process.env.PUBLIC_URL + "/images/mechanism-invitro.png",
+                    title: "Molecular Basis of Habituation-Like Responses",
+                    description: "Investigating the local desensitization hypothesis using calcium imaging techniques.",
+                    period: "2026-Present",
+                    details: "We verify the local cellular fatigue mechanism predicted by the mathematical model through calcium imaging experiments at Saitama University (Toyota Lab). By visualizing intracellular signal transduction, we approach the mechanism of habituation at the molecular level.",
+                    featured: false,
+                    techStack: ["Calcium Imaging", "Cell Biology", "Molecular Biology"],
+                    outcomes: ["Established an experimental system to verify mathematical model predictions", "Visualized the habituation mechanism at the cellular level"],
+                    funding: [],
+                    mentor: ["Saitama Univ. Toyota Lab"],
+                },
+                // --- Application ---
+                {
+                    id: "hrc",
+                    category: "application",
+                    image: process.env.PUBLIC_URL + "/images/hrc.png",
+                    title: "Development of Habituation Reservoir Computing (HRC)",
+                    description: "Developing an efficient time-series processing algorithm inspired by Mimosa's habituation.",
+                    period: "Present",
+                    details: "This project mathematically models the habituation process and applies it to the update rules of reservoir computing. We aim to construct 'Habituation-RC' (HRC), a power-efficient and autonomous new computational model that performs calculations only when necessary.",
+                    featured: true,
+                    techStack: ["Reservoir Computing", "Neural Networks", "Mathematical Optimization"],
+                    outcomes: ["Designed 'HRC', a power-efficient and autonomous new computational model"],
+                    mentor: ["PM: Prof. Gouhei Tanaka (Nagoya Inst. of Tech.)"],
+                    role: "Mitou Creator",
+                    funding: ["IPA 2026 Mitou Target Program"],
+                },
+                {
+                    id: "physical-reservoir",
+                    category: "application",
+                    image: process.env.PUBLIC_URL + "/images/mimosa-rc.png",
+                    title: "Demonstration of RC-like Information Processing in M. pudica",
+                    description: "Verifying whether M. pudica intrinsically functions as a 'pre-trained' physical reservoir model.",
+                    period: "Present",
+                    details: "Evaluating the information processing capabilities of natural plants within the framework of physical reservoir computing. We demonstrate how Mimosa pudica utilizes stimuli received from the environment as computational resources, exploring the potential of Plant Computing and its analogy to AI.",
+                    featured: false,
+                    techStack: ["Physical Reservoir Computing", "Information Theory", "Biometrics"],
+                    outcomes: ["Demonstrated the concept of utilizing plants as computational resources", "Pioneered the potential of Plant Computing"],
+                    mentor: ["PM: Prof. Gouhei Tanaka (Nagoya Inst. of Tech.)"],
+                    funding: ["IPA 2026 Mitou Target Program"],
+                },
+                {
+                    id: "stress-crop",
+                    category: "application",
+                    image: process.env.PUBLIC_URL + "/images/crop.png",
+                    title: "Engineering Stress-Resilient Crops via Habituation",
+                    description: "Applying habituation mechanisms to crops to enhance agricultural resilience.",
+                    period: "Present",
+                    details: "An applied project aiming to develop new stress-resilient crops capable of flexibly adapting to physical stress and environmental changes by applying the knowledge of 'habituation' and 'environmental adaptation' gained from Mimosa pudica to the agricultural field.",
+                    featured: false,
+                    techStack: ["Agriculture", "Plant Physiology", "Applied Research"],
+                    outcomes: ["Applied habituation mechanisms to agriculture", "Established a foundation for developing highly adaptable next-generation crops"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Vision ---
+                {
+                    id: "universal-intelligence",
+                    category: "vision",
+                    image: process.env.PUBLIC_URL + "/images/intelligence.png",
+                    title: "Elucidating Universal Principles of Intelligence Beyond Substrates",
+                    description: "Approaching common principles of 'intelligence' that transcend the presence of brains or hardware differences.",
+                    period: "2031-20XX",
+                    details: "The ultimate goal of this research is to elucidate the 'universal principles of intelligence' underlying animal nervous systems, plant networks, and even artificial intelligence (silicon substrates). We will construct a framework of information processing common to diverse systems and expand the definition of intelligence.",
+                    featured: true,
+                    techStack: ["Cognitive Science", "Complex Systems", "Systems Theory"],
+                    outcomes: ["Constructed an information processing framework common to diverse systems", "Theoretical approach toward redefining 'intelligence'"],
+                    mentor: [],
+                    funding: [],
+                },
+                // --- Outreach ---
+                {
+                    id: "advancelab-vice",
+                    category: "outreach",
+                    image: process.env.PUBLIC_URL + "/images/advancelab.png",
+                    title: "Vice Director, ADvance Lab",
+                    description: "Managed a research community for students and established a platform for novel value creation.",
+                    period: "Past Role",
+                    details: "Served as Vice Director at ADvance Lab. Dedicated efforts to forming a community where middle school, high school, and university students could gather beyond the boundaries of grades and fields to actively discuss and conduct joint research. Contributed to value creation in the next-generation scientific community by building networks among young researchers.",
+                    featured: false,
+                    techStack: ["Community Management", "Mentoring", "Organization Management"],
+                    outcomes: ["Formed a research community where students from different fields interact", "Provided a platform for novel value creation by young researchers"],
+                    mentor: [],
+                    funding: [],
+                    role: "Vice Director",
+                },
+                {
+                    id: "science-outreach",
+                    category: "outreach",
+                    image: process.env.PUBLIC_URL + "/images/science.png",
+                    title: "Science Delivery Service",
+                    description: "Organizing science workshops to bridge the educational gap between rural and urban areas.",
+                    period: "24.11 - Present",
+                    details: "A project launched from personal awareness of the opportunity gap in science education in rural areas. Planning and operating science classrooms for elementary students in Nagano Prefecture with familiar nature themes. Continuously conducting activities to bring out children's intellectual curiosity and convey the fun of science.",
+                    featured: true,
+                    techStack: ["Science Education", "Event Planning", "Communication"],
+                    outcomes: ["Conducted numerous science classrooms for elementary students in Nagano", "Grassroots contribution to bridging the educational gap in rural areas"],
+                    mentor: [],
+                    funding: [],
+                    role: "Planning & Operations Representative",
+                }
             ]
         },
         map: {
@@ -1138,22 +1597,23 @@ const content = {
                 { id: "utah", name: "Utah, USA", x: 20, y: 47, image: process.env.PUBLIC_URL + "/images/utah.png", details: "One-month homestay during 5th grade. My first overseas experience, opening my eyes to the world through culture shock." },
                 { id: "shanghai", name: "Shanghai, China", x: 75, y: 52, image: process.env.PUBLIC_URL + "/images/shanghai.jpg", details: "Two-week school exchange program in 9th grade. Deepened cultural understanding through dormitory life and classes." },
                 { id: "singapore", name: "Singapore", x: 71.5, y: 65.7, image: process.env.PUBLIC_URL + "/images/singapore.png", details: "Two-week homestay in 9th grade. Deepened mutual understanding by overcoming cultural differences with a Muslim host family." },
-                { id: "thailand", name: "Thailand", x: 71, y: 60, image: process.env.PUBLIC_URL + "/images/asc2025.png", details: "Participated in 'Asia Science Camp 2025' as a Japanese delegate. Deepened international perspectives through scientific discussions with students and Nobel laureates from Asia." }
+                { id: "thailand", name: "Thailand", x: 71, y: 60, image: process.env.PUBLIC_URL + "/images/asc2025.png", details: "Participated in 'Asia Science Camp 2025' as a Japanese delegate. Deepened international perspectives through scientific discussions with students and Nobel laureates from Asia." },
+                { id: "phoenix", name: "Phoenix, USA", x: 20, y: 50, image: process.env.PUBLIC_URL + "/images/ISEF2026.jpg", details: "Participated in 'Regeneron ISEF2026' as a Japanese delegate. Presented in the plant sciences division and won three awards, and interacted with participants from various countries." }
             ]
         },
         activities: {
             title: "Activities & Involvements",
             site_button: "Official Site",
             items: [
-                { image: process.env.PUBLIC_URL + "/images/Matsuo2.png", year: "2025", title: "Matsuo Lab GCI", event: "Student", details: "Systematically learned data analysis and machine learning implementation using Python at the Data Science Course hosted by the University of Tokyo Matsuo Lab. Honed practical skills through competition-style assignments and established a foundation for quantification and analysis of experimental data in current research.", link: "https://weblab.t.u-tokyo.ac.jp/news/gci-2025-summer-%e3%81%ae%e5%8b%9f%e9%9b%86%e9%96%8b%e5%a7%8b/" },
-                { image: process.env.PUBLIC_URL + "/images/Matsuo1.png", year: "2025", title: "Matsuo Lab LLM", event: "Student", details: "Learned cutting-edge engineering insights into Large Language Models (LLM). Deepened understanding of Generative AI architecture, serving as a catalyst for introducing AI into the scientific research process and exploring new approaches connecting biology and informatics.", link: "https://weblab.t.u-tokyo.ac.jp/large-language-model/" },
-                { image: process.env.PUBLIC_URL + "/images/SPICE_entre.png", year: "2024-2025", title: "Stanford e-Entrepreneurship", event: "Student", details: "Learned the basics of entrepreneurship and business planning through online lectures by Stanford University instructors. Finally, planned a project to address the educational gap problem as a team and presented it in English.", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-entrepreneurship-japan" },
-                { image: process.env.PUBLIC_URL + "/images/SPICE.png", year: "2025", title: "Stanford e-Japan", event: "Student", details: "Took lectures by experts on Japan-US relations and learned about Japan-US relations from multiple perspectives such as diplomacy, culture, and economy. Deepened international perspectives and discussion skills through discussions in English with other participants.", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-japan" },
-                { image: process.env.PUBLIC_URL + "/images/n1.png", year: "2024-2025", title: "N1 Dojo", event: "5th Cohort", details: "In order to develop my 'Science Delivery Service' project as a business, under the guidance of a mentor, I learned the practical startup process such as formulating a business plan, analyzing target customers, and examining a revenue model.", link: "https://www.sunaba.org/n1dojo" },
-                { image: process.env.PUBLIC_URL + "/images/UTokyo.jpg", year: "2024-", title: "UTokyoGSC-NEXT", event: "6th Cohort", details: "Received lectures on cutting-edge science and technology from professors at the University of Tokyo and had the opportunity to deepen my own research theme. I am greatly stimulated by interacting with highly motivated peers of the same generation gathered from all over the country.", link: "https://gsc.iis.u-tokyo.ac.jp/" },
-                { image: process.env.PUBLIC_URL + "/images/advancelab.png", year: "2024-", title: "ADvance Lab", event: "Vice Director", details: "Currently Involved in the operation of the lab as Vice Director. While creating new value by connecting the next generation and companies, I also plan events in rural areas to expand the circle of research.", link: "https://adlab.lne.st/" },
-                { image: process.env.PUBLIC_URL + "/images/aoki.png", year: "2022-2023", title: "Nagano Study Tour AOKI Kanrin Maru", event: "7th Cohort", details: "This program I participated in when I was a junior high school student is one of the origins of my current activities. During the training in Silicon Valley, I came into contact with a culture of challenging without fear of failure, which had a great influence on my own action guidelines.", link: "https://aoki-zaidan.or.jp/srv_kanrin.php" },
-                { image: process.env.PUBLIC_URL + "/images/Tsukuba.png", year: "2021-2022", title: "Tsukuba SKIP Academy", event: "Student", details: "Solidified the foundation of logical thinking necessary for scientific research by touching on university-level mathematics and physics online. The experience at this time helps me in handling mathematical models in my current research.", link: "https://skip.tsukuba.ac.jp/" }
+                { id: "gci", image: process.env.PUBLIC_URL + "/images/Matsuo2.png", year: "2025", title: "Matsuo Lab GCI", event: "Student", details: "Systematically learned data analysis and machine learning implementation using Python at the Data Science Course hosted by the University of Tokyo Matsuo Lab. Honed practical skills through competition-style assignments and established a foundation for quantification and analysis of experimental data in current research.", link: "https://weblab.t.u-tokyo.ac.jp/news/gci-2025-summer-%e3%81%ae%e5%8b%9f%e9%9b%86%e9%96%8b%e5%a7%8b/" },
+                { id: "llm", image: process.env.PUBLIC_URL + "/images/Matsuo1.png", year: "2025", title: "Matsuo Lab LLM", event: "Student", details: "Learned cutting-edge engineering insights into Large Language Models (LLM). Deepened understanding of Generative AI architecture, serving as a catalyst for introducing AI into the scientific research process and exploring new approaches connecting biology and informatics.", link: "https://weblab.t.u-tokyo.ac.jp/large-language-model/" },
+                { id: "stanford-entrepreneur", image: process.env.PUBLIC_URL + "/images/SPICE_entre.png", year: "2024-2025", title: "Stanford e-Entrepreneurship", event: "Student", details: "Learned the basics of entrepreneurship and business planning through online lectures by Stanford University instructors. Finally, planned a project to address the educational gap problem as a team and presented it in English.", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-entrepreneurship-japan" },
+                { id: "stanford-japan", image: process.env.PUBLIC_URL + "/images/SPICE.png", year: "2025", title: "Stanford e-Japan", event: "Student", details: "Took lectures by experts on Japan-US relations and learned about Japan-US relations from multiple perspectives such as diplomacy, culture, and economy. Deepened international perspectives and discussion skills through discussions in English with other participants.", link: "https://spice.fsi.stanford.edu/fellowship/stanford-e-japan" },
+                { id: "n1-dojo", image: process.env.PUBLIC_URL + "/images/n1.png", year: "2024-2025", title: "N1 Dojo", event: "5th Cohort", details: "In order to develop my 'Science Delivery Service' project as a business, under the guidance of a mentor, I learned the practical startup process such as formulating a business plan, analyzing target customers, and examining a revenue model.", link: "https://www.sunaba.org/n1dojo" },
+                { id: "gsc-next", image: process.env.PUBLIC_URL + "/images/UTokyo.jpg", year: "2024-", title: "UTokyoGSC-NEXT", event: "6th Cohort", details: "Received lectures on cutting-edge science and technology from professors at the University of Tokyo and had the opportunity to deepen my own research theme. I am greatly stimulated by interacting with highly motivated peers of the same generation gathered from all over the country.", link: "https://gsc.iis.u-tokyo.ac.jp/" },
+                { id: "advancelab", image: process.env.PUBLIC_URL + "/images/advancelab.png", year: "2024-", title: "ADvance Lab", event: "Vice Director", details: "Currently Involved in the operation of the lab as Vice Director. While creating new value by connecting the next generation and companies, I also plan events in rural areas to expand the circle of research.", link: "https://adlab.lne.st/" },
+                { id: "aoki-kanrinmaru", image: process.env.PUBLIC_URL + "/images/aoki.png", year: "2022-2023", title: "Nagano Study Tour AOKI Kanrin Maru", event: "7th Cohort", details: "This program I participated in when I was a junior high school student is one of the origins of my current activities. During the training in Silicon Valley, I came into contact with a culture of challenging without fear of failure, which had a great influence on my own action guidelines.", link: "https://aoki-zaidan.or.jp/srv_kanrin.php" },
+                { id: "tsukuba-skip", image: process.env.PUBLIC_URL + "/images/Tsukuba.png", year: "2021-2022", title: "Tsukuba SKIP Academy", event: "Student", details: "Solidified the foundation of logical thinking necessary for scientific research by touching on university-level mathematics and physics online. The experience at this time helps me in handling mathematical models in my current research.", link: "https://skip.tsukuba.ac.jp/" }
             ],
         },
         insights: {
@@ -1216,6 +1676,15 @@ const content = {
         media: {
             title: "Media",
             items: [
+                {
+                    date: "2026.05.25",
+                    mediaName: "Yomiuri Shimbun (National Edition / Online)",
+                    title: "Three Researches from Japan Student Science Awards Win Grand Awards at ISEF",
+                    link: "https://www.yomiuri.co.jp/science/20260524-GYT8T00095",
+                    image: "",
+                    type: "newspaper | Web news",
+                    description: "Featured in the morning national edition of the Yomiuri Shimbun and Yomiuri Shimbun Online, highlighting my achievements and awards at Regeneron ISEF 2026 as a representative of the Japan Student Science Awards.",
+                },
                 {
                     date: "2026.05.21",
                     mediaName: "TBS",
@@ -1352,21 +1821,34 @@ const BotanicalSynapse = () => {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const ctx = canvas.getContext('2d');
+
+        // Respect users who prefer reduced motion — skip the canvas animation entirely.
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        const ctx = canvas.getContext('2d', { alpha: true });
 
         let animationFrameId;
+        let isPaused = false;
 
         // --- 設定 ---
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         let width = window.innerWidth;
         let height = window.innerHeight;
         const isMobile = width < 600;
 
-        canvas.width = width;
-        canvas.height = height;
+        const setCanvasSize = () => {
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        setCanvasSize();
 
         const CONFIG = {
-            nodeCount: isMobile ? 30 : (width < 1024 ? 50 : 80), // PCは80のまま、モバイルとタブレットで減らす
-            connectDist: isMobile ? 100 : (width < 1024 ? 150 : 250), // 接続距離も調整
+            nodeCount: isMobile ? 30 : (width < 1024 ? 50 : 80),
+            connectDist: isMobile ? 100 : (width < 1024 ? 150 : 250),
             connectDistSq: (isMobile ? 100 : (width < 1024 ? 150 : 250)) ** 2,
             mouseRadiusSq: (isMobile ? 120 : 200) ** 2,
 
@@ -1562,8 +2044,16 @@ const BotanicalSynapse = () => {
             }
         };
 
-        const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Frame budget: target ~40fps on desktop, ~30fps on mobile to keep CPU/battery sane.
+        const frameInterval = isMobile ? 1000 / 30 : 1000 / 40;
+        let lastFrame = 0;
+        const animate = (now) => {
+            animationFrameId = requestAnimationFrame(animate);
+            if (isPaused) return;
+            if (now - lastFrame < frameInterval) return;
+            lastFrame = now;
+
+            ctx.clearRect(0, 0, width, height);
             ctx.globalCompositeOperation = 'source-over';
             updateState();
             state.edges.forEach(e => e.draw());
@@ -1597,7 +2087,6 @@ const BotanicalSynapse = () => {
                 if (state.pulses[i].life <= 0) state.pulses.splice(i, 1);
             }
             ctx.globalCompositeOperation = 'source-over';
-            animationFrameId = requestAnimationFrame(animate);
         };
 
         const handleInteraction = (x, y) => {
@@ -1653,15 +2142,24 @@ const BotanicalSynapse = () => {
         // Init
         for (let i = 0; i < CONFIG.nodeCount; i++) state.nodes.push(new Node(rand(0, width), rand(0, height)));
         forceConnections();
-        animate();
+        animationFrameId = requestAnimationFrame(animate);
 
+        // Throttle resize to avoid thrashing canvas reallocation.
+        let resizeTimer = null;
         const handleResize = () => {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                setCanvasSize();
+            }, 150);
         };
-        const handleMouseMove = e => { state.mouse.x = e.clientX; state.mouse.y = e.clientY; };
+        // Throttle mousemove to ~60Hz max with rAF coalescing.
+        let pendingMouse = null;
+        const flushMouse = () => {
+            if (pendingMouse) { state.mouse.x = pendingMouse.x; state.mouse.y = pendingMouse.y; pendingMouse = null; }
+        };
+        const handleMouseMove = e => { pendingMouse = { x: e.clientX, y: e.clientY }; flushMouse(); };
         const handleMouseDown = e => handleInteraction(e.clientX, e.clientY);
         const handleTouchStart = e => {
             const t = e.touches[0];
@@ -1672,187 +2170,310 @@ const BotanicalSynapse = () => {
             state.mouse.x = t.clientX; state.mouse.y = t.clientY;
         };
         const handleTouchEnd = () => { state.mouse.x = -999; state.mouse.y = -999; };
+        const handleVisibility = () => { isPaused = document.hidden; };
 
         window.addEventListener('resize', handleResize);
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
         window.addEventListener('mousedown', handleMouseDown);
-        window.addEventListener('touchstart', handleTouchStart, { passive: false });
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
         window.addEventListener('touchend', handleTouchEnd);
+        document.addEventListener('visibilitychange', handleVisibility);
 
         return () => {
             cancelAnimationFrame(animationFrameId);
+            clearTimeout(resizeTimer);
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('touchstart', handleTouchStart);
             window.removeEventListener('touchmove', handleTouchMove);
             window.removeEventListener('touchend', handleTouchEnd);
+            document.removeEventListener('visibilitychange', handleVisibility);
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-auto" />;
+    return <canvas ref={canvasRef} aria-hidden="true" className="fixed inset-0 z-0 pointer-events-none" />;
 };
 
 
 // --- 新しいイントロアニメーション (Random Node Loading) ---
+// --- イントロアニメーション (Synaptic Genesis) ---
+const INTRO_WORDS = ['People', 'Region', 'Knowledge', 'Science', 'Future', 'Nature', 'Intelligence', 'Empathy', 'Technology', 'Life', 'Synapse', 'Universe', 'Society', 'Ideas', 'World'];
+const INTRO_TITLE = 'Intelligence is Connection';
+
 const NodeIntro = ({ onFinish }) => {
     const canvasRef = useRef(null);
+    const finishedRef = useRef(false);
+    const [showSkip, setShowSkip] = useState(false);
+    const [wordIndex, setWordIndex] = useState(0);
+    const reduced = useMemo(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches, []);
+
+    const finish = useCallback(() => {
+        if (finishedRef.current) return;
+        finishedRef.current = true;
+        onFinish();
+    }, [onFinish]);
+
+    // Reduced motion: 短時間で終了
+    useEffect(() => {
+        if (!reduced) return;
+        const t = setTimeout(finish, 900);
+        return () => clearTimeout(t);
+    }, [reduced, finish]);
 
     useEffect(() => {
+        const t = setTimeout(() => setShowSkip(true), 1500);
+        return () => clearTimeout(t);
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => setWordIndex(i => (i + 1) % INTRO_WORDS.length), 400);
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        if (reduced) return;
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
 
-        let w = canvas.width = window.innerWidth;
-        let h = canvas.height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        let w = window.innerWidth;
+        let h = window.innerHeight;
 
-        const CONFIG = {
-            nodeCount: 6,
-            speed: 0.04,
-            color: "255, 255, 255" // White
+        // 樹状突起を描き足していく永続レイヤー
+        const trail = document.createElement('canvas');
+        const tctx = trail.getContext('2d');
+
+        const setSize = () => {
+            w = window.innerWidth; h = window.innerHeight;
+            canvas.width = w * dpr; canvas.height = h * dpr;
+            canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            trail.width = w * dpr; trail.height = h * dpr;
+            tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            tctx.lineCap = 'round';
         };
+        setSize();
 
-        const nodes = [];
+        const isMobile = w < 600;
         const cx = w / 2;
         const cy = h / 2;
-        const baseRadius = Math.min(w, h) * 0.15;
+        const maxR = Math.min(w, h) * (isMobile ? 0.44 : 0.38);
+        const rand = (a, b) => Math.random() * (b - a) + a;
 
-        for (let i = 0; i < CONFIG.nodeCount; i++) {
-            const angle = (i / CONFIG.nodeCount) * Math.PI * 2 + (Math.random() - 0.5);
-            const r = baseRadius * (0.8 + Math.random() * 0.6);
-            nodes.push({
-                x: cx + Math.cos(angle) * r,
-                y: cy + Math.sin(angle) * r,
-                active: false
+        const branches = [];
+        const nodes = [];
+        const signals = [];
+        let totalBranches = 0;
+        const MAX_BRANCHES = isMobile ? 70 : 110;
+
+        const spawnBranch = (x, y, angle, depth, delay) => {
+            if (totalBranches >= MAX_BRANCHES) return;
+            totalBranches++;
+            branches.push({
+                x, y, angle, depth, delay,
+                speed: rand(1.6, 2.6) * (1 - depth * 0.12),
+                life: rand(50, 120) * (1 - depth * 0.18),
+                points: [{ x, y }],
+                done: false
             });
+        };
+
+        const TRUNKS = 7;
+        for (let i = 0; i < TRUNKS; i++) {
+            const a = (i / TRUNKS) * Math.PI * 2 + rand(-0.35, 0.35);
+            spawnBranch(cx, cy, a, 0, i * 5 + rand(0, 8));
         }
 
-        let indices = Array.from({ length: CONFIG.nodeCount }, (_, i) => i);
-        for (let i = indices.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [indices[i], indices[j]] = [indices[j], indices[i]];
-        }
-        const path = [...indices, indices[0]];
-
-        nodes[path[0]].active = true;
-
-        let pathIndex = 0;
-        let lineProgress = 0;
         let frameId;
-        let finished = false;
+        let bloom = 0;
+        const start = performance.now();
 
-        const render = () => {
+        const render = (now) => {
+            const t = (now - start) / 1000;
             ctx.clearRect(0, 0, w, h);
-            const time = Date.now() * 0.001;
 
-            if (!finished) {
-                lineProgress += CONFIG.speed;
-                if (lineProgress >= 1.0) {
-                    lineProgress = 0;
-                    pathIndex++;
-                    if (pathIndex < path.length) nodes[path[pathIndex]].active = true;
-                    if (pathIndex >= path.length - 1) {
-                        finished = true;
-                        if (onFinish) setTimeout(onFinish, 800);
-                    }
-                }
-            }
+            // 成長: 新しいセグメントだけを永続レイヤーに描く
+            branches.forEach(b => {
+                if (b.done) return;
+                if (b.delay > 0) { b.delay--; return; }
 
-            ctx.lineCap = "round";
-            ctx.lineJoin = "round";
+                const px = b.x, py = b.y;
+                b.angle += rand(-0.22, 0.22);
+                const outward = Math.atan2(b.y - cy, b.x - cx);
+                b.angle += Math.sin(outward - b.angle) * 0.06;
+                b.x += Math.cos(b.angle) * b.speed;
+                b.y += Math.sin(b.angle) * b.speed;
+                b.points.push({ x: b.x, y: b.y });
+                b.life--;
 
-            nodes.forEach((n, i) => {
-                const floatX = Math.sin(time + i * 1.5) * 3;
-                const floatY = Math.cos(time * 0.8 + i) * 3;
-                const dx = n.x + floatX;
-                const dy = n.y + floatY;
+                tctx.beginPath();
+                tctx.moveTo(px, py);
+                tctx.lineTo(b.x, b.y);
+                tctx.strokeStyle = `rgba(140, 220, 180, ${Math.max(0.07, 0.3 - b.depth * 0.07)})`;
+                tctx.lineWidth = Math.max(0.4, 1.6 - b.depth * 0.4);
+                tctx.stroke();
 
-                if (n.active) {
-                    ctx.beginPath();
-                    ctx.arc(dx, dy, 3.5, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(${CONFIG.color}, 1)`;
-                    ctx.fill();
-
-                    const breath = Math.sin(time * 3 + i) * 0.5 + 0.5;
-                    ctx.beginPath();
-                    ctx.arc(dx, dy, 5 + breath * 4, 0, Math.PI * 2);
-                    ctx.strokeStyle = `rgba(${CONFIG.color}, ${0.3 * (1 - breath)})`;
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(dx, dy, 2.5, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(${CONFIG.color}, 0.2)`;
-                    ctx.fill();
+                if (b.depth < 3 && b.points.length > 8 && Math.random() < 0.04) {
+                    spawnBranch(b.x, b.y, b.angle + rand(0.5, 1.1) * (Math.random() < 0.5 ? 1 : -1), b.depth + 1, 0);
                 }
 
-                n.currentX = dx;
-                n.currentY = dy;
+                if (b.life <= 0 || Math.hypot(b.x - cx, b.y - cy) > maxR) {
+                    b.done = true;
+                    nodes.push({ x: b.x, y: b.y, r: rand(1.2, 2.4) + (3 - b.depth) * 0.3, phase: rand(0, Math.PI * 2) });
+                }
             });
 
-            ctx.beginPath();
-            let first = true;
-            for (let i = 0; i <= Math.min(pathIndex, path.length - 1); i++) {
-                const n = nodes[path[i]];
-                if (first) { ctx.moveTo(n.currentX, n.currentY); first = false; }
-                else { ctx.lineTo(n.currentX, n.currentY); }
+            ctx.drawImage(trail, 0, 0, w, h);
+
+            // 中心のシード (タイトル表示後は減光して文字を引き立てる)
+            const seedScale = Math.min(1, t / 0.4);
+            const dim = t < 2 ? 1 : Math.max(0.3, 1 - (t - 2) * 0.5);
+            const seedR = 4.5 * seedScale * (1 + Math.sin(t * 3.2) * 0.18);
+            const glowR = Math.max(1, seedR * 9);
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
+            grad.addColorStop(0, `rgba(110, 231, 183, ${0.5 * dim})`);
+            grad.addColorStop(1, 'rgba(110, 231, 183, 0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath(); ctx.arc(cx, cy, glowR, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(cx, cy, Math.max(0.5, seedR), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(236, 253, 245, ${0.95 * dim})`;
+            ctx.fill();
+
+            // 末端ノードの明滅 + 経路を走る信号
+            ctx.globalCompositeOperation = 'lighter';
+            nodes.forEach(n => {
+                const tw = 0.5 + Math.sin(t * 2.4 + n.phase) * 0.5;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(52, 211, 153, ${0.25 + 0.45 * tw})`;
+                ctx.fill();
+            });
+
+            if (t > 1.1 && signals.length < 8 && Math.random() < 0.14) {
+                const grown = branches.filter(b => b.points.length > 20);
+                if (grown.length) signals.push({ b: grown[(Math.random() * grown.length) | 0], i: 0, speed: rand(1.5, 3.5) });
             }
-            ctx.strokeStyle = `rgba(${CONFIG.color}, 0.4)`;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            if (!finished && pathIndex < path.length - 1) {
-                const n1 = nodes[path[pathIndex]];
-                const n2 = nodes[path[pathIndex + 1]];
-                const cx = n1.currentX + (n2.currentX - n1.currentX) * lineProgress;
-                const cy = n1.currentY + (n2.currentY - n1.currentY) * lineProgress;
-
-                ctx.beginPath(); ctx.moveTo(n1.currentX, n1.currentY); ctx.lineTo(cx, cy);
-                const grad = ctx.createLinearGradient(n1.currentX, n1.currentY, n2.currentX, n2.currentY);
-                grad.addColorStop(0, `rgba(${CONFIG.color}, 0.3)`);
-                grad.addColorStop(1, `rgba(${CONFIG.color}, 1)`);
-                ctx.strokeStyle = grad; ctx.lineWidth = 2; ctx.stroke();
-
-                ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${CONFIG.color}, 1)`; ctx.fill();
+            for (let i = signals.length - 1; i >= 0; i--) {
+                const s = signals[i];
+                s.i += s.speed;
+                const p = s.b.points[s.i | 0];
+                if (!p) { signals.splice(i, 1); continue; }
+                const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 7);
+                g.addColorStop(0, 'rgba(190, 242, 215, 0.9)');
+                g.addColorStop(1, 'rgba(190, 242, 215, 0)');
+                ctx.fillStyle = g;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, Math.PI * 2); ctx.fill();
             }
+            ctx.globalCompositeOperation = 'source-over';
+
+            // ブルームリング → 終了
+            if (t > 3.7) {
+                bloom += 0.03;
+                ctx.beginPath();
+                ctx.arc(cx, cy, bloom * maxR * 2.4, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(110, 231, 183, ${Math.max(0, 0.4 - bloom * 0.4)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            if (t > 4.3) { finish(); return; }
 
             frameId = requestAnimationFrame(render);
         };
+        frameId = requestAnimationFrame(render);
 
-        const handleResize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
-        window.addEventListener('resize', handleResize);
-        render();
-
-        return () => { cancelAnimationFrame(frameId); window.removeEventListener('resize', handleResize); };
-    }, [onFinish]);
-
-    const [loadingWord, setLoadingWord] = useState('People');
-    const words = ['People', 'Region', 'Knowledge', 'Science', 'Future', 'Nature', 'Intelligence', 'Empathy', 'Technology', 'Life', 'Synapse', 'Universe', 'Society', 'Ideas', 'World'];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setLoadingWord(prev => {
-                const currentIndex = words.indexOf(prev);
-                return words[(currentIndex + 1) % words.length];
-            });
-        }, 80);
-        return () => clearInterval(interval);
-    }, []);
+        window.addEventListener('resize', setSize);
+        return () => { cancelAnimationFrame(frameId); window.removeEventListener('resize', setSize); };
+    }, [reduced, finish]);
 
     return (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-            <canvas ref={canvasRef} className="absolute inset-0" />
+        <motion.div
+            className="fixed inset-0 z-50 bg-black overflow-hidden cursor-pointer select-none"
+            exit={{ opacity: 0, scale: 1.045 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            onClick={finish}
+        >
+            {!reduced && <canvas ref={canvasRef} className="absolute inset-0" />}
+
+            {/* タイトル: 1文字ずつブラー解除で浮かび上がる */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6">
+                <h1 className="text-xl md:text-4xl font-normal text-white font-['Syne',sans-serif] tracking-[0.14em] text-center [text-shadow:0_0_24px_rgba(16,185,129,0.25)]">
+                    {(() => {
+                        let charIdx = 0;
+                        return INTRO_TITLE.split(' ').map((word, wi, arr) => {
+                            const chars = word.split('').map((ch) => {
+                                const i = charIdx++;
+                                return (
+                                    <motion.span
+                                        key={i}
+                                        className="inline-block"
+                                        initial={{ opacity: 0, y: 12, filter: 'blur(8px)' }}
+                                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                        transition={{ duration: 0.8, delay: (reduced ? 0.1 : 1.5) + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                                    >
+                                        {ch}
+                                    </motion.span>
+                                );
+                            });
+                            charIdx++; // スペース分のディレイを保つ
+                            return (
+                                <React.Fragment key={wi}>
+                                    <span className="inline-block whitespace-nowrap">{chars}</span>
+                                    {wi < arr.length - 1 && ' '}
+                                </React.Fragment>
+                            );
+                        });
+                    })()}
+                </h1>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.2, delay: reduced ? 0.2 : 2.5 }}
+                    className="mt-6 text-[10px] md:text-[11px] text-emerald-300/70 font-mono uppercase tracking-[0.4em]"
+                >
+                    Kazuhiro Komatsu
+                </motion.p>
+            </div>
+
+            {/* Connecting ワードサイクル (穏やかなクロスフェード) */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.0, delay: 0.5 }}
-                className="absolute bottom-24 left-0 w-full text-center z-10 text-white font-mono text-xs md:text-sm tracking-[0.2em] uppercase mix-blend-difference"
+                className="absolute bottom-24 left-0 w-full text-center z-10 text-gray-500 font-mono text-[10px] md:text-xs tracking-[0.25em] uppercase"
             >
-                Connecting <span className="text-emerald-500">{loadingWord}</span>...
+                Connecting{' '}
+                <AnimatePresence mode="wait">
+                    <motion.span
+                        key={wordIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.18 }}
+                        className="text-emerald-400 inline-block"
+                    >
+                        {INTRO_WORDS[wordIndex]}
+                    </motion.span>
+                </AnimatePresence>
             </motion.div>
-        </div>
+
+            {/* スキップ表示 */}
+            <AnimatePresence>
+                {showSkip && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.6 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="absolute bottom-8 right-8 text-[10px] text-gray-400 font-mono tracking-[0.3em] uppercase"
+                    >
+                        Tap to skip
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };
 
@@ -1920,48 +2541,90 @@ const ArrowRightIcon = (props) => (
 );
 
 
-// --- カスタムカーソルコンポーネント (Green Glow) ---
+// --- カスタムカーソルコンポーネント (Dot + Trailing Ring) ---
 const CustomCursor = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
+    const dotRef = useRef(null);
+    const ringRef = useRef(null);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
 
     useEffect(() => {
-        const mouseMove = (e) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-            setIsHovering(!!e.target.closest('[data-hoverable="true"]'));
-        };
-
-        window.addEventListener("mousemove", mouseMove);
-        return () => {
-            window.removeEventListener("mousemove", mouseMove);
-        };
+        setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
     }, []);
 
-    const outerVariants = {
-        default: {
-            height: 20,
-            width: 20,
-            x: mousePosition.x - 10,
-            y: mousePosition.y - 10,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)', // White base
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-        },
-        hover: {
-            height: 40,
-            width: 40,
-            x: mousePosition.x - 20,
-            y: mousePosition.y - 20,
-            backgroundColor: 'rgba(30, 100, 70, 0.3)', // Muted Green
-            border: '1px solid rgba(50, 150, 100, 0.5)',
-        },
-    };
+    useEffect(() => {
+        if (isTouchDevice) return;
+        const dot = dotRef.current;
+        const ring = ringRef.current;
+        if (!dot || !ring) return;
+
+        let x = -100, y = -100, rx = -100, ry = -100;
+        let hovering = false, down = false, frameId;
+
+        const onMove = (e) => {
+            x = e.clientX; y = e.clientY;
+            hovering = !!e.target.closest('[data-hoverable="true"], a, button');
+        };
+        const onDown = () => { down = true; };
+        const onUp = () => { down = false; };
+
+        const loop = () => {
+            // リングはドットを遅れて追従する
+            rx += (x - rx) * 0.16;
+            ry += (y - ry) * 0.16;
+
+            dot.style.transform = `translate3d(${x - 2}px, ${y - 2}px, 0)`;
+
+            const size = hovering ? 38 : down ? 16 : 26;
+            ring.style.width = `${size}px`;
+            ring.style.height = `${size}px`;
+            ring.style.transform = `translate3d(${rx - size / 2}px, ${ry - size / 2}px, 0)`;
+            ring.style.borderColor = hovering ? 'rgba(52, 211, 153, 0.6)' : 'rgba(255, 255, 255, 0.2)';
+            ring.style.backgroundColor = hovering ? 'rgba(16, 185, 129, 0.06)' : 'transparent';
+
+            frameId = requestAnimationFrame(loop);
+        };
+        loop();
+
+        window.addEventListener('mousemove', onMove, { passive: true });
+        window.addEventListener('mousedown', onDown);
+        window.addEventListener('mouseup', onUp);
+        return () => {
+            cancelAnimationFrame(frameId);
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mousedown', onDown);
+            window.removeEventListener('mouseup', onUp);
+        };
+    }, [isTouchDevice]);
+
+    if (isTouchDevice) return null;
 
     return (
+        <>
+            <div
+                ref={dotRef}
+                aria-hidden="true"
+                className="fixed top-0 left-0 w-1 h-1 rounded-full bg-emerald-300 pointer-events-none z-[9999] hidden md:block"
+                style={{ willChange: 'transform' }}
+            />
+            <div
+                ref={ringRef}
+                aria-hidden="true"
+                className="fixed top-0 left-0 rounded-full border pointer-events-none z-[9998] hidden md:block transition-[width,height,border-color,background-color] duration-300 ease-out"
+                style={{ willChange: 'transform' }}
+            />
+        </>
+    );
+};
+
+// --- スクロールプログレスバー ---
+const ScrollProgress = () => {
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
+    return (
         <motion.div
-            className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block backdrop-blur-[1px]"
-            variants={outerVariants}
-            animate={isHovering ? "hover" : "default"}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            aria-hidden="true"
+            style={{ scaleX }}
+            className="fixed top-0 left-0 right-0 h-px origin-left z-[60] bg-emerald-400/90 pointer-events-none"
         />
     );
 };
@@ -1979,86 +2642,191 @@ const GradientText = ({ children, className }) => {
 // --- Header (Minimal) ---
 const Header = ({ lang, setLang, content, setPage }) => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        if (isMobileMenuOpen) lockBodyScroll(); else unlockBodyScroll();
+        return () => unlockBodyScroll();
+    }, [isMobileMenuOpen]);
+
     const scrollToSection = (id) => {
+        setIsMobileMenuOpen(false);
         setPage('home');
         setTimeout(() => {
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+        }, 300);
     };
 
     return (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4' : 'bg-transparent py-8'}`}>
-            <nav className="max-w-[90%] mx-auto flex items-center justify-between">
-                <span data-hoverable="true" className="text-gray-300 font-normal text-xs tracking-[0.2em] cursor-pointer font-['Syne',sans-serif]" onClick={() => scrollToSection('hero')}>Kazuhiro.K</span>
-                <div className="flex items-center gap-6">
-                    <div className="hidden md:flex items-center space-x-6">
-                        {Object.entries(content.nav).map(([key, value]) => (
-                            <a data-hoverable="true" key={key} onClick={() => scrollToSection(key)} className="text-gray-500 hover:text-white text-xs font-medium cursor-pointer transition-colors uppercase tracking-[0.1em]"><AnimatedText text={value} /></a>
-                        ))}
+        <>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-black/85 backdrop-blur-md py-4 border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.4)]' : 'bg-transparent py-8 border-b border-transparent'}`}>
+                <nav className="max-w-[90%] mx-auto flex items-center justify-between">
+                    <span data-hoverable="true" className="text-white font-normal text-sm tracking-[0.2em] cursor-pointer font-['Syne',sans-serif]" onClick={() => scrollToSection('hero')}>Kazuhiro<span className="text-emerald-400">.</span>K</span>
+                    <div className="flex items-center gap-6">
+                        <div className="hidden md:flex items-center space-x-6">
+                            {Object.entries(content.nav).map(([key, value]) => (
+                                <a data-hoverable="true" key={key} onClick={() => scrollToSection(key)} className="text-gray-400 hover:text-emerald-300 text-xs font-medium cursor-pointer transition-colors uppercase tracking-[0.1em]"><AnimatedText text={value} /></a>
+                            ))}
+                        </div>
+                        <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2">
+                            <GlobeIcon />
+                            <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
+                        </button>
+                        {/* Mobile hamburger button */}
+                        <button
+                            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            aria-label="Menu"
+                        >
+                            <motion.span animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="block w-5 h-px bg-gray-300 transition-colors" />
+                            <motion.span animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-5 h-px bg-gray-300 transition-colors" />
+                            <motion.span animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="block w-5 h-px bg-gray-300 transition-colors" />
+                        </button>
                     </div>
-                    <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2">
-                        <GlobeIcon />
-                        <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
-                    </button>
-                </div>
-            </nav>
-        </header>
+                </nav>
+            </header>
+
+            {/* Mobile fullscreen menu overlay */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center md:hidden"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                        <nav className="flex flex-col items-center gap-6" onClick={(e) => e.stopPropagation()}>
+                            {Object.entries(content.nav).map(([key, value], index) => (
+                                <motion.a
+                                    key={key}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                                    onClick={() => scrollToSection(key)}
+                                    className="text-gray-400 hover:text-white text-sm cursor-pointer transition-colors uppercase tracking-[0.25em] py-2 px-6"
+                                >
+                                    {value}
+                                </motion.a>
+                            ))}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.5 }}
+                                className="mt-8 pt-8 border-t border-white/10"
+                            >
+                                <button onClick={() => { setLang(lang === 'ja' ? 'en' : 'ja'); setIsMobileMenuOpen(false); }} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 py-2 px-6">
+                                    <GlobeIcon />
+                                    {lang === 'ja' ? 'EN' : 'JP'}
+                                </button>
+                            </motion.div>
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 };
 
 // --- ヒーローセクション (Minimal & Bottom-Right) ---
 const HeroSection = ({ content }) => {
-    return (
-        <section id="hero" className="h-[100dvh] w-full relative overflow-hidden">
-            {/* Background Canvas */}
-            <BotanicalSynapse />
+    // マウスに合わせた控えめなパララックス
+    const mx = useMotionValue(0);
+    const my = useMotionValue(0);
+    const px = useSpring(mx, { stiffness: 50, damping: 18, mass: 0.6 });
+    const py = useSpring(my, { stiffness: 50, damping: 18, mass: 0.6 });
 
+    const handleMouseMove = (e) => {
+        mx.set((e.clientX / window.innerWidth - 0.5) * -16);
+        my.set((e.clientY / window.innerHeight - 0.5) * -10);
+    };
+
+    const words = content.hero.title.split(' ');
+    const leading = words.slice(0, -1).join(' ');
+    const lastWord = words[words.length - 1];
+    const lastWordDelay = 0.4 + (leading.length + 1) * 0.04 + 0.15;
+
+    return (
+        <section id="hero" className="h-[100dvh] w-full relative overflow-hidden" onMouseMove={handleMouseMove}>
+            {/* Background canvas is rendered globally at the App level */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
 
             {/* コンテンツを右下に配置 (Minimal) */}
-            <div className="absolute bottom-12 right-12 md:bottom-20 md:right-20 z-10 pointer-events-none select-none text-right">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, delay: 0.5 }}
-                    className="text-xl md:text-2xl font-normal tracking-[0.2em] mb-4 text-gray-100 font-['Syne',sans-serif] bg-black/40 backdrop-blur-[2px] rounded-sm px-4 py-2 inline-block"
-                >
-                    {content.hero.title}
-                </motion.h1>
+            <motion.div style={{ x: px, y: py }} className="absolute bottom-12 right-12 md:bottom-20 md:right-20 z-10 pointer-events-none select-none text-right">
+                <h1 className="text-2xl md:text-4xl font-normal tracking-[0.12em] mb-5 text-white font-['Syne',sans-serif] inline-block [text-shadow:0_2px_30px_rgba(0,0,0,0.9)]">
+                    {(() => {
+                        let charIdx = 0;
+                        return leading.split(' ').map((word, wi, arr) => {
+                            const chars = word.split('').map((ch) => {
+                                const i = charIdx++;
+                                return (
+                                    <motion.span
+                                        key={i}
+                                        className="inline-block"
+                                        initial={{ opacity: 0, y: '0.4em', filter: 'blur(6px)' }}
+                                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                        transition={{ duration: 0.8, delay: 0.4 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                                    >
+                                        {ch}
+                                    </motion.span>
+                                );
+                            });
+                            charIdx++; // スペース分のディレイを保つ
+                            return (
+                                <React.Fragment key={wi}>
+                                    <span className="inline-block whitespace-nowrap">{chars}</span>
+                                    {wi < arr.length - 1 && ' '}
+                                </React.Fragment>
+                            );
+                        });
+                    })()}
+                    {leading && ' '}
+                    <motion.span
+                        className="inline-block bg-gradient-to-r from-emerald-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text"
+                        initial={{ opacity: 0, scale: 1.06, filter: 'blur(10px)' }}
+                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                        transition={{ duration: 1.1, delay: lastWordDelay, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                        {lastWord}
+                    </motion.span>
+                </h1>
                 <div className="flex flex-col items-end gap-2">
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1.2, delay: 1.2 }}
-                        className="text-xs md:text-xs text-emerald-500/80 font-mono tracking-[0.4em] uppercase"
+                        transition={{ duration: 1.2, delay: 1.6 }}
+                        className="text-[11px] md:text-xs text-emerald-400/90 font-mono tracking-[0.4em] uppercase [text-shadow:0_1px_12px_rgba(0,0,0,0.8)]"
                     >
                         <AnimatedText text={content.hero.subtitle} />
                     </motion.p>
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ duration: 1.0, delay: 1.8 }}
-                        className="text-xs text-gray-600 font-mono tracking-widest mt-2"
+                        transition={{ duration: 1.0, delay: 2.0 }}
+                        className="text-[11px] text-gray-400 font-mono tracking-widest mt-2"
                     >
                         <AnimatedText text={content.hero.name_label} />
                     </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Scroll Indicator (Minimal) */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, y: [0, 5, 0] }}
                 transition={{ duration: 3, delay: 3, repeat: Infinity }}
-                className="absolute bottom-8 left-8 text-gray-700 pointer-events-none"
+                className="absolute bottom-8 left-8 text-gray-500 pointer-events-none flex items-center gap-3"
             >
                 <span className="text-xs tracking-widest font-mono">SCROLL</span>
+                <span className="block w-10 h-px bg-gradient-to-r from-emerald-500/60 to-transparent" />
             </motion.div>
         </section>
     );
@@ -2079,7 +2847,7 @@ const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
 
     return (
         <div className="mb-16 last:mb-0">
-            <h3 className="text-xs font-bold text-gray-500 tracking-[0.2em] uppercase mb-8 ml-2 border-l-2 border-emerald-900/50 pl-4">{title}</h3>
+            <h3 className="text-sm font-bold text-gray-300 tracking-[0.2em] uppercase mb-8 ml-2 border-l-2 border-emerald-500/50 pl-4">{title}</h3>
             <div className="flex flex-col gap-1">
                 {/* Always visible items */}
                 {visibleItems.map((item, index) => (
@@ -2087,12 +2855,12 @@ const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
                         key={`${title}-visible-${index}-${item.title}`}
                         data-hoverable="true"
                         onClick={() => onDetailSelect({ ...item, category })}
-                        className="group flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-white/5 cursor-pointer transition-colors border-b border-white/5 last:border-0 bg-black/50 backdrop-blur-sm hover:bg-black/60 p-6 rounded-sm transition-colors"
+                        className="group flex flex-col md:flex-row md:items-center justify-between cursor-pointer border-b border-white/5 last:border-0 bg-black/50 backdrop-blur-sm hover:bg-black/70 p-6 rounded-sm border-l-2 border-l-transparent hover:border-l-emerald-500/60 transition-all duration-300"
                     >
                         <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 flex-1">
                             <span className="font-mono text-emerald-600/70 text-xs tracking-widest min-w-[3rem] group-hover:text-emerald-500 transition-colors"><AnimatedText text={item.year} /></span>
                             <div className="flex-1">
-                                <h4 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors mb-1 md:mb-0 tracking-wide"><AnimatedText text={item.title} /></h4>
+                                <h4 className="text-sm md:text-base font-medium text-gray-200 group-hover:text-white transition-colors mb-1 md:mb-0 tracking-wide"><AnimatedText text={item.title} /></h4>
                             </div>
                         </div>
                         <div className="mt-2 md:mt-0 md:pl-8 flex items-center justify-between md:justify-end gap-4 min-w-[30%]">
@@ -2117,12 +2885,12 @@ const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
                                     key={`${title}-hidden-${index}-${item.title}`}
                                     data-hoverable="true"
                                     onClick={() => onDetailSelect({ ...item, category })}
-                                    className="group flex flex-col md:flex-row md:items-center justify-between p-4 hover:bg-white/5 cursor-pointer transition-colors border-b border-white/5 last:border-0 bg-black/50 backdrop-blur-sm hover:bg-black/60 p-6 rounded-sm transition-colors"
+                                    className="group flex flex-col md:flex-row md:items-center justify-between cursor-pointer border-b border-white/5 last:border-0 bg-black/50 backdrop-blur-sm hover:bg-black/70 p-6 rounded-sm border-l-2 border-l-transparent hover:border-l-emerald-500/60 transition-all duration-300"
                                 >
                                     <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 flex-1">
                                         <span className="font-mono text-emerald-600/70 text-xs tracking-widest min-w-[3rem] group-hover:text-emerald-500 transition-colors"><AnimatedText text={item.year} /></span>
                                         <div className="flex-1">
-                                            <h4 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors mb-1 md:mb-0 tracking-wide"><AnimatedText text={item.title} /></h4>
+                                            <h4 className="text-sm md:text-base font-medium text-gray-200 group-hover:text-white transition-colors mb-1 md:mb-0 tracking-wide"><AnimatedText text={item.title} /></h4>
                                         </div>
                                     </div>
                                     <div className="mt-2 md:mt-0 md:pl-8 flex items-center justify-between md:justify-end gap-4 min-w-[30%]">
@@ -2154,7 +2922,7 @@ const ResearchSection = ({ content, onDetailSelect, ui }) => {
         <ContentSection id="research" title={content.research.title}>
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
-                    <p className="text-xs text-gray-500 tracking-[0.15em] bg-black/40 backdrop-blur-[2px] rounded-sm px-4 py-2 inline-block"><AnimatedText text={content.research.description} /></p>
+                    <p className="text-sm text-gray-300 tracking-[0.1em] leading-7 bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-5 py-3 inline-block"><AnimatedText text={content.research.description} /></p>
                 </div>
 
                 <ResearchListGroup title={content.research.heading_grants} items={content.research.grants} category="grant" onDetailSelect={onDetailSelect} />
@@ -2165,19 +2933,59 @@ const ResearchSection = ({ content, onDetailSelect, ui }) => {
 }
 
 
+// --- セクションタイトル (1文字ずつリビール) ---
+const sectionTitleContainer = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.012, delayChildren: 0 } }
+};
+const sectionTitleChar = {
+    hidden: { opacity: 0, y: 4 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const SectionTitle = ({ title }) => (
+    <AnimatePresence mode="wait">
+        <motion.span
+            key={title}
+            variants={sectionTitleContainer}
+            initial="hidden"
+            whileInView="visible"
+            exit={{ opacity: 0, transition: { duration: 0.25 } }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="inline-block"
+        >
+            {title.split(' ').map((word, wi, arr) => (
+                <React.Fragment key={wi}>
+                    <span className="inline-block whitespace-nowrap">
+                        {word.split('').map((ch, ci) => (
+                            <motion.span key={ci} variants={sectionTitleChar} className="inline-block">
+                                {ch}
+                            </motion.span>
+                        ))}
+                    </span>
+                    {wi < arr.length - 1 && ' '}
+                </React.Fragment>
+            ))}
+        </motion.span>
+    </AnimatePresence>
+);
+
 // --- 通常のセクション (Minimal) ---
 const ContentSection = ({ id, title, children }) => (
-    <section id={id.toLowerCase()} className={`py-24 md:py-32 relative`}>
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-            <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.6 }}
-                className="text-sm font-normal text-gray-500 text-center mb-24 font-['Syne',sans-serif] tracking-[0.3em] uppercase"
-            >
-                <AnimatedText text={title} />
-            </motion.h2>
+    <section id={id.toLowerCase()} className={`py-16 md:py-32 relative`}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
+            <div className="text-center mb-12 md:mb-24">
+                <h2 className="text-xl md:text-3xl font-normal text-gray-100 font-['Syne',sans-serif] tracking-[0.25em] uppercase">
+                    <SectionTitle title={title} />
+                </h2>
+                <motion.div
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    whileInView={{ scaleX: 1, opacity: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    className="mt-5 mx-auto w-16 h-px bg-gradient-to-r from-transparent via-emerald-500/80 to-transparent"
+                />
+            </div>
             {children}
         </div>
     </section>
@@ -2212,10 +3020,10 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
                             onClick={() => onNewsSelect(item)}
                             data-hoverable="true"
                             className={`
-                                relative overflow-hidden group cursor-pointer border border-white/10 p-6 flex flex-col justify-end
+                                relative overflow-hidden group cursor-pointer rounded-lg border border-white/10 hover:border-emerald-500/30 p-6 flex flex-col justify-end
                                 min-h-[350px] md:min-h-0
                                 ${isLarge ? 'md:col-span-2 md:row-span-2' : 'md:col-span-1 md:row-span-1'}
-                                bg-neutral-900/40 hover:bg-neutral-800/60 transition-colors
+                                bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)]
                             `}
                         >
                             {thumbnail ? (
@@ -2231,7 +3039,7 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
 
                             <div className="relative z-10">
                                 <p className="text-xs text-emerald-500/80 font-mono mb-2 tracking-widest"><AnimatedText text={item.date} /></p>
-                                <h3 className={`${isLarge ? 'text-lg md:text-2xl' : 'text-xs md:text-base'} font-normal text-gray-200 group-hover:text-white transition-colors tracking-wide leading-tight mb-4`}>
+                                <h3 className={`${isLarge ? 'text-xl md:text-3xl' : 'text-sm md:text-lg'} font-normal text-gray-100 group-hover:text-white transition-colors tracking-wide leading-snug mb-4`}>
                                     <AnimatedText text={item.title} />
                                 </h3>
                                 <div className="text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2 group-hover:text-emerald-400 transition-colors">
@@ -2243,7 +3051,7 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
                 })}
             </div>
             <div className="text-right mt-12">
-                <a onClick={() => setPage('all-news')} data-hoverable="true" className="inline-block text-xs text-gray-500 hover:text-white border-b border-transparent hover:border-white pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
+                <a onClick={() => setPage('all-news')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
                     <AnimatedText text={content.news.view_more_button} />
                 </a>
             </div>
@@ -2252,145 +3060,240 @@ const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
 };
 
 // --- Newsモーダル (Dark Theme) ---
+// Lock body scroll while preserving (and restoring) the scroll position.
+// Plain `position: fixed` on body causes a jump to top when released — we save the
+// scrollY and restore it on unlock to avoid that.
+const lockBodyScroll = () => {
+    if (document.body.classList.contains('modal-open')) return;
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.dataset.scrollY = String(scrollY);
+    document.body.style.top = `-${scrollY}px`;
+    document.body.classList.add('modal-open');
+};
+const unlockBodyScroll = () => {
+    if (!document.body.classList.contains('modal-open')) return;
+    const scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    delete document.body.dataset.scrollY;
+    // Restore without smooth behavior so it's invisible to the user.
+    window.scrollTo(0, scrollY);
+};
+
 const NewsModal = ({ newsItem, onClose, ui }) => {
-    if (!newsItem) return null;
+    useEffect(() => {
+        if (newsItem) lockBodyScroll(); else unlockBodyScroll();
+        return () => unlockBodyScroll();
+    }, [newsItem]);
 
     return (
         <AnimatePresence>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] flex items-center justify-center p-4"
-                onClick={onClose}
-            >
+            {newsItem && (
                 <motion.div
-                    initial={{ scale: 0.98, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.98, opacity: 0 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="bg-black/80 rounded-sm p-8 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[90dvh] flex flex-col ring-1 ring-white/5"
-                    onClick={(e) => e.stopPropagation()}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] flex items-center justify-center p-3 md:p-4"
+                    onClick={onClose}
                 >
-                    <button data-hoverable="true" onClick={onClose} className="absolute top-6 right-6 text-gray-500 hover:text-white z-10 transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"><CloseIcon /></button>
-                    <div className="overflow-y-auto custom-scrollbar pr-4">
-                        <p className="text-xs text-emerald-500 font-mono mb-4 tracking-widest"><AnimatedText text={newsItem.date} /></p>
-                        <h2 className="text-2xl font-bold text-gray-100 mb-8 leading-relaxed"><AnimatedText text={newsItem.title} /></h2>
-                        <div className="text-sm text-gray-300 whitespace-pre-line prose prose-invert prose-sm leading-8 tracking-wide" dangerouslySetInnerHTML={{ __html: newsItem.fullContent.replace(/\n/g, '<br />') }} />
+                    <motion.div
+                        initial={{ scale: 0.98, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.98, opacity: 0 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        className="bg-black/80 rounded-sm p-5 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[95dvh] flex flex-col ring-1 ring-white/5"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button data-hoverable="true" onClick={onClose} className="absolute top-4 right-4 md:top-6 md:right-6 text-gray-500 hover:text-white z-10 transition-colors bg-black/50 p-3 rounded-full backdrop-blur-sm min-w-[44px] min-h-[44px] flex items-center justify-center"><CloseIcon /></button>
+                        <div key={newsItem.id || newsItem.title} className="overflow-y-auto custom-scrollbar pr-4">
+                            <p className="text-xs text-emerald-500 font-mono mb-4 tracking-widest"><AnimatedText text={newsItem.date} /></p>
+                            <h2 className="text-2xl font-bold text-gray-100 mb-8 leading-relaxed"><AnimatedText text={newsItem.title} /></h2>
+                            <div className="text-sm text-gray-300 whitespace-pre-line prose prose-invert prose-sm leading-7 tracking-wide" dangerouslySetInnerHTML={{ __html: newsItem.fullContent.replace(/\n/g, '<br />') }} />
 
-                        {newsItem.link && (
-                            <div className="mt-8 mb-4">
-                                <a
-                                    href={newsItem.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-widest font-mono group"
-                                >
-                                    <span>{ui ? ui.view_website : "VIEW WEBSITE"}</span>
-                                    <ExternalLinkIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                                </a>
-                            </div>
-                        )}
+                            {newsItem.link && (
+                                <div className="mt-8 mb-4">
+                                    <a
+                                        href={newsItem.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-widest font-mono group"
+                                    >
+                                        <span>{ui ? ui.view_website : "VIEW WEBSITE"}</span>
+                                        <ExternalLinkIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                                    </a>
+                                </div>
+                            )}
 
-                        {newsItem.images && newsItem.images.length > 0 && (
-                            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {newsItem.images.map((img, index) => (
-                                    <img
-                                        key={index}
-                                        src={img}
-                                        alt={`${newsItem.title} image ${index + 1}`}
-                                        className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
-                                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/171717/525252?text=Image+Not+Found'; }}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                            {newsItem.images && newsItem.images.length > 0 && (
+                                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {newsItem.images.map((img, index) => (
+                                        <img
+                                            key={index}
+                                            src={img}
+                                            alt={`${newsItem.title} image ${index + 1}`}
+                                            className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+                                            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/171717/525252?text=Image+Not+Found'; }}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
                 </motion.div>
-            </motion.div>
+            )}
         </AnimatePresence>
     );
 };
 
 // --- Detail Modal (Redesigned Minimal) ---
 const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
-    if (!item) return null;
+    useEffect(() => {
+        if (item) lockBodyScroll(); else unlockBodyScroll();
+        return () => unlockBodyScroll();
+    }, [item]);
 
     return (
         <AnimatePresence>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] flex items-center justify-center p-4 md:p-8"
-                onClick={onClose}
-            >
+            {item && (
                 <motion.div
-                    initial={{ y: 20, opacity: 0, scale: 0.98 }}
-                    animate={{ y: 0, opacity: 1, scale: 1 }}
-                    exit={{ y: 20, opacity: 0, scale: 0.98 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[85dvh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
-                    onClick={(e) => e.stopPropagation()}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] flex items-center justify-center p-3 md:p-8"
+                    onClick={onClose}
                 >
-                    <button data-hoverable="true" onClick={onClose} className="absolute top-6 right-6 z-20 text-gray-500 hover:text-white transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm"><CloseIcon /></button>
+                    <motion.div
+                        initial={{ y: 20, opacity: 0, scale: 0.98 }}
+                        animate={{ y: 0, opacity: 1, scale: 1 }}
+                        exit={{ y: 20, opacity: 0, scale: 0.98 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[90dvh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button data-hoverable="true" onClick={onClose} className="absolute top-4 right-4 md:top-6 md:right-6 z-20 text-gray-500 hover:text-white transition-colors bg-black/50 p-3 rounded-full backdrop-blur-sm min-w-[44px] min-h-[44px] flex items-center justify-center"><CloseIcon /></button>
 
-                    {/* Image Section */}
-                    {item.image && (
-                        <div className="w-full md:w-1/2 h-64 md:h-auto relative overflow-hidden flex-shrink-0">
-                            <img src={item.image} alt={item.title || item.name} className="w-full h-full object-cover grayscale opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x400/171717/525252?text=Image+Not+Found'; }} />
-                            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
-                        </div>
-                    )}
-
-                    {/* Content Section */}
-                    <div className={`p-8 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-center ${item.image ? 'md:w-1/2' : 'w-full'}`}>
-                        <div className="mb-8 flex flex-wrap gap-3 text-xs font-mono text-emerald-500/90 tracking-widest uppercase">
-                            {item.year && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.year}</span>}
-                            {item.type && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.type}</span>}
-                            {item.period && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.period}</span>}
-                        </div>
-
-                        <h2 className="text-lg md:text-xl font-normal text-white mb-8 leading-tight tracking-wide font-['Syne',sans-serif]">
-                            <AnimatedText text={item.title || item.name} />
-                        </h2>
-
-                        {item.prize && (
-                            <div className="mb-8 pl-4 border-l border-emerald-500/50">
-                                <span className="text-[10px] uppercase text-gray-500 block mb-1 tracking-widest">{item.category === 'grant' ? ui.grant_label : ui.award_label}</span>
-                                <p className="text-sm text-emerald-400 font-medium"><AnimatedText text={item.prize} /></p>
+                        {/* Image Section */}
+                        {item.image && (
+                            <div className="w-full md:w-1/2 h-48 md:h-auto relative overflow-hidden flex-shrink-0">
+                                <img src={item.image} alt={item.title || item.name} className="w-full h-full object-cover grayscale opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x400/171717/525252?text=Image+Not+Found'; }} />
+                                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
                             </div>
                         )}
 
-                        <p className="text-sm text-gray-400 whitespace-pre-line leading-7 tracking-wide mb-8"><AnimatedText text={item.details} /></p>
+                        {/* Content Section */}
+                        <div key={item.title || item.name} className={`p-5 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-start ${item.image ? 'md:w-1/2' : 'w-full'}`}>
+                            <div className="mb-8 flex flex-wrap gap-3 text-xs font-mono text-emerald-500/90 tracking-widest uppercase">
+                                {item.year && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.year}</span>}
+                                {item.type && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.type}</span>}
+                                {item.period && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.period}</span>}
+                            </div>
 
-                        <div className="flex flex-wrap gap-4 mt-8">
-                            {item.pdf && (
-                                <button
-                                    onClick={(e) => handleDownload(e, item.pdf)}
-                                    data-hoverable="true"
-                                    className="inline-flex items-center gap-3 text-xs text-gray-300 hover:text-white border border-white/20 hover:border-white px-8 py-3 rounded-full transition-all tracking-[0.2em] uppercase group"
-                                >
-                                    <DownloadIcon className="w-3 h-3 group-hover:scale-110 transition-transform" />
-                                    <AnimatedText text={content.research.download_button} />
-                                </button>
+                            <h2 className="text-lg md:text-xl font-normal text-white mb-6 leading-tight tracking-wide font-['Syne',sans-serif]">
+                                <AnimatedText text={item.title || item.name} />
+                            </h2>
+
+                            {(item.role || item.funding || item.mentor || item.supports) && (
+                                <div className="mb-6 flex flex-wrap gap-2">
+                                    {item.role && (
+                                        <span className="text-xs text-emerald-400 font-mono tracking-widest uppercase border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
+                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                            {item.role}
+                                        </span>
+                                    )}
+                                    {item.funding && (Array.isArray(item.funding) ? item.funding : [item.funding]).filter(Boolean).map((fund, idx) => (
+                                        <span key={`fund-${idx}`} className="text-xs text-yellow-500 font-mono tracking-widest uppercase border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
+                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            Funding: {fund}
+                                        </span>
+                                    ))}
+                                    {item.mentor && (Array.isArray(item.mentor) ? item.mentor : [item.mentor]).filter(Boolean).map((mntr, idx) => (
+                                        <span key={`mentor-${idx}`} className="text-xs text-blue-400 font-mono tracking-widest uppercase border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
+                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                            {typeof mntr === 'object' ? `${mntr.role}: ${mntr.name}` : `Mentor: ${mntr}`}
+                                        </span>
+                                    ))}
+                                    {item.supports && (Array.isArray(item.supports) ? item.supports : [item.supports]).filter(Boolean).map((sup, idx) => (
+                                        <span key={`support-${idx}`} className="text-xs text-blue-400 font-mono tracking-widest uppercase border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
+                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                                            {sup.role}: {sup.name}
+                                        </span>
+                                    ))}
+                                </div>
                             )}
-                            {item.link && (
-                                <a
-                                    href={item.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    data-hoverable="true"
-                                    className="inline-flex items-center gap-3 text-xs text-gray-300 hover:text-white border border-white/20 hover:border-white px-8 py-3 rounded-full transition-all tracking-[0.2em] uppercase group"
-                                >
-                                    <ExternalLinkIcon className="w-3 h-3 group-hover:scale-110 transition-transform" />
-                                    <AnimatedText text={content.activities.site_button} />
-                                </a>
+
+                            {item.techStack && item.techStack.length > 0 && (
+                                <div className="mb-8 flex flex-wrap gap-2">
+                                    {item.techStack.map((tech, idx) => (
+                                        <span key={idx} className="text-[10px] text-gray-400 border border-white/10 bg-white/5 px-2 py-1 rounded tracking-wider">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
                             )}
+
+                            {item.prize && (
+                                <div className="mb-8 pl-4 border-l border-emerald-500/50">
+                                    <span className="text-[10px] uppercase text-gray-500 block mb-1 tracking-widest">{item.category === 'grant' ? ui.grant_label : ui.award_label}</span>
+                                    <p className="text-sm text-emerald-400 font-medium"><AnimatedText text={item.prize} /></p>
+                                </div>
+                            )}
+
+                            {item.details && (
+                                <div className="mb-8">
+                                    {(item.techStack || item.outcomes) && (
+                                        <h4 className="text-xs text-gray-500 uppercase tracking-widest mb-3 font-mono">Background & Details</h4>
+                                    )}
+                                    <p className="text-sm text-gray-400 whitespace-pre-line leading-7 tracking-wide"><AnimatedText text={item.details} /></p>
+                                </div>
+                            )}
+
+                            {item.outcomes && item.outcomes.length > 0 && (
+                                <div className="mb-8 p-5 bg-white/[0.02] border border-white/5 rounded-lg">
+                                    <h4 className="text-xs text-emerald-500/80 uppercase tracking-widest mb-4 font-mono flex items-center gap-2">
+                                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                        Key Outcomes
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {item.outcomes.map((outcome, idx) => (
+                                            <li key={idx} className="text-sm text-gray-300 leading-relaxed flex items-start gap-3">
+                                                <span className="text-emerald-500/50 mt-1 flex-shrink-0">
+                                                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                                </span>
+                                                <span>{outcome}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            <div className="flex flex-wrap gap-4 mt-8">
+                                {item.pdf && (
+                                    <button
+                                        onClick={(e) => handleDownload(e, item.pdf)}
+                                        data-hoverable="true"
+                                        className="inline-flex items-center gap-3 text-xs text-gray-300 hover:text-white border border-white/20 hover:border-white px-8 py-3 rounded-full transition-all tracking-[0.2em] uppercase group"
+                                    >
+                                        <DownloadIcon className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                                        <AnimatedText text={content.research.download_button} />
+                                    </button>
+                                )}
+                                {item.link && (
+                                    <a
+                                        href={item.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-hoverable="true"
+                                        className="inline-flex items-center gap-3 text-xs text-gray-300 hover:text-white border border-white/20 hover:border-white px-8 py-3 rounded-full transition-all tracking-[0.2em] uppercase group"
+                                    >
+                                        <ExternalLinkIcon className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                                        <AnimatedText text={content.activities.site_button} />
+                                    </a>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </motion.div>
-            </motion.div>
+            )}
         </AnimatePresence>
     );
 };
@@ -2452,11 +3355,11 @@ const Footer = ({ content, setPage, ui }) => {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-12 mb-20">
                     {content.columns.map((column) => (
                         <div key={column.title}>
-                            <h3 className="text-xs font-bold text-gray-700 tracking-[0.2em] uppercase mb-8"><AnimatedText text={column.title} /></h3>
+                            <h3 className="text-xs font-bold text-emerald-700/80 tracking-[0.2em] uppercase mb-8"><AnimatedText text={column.title} /></h3>
                             <ul className="space-y-4">
                                 {column.items.map((item) => (
                                     <li key={item}>
-                                        <a data-hoverable="true" onClick={() => scrollToSection(item)} className="text-xs text-gray-500 hover:text-white transition-colors cursor-pointer tracking-wider uppercase">
+                                        <a data-hoverable="true" onClick={() => scrollToSection(item)} className="text-xs text-gray-400 hover:text-white transition-colors cursor-pointer tracking-wider uppercase">
                                             <AnimatedText text={item} />
                                         </a>
                                     </li>
@@ -2492,16 +3395,23 @@ const AllProjectsPage = ({ content, setPage, setSelectedDetail, lang, setLang, s
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
+            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden flex flex-col"
         >
-            <BotanicalSynapse />
+            {/* Background canvas is rendered globally at the App level */}
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
-            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-32 relative z-10">
-                <div className="flex justify-between items-end mb-20 border-b border-white/10 pb-8">
+
+            <div className="pt-32 pb-12 px-6 sm:px-8 lg:px-12 relative z-10">
+                <div className="max-w-4xl mx-auto flex justify-between items-end mb-8 border-b border-white/10 pb-8">
                     <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
-                        <AnimatedText text={content.all_projects_page.title} />
+                        <AnimatedText text={content.all_projects_page?.title || "Projects Overview"} />
                     </h1>
                     <div className="flex items-center gap-6">
+                        {lang && setLang && (
+                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors">
+                                <GlobeIcon />
+                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
+                            </button>
+                        )}
                         <button
                             onClick={handleBack}
                             data-hoverable="true"
@@ -2511,28 +3421,117 @@ const AllProjectsPage = ({ content, setPage, setSelectedDetail, lang, setLang, s
                         </button>
                     </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-12">
-                    {content.projects.items.map((item, index) => (
-                        <motion.div
-                            key={`project-${index}`}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            onClick={() => setSelectedDetail(item)}
-                            data-hoverable="true"
-                            className="group cursor-pointer"
-                        >
-                            <div className="aspect-video overflow-hidden relative mb-6">
-                                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
-                                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                            </div>
-                            <div>
-                                <p className="text-xs text-gray-500 font-mono mb-2 tracking-widest"><AnimatedText text={item.period} /></p>
-                                <h3 className="text-lg font-normal text-gray-200 group-hover:text-white transition-colors mb-3"><AnimatedText text={item.title} /></h3>
-                                <p className="text-xs text-gray-500 leading-relaxed tracking-wide"><AnimatedText text={item.description} /></p>
-                            </div>
-                        </motion.div>
-                    ))}
+            </div>
+
+            <div className="flex-1 relative z-10 px-6 sm:px-8 lg:px-12 pb-32">
+                <div className="max-w-4xl mx-auto">
+
+                    {/* Main Timeline */}
+                    <div className="relative border-l border-white/20 ml-4 md:ml-8 space-y-24 pb-12">
+                        {content.projects.categories && Object.entries(content.projects.categories).map(([categoryKey, categoryData], idx) => {
+                            const categoryItems = content.projects.items.filter(item => item.category === categoryKey);
+                            if (categoryItems.length === 0) return null;
+
+                            return (
+                                <motion.div
+                                    key={categoryKey}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.5 }}
+                                    className="relative pl-8 md:pl-16"
+                                >
+                                    {/* Timeline Node */}
+                                    <div className={`absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full ${categoryData.status === 'Done' ? 'bg-gray-400' : categoryData.status === 'Ongoing' ? 'bg-teal-400' : 'bg-rose-400'} shadow-[0_0_10px_currentColor]`}></div>
+
+                                    {/* Phase Header */}
+                                    <div className="mb-8">
+                                        <div className="flex items-center gap-4 mb-2">
+                                            <span className="text-xs font-mono text-gray-400 tracking-widest">{categoryData.period}</span>
+                                            <span className={`text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-sm border ${categoryData.color} ${categoryData.status === 'Done' ? 'text-gray-400 bg-white/5' : categoryData.status === 'Ongoing' ? 'text-teal-400 bg-teal-500/10' : 'text-rose-400 bg-rose-500/10'}`}>
+                                                {categoryData.status}
+                                            </span>
+                                        </div>
+                                        <h2 className="text-2xl md:text-3xl font-normal text-gray-100 tracking-wider">{categoryData.title}</h2>
+                                    </div>
+
+                                    {/* Cards Container */}
+                                    <div className="grid sm:grid-cols-2 gap-6">
+                                        {categoryItems.map((item, index) => (
+                                            <motion.div
+                                                key={`project-${item.title}-${index}`}
+                                                whileHover={{ y: -5, scale: 1.02 }}
+                                                onClick={() => setSelectedDetail(item)}
+                                                data-hoverable="true"
+                                                className={`group cursor-pointer bg-white/[0.02] border ${item.subProject ? 'border-dashed border-white/30 ml-4 sm:ml-8 sm:col-span-2 md:col-span-1' : 'border-white/10'} p-5 rounded-xl hover:bg-white/10 hover:border-solid hover:border-white/30 hover:shadow-[0_10px_30px_rgba(255,255,255,0.05)] transition-all duration-300 backdrop-blur-md relative`}
+                                            >
+                                                {item.subProject && (
+                                                    <div className="absolute -left-4 sm:-left-8 top-1/2 w-4 sm:w-8 border-t border-dashed border-white/30"></div>
+                                                )}
+                                                <div className="aspect-video overflow-hidden relative mb-4 rounded-lg bg-black/50">
+                                                    <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
+                                                    {item.featured && (
+                                                        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur text-[10px] px-2 py-1 text-yellow-500 border border-yellow-500/30 tracking-widest uppercase rounded">
+                                                            Featured
+                                                        </div>
+                                                    )}
+                                                    {item.subProject && (
+                                                        <div className="absolute top-3 left-3 bg-black/60 backdrop-blur text-[10px] px-2 py-1 text-gray-300 border border-white/20 tracking-widest uppercase rounded">
+                                                            Sub Project
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-lg font-medium text-gray-200 group-hover:text-white transition-colors mb-2 leading-relaxed"><AnimatedText text={item.title} /></h3>
+                                                    <p className="text-sm text-gray-500 leading-relaxed tracking-wide"><AnimatedText text={item.description} /></p>
+                                                </div>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Outreach Section */}
+                    {(() => {
+                        const outreachItems = content.projects.items.filter(item => item.category === 'outreach');
+                        if (outreachItems.length === 0) return null;
+                        return (
+                            <motion.div
+                                initial={{ opacity: 0, y: 14 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.5 }}
+                                className="mt-16 pt-16 border-t border-white/10"
+                            >
+                                <div className="mb-10 text-center">
+                                    <h2 className="text-xl md:text-2xl font-normal text-gray-300 tracking-wider">Science Communication & Outreach</h2>
+                                    <p className="text-sm text-gray-500 mt-2 font-mono tracking-widest uppercase">Educational Activities & Social Contributions</p>
+                                </div>
+                                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {outreachItems.map((item, index) => (
+                                        <motion.div
+                                            key={`outreach-${index}`}
+                                            whileHover={{ y: -5, scale: 1.02 }}
+                                            onClick={() => setSelectedDetail(item)}
+                                            data-hoverable="true"
+                                            className="group cursor-pointer bg-white/[0.01] border border-white/5 p-4 rounded-xl hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 backdrop-blur-md"
+                                        >
+                                            <div className="aspect-video overflow-hidden relative mb-4 rounded-lg bg-black/50">
+                                                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-700 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-base font-medium text-gray-300 group-hover:text-white transition-colors leading-snug mb-2"><AnimatedText text={item.title} /></h3>
+                                                <p className="text-xs text-gray-500 leading-relaxed tracking-wide line-clamp-3"><AnimatedText text={item.description} /></p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        );
+                    })()}
+
                 </div>
             </div>
         </motion.div>
@@ -2575,7 +3574,7 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
             exit={{ opacity: 0 }}
             className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
         >
-            <BotanicalSynapse />
+            {/* Background canvas is rendered globally at the App level */}
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
 
             <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-32 relative z-10">
@@ -2584,20 +3583,12 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
                         <AnimatedText text={content.news.title} />
                     </h1>
                     <div className="flex items-center gap-6">
-                        <div className="flex gap-4 mr-4">
-                            <button
-                                onClick={() => setLang('ja')}
-                                className={`text-xs tracking-widest transition-colors ${lang === 'ja' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
-                            >
-                                JP
+                        {lang && setLang && (
+                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors mr-4">
+                                <GlobeIcon />
+                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
                             </button>
-                            <button
-                                onClick={() => setLang('en')}
-                                className={`text-xs tracking-widest transition-colors ${lang === 'en' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
-                            >
-                                EN
-                            </button>
-                        </div>
+                        )}
                         <button
                             onClick={handleBack}
                             data-hoverable="true"
@@ -2619,7 +3610,7 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
                                 transition={{ duration: 0.5, delay: index * 0.05 }}
                                 onClick={() => setSelectedNews(item)}
                                 data-hoverable="true"
-                                className="group bg-neutral-900/40 border border-white/10 relative overflow-hidden cursor-pointer hover:bg-neutral-800/60 transition-colors aspect-[4/3] flex flex-col justify-end p-6"
+                                className="group bg-neutral-900/40 rounded-lg border border-white/10 hover:border-emerald-500/30 relative overflow-hidden cursor-pointer hover:bg-neutral-800/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)] aspect-[4/3] flex flex-col justify-end p-6"
                             >
                                 {thumbnail && (
                                     <>
@@ -2664,83 +3655,227 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
 
 // --- プロジェクトスライダーセクション (Minimal) ---
 const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
-    const [projectIndex, setProjectIndex] = useState(0);
-    const [direction, setDirection] = useState(0);
+    const allItems = content.projects.items;
+    const categories = content.projects.categories;
+    const categoryOrder = ['foundation', 'engineering', 'physiology', 'mechanism', 'application', 'vision'];
 
-    const slideVariants = {
-        enter: (direction) => ({
-            x: direction > 0 ? '100%' : '-100%',
-            opacity: 0,
-        }),
-        center: {
-            zIndex: 1,
-            x: 0,
-            opacity: 1,
-        },
-        exit: (direction) => ({
-            zIndex: 0,
-            x: direction < 0 ? '100%' : '-100%',
-            opacity: 0,
-        }),
-    };
+    // Default to "application" which is the flagship ongoing category
+    const [selectedCategory, setSelectedCategory] = useState('application');
 
-    const featuredItems = useMemo(() => content.projects.items.filter(item => item.featured), [content.projects.items]);
+    // Items for the selected category
+    const categoryItems = useMemo(() => {
+        return allItems.filter(item => item.category === selectedCategory);
+    }, [allItems, selectedCategory]);
 
-    const paginate = useCallback((newDirection) => {
-        setDirection(newDirection);
-        setProjectIndex((prevIndex) => {
-            const numItems = featuredItems.length;
-            if (numItems === 0) return 0;
-            return (prevIndex + newDirection + numItems) % numItems;
-        });
-    }, [featuredItems.length]);
+    const isTwoProjects = categoryItems.length === 2;
 
-    useEffect(() => {
-        const projectInterval = setInterval(() => paginate(1), 7000);
-        return () => clearInterval(projectInterval);
-    }, [paginate]);
+    // Hero projects: If exactly 2 projects, both are heroes. Otherwise, first featured or first item.
+    const heroProjects = useMemo(() => {
+        if (isTwoProjects) return categoryItems;
+        return [categoryItems.find(item => item.featured) || categoryItems[0]].filter(Boolean);
+    }, [categoryItems, isTwoProjects]);
+
+    // Other items in the category (exclude heroes)
+    const otherItems = useMemo(() => {
+        if (isTwoProjects) return [];
+        return categoryItems.filter(item => item !== heroProjects[0]);
+    }, [categoryItems, heroProjects, isTwoProjects]);
+
+    const selectedCat = categories[selectedCategory];
 
     return (
         <ContentSection id="projects" title={content.projects.title}>
-            <div className="relative w-full aspect-[4/5] md:aspect-[21/9] bg-neutral-900/10">
-                <AnimatePresence initial={false} custom={direction}>
-                    <motion.div
-                        key={projectIndex}
-                        custom={direction}
-                        variants={slideVariants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{
-                            x: { type: "tween", ease: "easeInOut", duration: 0.8 },
-                            opacity: { duration: 0.4 }
-                        }}
-                        className="absolute inset-0 w-full h-full cursor-pointer flex flex-col md:flex-row"
-                        onClick={() => setSelectedDetail(featuredItems[projectIndex])}
-                        data-hoverable="true"
-                    >
-                        {/* Image Side */}
-                        <div className="w-full md:w-3/5 h-1/2 md:h-full relative overflow-hidden">
-                            <img src={featuredItems[projectIndex]?.image || ''} alt={featuredItems[projectIndex]?.title || ''} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/1200x675/171717/525252?text=Image+Not+Found'; }} />
-                        </div>
 
-                        {/* Content Side */}
-                        <div className="w-full md:w-2/5 h-1/2 md:h-full p-6 md:p-12 flex flex-col justify-center bg-transparent md:border-l border-white/5">
-                            <span className="block text-[10px] tracking-[0.3em] text-gray-500 mb-6 uppercase">{ui.featured_project}</span>
-                            <h3 className="text-xl md:text-2xl font-normal text-gray-100 mb-4 leading-tight tracking-[0.1em] font-['Syne',sans-serif]"><AnimatedText text={featuredItems[projectIndex]?.title || ''} /></h3>
-                            <p className="text-xs text-gray-500 line-clamp-3 tracking-wide leading-7"><AnimatedText text={featuredItems[projectIndex]?.description || ''} /></p>
-                            <div className="mt-8 text-[10px] text-gray-400 uppercase tracking-widest border-b border-gray-700 pb-1 self-start">{ui.click_for_details}</div>
-                        </div>
-                    </motion.div>
-                </AnimatePresence>
-
-                <div className="absolute bottom-4 right-6 flex gap-4 z-10">
-                    <button onClick={(e) => { e.stopPropagation(); paginate(-1); }} className="text-gray-600 hover:text-white transition-colors" data-hoverable="true"><ChevronLeftIcon className="w-4 h-4" /></button>
-                    <button onClick={(e) => { e.stopPropagation(); paginate(1); }} className="text-gray-600 hover:text-white transition-colors" data-hoverable="true"><ChevronRightIcon className="w-4 h-4" /></button>
+            {/* Interactive Category Timeline */}
+            {categories && (
+                <div className="mb-12 overflow-x-auto scrollbar-hide">
+                    <div className="flex items-center gap-0 min-w-max mx-auto justify-center">
+                        {categoryOrder.map((key, idx) => {
+                            const cat = categories[key];
+                            if (!cat) return null;
+                            const isSelected = key === selectedCategory;
+                            const statusColor = cat.status === 'Done' ? 'bg-gray-400' : cat.status === 'Ongoing' ? 'bg-teal-400' : 'bg-rose-400';
+                            const statusRing = cat.status === 'Done' ? 'ring-gray-400/40' : cat.status === 'Ongoing' ? 'ring-teal-400/40' : 'ring-rose-400/40';
+                            const textColor = isSelected
+                                ? (cat.status === 'Done' ? 'text-gray-200' : cat.status === 'Ongoing' ? 'text-teal-300' : 'text-rose-300')
+                                : (cat.status === 'Done' ? 'text-gray-600' : cat.status === 'Ongoing' ? 'text-teal-500/60' : 'text-rose-500/60');
+                            return (
+                                <React.Fragment key={key}>
+                                    <motion.button
+                                        onClick={() => setSelectedCategory(key)}
+                                        data-hoverable="true"
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.4, delay: idx * 0.08 }}
+                                        className={`flex flex-col items-center text-center px-3 md:px-6 py-3 rounded-sm transition-all duration-300 cursor-pointer
+                                            ${isSelected ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'}`}
+                                    >
+                                        <div className={`w-3.5 h-3.5 rounded-full ${statusColor} mb-3 transition-all duration-300
+                                            ${isSelected ? `scale-150 ring-4 ${statusRing} shadow-[0_0_12px_currentColor]` : 'scale-100 shadow-[0_0_4px_currentColor] opacity-60 hover:opacity-100'}`} />
+                                        <span className={`text-[10px] font-mono tracking-widest uppercase mb-1 transition-colors duration-300 ${textColor}`}>{cat.period}</span>
+                                        <span className={`text-[10px] tracking-wider max-w-[90px] leading-tight transition-colors duration-300 ${isSelected ? 'text-gray-300' : 'text-gray-600'}`}>
+                                            {cat.title.replace(/ \(.*\)/, '')}
+                                        </span>
+                                        {isSelected && (
+                                            <motion.div
+                                                layoutId="category-indicator"
+                                                className="w-full h-px bg-gradient-to-r from-transparent via-white/40 to-transparent mt-2"
+                                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                            />
+                                        )}
+                                    </motion.button>
+                                    {idx < categoryOrder.length - 1 && (
+                                        <div className="w-6 md:w-10 h-px bg-gradient-to-r from-white/15 to-white/5 mt-[-18px]" />
+                                    )}
+                                </React.Fragment>
+                            );
+                        })}
+                    </div>
                 </div>
-            </div>
+            )}
+
+            {/* Category description badge */}
+            {selectedCat && (
+                <motion.div
+                    key={`cat-badge-${selectedCategory}`}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="mb-10 flex items-center justify-center gap-3"
+                >
+                    <span className={`text-[10px] font-mono tracking-[0.3em] uppercase px-3 py-1 rounded-sm border
+                        ${selectedCat.status === 'Done' ? 'text-gray-400 border-gray-500/30 bg-gray-500/10' :
+                            selectedCat.status === 'Ongoing' ? 'text-teal-400 border-teal-500/30 bg-teal-500/10' :
+                                'text-rose-400 border-rose-500/30 bg-rose-500/10'}`}>
+                        {selectedCat.status}
+                    </span>
+                    <span className="text-xs text-gray-500 tracking-wider">{selectedCat.title}</span>
+                    <span className="text-[10px] text-gray-600 font-mono">{categoryItems.length} project{categoryItems.length !== 1 ? 's' : ''}</span>
+                </motion.div>
+            )}
+
+            {/* Hero Project Card(s) for selected category */}
+            <AnimatePresence mode="wait">
+                {heroProjects.length > 0 && (
+                    <motion.div
+                        key={`hero-container-${selectedCategory}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.4 }}
+                        className={`grid gap-6 mb-8 ${isTwoProjects ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}
+                    >
+                        {heroProjects.map((heroProject, idx) => (
+                            <div
+                                key={`hero-${selectedCategory}-${heroProject.title}`}
+                                onClick={() => setSelectedDetail(heroProject)}
+                                data-hoverable="true"
+                                className={`group cursor-pointer relative w-full overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-500 flex flex-col md:block
+                                    ${isTwoProjects ? 'md:aspect-[4/3]' : 'md:aspect-[21/9]'}`}
+                            >
+                                {/* Image: aspect-ratio'd block on mobile (stacked), absolute fill on md+ (overlay) */}
+                                <div className={`relative w-full ${isTwoProjects ? 'aspect-[4/3]' : 'aspect-[16/9]'} md:absolute md:inset-0 md:aspect-auto md:h-full`}>
+                                    <img
+                                        src={heroProject.image}
+                                        alt={heroProject.title}
+                                        className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-70 transition-all duration-1000 scale-105 group-hover:scale-100"
+                                        loading="lazy" decoding="async"
+                                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/1200x500/171717/525252?text=Image+Not+Found'; }}
+                                    />
+                                    {/* Gradients only matter for the desktop overlay layout */}
+                                    <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+                                    <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                                    {/* Bottom fade on mobile so the image blends into the dark text panel below */}
+                                    <div className="md:hidden absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent" />
+                                </div>
+
+                                {/* Text: normal flow on mobile, absolute overlay on md+ */}
+                                <div className={`relative bg-black p-5 md:bg-transparent md:absolute md:bottom-0 md:left-0 md:p-10 z-10 ${isTwoProjects ? 'md:w-full' : 'md:max-w-2xl'}`}>
+                                    <div className="flex items-center gap-3 mb-4 flex-wrap">
+                                        {heroProject.featured && (
+                                            <span className="text-[10px] tracking-[0.3em] text-emerald-400 uppercase font-mono border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 rounded-sm">{ui.featured_project}</span>
+                                        )}
+                                        {heroProject.period && <span className="text-[10px] tracking-widest text-gray-400 uppercase font-mono">{heroProject.period}</span>}
+                                    </div>
+                                    <h3 className={`font-normal text-white mb-3 leading-tight tracking-wide font-['Syne',sans-serif] group-hover:text-emerald-50 transition-colors
+                                        ${isTwoProjects ? 'text-lg md:text-2xl' : 'text-xl md:text-3xl'}`}>
+                                        {heroProject.title}
+                                    </h3>
+                                    <p className="text-sm text-gray-400 leading-relaxed tracking-wide line-clamp-3 md:line-clamp-2 group-hover:text-gray-300 transition-colors">
+                                        {heroProject.description}
+                                    </p>
+                                    {heroProject.funding && heroProject.funding.length > 0 && (
+                                        <div className="mt-4 flex flex-wrap gap-2">
+                                            {heroProject.funding.map((f, i) => (
+                                                <span key={i} className="text-[10px] text-yellow-500/80 font-mono border border-yellow-500/20 px-2 py-0.5 rounded-sm tracking-wider">{f}</span>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <div className="mt-6 text-[10px] text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors flex items-center gap-2">
+                                        {ui.click_for_details}
+                                        <ArrowRightIcon className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Other Projects in Selected Category */}
+            <AnimatePresence mode="wait">
+                {otherItems.length > 0 && (
+                    <motion.div
+                        key={`grid-${selectedCategory}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+                    >
+                        {otherItems.map((item, index) => (
+                            <motion.div
+                                key={`proj-${item.title}`}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.35, delay: index * 0.06 }}
+                                whileHover={{ y: -4 }}
+                                onClick={() => setSelectedDetail(item)}
+                                data-hoverable="true"
+                                className="group cursor-pointer bg-white/[0.02] border border-white/10 hover:border-emerald-500/30 rounded-lg overflow-hidden hover:bg-white/[0.05] hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)] transition-all duration-300"
+                            >
+                                {item.image && (
+                                    <div className="aspect-[16/9] relative overflow-hidden">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-80 transition-all duration-700 scale-105 group-hover:scale-100"
+                                            loading="lazy" decoding="async"
+                                            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x225/171717/525252?text=Image+Not+Found'; }}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                                    </div>
+                                )}
+                                <div className="p-5">
+                                    <h3 className="text-sm font-normal text-gray-200 group-hover:text-white transition-colors mb-2 leading-snug tracking-wide line-clamp-2">
+                                        {item.title}
+                                    </h3>
+                                    <p className="text-xs text-gray-400 leading-relaxed tracking-wide line-clamp-2">
+                                        {item.description}
+                                    </p>
+                                    {item.role && (
+                                        <span className="inline-block mt-3 text-[9px] text-emerald-400/70 font-mono tracking-widest uppercase border border-emerald-500/20 px-2 py-0.5 rounded-sm">{item.role}</span>
+                                    )}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <div className="text-right mt-8">
-                <a onClick={() => setPage('all-projects')} data-hoverable="true" className="inline-block text-xs text-gray-500 hover:text-white border-b border-transparent hover:border-white pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
+                <a onClick={() => setPage('all-projects')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
                     <AnimatedText text={content.projects.view_all_button} />
                 </a>
             </div>
@@ -2784,7 +3919,7 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: index * 0.08 }}
-            className={`bg-black/50 backdrop-blur-sm rounded-sm border transition-colors ${isExpanded ? 'border-emerald-900/40 bg-black/70' : 'border-white/5 hover:bg-black/60'}`}
+            className={`bg-black/50 backdrop-blur-sm rounded-sm border transition-colors ${isExpanded ? 'border-emerald-500/30 bg-black/70' : 'border-white/5 hover:border-emerald-500/20 hover:bg-black/60'}`}
         >
             <div
                 onClick={onToggle}
@@ -2800,7 +3935,7 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
                             <AnimatedText text={item.title} />
                         </h3>
                         {!isExpanded && item.summary && (
-                            <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors tracking-wide leading-6">
+                            <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors tracking-wide leading-6">
                                 <AnimatedText text={item.summary} />
                             </p>
                         )}
@@ -2842,7 +3977,7 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
                                 </div>
                             )}
 
-                            <p className="text-sm text-gray-400 leading-8 tracking-wide whitespace-pre-line">
+                            <p className="text-sm text-gray-300 leading-7 tracking-wide whitespace-pre-line">
                                 {item.content}
                             </p>
 
@@ -2918,7 +4053,7 @@ const InsightsSection = ({ content, expandedInsightId, onInsightToggle, setPage,
     return (
         <ContentSection id="insights" title={content.insights.title}>
             <div className="text-center mb-12">
-                <p className="text-xs text-gray-500 tracking-[0.15em] bg-black/40 backdrop-blur-[2px] rounded-sm px-4 py-2 inline-block whitespace-pre-line">
+                <p className="text-sm text-gray-300 tracking-[0.1em] leading-7 bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-5 py-3 inline-block whitespace-pre-line">
                     <AnimatedText text={content.insights.description} />
                 </p>
             </div>
@@ -2956,7 +4091,7 @@ const InsightsSection = ({ content, expandedInsightId, onInsightToggle, setPage,
                 ))}
             </div>
             <div className="text-right mt-12">
-                <a onClick={() => setPage('all-insights')} data-hoverable="true" className="inline-block text-xs text-gray-500 hover:text-white border-b border-transparent hover:border-white pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
+                <a onClick={() => setPage('all-insights')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
                     <AnimatedText text={content.insights.view_more_button} />
                 </a>
             </div>
@@ -3022,7 +4157,7 @@ const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle,
             exit={{ opacity: 0 }}
             className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
         >
-            <BotanicalSynapse />
+            {/* Background canvas is rendered globally at the App level */}
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
 
             <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-32 relative z-10">
@@ -3031,20 +4166,12 @@ const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle,
                         <AnimatedText text={content.insights.title} />
                     </h1>
                     <div className="flex items-center gap-6">
-                        <div className="flex gap-4 mr-4">
-                            <button
-                                onClick={() => setLang('ja')}
-                                className={`text-xs tracking-widest transition-colors ${lang === 'ja' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
-                            >
-                                JP
+                        {lang && setLang && (
+                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors mr-4">
+                                <GlobeIcon />
+                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
                             </button>
-                            <button
-                                onClick={() => setLang('en')}
-                                className={`text-xs tracking-widest transition-colors ${lang === 'en' ? 'text-white border-b border-white' : 'text-gray-600 hover:text-gray-400'}`}
-                            >
-                                EN
-                            </button>
-                        </div>
+                        )}
                         <button
                             onClick={handleBack}
                             data-hoverable="true"
@@ -3109,14 +4236,14 @@ const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle,
 };
 
 // --- Media Coverage Section ---
-const MediaSection = ({ content, ui }) => {
+const MediaSection = ({ content, ui, setPage }) => {
     const parseDate = (dateStr) => {
         if (!dateStr) return new Date(0);
         const parts = dateStr.split('.');
         if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
         return new Date(dateStr);
     };
-    const sortedMedia = [...content.media.items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    const sortedMedia = [...content.media.items].sort((a, b) => parseDate(b.date) - parseDate(a.date)).slice(0, 2);
 
     return (
         <ContentSection id="media" title={content.media.title}>
@@ -3178,7 +4305,104 @@ const MediaSection = ({ content, ui }) => {
                     </motion.div>
                 ))}
             </div>
+            <div className="text-right mt-12 max-w-5xl mx-auto">
+                <a onClick={() => setPage('all-media')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
+                    <AnimatedText text={content.news?.view_more_button || "VIEW ALL"} />
+                </a>
+            </div>
         </ContentSection>
+    );
+};
+
+
+
+// --- All Media Page ---
+const AllMediaPage = ({ content, setPage, lang, setLang, setScrollToSectionId, ui }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    const parseDate = (dateStr) => {
+        if (!dateStr) return new Date(0);
+        const parts = dateStr.split('.');
+        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
+        return new Date(dateStr);
+    };
+
+    const sortedItems = [...content.media.items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
+
+    const handleBack = () => {
+        setScrollToSectionId('media');
+        setPage('home');
+    };
+
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden flex flex-col">
+            {/* Background canvas is rendered globally at the App level */}
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
+            <div className="flex-grow pt-32 pb-12 px-6 sm:px-8 lg:px-12 relative z-10">
+                <div className="max-w-6xl mx-auto flex justify-between items-end mb-20 border-b border-white/10 pb-8">
+                    <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
+                        <AnimatedText text={content.media.title} />
+                    </h1>
+                    <div className="flex items-center gap-6">
+                        {lang && setLang && (
+                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors mr-4">
+                                <GlobeIcon />
+                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
+                            </button>
+                        )}
+                        <button onClick={handleBack} data-hoverable="true" className="text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase">
+                            <AnimatedText text={ui.back} />
+                        </button>
+                    </div>
+                </div>
+
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {currentItems.map((item, index) => (
+                        <motion.div key={`all-media-${index}`} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: index * 0.05 }} className="group relative bg-neutral-900/30 backdrop-blur-sm hover:bg-neutral-800/40 p-8 rounded-sm border border-white/5 hover:border-emerald-500/20 transition-all duration-500 flex flex-col justify-between">
+                            <div>
+                                <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-[10px] text-emerald-500/80 font-mono tracking-widest uppercase border border-emerald-500/20 px-2 py-0.5 rounded-sm">{item.type}</span>
+                                        <span className="text-xs text-gray-400 font-medium tracking-wide">{item.mediaName}</span>
+                                    </div>
+                                    <span className="text-[10px] text-gray-600 font-mono tracking-wider">{item.date}</span>
+                                </div>
+                                <h3 className="text-base font-normal text-gray-200 group-hover:text-white transition-colors mb-4 tracking-wide leading-relaxed"><AnimatedText text={item.title} /></h3>
+                                <p className="text-xs text-gray-500 leading-relaxed tracking-wide group-hover:text-gray-400 transition-colors"><AnimatedText text={item.description} /></p>
+                            </div>
+                            {item.link && (typeof item.link === 'string' ? item.link.trim() !== '' : item.link.length > 0) ? (
+                                <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
+                                    <a href={Array.isArray(item.link) ? item.link[0] : item.link} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer">{ui.view_website || "READ ARTICLE"} <ExternalLinkIcon className="w-3 h-3" /></a>
+                                </div>
+                            ) : (item.image && (typeof item.image === 'string' ? item.image.trim() !== '' : item.image.length > 0)) ? (
+                                <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
+                                    <a href={Array.isArray(item.image) ? item.image[0] : item.image} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer">{ui.view || "VIEW"} <ExternalLinkIcon className="w-3 h-3" /></a>
+                                </div>
+                            ) : null}
+                        </motion.div>
+                    ))}
+                </div>
+
+                {totalPages > 1 && (
+                    <div className="mt-20 flex justify-center gap-2">
+                        {Array.from({ length: totalPages }).map((_, idx) => (
+                            <button key={idx} onClick={() => paginate(idx + 1)} className={`w-2 h-2 rounded-full transition-all duration-300 ${currentPage === idx + 1 ? 'bg-white scale-125' : 'bg-white/20 hover:bg-white/50'}`} />
+                        ))}
+                    </div>
+                )}
+            </div>
+            <Footer content={content.footer} setPage={setPage} ui={ui} />
+        </motion.div>
     );
 };
 
@@ -3216,10 +4440,10 @@ const MainContent = ({
 
             <ContentSection id="profile" title={currentContent.profile.title}>
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.5 }}
                     className="flex flex-col md:flex-row items-center gap-8 md:gap-12 max-w-4xl mx-auto"
                 >
                     <div className="flex-shrink-0">
@@ -3237,10 +4461,10 @@ const MainContent = ({
 
                     <div className="flex-1 w-full">
                         <div className="w-fit mx-auto md:mx-0 text-left">
-                            <p className="text-2xl font-normal text-gray-100 mb-2 tracking-[0.05em] font-['Syne',sans-serif] pl-6"><AnimatedText text={currentContent.profile.name} /></p>
-                            <p className="text-xs text-emerald-600/80 mb-8 font-mono tracking-widest uppercase pl-6"><AnimatedText text={currentContent.profile.affiliation} /></p>
-                            <p className="text-sm text-gray-400 leading-8 tracking-wide mb-10 whitespace-pre-line bg-black/40 backdrop-blur-[2px] rounded-sm px-6 py-4 block"><AnimatedText text={currentContent.profile.description} /></p>
-                            <a href={cvUrl} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="inline-block text-xs text-gray-500 border border-gray-800 px-8 py-3 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-500 tracking-[0.2em] uppercase ml-6">
+                            <p className="text-xl font-normal text-gray-100 mb-2 tracking-[0.05em] font-['Syne',sans-serif] pl-6"><AnimatedText text={currentContent.profile.name} /></p>
+                            <p className="text-xs text-emerald-500/90 mb-8 font-mono tracking-widest uppercase pl-6"><AnimatedText text={currentContent.profile.affiliation} /></p>
+                            <p className="text-sm text-gray-300 leading-7 tracking-wide mb-10 whitespace-pre-line bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-6 py-5 block"><AnimatedText text={currentContent.profile.description} /></p>
+                            <a href={cvUrl} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="inline-block text-xs text-gray-300 border border-gray-700 px-8 py-3 rounded-full hover:bg-emerald-500 hover:text-black hover:border-emerald-500 hover:shadow-[0_0_24px_rgba(16,185,129,0.35)] transition-all duration-500 tracking-[0.2em] uppercase ml-6">
                                 <AnimatedText text={currentContent.profile.cv_button} />
                             </a>
                         </div>
@@ -3250,14 +4474,12 @@ const MainContent = ({
 
             <ContentSection id="vision" title={currentContent.vision.title}>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.8 }} className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-lg md:text-xl font-normal text-gray-200 leading-relaxed mb-8 tracking-[0.1em]"><AnimatedText text={currentContent.vision.heading} /></h2>
-                    <p className="text-sm text-gray-500 leading-8 tracking-wide whitespace-pre-line bg-black/40 backdrop-blur-[2px] rounded-sm px-6 py-4 inline-block"><AnimatedText text={currentContent.vision.description} /></p>
+                    <h2 className="text-xl md:text-2xl font-normal text-white leading-relaxed mb-8 tracking-[0.1em]"><AnimatedText text={currentContent.vision.heading} /></h2>
+                    <p className="text-sm text-gray-300 leading-7 tracking-wide whitespace-pre-line text-left bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-6 py-5 inline-block"><AnimatedText text={currentContent.vision.description} /></p>
                 </motion.div>
             </ContentSection>
 
             <NewsSection content={currentContent} onNewsSelect={handleNewsSelect} setPage={setPage} ui={currentContent.ui} />
-
-            <ResearchSection content={currentContent} onDetailSelect={setSelectedDetail} ui={currentContent.ui} />
 
             <ProjectSliderSection
                 content={currentContent}
@@ -3266,8 +4488,10 @@ const MainContent = ({
                 ui={currentContent.ui}
             />
 
+            <ResearchSection content={currentContent} onDetailSelect={setSelectedDetail} ui={currentContent.ui} />
+
             <ContentSection id="map" title={currentContent.map.title}>
-                <p className="text-center text-xs text-gray-500 mb-12 tracking-[0.2em] uppercase bg-black/40 backdrop-blur-[2px] rounded-sm px-4 py-2 w-fit mx-auto"><AnimatedText text={currentContent.map.description} /></p>
+                <p className="text-center text-xs text-gray-400 mb-12 tracking-[0.2em] uppercase bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-5 py-3 w-fit mx-auto"><AnimatedText text={currentContent.map.description} /></p>
                 <div className="relative w-full max-w-4xl mx-auto aspect-video bg-transparent border border-white/5 overflow-hidden rounded-sm grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
                     <img src={process.env.PUBLIC_URL + "/images/map.jpg"} alt="World Map" className="w-full h-full object-contain opacity-90 mix-blend-lighten" loading="lazy" decoding="async" />
 
@@ -3306,10 +4530,10 @@ const MainContent = ({
 
             <InsightsSection content={currentContent} expandedInsightId={expandedInsightId} onInsightToggle={handleInsightToggle} setPage={setPage} ui={currentContent.ui} />
 
-            <MediaSection content={currentContent} ui={currentContent.ui} />
+            <MediaSection content={currentContent} ui={currentContent.ui} setPage={setPage} />
 
             <ContentSection id="activities" title={currentContent.activities.title}>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     {currentContent.activities.items.map((item, index) => (
                         <motion.div
                             key={`activity-${index}`}
@@ -3317,16 +4541,24 @@ const MainContent = ({
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: index * 0.05 }}
-                            className="group cursor-pointer bg-black/50 backdrop-blur-sm hover:bg-black/60 p-6 rounded-sm transition-colors"
+                            className="group bg-neutral-900/40 rounded-lg border border-white/10 hover:border-emerald-500/30 relative overflow-hidden cursor-pointer hover:bg-neutral-800/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)] aspect-[4/3] flex flex-col justify-end p-6"
                             onClick={() => setSelectedDetail(item)}
                             data-hoverable="true"
                         >
-                            <div className="border-t border-white/10 pt-4 mb-4 flex justify-between items-start">
-                                <span className="text-[10px] text-gray-600 font-mono tracking-wider">{item.year}</span>
-                                {item.link && <ExternalLinkIcon className="w-3 h-3 text-gray-600 group-hover:text-white transition-colors" />}
+                            {item.image && (
+                                <>
+                                    <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-700 grayscale hover:grayscale-0" loading="lazy" decoding="async" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+                                </>
+                            )}
+                            <div className="relative z-10">
+                                <div className="border-t border-white/10 pt-4 mb-4 flex justify-between items-start">
+                                    <span className="text-[10px] text-gray-500 font-mono tracking-widest">{item.year}</span>
+                                    {item.link && <ExternalLinkIcon className="w-3 h-3 text-gray-400 group-hover:text-white transition-colors" />}
+                                </div>
+                                <h3 className="text-lg font-normal text-gray-300 group-hover:text-white transition-colors mb-2 leading-tight line-clamp-2"><AnimatedText text={item.title} /></h3>
+                                <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors tracking-wide"><AnimatedText text={item.event} /></p>
                             </div>
-                            <h3 className="text-sm font-normal text-gray-300 group-hover:text-white transition-colors mb-2 min-h-[2.5rem] tracking-wide"><AnimatedText text={item.title} /></h3>
-                            <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors line-clamp-2 tracking-wide"><AnimatedText text={item.event} /></p>
                         </motion.div>
                     ))}
                 </div>
@@ -3334,7 +4566,7 @@ const MainContent = ({
 
             <ContentSection id="contact" title={currentContent.contact.title}>
                 <div className="text-center">
-                    <p className="text-xs text-gray-500 mb-12 max-w-xl mx-auto whitespace-pre-line leading-8 tracking-wide"><AnimatedText text={currentContent.contact.description} /></p>
+                    <p className="text-sm text-gray-400 mb-12 max-w-xl mx-auto whitespace-pre-line leading-8 tracking-wide"><AnimatedText text={currentContent.contact.description} /></p>
                     <div className="flex flex-col items-center gap-8">
                         <motion.a
                             data-hoverable="true"
@@ -3366,10 +4598,121 @@ const MainContent = ({
 
 // --- メインアプリケーションコンポーネント ---
 export default function App() {
-    const [lang, setLang] = useState('ja');
-    const [page, setPage] = useState('home');
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [lang, setLangState] = useState(() => {
+        const urlLang = searchParams.get('lang');
+        if (urlLang === 'en' || urlLang === 'ja') return urlLang;
+
+        const savedLang = localStorage.getItem('appLang');
+        if (savedLang === 'en' || savedLang === 'ja') return savedLang;
+
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang && !browserLang.startsWith('ja')) return 'en';
+
+        return 'ja';
+    });
+
+    const setLang = useCallback((newLang) => {
+        setLangState(newLang);
+        localStorage.setItem('appLang', newLang);
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+            next.set('lang', newLang);
+            return next;
+        }, { replace: true });
+    }, [setSearchParams]);
+
+    useEffect(() => {
+        const urlLang = searchParams.get('lang');
+        if (urlLang === 'en' || urlLang === 'ja') {
+            if (urlLang !== lang) {
+                setLangState(urlLang);
+                localStorage.setItem('appLang', urlLang);
+            }
+        } else {
+            setSearchParams(prev => {
+                const next = new URLSearchParams(prev);
+                next.set('lang', lang);
+                return next;
+            }, { replace: true });
+        }
+    }, [searchParams, lang, setSearchParams]);
+
+    const [page, setPageState] = useState(() => {
+        const urlView = searchParams.get('v');
+        if (urlView === 'news') return 'all-news';
+        if (urlView === 'projects') return 'all-projects';
+        if (urlView === 'insights') return 'all-insights';
+        if (urlView === 'media') return 'all-media';
+        return 'home';
+    });
+
+    const setPage = useCallback((newPage) => {
+        setPageState(newPage);
+        setSearchParams(prev => {
+            const next = new URLSearchParams(prev);
+            if (newPage === 'home') {
+                next.delete('v');
+            } else if (newPage === 'all-news') {
+                next.set('v', 'news');
+            } else if (newPage === 'all-projects') {
+                next.set('v', 'projects');
+            } else if (newPage === 'all-insights') {
+                next.set('v', 'insights');
+            } else if (newPage === 'all-media') {
+                next.set('v', 'media');
+            }
+            return next;
+        });
+    }, [setSearchParams]);
+
+    useEffect(() => {
+        const urlView = searchParams.get('v');
+        let expectedPage = 'home';
+        if (urlView === 'news') expectedPage = 'all-news';
+        else if (urlView === 'projects') expectedPage = 'all-projects';
+        else if (urlView === 'insights') expectedPage = 'all-insights';
+        else if (urlView === 'media') expectedPage = 'all-media';
+
+        setPageState(expectedPage);
+    }, [searchParams]);
     const [selectedNews, setSelectedNews] = useState(null);
-    const [selectedDetail, setSelectedDetail] = useState(null);
+    const [_selectedDetail, _setSelectedDetail] = useState(null);
+    const selectedDetail = _selectedDetail;
+
+    const setSelectedDetail = useCallback((item) => {
+        if (!item) {
+            setSearchParams((prev) => {
+                const newParams = new URLSearchParams(prev);
+                newParams.delete('p');
+                newParams.delete('a');
+                newParams.delete('m');
+                return newParams;
+            });
+            _setSelectedDetail(null);
+            return;
+        }
+
+        let type = null;
+        if (item.x !== undefined && item.y !== undefined) {
+            type = 'm';
+        } else if (item.event !== undefined) {
+            type = 'a';
+        } else if (item.category && ['foundation', 'engineering', 'physiology', 'mechanism', 'application', 'vision', 'outreach'].includes(item.category)) {
+            type = 'p';
+        }
+
+        if (type && item.id) {
+            setSearchParams((prev) => {
+                const newParams = new URLSearchParams(prev);
+                newParams.set(type, item.id);
+                return newParams;
+            });
+        }
+        _setSelectedDetail(item);
+    }, [setSearchParams]);
+
     const [showIntro, setShowIntro] = useState(() => {
         // Check session storage to see if intro has been shown
         return !sessionStorage.getItem('introShown');
@@ -3378,7 +4721,6 @@ export default function App() {
     const [copied, setCopied] = useState(false);
     const [scrollToSectionId, setScrollToSectionId] = useState(null);
     const [expandedInsightId, setExpandedInsightId] = useState(null);
-    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         ReactGA.initialize('G-CQ3EC5TLMM');
@@ -3395,7 +4737,11 @@ export default function App() {
     // --- News Routing Logic ---
     const handleNewsSelect = (item) => {
         if (item && item.id) {
-            setSearchParams({ news: item.id });
+            setSearchParams(prev => {
+                const next = new URLSearchParams(prev);
+                next.set('n', item.id);
+                return next;
+            });
         } else {
             setSelectedNews(item); // Fallback for items without ID
         }
@@ -3404,14 +4750,14 @@ export default function App() {
     const handleNewsClose = () => {
         setSearchParams((prev) => {
             const newParams = new URLSearchParams(prev);
-            newParams.delete('news');
+            newParams.delete('n');
             return newParams;
         });
     };
 
     // Sync URL -> State
     useEffect(() => {
-        const newsId = searchParams.get('news');
+        const newsId = searchParams.get('n');
         if (newsId) {
             const allItems = content[lang].news.items;
             const item = allItems.find(i => i.id === newsId);
@@ -3425,7 +4771,31 @@ export default function App() {
             // Actually, simply:
             setSelectedNews(null);
         }
-    }, [searchParams, lang]);
+    }, [searchParams, lang, content]);
+
+    // Sync URL -> selectedDetail (Projects, Activities, Map)
+    useEffect(() => {
+        const projectId = searchParams.get('p');
+        const activityId = searchParams.get('a');
+        const mapId = searchParams.get('m');
+
+        if (projectId) {
+            const item = content[lang].projects.items.find(i => i.id === projectId);
+            if (item) _setSelectedDetail(item);
+        } else if (activityId) {
+            const item = content[lang].activities.items.find(i => i.id === activityId);
+            if (item) _setSelectedDetail(item);
+        } else if (mapId) {
+            const item = content[lang].map.locations.find(i => i.id === mapId);
+            if (item) _setSelectedDetail(item);
+        } else {
+            // Close modal if no URL params match, but ONLY if we are showing a project/activity/map.
+            _setSelectedDetail((prev) => {
+                if (prev && prev.id) return null;
+                return prev;
+            });
+        }
+    }, [searchParams, lang, content]);
 
     // --- Insight Accordion + URL Routing ---
     const handleInsightToggle = (insightId) => {
@@ -3511,6 +4881,7 @@ export default function App() {
                 {!showIntro && (
                     <motion.div key={page} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="relative z-10">
                         <CustomCursor />
+                        <ScrollProgress />
                         <NewsModal newsItem={selectedNews} onClose={handleNewsClose} ui={currentContent.ui} />
 
                         <DetailModal item={selectedDetail} onClose={() => setSelectedDetail(null)} content={currentContent} handleDownload={handleDownload} ui={currentContent.ui} />
@@ -3534,30 +4905,11 @@ export default function App() {
                         {page === 'all-news' && <AllNewsPage content={currentContent} setPage={setPage} setSelectedNews={handleNewsSelect} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
                         {page === 'all-projects' && <AllProjectsPage content={currentContent} setPage={setPage} setSelectedDetail={setSelectedDetail} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
                         {page === 'all-insights' && <AllInsightsPage content={currentContent} setPage={setPage} expandedInsightId={expandedInsightId} onInsightToggle={handleInsightToggle} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
+                        {page === 'all-media' && <AllMediaPage content={currentContent} setPage={setPage} lang={lang} setLang={setLang} setScrollToSectionId={setScrollToSectionId} ui={currentContent.ui} />}
                     </motion.div>
                 )}
             </AnimatePresence>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500&display=swap');
-                
-                .prose {
-                    max-width: none;
-                }
-                /* Custom Scrollbar for Dark Mode */
-                .custom-scrollbar::-webkit-scrollbar {
-                    width: 4px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background: #333;
-                    border-radius: 4px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                    background: #555;
-                }
-            `}</style>
+            {/* Global styles live in index.css */}
         </div>
     );
 }

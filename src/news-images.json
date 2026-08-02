@@ -29,9 +29,9 @@
     "/images_news/ISEF/2.jpeg",
     "/images_news/ISEF/3.JPG",
     "/images_news/ISEF/4.JPG",
-    "/images_news/ISEF/IMG_3148.JPG",
-    "/images_news/ISEF/IMG_3246.JPG",
-    "/images_news/ISEF/IMG_6988.jpg"
+    "/images_news/ISEF/5.jpg",
+    "/images_news/ISEF/6.JPG",
+    "/images_news/ISEF/7.JPG"
   ],
   "ISEF-pre": [
     "/images_news/ISEF-pre/Screenshot 0008-05-22 at 9.05.35.png"
@@ -42,7 +42,14 @@
     "/images_news/JBS2025/3.JPG",
     "/images_news/JBS2025/4.JPG"
   ],
-  "JSAI": [],
+  "JSAI": [
+    "/images_news/JSAI/1.JPG",
+    "/images_news/JSAI/2.JPG",
+    "/images_news/JSAI/72014edf-5aa0-4120-8fa4-1d4b4266af99.JPG",
+    "/images_news/JSAI/IMG_6160.jpeg",
+    "/images_news/JSAI/ac05cb41-7ee3-4761-9caa-9ac8f706ce23.JPG",
+    "/images_news/JSAI/db4a60b9-4fca-4cf4-81dc-d998f3ee8d89.JPG"
+  ],
   "Koushien": [
     "/images_news/Koushien/1-1.jpg",
     "/images_news/Koushien/1-2.jpg",
@@ -53,7 +60,13 @@
     "/images_news/MBSJ2025/2.jpg"
   ],
   "Mitou": [
+    "/images_news/Mitou/1.png",
     "/images_news/Mitou/2.png"
+  ],
+  "NEURO2026": [
+    "/images_news/NEURO2026/1.JPG",
+    "/images_news/NEURO2026/2.JPG",
+    "/images_news/NEURO2026/3.JPG"
   ],
   "NaganoGakkasyo2025": [
     "/images_news/NaganoGakkasyo2025/1.jpeg"
