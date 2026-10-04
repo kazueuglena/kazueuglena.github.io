@@ -1095,7 +1095,7 @@ const content = {
                     title: "ISEF 2026 Project Page Published",
                     summary: "My project page has been published on the official Virtual Project Board for ISEF (International Science and Engineering Fair).",
                     fullContent: "Ahead of the 'ISEF (International Science and Engineering Fair)' to be held in Los Angeles, USA in May 2026, my project page has been published on the official Virtual Project Board.<br><br>The project title is 'Stimulus Discrimination and Memory in M. pudica'. I am very happy to have this wonderful opportunity to let people all over the world know about my research on Mimosa pudica. Please take a look from the link below.",
-                    images: [],
+                    images: getNewsImages("ISEF-pre"),
                     link: "https://isef.net/project/plnt017-stimulus-discrimination-and-memory-in-m-pudica"
                 },
                 {
@@ -1105,7 +1105,7 @@ const content = {
                     title: "Released iOS App 'rHabit'",
                     summary: "Developed and published 'rHabit', an iOS tracking app that detects unconscious habits (like an open mouth) during focus using AI to support improvement.",
                     fullContent: "Do you ever find your mouth opening unconsciously while deeply focused on work or study? I have developed and independently released 'rHabit', an iOS app that detects these 'unconscious habits' in real-time using facial recognition AI to support your improvement.<br><br>Utilizing the iPhone's Face ID technology for completely local processing, it tracks seamlessly without disturbing your concentration. You can customize settings like 'how wide the mouth opens to detect' and it provides a gentle vibration to make you aware the moment a habit occurs. This app was inspired by my own experiences during long hours of concentration in research activities.<br><br>You can find more details on the <a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>Official Website</a> or download it directly from the <a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>App Store</a>.",
-                    images: [],
+                    images: getNewsImages("rHabit"),
                     link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US"
                 },
                 {
@@ -2558,7 +2558,7 @@ const T = {
     hoverFg: 'hover:text-[#ede6d6]',
 };
 
-const CONTAINER = 'max-w-5xl mx-auto px-5 sm:px-8';
+const CONTAINER = 'w-full max-w-[1680px] mx-auto px-5 sm:px-8 lg:px-14 2xl:px-20';
 
 // --- Header ---
 const Header = ({ lang, setLang, content, setPage }) => {
@@ -2657,14 +2657,14 @@ const HeroSection = ({ content }) => {
     return (
         <section id="hero" className="min-h-[100dvh] w-full relative flex items-end">
             <div className="absolute inset-0 bg-gradient-to-t from-[#15140f] via-transparent to-transparent pointer-events-none" />
-            <div className={`${CONTAINER} relative z-10 w-full pb-16 md:pb-24 flex justify-end`}>
+            <div className={`${CONTAINER} relative z-10 pb-20 md:pb-24 flex justify-start md:justify-end`}>
                 <motion.div
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-right max-w-2xl"
+                    className="text-left md:text-right max-w-2xl"
                 >
-                    <h1 className={`text-[40px] md:text-[64px] font-medium leading-[1.02] tracking-[-0.015em] ${T.fg} mb-5 [text-wrap:balance]`}>
+                    <h1 className={`text-[38px] sm:text-[48px] md:text-[64px] font-medium leading-[1.02] tracking-[-0.015em] ${T.fg} mb-5 [text-wrap:balance]`}>
                         {leading}{leading && ' '}<span className={T.acc}>{lastWord}</span>
                     </h1>
                     <p className={`text-[16px] md:text-[17px] ${T.muted}`}>{content.hero.subtitle}</p>
@@ -3068,9 +3068,9 @@ const TileCard = ({ image, eyebrow, title, text, onClick, aspect = 'aspect-[4/3]
                 <img src={image} alt="" className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
             </div>
         )}
-        {eyebrow && <p className={`text-[14px] ${T.muted} tabular-nums`}>{eyebrow}</p>}
-        <h3 className={`text-[17px] font-medium ${T.fg} ${T.hoverAcc} leading-[1.3] mt-1 transition-colors`}>{title}</h3>
-        {text && <p className={`text-[14px] ${T.muted} leading-[1.55] mt-1.5`}>{text}</p>}
+        {eyebrow && <p className={`text-[13px] md:text-[14px] ${T.muted} tabular-nums`}>{eyebrow}</p>}
+        <h3 className={`text-[15px] md:text-[17px] font-medium ${T.fg} ${T.hoverAcc} leading-[1.3] mt-1 transition-colors`}>{title}</h3>
+        {text && <p className={`text-[13px] md:text-[14px] ${T.muted} leading-[1.55] mt-1.5`}>{text}</p>}
     </article>
 );
 
@@ -3155,7 +3155,7 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
     return (
         <SubPage>
             <SubPageHeader title={content.all_news_page?.title || content.news.title} lang={lang} setLang={setLang} onBack={handleBack} ui={ui} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-8 gap-y-8 md:gap-y-10">
                 {currentItems.map((item, index) => (
                     <TileCard
                         key={`news-${index}`}
@@ -3275,7 +3275,7 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.25 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"
+                        className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-8 gap-y-8 mb-10"
                     >
                         {otherItems.map((item) => (
                             <TileCard
@@ -3495,7 +3495,7 @@ const MediaRow = ({ item, ui }) => {
     const label = hasLink ? (ui.view_website || 'Read article') : (ui.view || 'View');
 
     return (
-        <article className={`grid md:grid-cols-[200px_1fr] gap-2 md:gap-8 py-5 border-b ${T.line}`}>
+        <article className={`grid md:grid-cols-[240px_1fr] gap-2 md:gap-10 py-5 border-b ${T.line}`}>
             <div className={`text-[14px] ${T.muted} leading-[1.5]`}>
                 <p className={`${T.fg} font-medium`}>{item.mediaName}</p>
                 <p className="tabular-nums">{[item.type, item.date].filter(Boolean).join(' · ')}</p>
@@ -3601,8 +3601,8 @@ const MainContent = ({
                     const lede = parts[0];
                     const rest = parts.slice(1).join('\n\n');
                     return (
-                        <div className="grid md:grid-cols-[160px_1fr] gap-8 md:gap-10 items-start">
-                            <div className={`w-[160px] aspect-[4/5] overflow-hidden ${T.surf}`}>
+                        <div className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12 items-start">
+                            <div className={`w-[140px] md:w-[200px] aspect-[4/5] overflow-hidden ${T.surf}`}>
                                 <img
                                     src={process.env.PUBLIC_URL + "/images/profile-isef.jpg"}
                                     alt="Kazuhiro Komatsu"
@@ -3627,9 +3627,9 @@ const MainContent = ({
             </ContentSection>
 
             <ContentSection id="vision" title={currentContent.vision.title}>
-                <div className="max-w-[64ch]">
-                    <h3 className={`text-[22px] md:text-[24px] font-medium ${T.fg} leading-snug mb-5`}>{currentContent.vision.heading}</h3>
-                    <p className={`text-[16px] md:text-[17px] leading-[1.7] ${T.body} whitespace-pre-line`}>{currentContent.vision.description}</p>
+                <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-4 md:gap-12 items-start">
+                    <h3 className={`text-[22px] md:text-[26px] font-medium ${T.fg} leading-snug [text-wrap:balance]`}>{currentContent.vision.heading}</h3>
+                    <p className={`text-[16px] md:text-[17px] leading-[1.7] ${T.body} whitespace-pre-line max-w-[70ch]`}>{currentContent.vision.description}</p>
                 </div>
             </ContentSection>
 
@@ -3686,7 +3686,7 @@ const MainContent = ({
             <MediaSection content={currentContent} ui={currentContent.ui} setPage={setPage} />
 
             <ContentSection id="activities" title={currentContent.activities.title}>
-                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 md:gap-x-8 gap-y-8 md:gap-y-10">
                     {currentContent.activities.items.map((item, index) => (
                         <TileCard
                             key={`activity-${index}`}
@@ -3853,6 +3853,10 @@ export default function App() {
     useEffect(() => {
         ReactGA.initialize('G-CQ3EC5TLMM');
     }, []);
+
+    useEffect(() => {
+        document.documentElement.lang = lang;
+    }, [lang]);
 
     useEffect(() => {
         const currentPath = `/${page}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`;
