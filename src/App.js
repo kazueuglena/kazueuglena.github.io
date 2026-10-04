@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { motion, AnimatePresence, useScroll, useSpring, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import ReactGA from 'react-ga4';
 
 
@@ -26,21 +26,21 @@ const content = {
     ja: {
         nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
         ui: {
-            read_more: "READ MORE",
+            read_more: "Read more",
             click_for_details: "詳細を見る",
-            featured_project: "FEATURED PROJECT",
-            back: "BACK",
-            award_label: "AWARD",
-            grant_label: "GRANT",
-            copy: "COPY EMAIL",
+            featured_project: "Featured project",
+            back: "Back",
+            award_label: "Award",
+            grant_label: "Grant",
+            copy: "Copy email",
             click_to_copy: "Click to Copy",
-            copied: "COPIED",
-            view: "VIEW",
+            copied: "Copied",
+            view: "View",
             designed_with: "Designed with Botanical Intelligence.",
             back_to_main: "Back to Main Page",
-            scroll: "SCROLL",
+            scroll: "Scroll",
             view_website: "関連情報を見る",
-            view_all_insights: "VIEW ALL",
+            view_all_insights: "View all",
             insight_details: "詳細",
             all: "すべて"
         },
@@ -70,7 +70,7 @@ const content = {
                     date: "2025.07.15",
                     title: "ポートフォリオサイトを大幅リニューアル",
                     summary: "インタラクティブな機能を追加し、ウェブサイトを全面的に更新しました。",
-                    fullContent: "本日、ポートフォリオサイトを大幅にリニューアルしました。これまでの活動内容の拡充に加え、新たにNewsセクション、インタラクティブな活動マップなどを追加しました。これにより、私の活動の現在・過去・未来をより深く、そして楽しく知っていただけるようになったと信じています。ぜひサイト内を探索してみてください。<br><br><a href='https://sites.google.com/view/kazuhirokomatsu' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>以前のサイトはこちら</a>",
+                    fullContent: "本日、ポートフォリオサイトを大幅にリニューアルしました。これまでの活動内容の拡充に加え、新たにNewsセクション、インタラクティブな活動マップなどを追加しました。これにより、私の活動の現在・過去・未来をより深く、そして楽しく知っていただけるようになったと信じています。ぜひサイト内を探索してみてください。<br><br><a href='https://sites.google.com/view/kazuhirokomatsu' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>以前のサイトはこちら</a>",
                     images: getNewsImages("new_website")
                 },
                 {
@@ -207,7 +207,7 @@ const content = {
                     date: "2026.04.18",
                     title: "iOSアプリ「rHabit」をリリースしました",
                     summary: "集中作業中の「無意識のクセ（口開きなど）」をAIで検知し、改善をサポートするトラッキングアプリを開発・公開しました。",
-                    fullContent: "勉強やPC作業に深く集中している最中に、無意識に口が開いてしまうことはありませんか？顔認識AIを用いてこれら「無意識のクセ」をリアルタイムに検知し、改善をサポートするiOSアプリ「rHabit」を独自開発し、App Storeにて公開しました。<br><br>iPhoneのFace ID技術を活用した完全ローカル処理により、集中を阻害することなくトラッキングします。「どれくらい口が開いたら検知するか」などのカスタマイズも可能で、クセが出た瞬間に静かなバイブレーションで気づきを与えます。自身の研究活動など長時間の集中での実体験に基づき開発したアプリです。<br><br>詳細は<a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>公式サイト</a>、または<a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>App Store</a>からご覧いただけます。",
+                    fullContent: "勉強やPC作業に深く集中している最中に、無意識に口が開いてしまうことはありませんか？顔認識AIを用いてこれら「無意識のクセ」をリアルタイムに検知し、改善をサポートするiOSアプリ「rHabit」を独自開発し、App Storeにて公開しました。<br><br>iPhoneのFace ID技術を活用した完全ローカル処理により、集中を阻害することなくトラッキングします。「どれくらい口が開いたら検知するか」などのカスタマイズも可能で、クセが出た瞬間に静かなバイブレーションで気づきを与えます。自身の研究活動など長時間の集中での実体験に基づき開発したアプリです。<br><br>詳細は<a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>公式サイト</a>、または<a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>App Store</a>からご覧いただけます。",
                     images: getNewsImages("rHabit"),
                     link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769"
                 },
@@ -263,7 +263,7 @@ const content = {
                 }
                 */
             ],
-            view_more_button: "VIEW ALL",
+            view_more_button: "View all",
             details_button: "詳細"
         },
         research: {
@@ -483,7 +483,7 @@ const content = {
         },
         projects: {
             title: "Projects",
-            view_all_button: "VIEW ALL",
+            view_all_button: "View all",
             categories: {
                 foundation: { title: "Foundation (Past Projects)", period: "Past", status: "Done", color: "border-gray-500" },
                 engineering: { title: "Engineering", period: "2024-2025", status: "Done", color: "border-white/40" },
@@ -731,7 +731,7 @@ const content = {
         insights: {
             title: "Insights",
             description: "日々の研究や活動の中で感じた、小さな気づきや学びの記録。\n※ラフに書いているため文章がMessyです。",
-            view_more_button: "VIEW ALL",
+            view_more_button: "View all",
             items: [
                 {
                     id: "data-and-emotion",
@@ -923,22 +923,23 @@ const content = {
     en: {
         nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
         ui: {
-            read_more: "READ MORE",
+            read_more: "Read more",
             click_for_details: "Click for details",
-            featured_project: "FEATURED PROJECT",
-            back: "BACK",
-            award_label: "AWARD",
-            copy: "COPY EMAIL",
+            featured_project: "Featured project",
+            back: "Back",
+            award_label: "Award",
+            grant_label: "Grant",
+            copy: "Copy email",
             click_to_copy: "Click to Copy",
-            copied: "COPIED",
-            view: "VIEW",
+            copied: "Copied",
+            view: "View",
             designed_with: "Designed with Botanical Intelligence.",
             back_to_main: "Back to Main Page",
-            scroll: "SCROLL",
-            view_website: "VIEW RELATED INFO",
-            view_all_insights: "VIEW ALL",
+            scroll: "Scroll",
+            view_website: "View related info",
+            view_all_insights: "View all",
             insight_details: "Details",
-            all: "ALL"
+            all: "All"
         },
         hero: {
             title: "Intelligence is Connection",
@@ -966,7 +967,7 @@ const content = {
                     date: "July 15, 2025",
                     title: "Major Portfolio Site Renewal",
                     summary: "Refreshed the website with the concept of 'The Rhizome of Intelligence'.",
-                    fullContent: "Today, I've launched a major renewal of my portfolio site. Based on the concept 'The Rhizome of Intelligence,' it visually expresses the combination of plant networks and AI. Please see how my past, present, and future activities connect organically.<br><br><a href='https://sites.google.com/view/kazuhirokomatsu' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>Previous Site</a>",
+                    fullContent: "Today, I've launched a major renewal of my portfolio site. Based on the concept 'The Rhizome of Intelligence,' it visually expresses the combination of plant networks and AI. Please see how my past, present, and future activities connect organically.<br><br><a href='https://sites.google.com/view/kazuhirokomatsu' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>Previous Site</a>",
                     images: getNewsImages("new_website")
                 },
                 {
@@ -1103,7 +1104,7 @@ const content = {
                     date: "Apr 18, 2026",
                     title: "Released iOS App 'rHabit'",
                     summary: "Developed and published 'rHabit', an iOS tracking app that detects unconscious habits (like an open mouth) during focus using AI to support improvement.",
-                    fullContent: "Do you ever find your mouth opening unconsciously while deeply focused on work or study? I have developed and independently released 'rHabit', an iOS app that detects these 'unconscious habits' in real-time using facial recognition AI to support your improvement.<br><br>Utilizing the iPhone's Face ID technology for completely local processing, it tracks seamlessly without disturbing your concentration. You can customize settings like 'how wide the mouth opens to detect' and it provides a gentle vibration to make you aware the moment a habit occurs. This app was inspired by my own experiences during long hours of concentration in research activities.<br><br>You can find more details on the <a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>Official Website</a> or download it directly from the <a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-emerald-500 hover:underline'>App Store</a>.",
+                    fullContent: "Do you ever find your mouth opening unconsciously while deeply focused on work or study? I have developed and independently released 'rHabit', an iOS app that detects these 'unconscious habits' in real-time using facial recognition AI to support your improvement.<br><br>Utilizing the iPhone's Face ID technology for completely local processing, it tracks seamlessly without disturbing your concentration. You can customize settings like 'how wide the mouth opens to detect' and it provides a gentle vibration to make you aware the moment a habit occurs. This app was inspired by my own experiences during long hours of concentration in research activities.<br><br>You can find more details on the <a href='https://kazueuglena.github.io/rHabit/' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>Official Website</a> or download it directly from the <a href='https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US' target='_blank' rel='noopener noreferrer' class='text-[#a7b08f] hover:underline'>App Store</a>.",
                     images: [],
                     link: "https://apps.apple.com/jp/app/rhabit-%E7%84%A1%E6%84%8F%E8%AD%98%E3%81%AE%E3%82%AF%E3%82%BB%E6%94%B9%E5%96%84/id6761792769?l=en-US"
                 },
@@ -1148,7 +1149,7 @@ const content = {
                     link: "https://neuro2026.jnss.org/"
                 }
             ],
-            view_more_button: "VIEW ALL NEWS",
+            view_more_button: "View all news",
             details_button: "Details"
         },
         research: {
@@ -1369,7 +1370,7 @@ const content = {
         },
         projects: {
             title: "Projects",
-            view_all_button: "VIEW ALL",
+            view_all_button: "View all",
             categories: {
                 foundation: { title: "Foundation (Past Projects)", period: "Past", status: "Done", color: "border-gray-500" },
                 engineering: { title: "Engineering", period: "2024-2025", status: "Done", color: "border-white/40" },
@@ -1619,7 +1620,7 @@ const content = {
         insights: {
             title: "Insights",
             description: "Small discoveries and reflections from my daily research and activities.",
-            view_more_button: "VIEW ALL",
+            view_more_button: "View all",
             items: [
                 {
                     id: "data-and-emotion",
@@ -1968,7 +1969,7 @@ const BotanicalSynapse = () => {
                 ctx.moveTo(this.a.x, this.a.y);
                 ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, this.b.x, this.b.y);
                 ctx.lineWidth = 0.5 + this.weight * 1.5;
-                ctx.strokeStyle = this.weight > 0.4 ? `rgba(100, 116, 139,${this.weight * 0.4})` : `rgba(71, 85, 105,${this.weight * 0.2})`; // よりシックなグレー系の線
+                ctx.strokeStyle = this.weight > 0.4 ? `rgba(125, 120, 104,${this.weight * 0.4})` : `rgba(92, 88, 76,${this.weight * 0.2})`; // よりシックなグレー系の線
                 ctx.stroke();
             }
             isDead() { return this.weight < 0.02 && distSq(this.a, this.b) > CONFIG.connectDistSq; }
@@ -1994,7 +1995,7 @@ const BotanicalSynapse = () => {
                 const p = getBezierPos(this.from === this.edge.b ? 1 - this.t : this.t, ...Object.values(this.edge.curveParams));
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, Math.max(1, 2.5 - this.gen * 0.5), 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(160, 240, 160,${0.8 - this.gen * 0.15})`;
+                ctx.fillStyle = `rgba(214, 208, 186,${0.8 - this.gen * 0.15})`;
                 ctx.fill();
             }
         }
@@ -2005,7 +2006,7 @@ const BotanicalSynapse = () => {
             draw() {
                 if (this.life <= 0) return;
                 ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(100,200,120,${this.life * 0.2})`; ctx.stroke();
+                ctx.strokeStyle = `rgba(167,176,143,${this.life * 0.2})`; ctx.stroke();
             }
         }
 
@@ -2312,7 +2313,7 @@ const NodeIntro = ({ onFinish }) => {
                 tctx.beginPath();
                 tctx.moveTo(px, py);
                 tctx.lineTo(b.x, b.y);
-                tctx.strokeStyle = `rgba(140, 220, 180, ${Math.max(0.07, 0.3 - b.depth * 0.07)})`;
+                tctx.strokeStyle = `rgba(150, 148, 130, ${Math.max(0.07, 0.3 - b.depth * 0.07)})`;
                 tctx.lineWidth = Math.max(0.4, 1.6 - b.depth * 0.4);
                 tctx.stroke();
 
@@ -2334,12 +2335,12 @@ const NodeIntro = ({ onFinish }) => {
             const seedR = 4.5 * seedScale * (1 + Math.sin(t * 3.2) * 0.18);
             const glowR = Math.max(1, seedR * 9);
             const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowR);
-            grad.addColorStop(0, `rgba(110, 231, 183, ${0.5 * dim})`);
-            grad.addColorStop(1, 'rgba(110, 231, 183, 0)');
+            grad.addColorStop(0, `rgba(214, 208, 186, ${0.5 * dim})`);
+            grad.addColorStop(1, 'rgba(214, 208, 186, 0)');
             ctx.fillStyle = grad;
             ctx.beginPath(); ctx.arc(cx, cy, glowR, 0, Math.PI * 2); ctx.fill();
             ctx.beginPath(); ctx.arc(cx, cy, Math.max(0.5, seedR), 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(236, 253, 245, ${0.95 * dim})`;
+            ctx.fillStyle = `rgba(237, 230, 214, ${0.95 * dim})`;
             ctx.fill();
 
             // 末端ノードの明滅 + 経路を走る信号
@@ -2348,7 +2349,7 @@ const NodeIntro = ({ onFinish }) => {
                 const tw = 0.5 + Math.sin(t * 2.4 + n.phase) * 0.5;
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(52, 211, 153, ${0.25 + 0.45 * tw})`;
+                ctx.fillStyle = `rgba(167, 176, 143, ${0.25 + 0.45 * tw})`;
                 ctx.fill();
             });
 
@@ -2362,8 +2363,8 @@ const NodeIntro = ({ onFinish }) => {
                 const p = s.b.points[s.i | 0];
                 if (!p) { signals.splice(i, 1); continue; }
                 const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 7);
-                g.addColorStop(0, 'rgba(190, 242, 215, 0.9)');
-                g.addColorStop(1, 'rgba(190, 242, 215, 0)');
+                g.addColorStop(0, 'rgba(222, 216, 196, 0.9)');
+                g.addColorStop(1, 'rgba(222, 216, 196, 0)');
                 ctx.fillStyle = g;
                 ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, Math.PI * 2); ctx.fill();
             }
@@ -2374,7 +2375,7 @@ const NodeIntro = ({ onFinish }) => {
                 bloom += 0.03;
                 ctx.beginPath();
                 ctx.arc(cx, cy, bloom * maxR * 2.4, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(110, 231, 183, ${Math.max(0, 0.4 - bloom * 0.4)})`;
+                ctx.strokeStyle = `rgba(214, 208, 186, ${Math.max(0, 0.4 - bloom * 0.4)})`;
                 ctx.lineWidth = 1;
                 ctx.stroke();
             }
@@ -2390,7 +2391,7 @@ const NodeIntro = ({ onFinish }) => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-50 bg-black overflow-hidden cursor-pointer select-none"
+            className="fixed inset-0 z-50 bg-[#15140f] overflow-hidden cursor-pointer select-none"
             exit={{ opacity: 0, scale: 1.045 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             onClick={finish}
@@ -2399,7 +2400,7 @@ const NodeIntro = ({ onFinish }) => {
 
             {/* タイトル: 1文字ずつブラー解除で浮かび上がる */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6">
-                <h1 className="text-xl md:text-4xl font-normal text-white font-['Syne',sans-serif] tracking-[0.14em] text-center [text-shadow:0_0_24px_rgba(16,185,129,0.25)]">
+                <h1 className="text-[28px] md:text-[48px] font-medium tracking-[-0.01em] text-[#ede6d6] text-center">
                     {(() => {
                         let charIdx = 0;
                         return INTRO_TITLE.split(' ').map((word, wi, arr) => {
@@ -2431,7 +2432,7 @@ const NodeIntro = ({ onFinish }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1.2, delay: reduced ? 0.2 : 2.5 }}
-                    className="mt-6 text-[10px] md:text-[11px] text-emerald-300/70 font-mono uppercase tracking-[0.4em]"
+                    className="mt-4 text-[14px] md:text-[15px] text-[#a39c89]"
                 >
                     Kazuhiro Komatsu
                 </motion.p>
@@ -2442,7 +2443,7 @@ const NodeIntro = ({ onFinish }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.0, delay: 0.5 }}
-                className="absolute bottom-24 left-0 w-full text-center z-10 text-gray-500 font-mono text-[10px] md:text-xs tracking-[0.25em] uppercase"
+                className="absolute bottom-24 left-0 w-full text-center z-10 text-[#6f6a5c] text-[13px] md:text-[14px]"
             >
                 Connecting{' '}
                 <AnimatePresence mode="wait">
@@ -2452,7 +2453,7 @@ const NodeIntro = ({ onFinish }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.18 }}
-                        className="text-emerald-400 inline-block"
+                        className="text-[#a7b08f] inline-block"
                     >
                         {INTRO_WORDS[wordIndex]}
                     </motion.span>
@@ -2467,7 +2468,7 @@ const NodeIntro = ({ onFinish }) => {
                         animate={{ opacity: 0.6 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="absolute bottom-8 right-8 text-[10px] text-gray-400 font-mono tracking-[0.3em] uppercase"
+                        className="absolute bottom-8 right-8 text-[13px] text-[#a39c89]"
                     >
                         Tap to skip
                     </motion.div>
@@ -2502,7 +2503,7 @@ const ChevronDownIcon = ({ isExpanded }) => (
         viewBox="0 0 24 24"
         strokeWidth={2}
         stroke="currentColor"
-        className="w-5 h-5 text-gray-400"
+        className="w-5 h-5 text-[#a39c89] flex-shrink-0 mt-1"
         animate={{ rotate: isExpanded ? 180 : 0 }}
         transition={{ duration: 0.3 }}
     >
@@ -2542,104 +2543,24 @@ const ArrowRightIcon = (props) => (
 
 
 // --- カスタムカーソルコンポーネント (Dot + Trailing Ring) ---
-const CustomCursor = () => {
-    const dotRef = useRef(null);
-    const ringRef = useRef(null);
-    const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-    useEffect(() => {
-        setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    }, []);
-
-    useEffect(() => {
-        if (isTouchDevice) return;
-        const dot = dotRef.current;
-        const ring = ringRef.current;
-        if (!dot || !ring) return;
-
-        let x = -100, y = -100, rx = -100, ry = -100;
-        let hovering = false, down = false, frameId;
-
-        const onMove = (e) => {
-            x = e.clientX; y = e.clientY;
-            hovering = !!e.target.closest('[data-hoverable="true"], a, button');
-        };
-        const onDown = () => { down = true; };
-        const onUp = () => { down = false; };
-
-        const loop = () => {
-            // リングはドットを遅れて追従する
-            rx += (x - rx) * 0.16;
-            ry += (y - ry) * 0.16;
-
-            dot.style.transform = `translate3d(${x - 2}px, ${y - 2}px, 0)`;
-
-            const size = hovering ? 38 : down ? 16 : 26;
-            ring.style.width = `${size}px`;
-            ring.style.height = `${size}px`;
-            ring.style.transform = `translate3d(${rx - size / 2}px, ${ry - size / 2}px, 0)`;
-            ring.style.borderColor = hovering ? 'rgba(52, 211, 153, 0.6)' : 'rgba(255, 255, 255, 0.2)';
-            ring.style.backgroundColor = hovering ? 'rgba(16, 185, 129, 0.06)' : 'transparent';
-
-            frameId = requestAnimationFrame(loop);
-        };
-        loop();
-
-        window.addEventListener('mousemove', onMove, { passive: true });
-        window.addEventListener('mousedown', onDown);
-        window.addEventListener('mouseup', onUp);
-        return () => {
-            cancelAnimationFrame(frameId);
-            window.removeEventListener('mousemove', onMove);
-            window.removeEventListener('mousedown', onDown);
-            window.removeEventListener('mouseup', onUp);
-        };
-    }, [isTouchDevice]);
-
-    if (isTouchDevice) return null;
-
-    return (
-        <>
-            <div
-                ref={dotRef}
-                aria-hidden="true"
-                className="fixed top-0 left-0 w-1 h-1 rounded-full bg-emerald-300 pointer-events-none z-[9999] hidden md:block"
-                style={{ willChange: 'transform' }}
-            />
-            <div
-                ref={ringRef}
-                aria-hidden="true"
-                className="fixed top-0 left-0 rounded-full border pointer-events-none z-[9998] hidden md:block transition-[width,height,border-color,background-color] duration-300 ease-out"
-                style={{ willChange: 'transform' }}
-            />
-        </>
-    );
+// --- Design tokens (warm charcoal, one muted accent; Archivo everywhere) ---
+const T = {
+    bg: 'bg-[#15140f]',
+    surf: 'bg-[#1b1a14]',
+    fg: 'text-[#ede6d6]',
+    body: 'text-[#d6cfbf]',
+    muted: 'text-[#a39c89]',
+    faint: 'text-[#6f6a5c]',
+    line: 'border-[#2e2b22]',
+    acc: 'text-[#a7b08f]',
+    accBorder: 'border-[#a7b08f]',
+    hoverAcc: 'hover:text-[#a7b08f]',
+    hoverFg: 'hover:text-[#ede6d6]',
 };
 
-// --- スクロールプログレスバー ---
-const ScrollProgress = () => {
-    const { scrollYProgress } = useScroll();
-    const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
-    return (
-        <motion.div
-            aria-hidden="true"
-            style={{ scaleX }}
-            className="fixed top-0 left-0 right-0 h-px origin-left z-[60] bg-emerald-400/90 pointer-events-none"
-        />
-    );
-};
+const CONTAINER = 'max-w-5xl mx-auto px-5 sm:px-8';
 
-// --- グラデーションテキストコンポーネント (Green Neon) ---
-const GradientText = ({ children, className }) => {
-    return (
-        <span className={`bg-gradient-to-r from-emerald-400 via-green-400 to-lime-400 text-transparent bg-clip-text ${className}`}>
-            {children}
-        </span>
-    );
-};
-
-
-// --- Header (Minimal) ---
+// --- Header ---
 const Header = ({ lang, setLang, content, setPage }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -2650,7 +2571,6 @@ const Header = ({ lang, setLang, content, setPage }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Lock body scroll when mobile menu is open
     useEffect(() => {
         if (isMobileMenuOpen) lockBodyScroll(); else unlockBodyScroll();
         return () => unlockBodyScroll();
@@ -2666,68 +2586,59 @@ const Header = ({ lang, setLang, content, setPage }) => {
 
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-black/85 backdrop-blur-md py-4 border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.4)]' : 'bg-transparent py-8 border-b border-transparent'}`}>
-                <nav className="max-w-[90%] mx-auto flex items-center justify-between">
-                    <span data-hoverable="true" className="text-white font-normal text-sm tracking-[0.2em] cursor-pointer font-['Syne',sans-serif]" onClick={() => scrollToSection('hero')}>Kazuhiro<span className="text-emerald-400">.</span>K</span>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b ${isScrolled ? `bg-[#15140f]/90 backdrop-blur-sm ${T.line}` : 'bg-transparent border-transparent'}`}>
+                <nav className={`${CONTAINER} flex items-center justify-between h-16`}>
+                    <span onClick={() => scrollToSection('hero')} className={`text-[15px] font-medium ${T.fg} cursor-pointer`}>Kazuhiro Komatsu</span>
                     <div className="flex items-center gap-6">
-                        <div className="hidden md:flex items-center space-x-6">
+                        <div className="hidden lg:flex items-center gap-5">
                             {Object.entries(content.nav).map(([key, value]) => (
-                                <a data-hoverable="true" key={key} onClick={() => scrollToSection(key)} className="text-gray-400 hover:text-emerald-300 text-xs font-medium cursor-pointer transition-colors uppercase tracking-[0.1em]"><AnimatedText text={value} /></a>
+                                <a key={key} onClick={() => scrollToSection(key)} className={`text-[14px] ${T.muted} ${T.hoverFg} cursor-pointer transition-colors`}>{value}</a>
                             ))}
                         </div>
-                        <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2">
+                        <button onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className={`text-[14px] ${T.muted} ${T.hoverFg} flex items-center gap-1.5 transition-colors`}>
                             <GlobeIcon />
-                            <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
+                            <span>{lang === 'ja' ? 'EN' : 'JP'}</span>
                         </button>
-                        {/* Mobile hamburger button */}
                         <button
-                            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+                            className="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             aria-label="Menu"
                         >
-                            <motion.span animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="block w-5 h-px bg-gray-300 transition-colors" />
-                            <motion.span animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-5 h-px bg-gray-300 transition-colors" />
-                            <motion.span animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="block w-5 h-px bg-gray-300 transition-colors" />
+                            <motion.span animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="block w-5 h-px bg-[#ede6d6]" />
+                            <motion.span animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-5 h-px bg-[#ede6d6]" />
+                            <motion.span animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="block w-5 h-px bg-[#ede6d6]" />
                         </button>
                     </div>
                 </nav>
             </header>
 
-            {/* Mobile fullscreen menu overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center md:hidden"
+                        transition={{ duration: 0.25 }}
+                        className="fixed inset-0 z-40 bg-[#15140f]/95 flex flex-col items-start justify-center lg:hidden"
                         onClick={() => setIsMobileMenuOpen(false)}
                     >
-                        <nav className="flex flex-col items-center gap-6" onClick={(e) => e.stopPropagation()}>
+                        <nav className={`${CONTAINER} w-full flex flex-col items-start gap-1`} onClick={(e) => e.stopPropagation()}>
                             {Object.entries(content.nav).map(([key, value], index) => (
                                 <motion.a
                                     key={key}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 8 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                                    transition={{ duration: 0.25, delay: index * 0.03 }}
                                     onClick={() => scrollToSection(key)}
-                                    className="text-gray-400 hover:text-white text-sm cursor-pointer transition-colors uppercase tracking-[0.25em] py-2 px-6"
+                                    className={`text-[22px] font-medium ${T.fg} ${T.hoverAcc} cursor-pointer transition-colors py-1.5`}
                                 >
                                     {value}
                                 </motion.a>
                             ))}
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.5 }}
-                                className="mt-8 pt-8 border-t border-white/10"
-                            >
-                                <button onClick={() => { setLang(lang === 'ja' ? 'en' : 'ja'); setIsMobileMenuOpen(false); }} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 py-2 px-6">
-                                    <GlobeIcon />
-                                    {lang === 'ja' ? 'EN' : 'JP'}
-                                </button>
-                            </motion.div>
+                            <button onClick={() => { setLang(lang === 'ja' ? 'en' : 'ja'); setIsMobileMenuOpen(false); }} className={`mt-6 pt-6 border-t ${T.line} w-full text-left text-[15px] ${T.muted} ${T.hoverFg} flex items-center gap-2`}>
+                                <GlobeIcon />
+                                {lang === 'ja' ? 'English' : '日本語'}
+                            </button>
                         </nav>
                     </motion.div>
                 )}
@@ -2736,182 +2647,67 @@ const Header = ({ lang, setLang, content, setPage }) => {
     );
 };
 
-// --- ヒーローセクション (Minimal & Bottom-Right) ---
+
+// --- Hero (bottom-right, one quiet fade) ---
 const HeroSection = ({ content }) => {
-    // マウスに合わせた控えめなパララックス
-    const mx = useMotionValue(0);
-    const my = useMotionValue(0);
-    const px = useSpring(mx, { stiffness: 50, damping: 18, mass: 0.6 });
-    const py = useSpring(my, { stiffness: 50, damping: 18, mass: 0.6 });
-
-    const handleMouseMove = (e) => {
-        mx.set((e.clientX / window.innerWidth - 0.5) * -16);
-        my.set((e.clientY / window.innerHeight - 0.5) * -10);
-    };
-
     const words = content.hero.title.split(' ');
     const leading = words.slice(0, -1).join(' ');
     const lastWord = words[words.length - 1];
-    const lastWordDelay = 0.4 + (leading.length + 1) * 0.04 + 0.15;
 
     return (
-        <section id="hero" className="h-[100dvh] w-full relative overflow-hidden" onMouseMove={handleMouseMove}>
-            {/* Background canvas is rendered globally at the App level */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
-
-            {/* コンテンツを右下に配置 (Minimal) */}
-            <motion.div style={{ x: px, y: py }} className="absolute bottom-12 right-12 md:bottom-20 md:right-20 z-10 pointer-events-none select-none text-right">
-                <h1 className="text-2xl md:text-4xl font-normal tracking-[0.12em] mb-5 text-white font-['Syne',sans-serif] inline-block [text-shadow:0_2px_30px_rgba(0,0,0,0.9)]">
-                    {(() => {
-                        let charIdx = 0;
-                        return leading.split(' ').map((word, wi, arr) => {
-                            const chars = word.split('').map((ch) => {
-                                const i = charIdx++;
-                                return (
-                                    <motion.span
-                                        key={i}
-                                        className="inline-block"
-                                        initial={{ opacity: 0, y: '0.4em', filter: 'blur(6px)' }}
-                                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                                        transition={{ duration: 0.8, delay: 0.4 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                                    >
-                                        {ch}
-                                    </motion.span>
-                                );
-                            });
-                            charIdx++; // スペース分のディレイを保つ
-                            return (
-                                <React.Fragment key={wi}>
-                                    <span className="inline-block whitespace-nowrap">{chars}</span>
-                                    {wi < arr.length - 1 && ' '}
-                                </React.Fragment>
-                            );
-                        });
-                    })()}
-                    {leading && ' '}
-                    <motion.span
-                        className="inline-block bg-gradient-to-r from-emerald-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text"
-                        initial={{ opacity: 0, scale: 1.06, filter: 'blur(10px)' }}
-                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                        transition={{ duration: 1.1, delay: lastWordDelay, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                        {lastWord}
-                    </motion.span>
-                </h1>
-                <div className="flex flex-col items-end gap-2">
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1.2, delay: 1.6 }}
-                        className="text-[11px] md:text-xs text-emerald-400/90 font-mono tracking-[0.4em] uppercase [text-shadow:0_1px_12px_rgba(0,0,0,0.8)]"
-                    >
-                        <AnimatedText text={content.hero.subtitle} />
-                    </motion.p>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1.0, delay: 2.0 }}
-                        className="text-[11px] text-gray-400 font-mono tracking-widest mt-2"
-                    >
-                        <AnimatedText text={content.hero.name_label} />
-                    </motion.div>
-                </div>
-            </motion.div>
-
-            {/* Scroll Indicator (Minimal) */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, y: [0, 5, 0] }}
-                transition={{ duration: 3, delay: 3, repeat: Infinity }}
-                className="absolute bottom-8 left-8 text-gray-500 pointer-events-none flex items-center gap-3"
-            >
-                <span className="text-xs tracking-widest font-mono">SCROLL</span>
-                <span className="block w-10 h-px bg-gradient-to-r from-emerald-500/60 to-transparent" />
-            </motion.div>
+        <section id="hero" className="min-h-[100dvh] w-full relative flex items-end">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#15140f] via-transparent to-transparent pointer-events-none" />
+            <div className={`${CONTAINER} relative z-10 w-full pb-16 md:pb-24 flex justify-end`}>
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-right max-w-2xl"
+                >
+                    <h1 className={`text-[40px] md:text-[64px] font-medium leading-[1.02] tracking-[-0.015em] ${T.fg} mb-5 [text-wrap:balance]`}>
+                        {leading}{leading && ' '}<span className={T.acc}>{lastWord}</span>
+                    </h1>
+                    <p className={`text-[16px] md:text-[17px] ${T.muted}`}>{content.hero.subtitle}</p>
+                    <p className={`text-[15px] ${T.fg} mt-1.5`}>{content.hero.name_label}</p>
+                </motion.div>
+            </div>
         </section>
     );
 };
 
-// --- Research Section (Split Grants & Awards) ---
+
+// --- Research (year / title / result rows) ---
+const ResearchRow = ({ item, category, onDetailSelect }) => (
+    <div
+        onClick={() => onDetailSelect({ ...item, category })}
+        className={`group grid grid-cols-[64px_1fr] md:grid-cols-[72px_1fr_auto] gap-x-4 gap-y-1 items-baseline py-3.5 border-b ${T.line} cursor-pointer`}
+    >
+        <span className={`text-[15px] ${T.muted} tabular-nums`}>{item.year}</span>
+        <span className={`text-[16px] md:text-[17px] ${T.fg} ${T.hoverAcc} leading-snug transition-colors`}>{item.title}</span>
+        {item.prize && <span className={`col-start-2 md:col-start-3 text-[14px] ${T.acc} md:text-right md:max-w-[22rem] leading-snug`}>{item.prize}</span>}
+    </div>
+);
+
 const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
     const [isExpanded, setIsExpanded] = useState(false);
-
-    // Sort items by year descending
     const sortedItems = [...items].sort((a, b) => parseInt(b.year) - parseInt(a.year));
-
-    // Initial view shows latest 3
-    const visibleItems = sortedItems.slice(0, 3);
-    const hiddenItems = sortedItems.slice(3);
-
-    const showButton = hiddenItems.length > 0;
+    const shown = isExpanded ? sortedItems : sortedItems.slice(0, 3);
 
     return (
-        <div className="mb-16 last:mb-0">
-            <h3 className="text-sm font-bold text-gray-300 tracking-[0.2em] uppercase mb-8 ml-2 border-l-2 border-emerald-500/50 pl-4">{title}</h3>
-            <div className="flex flex-col gap-1">
-                {/* Always visible items */}
-                {visibleItems.map((item, index) => (
-                    <div
-                        key={`${title}-visible-${index}-${item.title}`}
-                        data-hoverable="true"
-                        onClick={() => onDetailSelect({ ...item, category })}
-                        className="group flex flex-col md:flex-row md:items-center justify-between cursor-pointer border-b border-white/5 last:border-0 bg-black/50 backdrop-blur-sm hover:bg-black/70 p-6 rounded-sm border-l-2 border-l-transparent hover:border-l-emerald-500/60 transition-all duration-300"
-                    >
-                        <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 flex-1">
-                            <span className="font-mono text-emerald-600/70 text-xs tracking-widest min-w-[3rem] group-hover:text-emerald-500 transition-colors"><AnimatedText text={item.year} /></span>
-                            <div className="flex-1">
-                                <h4 className="text-sm md:text-base font-medium text-gray-200 group-hover:text-white transition-colors mb-1 md:mb-0 tracking-wide"><AnimatedText text={item.title} /></h4>
-                            </div>
-                        </div>
-                        <div className="mt-2 md:mt-0 md:pl-8 flex items-center justify-between md:justify-end gap-4 min-w-[30%]">
-                            {item.prize && <span className="text-xs text-gray-500 group-hover:text-emerald-400 transition-colors text-right flex-1 tracking-wider uppercase"><AnimatedText text={item.prize} /></span>}
-                            {item.link && item.link.trim() !== "" && <ExternalLinkIcon className="w-3 h-3 text-gray-600 group-hover:text-white transition-colors" />}
-                        </div>
-                    </div>
+        <div className="mb-10 last:mb-0">
+            <h3 className={`text-[15px] font-medium ${T.fg} mb-1`}>{title}</h3>
+            <div className={`border-t ${T.line}`}>
+                {shown.map((item, index) => (
+                    <ResearchRow key={`${title}-${index}-${item.title}`} item={item} category={category} onDetailSelect={onDetailSelect} />
                 ))}
-
-                {/* Expandable items container */}
-                <AnimatePresence>
-                    {isExpanded && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-                            className="overflow-hidden bg-white/5 rounded-b-sm"
-                        >
-                            {hiddenItems.map((item, index) => (
-                                <div
-                                    key={`${title}-hidden-${index}-${item.title}`}
-                                    data-hoverable="true"
-                                    onClick={() => onDetailSelect({ ...item, category })}
-                                    className="group flex flex-col md:flex-row md:items-center justify-between cursor-pointer border-b border-white/5 last:border-0 bg-black/50 backdrop-blur-sm hover:bg-black/70 p-6 rounded-sm border-l-2 border-l-transparent hover:border-l-emerald-500/60 transition-all duration-300"
-                                >
-                                    <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 flex-1">
-                                        <span className="font-mono text-emerald-600/70 text-xs tracking-widest min-w-[3rem] group-hover:text-emerald-500 transition-colors"><AnimatedText text={item.year} /></span>
-                                        <div className="flex-1">
-                                            <h4 className="text-sm md:text-base font-medium text-gray-200 group-hover:text-white transition-colors mb-1 md:mb-0 tracking-wide"><AnimatedText text={item.title} /></h4>
-                                        </div>
-                                    </div>
-                                    <div className="mt-2 md:mt-0 md:pl-8 flex items-center justify-between md:justify-end gap-4 min-w-[30%]">
-                                        {item.prize && <span className="text-xs text-gray-500 group-hover:text-emerald-400 transition-colors text-right flex-1 tracking-wider uppercase"><AnimatedText text={item.prize} /></span>}
-                                        {item.link && item.link.trim() !== "" && <ExternalLinkIcon className="w-3 h-3 text-gray-600 group-hover:text-white transition-colors" />}
-                                    </div>
-                                </div>
-                            ))}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
             </div>
-            {showButton && (
-                <div className="mt-4 text-center">
-                    <button
-                        onClick={() => setIsExpanded(!isExpanded)}
-                        className="text-xs text-gray-500 hover:text-white tracking-widest uppercase transition-colors p-2"
-                    >
-                        {isExpanded ? "Close" : "View More"}
-                    </button>
-                </div>
+            {sortedItems.length > 3 && (
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className={`mt-3 text-[14px] ${T.muted} ${T.hoverFg} transition-colors`}
+                >
+                    {isExpanded ? 'Show fewer' : `Show all (${sortedItems.length})`}
+                </button>
             )}
         </div>
     );
@@ -2920,144 +2716,74 @@ const ResearchListGroup = ({ title, items, category, onDetailSelect }) => {
 const ResearchSection = ({ content, onDetailSelect, ui }) => {
     return (
         <ContentSection id="research" title={content.research.title}>
-            <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-16">
-                    <p className="text-sm text-gray-300 tracking-[0.1em] leading-7 bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-5 py-3 inline-block"><AnimatedText text={content.research.description} /></p>
-                </div>
-
-                <ResearchListGroup title={content.research.heading_grants} items={content.research.grants} category="grant" onDetailSelect={onDetailSelect} />
-                <ResearchListGroup title={content.research.heading_awards} items={content.research.awards} category="award" onDetailSelect={onDetailSelect} />
-            </div>
+            <p className={`text-[16px] md:text-[17px] ${T.body} leading-[1.65] max-w-[64ch] mb-10`}>{content.research.description}</p>
+            <ResearchListGroup title={content.research.heading_grants} items={content.research.grants} category="grant" onDetailSelect={onDetailSelect} />
+            <ResearchListGroup title={content.research.heading_awards} items={content.research.awards} category="award" onDetailSelect={onDetailSelect} />
         </ContentSection>
-    )
-}
-
-
-// --- セクションタイトル (1文字ずつリビール) ---
-const sectionTitleContainer = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.012, delayChildren: 0 } }
-};
-const sectionTitleChar = {
-    hidden: { opacity: 0, y: 4 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
+    );
 };
 
-const SectionTitle = ({ title }) => (
-    <AnimatePresence mode="wait">
-        <motion.span
-            key={title}
-            variants={sectionTitleContainer}
-            initial="hidden"
-            whileInView="visible"
-            exit={{ opacity: 0, transition: { duration: 0.25 } }}
-            viewport={{ once: true, amount: 0.5 }}
-            className="inline-block"
-        >
-            {title.split(' ').map((word, wi, arr) => (
-                <React.Fragment key={wi}>
-                    <span className="inline-block whitespace-nowrap">
-                        {word.split('').map((ch, ci) => (
-                            <motion.span key={ci} variants={sectionTitleChar} className="inline-block">
-                                {ch}
-                            </motion.span>
-                        ))}
-                    </span>
-                    {wi < arr.length - 1 && ' '}
-                </React.Fragment>
-            ))}
-        </motion.span>
-    </AnimatePresence>
-);
 
-// --- 通常のセクション (Minimal) ---
+
+// --- Section shell: big left-aligned heading with a rule ---
+const SectionTitle = ({ title }) => <span>{title}</span>;
+
 const ContentSection = ({ id, title, children }) => (
-    <section id={id.toLowerCase()} className={`py-16 md:py-32 relative`}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 relative z-10">
-            <div className="text-center mb-12 md:mb-24">
-                <h2 className="text-xl md:text-3xl font-normal text-gray-100 font-['Syne',sans-serif] tracking-[0.25em] uppercase">
-                    <SectionTitle title={title} />
-                </h2>
-                <motion.div
-                    initial={{ scaleX: 0, opacity: 0 }}
-                    whileInView={{ scaleX: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    className="mt-5 mx-auto w-16 h-px bg-gradient-to-r from-transparent via-emerald-500/80 to-transparent"
-                />
-            </div>
+    <section id={id.toLowerCase()} className="py-14 md:py-20 relative">
+        <div className={`${CONTAINER} relative z-10`}>
+            <h2 className={`text-[28px] md:text-[34px] font-medium tracking-[-0.01em] ${T.fg} pb-3 mb-8 md:mb-10 border-b ${T.line}`}>
+                <SectionTitle title={title} />
+            </h2>
             {children}
         </div>
     </section>
 );
 
-// --- NewsSection (Tile Layout) ---
+
+// --- News: one lead story + a dated list ---
+const parseNewsDate = (dateStr) => {
+    if (!dateStr) return new Date(0);
+    const parts = dateStr.split('.');
+    if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
+    return new Date(dateStr);
+};
+
 const NewsSection = ({ content, onNewsSelect, setPage, ui }) => {
-    // Sort news items by date (newest first) - Safe parsing for YYYY.MM.DD
-    const parseDate = (dateStr) => {
-        if (!dateStr) return new Date(0);
-        const parts = dateStr.split('.');
-        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
-        return new Date(dateStr);
-    };
-    const sortedNews = [...content.news.items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    const sortedNews = [...content.news.items].sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
+    const lead = sortedNews[0];
+    const rest = sortedNews.slice(1, 4);
+    const thumbOf = (item) => (item.images && item.images.length > 0 ? item.images[0] : null);
 
     return (
         <ContentSection id="news" title={content.news.title}>
-            <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-6 min-h-[600px] md:min-h-[500px]">
-                {sortedNews.slice(0, 3).map((item, index) => {
-                    // First item is large (2x2 on desktop)
-                    const isLarge = index === 0;
-                    const thumbnail = item.images && item.images.length > 0 ? item.images[0] : null;
-
-                    return (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            onClick={() => onNewsSelect(item)}
-                            data-hoverable="true"
-                            className={`
-                                relative overflow-hidden group cursor-pointer rounded-lg border border-white/10 hover:border-emerald-500/30 p-6 flex flex-col justify-end
-                                min-h-[350px] md:min-h-0
-                                ${isLarge ? 'md:col-span-2 md:row-span-2' : 'md:col-span-1 md:row-span-1'}
-                                bg-neutral-900/40 hover:bg-neutral-800/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)]
-                            `}
-                        >
-                            {thumbnail ? (
-                                <>
-                                    <img src={thumbnail} alt="News" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-700 grayscale hover:grayscale-0" loading="lazy" decoding="async" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
-                                </>
-                            ) : (
-                                <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <span className="text-[80px] leading-none font-bold text-white">0{index + 1}</span>
-                                </div>
-                            )}
-
-                            <div className="relative z-10">
-                                <p className="text-xs text-emerald-500/80 font-mono mb-2 tracking-widest"><AnimatedText text={item.date} /></p>
-                                <h3 className={`${isLarge ? 'text-xl md:text-3xl' : 'text-sm md:text-lg'} font-normal text-gray-100 group-hover:text-white transition-colors tracking-wide leading-snug mb-4`}>
-                                    <AnimatedText text={item.title} />
-                                </h3>
-                                <div className="text-xs text-gray-500 uppercase tracking-widest flex items-center gap-2 group-hover:text-emerald-400 transition-colors">
-                                    {ui.read_more} <div className="transform group-hover:translate-x-1 transition-transform"><ArrowRightIcon className="w-3 h-3" /></div>
-                                </div>
+            <div className="grid md:grid-cols-[1.4fr_1fr] gap-8 md:gap-10">
+                {lead && (
+                    <article onClick={() => onNewsSelect(lead)} className="group cursor-pointer min-w-0">
+                        {thumbOf(lead) && (
+                            <div className={`aspect-[16/10] overflow-hidden ${T.surf} mb-4`}>
+                                <img src={thumbOf(lead)} alt="" className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90" loading="lazy" decoding="async" />
                             </div>
-                        </motion.div>
-                    );
-                })}
-            </div>
-            <div className="text-right mt-12">
-                <a onClick={() => setPage('all-news')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
-                    <AnimatedText text={content.news.view_more_button} />
-                </a>
+                        )}
+                        <p className={`text-[14px] ${T.muted} tabular-nums`}>{lead.date}</p>
+                        <h3 className={`text-[24px] md:text-[30px] font-medium leading-[1.15] tracking-[-0.01em] ${T.fg} ${T.hoverAcc} mt-1.5 transition-colors [text-wrap:balance]`}>{lead.title}</h3>
+                    </article>
+                )}
+                <div className="flex flex-col min-w-0">
+                    {rest.map((item, index) => (
+                        <article key={item.id || index} onClick={() => onNewsSelect(item)} className={`group cursor-pointer py-4 border-t ${T.line} ${index === 0 ? 'md:border-t-0 md:pt-0' : ''}`}>
+                            <p className={`text-[14px] ${T.muted} tabular-nums`}>{item.date}</p>
+                            <h3 className={`text-[18px] md:text-[19px] font-medium leading-[1.3] ${T.fg} ${T.hoverAcc} mt-1 transition-colors`}>{item.title}</h3>
+                        </article>
+                    ))}
+                    <div className={`mt-auto pt-5 border-t ${T.line}`}>
+                        <a onClick={() => setPage('all-news')} className={`text-[15px] ${T.acc} ${T.hoverFg} cursor-pointer transition-colors`}>{content.news.view_more_button} →</a>
+                    </div>
+                </div>
             </div>
         </ContentSection>
     );
 };
+
 
 // --- Newsモーダル (Dark Theme) ---
 // Lock body scroll while preserving (and restoring) the scroll position.
@@ -3093,46 +2819,41 @@ const NewsModal = ({ newsItem, onClose, ui }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] flex items-center justify-center p-3 md:p-4"
+                    className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-3 md:p-6"
                     onClick={onClose}
                 >
                     <motion.div
-                        initial={{ scale: 0.98, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.98, opacity: 0 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        className="bg-black/80 rounded-sm p-5 md:p-12 max-w-3xl w-full border border-white/10 shadow-2xl relative max-h-[95dvh] flex flex-col ring-1 ring-white/5"
+                        initial={{ y: 12, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 12, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className={`${T.surf} border ${T.line} rounded-sm p-6 md:p-10 max-w-3xl w-full relative max-h-[92dvh] flex flex-col`}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <button data-hoverable="true" onClick={onClose} className="absolute top-4 right-4 md:top-6 md:right-6 text-gray-500 hover:text-white z-10 transition-colors bg-black/50 p-3 rounded-full backdrop-blur-sm min-w-[44px] min-h-[44px] flex items-center justify-center"><CloseIcon /></button>
-                        <div key={newsItem.id || newsItem.title} className="overflow-y-auto custom-scrollbar pr-4">
-                            <p className="text-xs text-emerald-500 font-mono mb-4 tracking-widest"><AnimatedText text={newsItem.date} /></p>
-                            <h2 className="text-2xl font-bold text-gray-100 mb-8 leading-relaxed"><AnimatedText text={newsItem.title} /></h2>
-                            <div className="text-sm text-gray-300 whitespace-pre-line prose prose-invert prose-sm leading-7 tracking-wide" dangerouslySetInnerHTML={{ __html: newsItem.fullContent.replace(/\n/g, '<br />') }} />
+                        <button onClick={onClose} aria-label="Close" className={`absolute top-3 right-3 md:top-5 md:right-5 ${T.muted} ${T.hoverFg} z-10 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center`}><CloseIcon /></button>
+                        <div key={newsItem.id || newsItem.title} className="overflow-y-auto custom-scrollbar pr-2 md:pr-6">
+                            <p className={`text-[14px] ${T.muted} tabular-nums mb-2`}>{newsItem.date}</p>
+                            <h2 className={`text-[24px] md:text-[28px] font-medium ${T.fg} leading-[1.2] mb-6 pr-8`}>{newsItem.title}</h2>
+                            <div className={`text-[16px] ${T.body} leading-[1.7] max-w-[64ch]`} dangerouslySetInnerHTML={{ __html: newsItem.fullContent.replace(/\n/g, '<br />') }} />
 
                             {newsItem.link && (
-                                <div className="mt-8 mb-4">
-                                    <a
-                                        href={newsItem.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-widest font-mono group"
-                                    >
-                                        <span>{ui ? ui.view_website : "VIEW WEBSITE"}</span>
-                                        <ExternalLinkIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                                <div className="mt-6">
+                                    <a href={newsItem.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 text-[15px] ${T.acc} ${T.hoverFg} transition-colors`}>
+                                        <span>{ui ? ui.view_website : 'View website'}</span>
+                                        <ExternalLinkIcon className="w-4 h-4" />
                                     </a>
                                 </div>
                             )}
 
                             {newsItem.images && newsItem.images.length > 0 && (
-                                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     {newsItem.images.map((img, index) => (
                                         <img
                                             key={index}
                                             src={img}
-                                            alt={`${newsItem.title} image ${index + 1}`}
-                                            className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
-                                            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/171717/525252?text=Image+Not+Found'; }}
+                                            alt={`${newsItem.title} ${index + 1}`}
+                                            className="w-full h-auto"
+                                            onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }}
                                         />
                                     ))}
                                 </div>
@@ -3145,12 +2866,15 @@ const NewsModal = ({ newsItem, onClose, ui }) => {
     );
 };
 
-// --- Detail Modal (Redesigned Minimal) ---
+
 const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
     useEffect(() => {
         if (item) lockBodyScroll(); else unlockBodyScroll();
         return () => unlockBodyScroll();
     }, [item]);
+
+    const metaLine = item ? [item.year, item.type, item.period].filter(Boolean).join(' · ') : '';
+    const asList = (v) => (Array.isArray(v) ? v : [v]).filter(Boolean);
 
     return (
         <AnimatePresence>
@@ -3159,137 +2883,79 @@ const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] flex items-center justify-center p-3 md:p-8"
+                    className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-3 md:p-8"
                     onClick={onClose}
                 >
                     <motion.div
-                        initial={{ y: 20, opacity: 0, scale: 0.98 }}
-                        animate={{ y: 0, opacity: 1, scale: 1 }}
-                        exit={{ y: 20, opacity: 0, scale: 0.98 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                        className="bg-black/80 rounded-sm max-w-5xl w-full max-h-[90dvh] flex flex-col md:flex-row border border-white/10 shadow-2xl relative overflow-hidden ring-1 ring-white/5"
+                        initial={{ y: 12, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 12, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className={`${T.surf} border ${T.line} rounded-sm max-w-5xl w-full max-h-[90dvh] flex flex-col md:flex-row relative overflow-hidden`}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <button data-hoverable="true" onClick={onClose} className="absolute top-4 right-4 md:top-6 md:right-6 z-20 text-gray-500 hover:text-white transition-colors bg-black/50 p-3 rounded-full backdrop-blur-sm min-w-[44px] min-h-[44px] flex items-center justify-center"><CloseIcon /></button>
+                        <button onClick={onClose} aria-label="Close" className={`absolute top-3 right-3 md:top-5 md:right-5 z-20 ${T.muted} ${T.hoverFg} transition-colors ${T.surf} p-2 min-w-[44px] min-h-[44px] flex items-center justify-center`}><CloseIcon /></button>
 
-                        {/* Image Section */}
                         {item.image && (
-                            <div className="w-full md:w-1/2 h-48 md:h-auto relative overflow-hidden flex-shrink-0">
-                                <img src={item.image} alt={item.title || item.name} className="w-full h-full object-cover grayscale opacity-80" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x400/171717/525252?text=Image+Not+Found'; }} />
-                                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
+                            <div className="w-full md:w-1/2 h-52 md:h-auto relative overflow-hidden flex-shrink-0 bg-[#15140f]">
+                                <img src={item.image} alt={item.title || item.name} className="w-full h-full object-cover" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                             </div>
                         )}
 
-                        {/* Content Section */}
-                        <div key={item.title || item.name} className={`p-5 md:p-12 overflow-y-auto custom-scrollbar flex flex-col justify-start ${item.image ? 'md:w-1/2' : 'w-full'}`}>
-                            <div className="mb-8 flex flex-wrap gap-3 text-xs font-mono text-emerald-500/90 tracking-widest uppercase">
-                                {item.year && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.year}</span>}
-                                {item.type && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.type}</span>}
-                                {item.period && <span className="border border-emerald-900/50 px-2 py-1 rounded">{item.period}</span>}
-                            </div>
+                        <div key={item.title || item.name} className={`p-6 md:p-10 overflow-y-auto custom-scrollbar flex flex-col ${item.image ? 'md:w-1/2' : 'w-full'}`}>
+                            {metaLine && <p className={`text-[14px] ${T.muted} mb-2`}>{metaLine}</p>}
 
-                            <h2 className="text-lg md:text-xl font-normal text-white mb-6 leading-tight tracking-wide font-['Syne',sans-serif]">
-                                <AnimatedText text={item.title || item.name} />
-                            </h2>
+                            <h2 className={`text-[22px] md:text-[26px] font-medium ${T.fg} leading-[1.2] mb-5 pr-8`}>{item.title || item.name}</h2>
 
                             {(item.role || item.funding || item.mentor || item.supports) && (
-                                <div className="mb-6 flex flex-wrap gap-2">
-                                    {item.role && (
-                                        <span className="text-xs text-emerald-400 font-mono tracking-widest uppercase border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
-                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                                            {item.role}
-                                        </span>
-                                    )}
-                                    {item.funding && (Array.isArray(item.funding) ? item.funding : [item.funding]).filter(Boolean).map((fund, idx) => (
-                                        <span key={`fund-${idx}`} className="text-xs text-yellow-500 font-mono tracking-widest uppercase border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
-                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                            Funding: {fund}
-                                        </span>
-                                    ))}
-                                    {item.mentor && (Array.isArray(item.mentor) ? item.mentor : [item.mentor]).filter(Boolean).map((mntr, idx) => (
-                                        <span key={`mentor-${idx}`} className="text-xs text-blue-400 font-mono tracking-widest uppercase border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
-                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                                            {typeof mntr === 'object' ? `${mntr.role}: ${mntr.name}` : `Mentor: ${mntr}`}
-                                        </span>
-                                    ))}
-                                    {item.supports && (Array.isArray(item.supports) ? item.supports : [item.supports]).filter(Boolean).map((sup, idx) => (
-                                        <span key={`support-${idx}`} className="text-xs text-blue-400 font-mono tracking-widest uppercase border border-blue-500/30 bg-blue-500/10 px-3 py-1 rounded-full flex items-center gap-1.5">
-                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                                            {sup.role}: {sup.name}
-                                        </span>
-                                    ))}
+                                <div className={`mb-5 text-[14px] ${T.muted} flex flex-col gap-1`}>
+                                    {item.role && <p><span className={T.fg}>Role</span> · {item.role}</p>}
+                                    {asList(item.funding).map((fund, idx) => <p key={`fund-${idx}`}><span className={T.fg}>Funding</span> · {fund}</p>)}
+                                    {asList(item.mentor).map((mntr, idx) => <p key={`mentor-${idx}`}><span className={T.fg}>{typeof mntr === 'object' ? mntr.role : 'Mentor'}</span> · {typeof mntr === 'object' ? mntr.name : mntr}</p>)}
+                                    {asList(item.supports).map((sup, idx) => <p key={`support-${idx}`}><span className={T.fg}>{sup.role}</span> · {sup.name}</p>)}
                                 </div>
                             )}
 
                             {item.techStack && item.techStack.length > 0 && (
-                                <div className="mb-8 flex flex-wrap gap-2">
-                                    {item.techStack.map((tech, idx) => (
-                                        <span key={idx} className="text-[10px] text-gray-400 border border-white/10 bg-white/5 px-2 py-1 rounded tracking-wider">
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
+                                <p className={`mb-5 text-[14px] ${T.muted}`}>{item.techStack.join(' · ')}</p>
                             )}
 
                             {item.prize && (
-                                <div className="mb-8 pl-4 border-l border-emerald-500/50">
-                                    <span className="text-[10px] uppercase text-gray-500 block mb-1 tracking-widest">{item.category === 'grant' ? ui.grant_label : ui.award_label}</span>
-                                    <p className="text-sm text-emerald-400 font-medium"><AnimatedText text={item.prize} /></p>
+                                <div className="mb-5">
+                                    <p className={`text-[13px] ${T.muted}`}>{item.category === 'grant' ? ui.grant_label : ui.award_label}</p>
+                                    <p className={`text-[16px] ${T.acc}`}>{item.prize}</p>
                                 </div>
                             )}
 
                             {item.details && (
-                                <div className="mb-8">
-                                    {(item.techStack || item.outcomes) && (
-                                        <h4 className="text-xs text-gray-500 uppercase tracking-widest mb-3 font-mono">Background & Details</h4>
-                                    )}
-                                    <p className="text-sm text-gray-400 whitespace-pre-line leading-7 tracking-wide"><AnimatedText text={item.details} /></p>
-                                </div>
+                                <p className={`text-[15px] md:text-[16px] ${T.body} whitespace-pre-line leading-[1.7] mb-6`}>{item.details}</p>
                             )}
 
                             {item.outcomes && item.outcomes.length > 0 && (
-                                <div className="mb-8 p-5 bg-white/[0.02] border border-white/5 rounded-lg">
-                                    <h4 className="text-xs text-emerald-500/80 uppercase tracking-widest mb-4 font-mono flex items-center gap-2">
-                                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                                        Key Outcomes
-                                    </h4>
-                                    <ul className="space-y-3">
-                                        {item.outcomes.map((outcome, idx) => (
-                                            <li key={idx} className="text-sm text-gray-300 leading-relaxed flex items-start gap-3">
-                                                <span className="text-emerald-500/50 mt-1 flex-shrink-0">
-                                                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                                                </span>
-                                                <span>{outcome}</span>
-                                            </li>
-                                        ))}
+                                <div className="mb-6">
+                                    <h4 className={`text-[14px] font-medium ${T.fg} mb-2`}>Key outcomes</h4>
+                                    <ul className={`list-disc pl-5 space-y-1.5 text-[15px] ${T.body} leading-[1.6]`}>
+                                        {item.outcomes.map((outcome, idx) => <li key={idx}>{outcome}</li>)}
                                     </ul>
                                 </div>
                             )}
 
-                            <div className="flex flex-wrap gap-4 mt-8">
-                                {item.pdf && (
-                                    <button
-                                        onClick={(e) => handleDownload(e, item.pdf)}
-                                        data-hoverable="true"
-                                        className="inline-flex items-center gap-3 text-xs text-gray-300 hover:text-white border border-white/20 hover:border-white px-8 py-3 rounded-full transition-all tracking-[0.2em] uppercase group"
-                                    >
-                                        <DownloadIcon className="w-3 h-3 group-hover:scale-110 transition-transform" />
-                                        <AnimatedText text={content.research.download_button} />
-                                    </button>
-                                )}
-                                {item.link && (
-                                    <a
-                                        href={item.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        data-hoverable="true"
-                                        className="inline-flex items-center gap-3 text-xs text-gray-300 hover:text-white border border-white/20 hover:border-white px-8 py-3 rounded-full transition-all tracking-[0.2em] uppercase group"
-                                    >
-                                        <ExternalLinkIcon className="w-3 h-3 group-hover:scale-110 transition-transform" />
-                                        <AnimatedText text={content.activities.site_button} />
-                                    </a>
-                                )}
-                            </div>
+                            {(item.pdf || item.link) && (
+                                <div className="flex flex-wrap gap-3 mt-auto pt-2">
+                                    {item.pdf && (
+                                        <button onClick={(e) => handleDownload(e, item.pdf)} className={`inline-flex items-center gap-2 text-[14px] ${T.fg} border ${T.line} hover:border-[#ede6d6] px-4 py-2 rounded-sm transition-colors`}>
+                                            <DownloadIcon className="w-4 h-4" />
+                                            <span>{content.research.download_button}</span>
+                                        </button>
+                                    )}
+                                    {item.link && (
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 text-[14px] ${T.fg} border ${T.line} hover:border-[#ede6d6] px-4 py-2 rounded-sm transition-colors`}>
+                                            <ExternalLinkIcon className="w-4 h-4" />
+                                            <span>{content.activities.site_button}</span>
+                                        </a>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 </motion.div>
@@ -3299,7 +2965,7 @@ const DetailModal = ({ item, onClose, content, handleDownload, ui }) => {
 };
 
 
-// --- フッターコンポーネント (Minimal) ---
+
 const Footer = ({ content, setPage, ui }) => {
     const scrollToSection = (itemText) => {
         const targetId = itemText.toLowerCase().replace(/\s+/g, '-');
@@ -3315,252 +2981,171 @@ const Footer = ({ content, setPage, ui }) => {
         };
 
         if (externalLinks[targetId]) {
-            ReactGA.event({
-                category: "External_Link",
-                action: "Click",
-                label: targetId
-            });
+            ReactGA.event({ category: "External_Link", action: "Click", label: targetId });
             window.open(externalLinks[targetId], '_blank', 'noopener,noreferrer');
             return;
         }
 
-        const element = document.getElementById(targetId === 'Insights' ? 'insights' : targetId);
-        if (element) {
-            setPage('home');
-            setTimeout(() => {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        } else if (targetId === 'profile' || targetId === 'vision' || targetId === 'news' || targetId === 'research' || targetId === 'projects' || targetId === 'map' || targetId === 'activities' || targetId === 'contact' || targetId === 'Insights') {
-            // If not found but is a main section, ensure we go home first
-            const actualId = targetId === 'Insights' ? 'insights' : targetId;
-            setPage('home');
-            setTimeout(() => {
-                document.getElementById(actualId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
+        const actualId = targetId === 'Insights' ? 'insights' : targetId;
+        setPage('home');
+        setTimeout(() => {
+            document.getElementById(actualId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
     };
 
-    const getIcon = (itemText) => {
-        const lower = itemText.toLowerCase();
-        if (lower.includes('x')) return <TwitterIcon />;
-        if (lower.includes('linkedin')) return <LinkedinIcon />;
-        if (lower.includes('instagram')) return <InstagramIcon />;
-        if (lower.includes('facebook')) return <FacebookIcon />;
-        if (lower.includes('github')) return <GitHubIcon />;
-        return <ExternalLinkIcon className="w-4 h-4" />;
-    };
     return (
-        <footer className="py-20 text-gray-500 relative">
-            <div className="max-w-4xl mx-auto px-6">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-12 mb-20">
+        <footer className="py-12 md:py-16 relative">
+            <div className={CONTAINER}>
+                <div className={`grid grid-cols-2 md:grid-cols-3 gap-8 mb-12 border-t ${T.line} pt-10`}>
                     {content.columns.map((column) => (
                         <div key={column.title}>
-                            <h3 className="text-xs font-bold text-emerald-700/80 tracking-[0.2em] uppercase mb-8"><AnimatedText text={column.title} /></h3>
-                            <ul className="space-y-4">
+                            <h3 className={`text-[13px] font-medium ${T.fg} mb-3`}>{column.title}</h3>
+                            <ul className="space-y-2">
                                 {column.items.map((item) => (
                                     <li key={item}>
-                                        <a data-hoverable="true" onClick={() => scrollToSection(item)} className="text-xs text-gray-400 hover:text-white transition-colors cursor-pointer tracking-wider uppercase">
-                                            <AnimatedText text={item} />
-                                        </a>
+                                        <a onClick={() => scrollToSection(item)} className={`text-[14px] ${T.muted} ${T.hoverFg} transition-colors cursor-pointer`}>{item}</a>
                                     </li>
                                 ))}
                             </ul>
                         </div>
                     ))}
                 </div>
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-t border-white/5 pt-8">
-                    <p className="text-left text-gray-700 text-[10px] tracking-widest font-mono">&copy; {new Date().getFullYear()} Kazuhiro Komatsu.</p>
-                    <p className="text-left text-gray-800 text-[10px] tracking-widest font-mono uppercase opacity-50">{ui.designed_with}</p>
+                <div className={`flex flex-col md:flex-row justify-between gap-2 text-[13px] ${T.faint}`}>
+                    <p>&copy; {new Date().getFullYear()} Kazuhiro Komatsu</p>
+                    <p>{ui.designed_with}</p>
                 </div>
             </div>
         </footer>
     );
 };
 
+// --- Shared pieces for the "All …" pages ---
+const SubPage = ({ children }) => (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={`min-h-[100dvh] ${T.fg} relative flex flex-col`}>
+        <div className="absolute inset-0 bg-[#15140f]/85 pointer-events-none z-0" />
+        <div className={`${CONTAINER} w-full flex-1 pt-28 pb-24 relative z-10`}>
+            {children}
+        </div>
+    </motion.div>
+);
 
+const SubPageHeader = ({ title, lang, setLang, onBack, ui }) => (
+    <div className={`flex flex-wrap justify-between items-end gap-4 mb-10 border-b ${T.line} pb-4`}>
+        <h1 className={`text-[28px] md:text-[34px] font-medium tracking-[-0.01em] ${T.fg}`}>{title}</h1>
+        <div className={`flex items-center gap-5 text-[14px] ${T.muted}`}>
+            {lang && setLang && (
+                <button onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className={`${T.hoverFg} flex items-center gap-1.5 transition-colors`}>
+                    <GlobeIcon />
+                    <span>{lang === 'ja' ? 'EN' : 'JP'}</span>
+                </button>
+            )}
+            <button onClick={onBack} className={`${T.hoverFg} transition-colors`}>← {ui.back}</button>
+        </div>
+    </div>
+);
 
-// --- すべてのプロジェクトページ (Dark Theme) ---
+const Pagination = ({ totalPages, currentPage, paginate }) => (
+    totalPages > 1 ? (
+        <div className="flex justify-center items-center gap-2 mt-14">
+            {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                    key={i + 1}
+                    onClick={() => paginate(i + 1)}
+                    className={`w-9 h-9 rounded-sm text-[14px] tabular-nums transition-colors ${currentPage === i + 1 ? 'bg-[#ede6d6] text-[#15140f]' : `${T.muted} ${T.hoverFg} border ${T.line}`}`}
+                >
+                    {i + 1}
+                </button>
+            ))}
+        </div>
+    ) : null
+);
+
+// Image-on-top card used by news / projects / activities lists
+const TileCard = ({ image, eyebrow, title, text, onClick, aspect = 'aspect-[4/3]' }) => (
+    <article onClick={onClick} className="group cursor-pointer min-w-0">
+        {image && (
+            <div className={`${aspect} overflow-hidden ${T.surf} mb-3`}>
+                <img src={image} alt="" className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
+            </div>
+        )}
+        {eyebrow && <p className={`text-[14px] ${T.muted} tabular-nums`}>{eyebrow}</p>}
+        <h3 className={`text-[17px] font-medium ${T.fg} ${T.hoverAcc} leading-[1.3] mt-1 transition-colors`}>{title}</h3>
+        {text && <p className={`text-[14px] ${T.muted} leading-[1.55] mt-1.5`}>{text}</p>}
+    </article>
+);
+
 const AllProjectsPage = ({ content, setPage, setSelectedDetail, lang, setLang, setScrollToSectionId, ui }) => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    useEffect(() => { window.scrollTo(0, 0); }, []);
 
     const handleBack = () => {
         setScrollToSectionId('projects');
         setPage('home');
     };
 
+    const outreachItems = content.projects.items.filter(item => item.category === 'outreach');
+
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden flex flex-col"
-        >
-            {/* Background canvas is rendered globally at the App level */}
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
+        <SubPage>
+            <SubPageHeader title={content.all_projects_page?.title || "Projects"} lang={lang} setLang={setLang} onBack={handleBack} ui={ui} />
 
-            <div className="pt-32 pb-12 px-6 sm:px-8 lg:px-12 relative z-10">
-                <div className="max-w-4xl mx-auto flex justify-between items-end mb-8 border-b border-white/10 pb-8">
-                    <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
-                        <AnimatedText text={content.all_projects_page?.title || "Projects Overview"} />
-                    </h1>
-                    <div className="flex items-center gap-6">
-                        {lang && setLang && (
-                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors">
-                                <GlobeIcon />
-                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
-                            </button>
-                        )}
-                        <button
-                            onClick={handleBack}
-                            data-hoverable="true"
-                            className="text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase"
-                        >
-                            <AnimatedText text={ui.back} />
-                        </button>
+            {content.projects.categories && Object.entries(content.projects.categories).map(([categoryKey, categoryData]) => {
+                const categoryItems = content.projects.items.filter(item => item.category === categoryKey);
+                if (categoryItems.length === 0) return null;
+
+                return (
+                    <div key={categoryKey} className="mb-14">
+                        <p className={`text-[14px] ${T.muted}`}>{categoryData.period} · {categoryData.status}</p>
+                        <h2 className={`text-[22px] md:text-[24px] font-medium ${T.fg} mt-1 mb-6`}>{categoryData.title}</h2>
+                        <div className="grid sm:grid-cols-2 gap-8">
+                            {categoryItems.map((item, index) => (
+                                <TileCard
+                                    key={`project-${item.title}-${index}`}
+                                    image={item.image}
+                                    aspect="aspect-video"
+                                    eyebrow={[item.featured && ui.featured_project, item.subProject && 'Sub-project', item.period].filter(Boolean).join(' · ')}
+                                    title={item.title}
+                                    text={item.description}
+                                    onClick={() => setSelectedDetail(item)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                );
+            })}
+
+            {outreachItems.length > 0 && (
+                <div className={`mt-4 pt-10 border-t ${T.line}`}>
+                    <h2 className={`text-[22px] md:text-[24px] font-medium ${T.fg}`}>Science Communication &amp; Outreach</h2>
+                    <p className={`text-[15px] ${T.muted} mt-1 mb-6`}>Educational activities and social contributions</p>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {outreachItems.map((item, index) => (
+                            <TileCard
+                                key={`outreach-${index}`}
+                                image={item.image}
+                                aspect="aspect-video"
+                                title={item.title}
+                                text={item.description}
+                                onClick={() => setSelectedDetail(item)}
+                            />
+                        ))}
                     </div>
                 </div>
-            </div>
-
-            <div className="flex-1 relative z-10 px-6 sm:px-8 lg:px-12 pb-32">
-                <div className="max-w-4xl mx-auto">
-
-                    {/* Main Timeline */}
-                    <div className="relative border-l border-white/20 ml-4 md:ml-8 space-y-24 pb-12">
-                        {content.projects.categories && Object.entries(content.projects.categories).map(([categoryKey, categoryData], idx) => {
-                            const categoryItems = content.projects.items.filter(item => item.category === categoryKey);
-                            if (categoryItems.length === 0) return null;
-
-                            return (
-                                <motion.div
-                                    key={categoryKey}
-                                    initial={{ opacity: 0, y: 12 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-100px" }}
-                                    transition={{ duration: 0.5 }}
-                                    className="relative pl-8 md:pl-16"
-                                >
-                                    {/* Timeline Node */}
-                                    <div className={`absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full ${categoryData.status === 'Done' ? 'bg-gray-400' : categoryData.status === 'Ongoing' ? 'bg-teal-400' : 'bg-rose-400'} shadow-[0_0_10px_currentColor]`}></div>
-
-                                    {/* Phase Header */}
-                                    <div className="mb-8">
-                                        <div className="flex items-center gap-4 mb-2">
-                                            <span className="text-xs font-mono text-gray-400 tracking-widest">{categoryData.period}</span>
-                                            <span className={`text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-sm border ${categoryData.color} ${categoryData.status === 'Done' ? 'text-gray-400 bg-white/5' : categoryData.status === 'Ongoing' ? 'text-teal-400 bg-teal-500/10' : 'text-rose-400 bg-rose-500/10'}`}>
-                                                {categoryData.status}
-                                            </span>
-                                        </div>
-                                        <h2 className="text-2xl md:text-3xl font-normal text-gray-100 tracking-wider">{categoryData.title}</h2>
-                                    </div>
-
-                                    {/* Cards Container */}
-                                    <div className="grid sm:grid-cols-2 gap-6">
-                                        {categoryItems.map((item, index) => (
-                                            <motion.div
-                                                key={`project-${item.title}-${index}`}
-                                                whileHover={{ y: -5, scale: 1.02 }}
-                                                onClick={() => setSelectedDetail(item)}
-                                                data-hoverable="true"
-                                                className={`group cursor-pointer bg-white/[0.02] border ${item.subProject ? 'border-dashed border-white/30 ml-4 sm:ml-8 sm:col-span-2 md:col-span-1' : 'border-white/10'} p-5 rounded-xl hover:bg-white/10 hover:border-solid hover:border-white/30 hover:shadow-[0_10px_30px_rgba(255,255,255,0.05)] transition-all duration-300 backdrop-blur-md relative`}
-                                            >
-                                                {item.subProject && (
-                                                    <div className="absolute -left-4 sm:-left-8 top-1/2 w-4 sm:w-8 border-t border-dashed border-white/30"></div>
-                                                )}
-                                                <div className="aspect-video overflow-hidden relative mb-4 rounded-lg bg-black/50">
-                                                    <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
-                                                    {item.featured && (
-                                                        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur text-[10px] px-2 py-1 text-yellow-500 border border-yellow-500/30 tracking-widest uppercase rounded">
-                                                            Featured
-                                                        </div>
-                                                    )}
-                                                    {item.subProject && (
-                                                        <div className="absolute top-3 left-3 bg-black/60 backdrop-blur text-[10px] px-2 py-1 text-gray-300 border border-white/20 tracking-widest uppercase rounded">
-                                                            Sub Project
-                                                        </div>
-                                                    )}
-                                                </div>
-                                                <div>
-                                                    <h3 className="text-lg font-medium text-gray-200 group-hover:text-white transition-colors mb-2 leading-relaxed"><AnimatedText text={item.title} /></h3>
-                                                    <p className="text-sm text-gray-500 leading-relaxed tracking-wide"><AnimatedText text={item.description} /></p>
-                                                </div>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Outreach Section */}
-                    {(() => {
-                        const outreachItems = content.projects.items.filter(item => item.category === 'outreach');
-                        if (outreachItems.length === 0) return null;
-                        return (
-                            <motion.div
-                                initial={{ opacity: 0, y: 14 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.5 }}
-                                className="mt-16 pt-16 border-t border-white/10"
-                            >
-                                <div className="mb-10 text-center">
-                                    <h2 className="text-xl md:text-2xl font-normal text-gray-300 tracking-wider">Science Communication & Outreach</h2>
-                                    <p className="text-sm text-gray-500 mt-2 font-mono tracking-widest uppercase">Educational Activities & Social Contributions</p>
-                                </div>
-                                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {outreachItems.map((item, index) => (
-                                        <motion.div
-                                            key={`outreach-${index}`}
-                                            whileHover={{ y: -5, scale: 1.02 }}
-                                            onClick={() => setSelectedDetail(item)}
-                                            data-hoverable="true"
-                                            className="group cursor-pointer bg-white/[0.01] border border-white/5 p-4 rounded-xl hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 backdrop-blur-md"
-                                        >
-                                            <div className="aspect-video overflow-hidden relative mb-4 rounded-lg bg-black/50">
-                                                <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-700 grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100" loading="lazy" decoding="async" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/800x450/171717/525252?text=Image+Not+Found'; }} />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-base font-medium text-gray-300 group-hover:text-white transition-colors leading-snug mb-2"><AnimatedText text={item.title} /></h3>
-                                                <p className="text-xs text-gray-500 leading-relaxed tracking-wide line-clamp-3"><AnimatedText text={item.description} /></p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </motion.div>
-                        );
-                    })()}
-
-                </div>
-            </div>
-        </motion.div>
+            )}
+        </SubPage>
     );
 };
+
 const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScrollToSectionId, ui }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 9;
 
-    const parseDate = (dateStr) => {
-        if (!dateStr) return new Date(0);
-        const parts = dateStr.split('.');
-        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
-        return new Date(dateStr);
-    };
-
-    const sortedItems = [...content.news.items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
-
-    // Pagination Logic
+    const sortedItems = [...content.news.items].sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
     const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = sortedItems.slice(indexOfLastItem - itemsPerPage, indexOfLastItem);
     const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
-
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [currentPage]); // Scroll to top on page change
+    useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
 
     const handleBack = () => {
         setScrollToSectionId('news');
@@ -3568,114 +3153,44 @@ const AllNewsPage = ({ content, setPage, setSelectedNews, lang, setLang, setScro
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
-        >
-            {/* Background canvas is rendered globally at the App level */}
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
-
-            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-32 relative z-10">
-                <div className="flex justify-between items-end mb-20 border-b border-white/10 pb-8">
-                    <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
-                        <AnimatedText text={content.news.title} />
-                    </h1>
-                    <div className="flex items-center gap-6">
-                        {lang && setLang && (
-                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors mr-4">
-                                <GlobeIcon />
-                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
-                            </button>
-                        )}
-                        <button
-                            onClick={handleBack}
-                            data-hoverable="true"
-                            className="text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase"
-                        >
-                            <AnimatedText text={ui.back} />
-                        </button>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {currentItems.map((item, index) => {
-                        const thumbnail = item.images && item.images.length > 0 ? item.images[0] : null;
-                        return (
-                            <motion.div
-                                key={`news-${index}`}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.05 }}
-                                onClick={() => setSelectedNews(item)}
-                                data-hoverable="true"
-                                className="group bg-neutral-900/40 rounded-lg border border-white/10 hover:border-emerald-500/30 relative overflow-hidden cursor-pointer hover:bg-neutral-800/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)] aspect-[4/3] flex flex-col justify-end p-6"
-                            >
-                                {thumbnail && (
-                                    <>
-                                        <img src={thumbnail} alt="News" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-700 grayscale hover:grayscale-0" loading="lazy" decoding="async" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
-                                    </>
-                                )}
-                                <div className="relative z-10">
-                                    <p className="text-xs text-gray-500 font-mono mb-2 tracking-widest"><AnimatedText text={item.date} /></p>
-                                    <h3 className="text-lg font-normal text-gray-300 group-hover:text-white transition-colors mb-2 leading-tight line-clamp-2"><AnimatedText text={item.title} /></h3>
-                                    <div className="mt-4 text-xs text-gray-600 group-hover:text-gray-400 transition-colors tracking-widest uppercase">
-                                        {ui.read_more}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
-
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                    <div className="flex justify-center items-center gap-4 mt-16">
-                        {Array.from({ length: totalPages }, (_, i) => (
-                            <button
-                                key={i + 1}
-                                onClick={() => paginate(i + 1)}
-                                className={`w-8 h-8 rounded-full text-xs font-mono transition-colors ${currentPage === i + 1
-                                    ? 'bg-white text-black'
-                                    : 'bg-neutral-900 text-gray-500 hover:text-white hover:bg-neutral-800'
-                                    }`}
-                                data-hoverable="true"
-                            >
-                                {i + 1}
-                            </button>
-                        ))}
-                    </div>
-                )}
+        <SubPage>
+            <SubPageHeader title={content.all_news_page?.title || content.news.title} lang={lang} setLang={setLang} onBack={handleBack} ui={ui} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+                {currentItems.map((item, index) => (
+                    <TileCard
+                        key={`news-${index}`}
+                        image={item.images && item.images.length > 0 ? item.images[0] : null}
+                        eyebrow={item.date}
+                        title={item.title}
+                        onClick={() => setSelectedNews(item)}
+                    />
+                ))}
             </div>
-        </motion.div>
+            <Pagination totalPages={totalPages} currentPage={currentPage} paginate={paginate} />
+        </SubPage>
     );
 };
 
-// --- プロジェクトスライダーセクション (Minimal) ---
+
+// --- Projects: phase selector, one lead project, the rest as tiles ---
 const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
     const allItems = content.projects.items;
     const categories = content.projects.categories;
     const categoryOrder = ['foundation', 'engineering', 'physiology', 'mechanism', 'application', 'vision'];
 
-    // Default to "application" which is the flagship ongoing category
     const [selectedCategory, setSelectedCategory] = useState('application');
 
-    // Items for the selected category
     const categoryItems = useMemo(() => {
         return allItems.filter(item => item.category === selectedCategory);
     }, [allItems, selectedCategory]);
 
     const isTwoProjects = categoryItems.length === 2;
 
-    // Hero projects: If exactly 2 projects, both are heroes. Otherwise, first featured or first item.
     const heroProjects = useMemo(() => {
         if (isTwoProjects) return categoryItems;
         return [categoryItems.find(item => item.featured) || categoryItems[0]].filter(Boolean);
     }, [categoryItems, isTwoProjects]);
 
-    // Other items in the category (exclude heroes)
     const otherItems = useMemo(() => {
         if (isTwoProjects) return [];
         return categoryItems.filter(item => item !== heroProjects[0]);
@@ -3685,137 +3200,66 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
 
     return (
         <ContentSection id="projects" title={content.projects.title}>
-
-            {/* Interactive Category Timeline */}
             {categories && (
-                <div className="mb-12 overflow-x-auto scrollbar-hide">
-                    <div className="flex items-center gap-0 min-w-max mx-auto justify-center">
-                        {categoryOrder.map((key, idx) => {
+                <div className="mb-6 overflow-x-auto scrollbar-hide -mx-5 px-5 sm:mx-0 sm:px-0">
+                    <div className="flex gap-2 min-w-max">
+                        {categoryOrder.map((key) => {
                             const cat = categories[key];
                             if (!cat) return null;
                             const isSelected = key === selectedCategory;
-                            const statusColor = cat.status === 'Done' ? 'bg-gray-400' : cat.status === 'Ongoing' ? 'bg-teal-400' : 'bg-rose-400';
-                            const statusRing = cat.status === 'Done' ? 'ring-gray-400/40' : cat.status === 'Ongoing' ? 'ring-teal-400/40' : 'ring-rose-400/40';
-                            const textColor = isSelected
-                                ? (cat.status === 'Done' ? 'text-gray-200' : cat.status === 'Ongoing' ? 'text-teal-300' : 'text-rose-300')
-                                : (cat.status === 'Done' ? 'text-gray-600' : cat.status === 'Ongoing' ? 'text-teal-500/60' : 'text-rose-500/60');
                             return (
-                                <React.Fragment key={key}>
-                                    <motion.button
-                                        onClick={() => setSelectedCategory(key)}
-                                        data-hoverable="true"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.4, delay: idx * 0.08 }}
-                                        className={`flex flex-col items-center text-center px-3 md:px-6 py-3 rounded-sm transition-all duration-300 cursor-pointer
-                                            ${isSelected ? 'bg-white/[0.03]' : 'hover:bg-white/[0.02]'}`}
-                                    >
-                                        <div className={`w-3.5 h-3.5 rounded-full ${statusColor} mb-3 transition-all duration-300
-                                            ${isSelected ? `scale-150 ring-4 ${statusRing} shadow-[0_0_12px_currentColor]` : 'scale-100 shadow-[0_0_4px_currentColor] opacity-60 hover:opacity-100'}`} />
-                                        <span className={`text-[10px] font-mono tracking-widest uppercase mb-1 transition-colors duration-300 ${textColor}`}>{cat.period}</span>
-                                        <span className={`text-[10px] tracking-wider max-w-[90px] leading-tight transition-colors duration-300 ${isSelected ? 'text-gray-300' : 'text-gray-600'}`}>
-                                            {cat.title.replace(/ \(.*\)/, '')}
-                                        </span>
-                                        {isSelected && (
-                                            <motion.div
-                                                layoutId="category-indicator"
-                                                className="w-full h-px bg-gradient-to-r from-transparent via-white/40 to-transparent mt-2"
-                                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                                            />
-                                        )}
-                                    </motion.button>
-                                    {idx < categoryOrder.length - 1 && (
-                                        <div className="w-6 md:w-10 h-px bg-gradient-to-r from-white/15 to-white/5 mt-[-18px]" />
-                                    )}
-                                </React.Fragment>
+                                <button
+                                    key={key}
+                                    onClick={() => setSelectedCategory(key)}
+                                    className={`flex flex-col items-start px-4 py-2.5 border rounded-sm text-left transition-colors ${isSelected ? 'border-[#ede6d6] text-[#ede6d6]' : `${T.line} ${T.muted} ${T.hoverFg} hover:border-[#6f6a5c]`}`}
+                                >
+                                    <span className="text-[12px] tabular-nums">{cat.period}</span>
+                                    <span className="text-[14px] font-medium">{cat.title.replace(/ \(.*\)/, '')}</span>
+                                </button>
                             );
                         })}
                     </div>
                 </div>
             )}
 
-            {/* Category description badge */}
             {selectedCat && (
-                <motion.div
-                    key={`cat-badge-${selectedCategory}`}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mb-10 flex items-center justify-center gap-3"
-                >
-                    <span className={`text-[10px] font-mono tracking-[0.3em] uppercase px-3 py-1 rounded-sm border
-                        ${selectedCat.status === 'Done' ? 'text-gray-400 border-gray-500/30 bg-gray-500/10' :
-                            selectedCat.status === 'Ongoing' ? 'text-teal-400 border-teal-500/30 bg-teal-500/10' :
-                                'text-rose-400 border-rose-500/30 bg-rose-500/10'}`}>
-                        {selectedCat.status}
-                    </span>
-                    <span className="text-xs text-gray-500 tracking-wider">{selectedCat.title}</span>
-                    <span className="text-[10px] text-gray-600 font-mono">{categoryItems.length} project{categoryItems.length !== 1 ? 's' : ''}</span>
-                </motion.div>
+                <p className={`text-[14px] ${T.muted} mb-8`}>
+                    {selectedCat.status} · {selectedCat.title} · {categoryItems.length} project{categoryItems.length !== 1 ? 's' : ''}
+                </p>
             )}
 
-            {/* Hero Project Card(s) for selected category */}
             <AnimatePresence mode="wait">
                 {heroProjects.length > 0 && (
                     <motion.div
                         key={`hero-container-${selectedCategory}`}
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.4 }}
-                        className={`grid gap-6 mb-8 ${isTwoProjects ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`grid gap-8 mb-10 ${isTwoProjects ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}
                     >
-                        {heroProjects.map((heroProject, idx) => (
+                        {heroProjects.map((heroProject) => (
                             <div
                                 key={`hero-${selectedCategory}-${heroProject.title}`}
                                 onClick={() => setSelectedDetail(heroProject)}
-                                data-hoverable="true"
-                                className={`group cursor-pointer relative w-full overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-500 flex flex-col md:block
-                                    ${isTwoProjects ? 'md:aspect-[4/3]' : 'md:aspect-[21/9]'}`}
+                                className={`group cursor-pointer grid gap-5 items-start ${isTwoProjects ? '' : 'md:grid-cols-[1.3fr_1fr] md:gap-8'}`}
                             >
-                                {/* Image: aspect-ratio'd block on mobile (stacked), absolute fill on md+ (overlay) */}
-                                <div className={`relative w-full ${isTwoProjects ? 'aspect-[4/3]' : 'aspect-[16/9]'} md:absolute md:inset-0 md:aspect-auto md:h-full`}>
+                                <div className={`${isTwoProjects ? 'aspect-[4/3]' : 'aspect-[16/10]'} overflow-hidden ${T.surf}`}>
                                     <img
                                         src={heroProject.image}
-                                        alt={heroProject.title}
-                                        className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-70 transition-all duration-1000 scale-105 group-hover:scale-100"
+                                        alt=""
+                                        className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
                                         loading="lazy" decoding="async"
-                                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/1200x500/171717/525252?text=Image+Not+Found'; }}
+                                        onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }}
                                     />
-                                    {/* Gradients only matter for the desktop overlay layout */}
-                                    <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-                                    <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                                    {/* Bottom fade on mobile so the image blends into the dark text panel below */}
-                                    <div className="md:hidden absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent" />
                                 </div>
-
-                                {/* Text: normal flow on mobile, absolute overlay on md+ */}
-                                <div className={`relative bg-black p-5 md:bg-transparent md:absolute md:bottom-0 md:left-0 md:p-10 z-10 ${isTwoProjects ? 'md:w-full' : 'md:max-w-2xl'}`}>
-                                    <div className="flex items-center gap-3 mb-4 flex-wrap">
-                                        {heroProject.featured && (
-                                            <span className="text-[10px] tracking-[0.3em] text-emerald-400 uppercase font-mono border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 rounded-sm">{ui.featured_project}</span>
-                                        )}
-                                        {heroProject.period && <span className="text-[10px] tracking-widest text-gray-400 uppercase font-mono">{heroProject.period}</span>}
-                                    </div>
-                                    <h3 className={`font-normal text-white mb-3 leading-tight tracking-wide font-['Syne',sans-serif] group-hover:text-emerald-50 transition-colors
-                                        ${isTwoProjects ? 'text-lg md:text-2xl' : 'text-xl md:text-3xl'}`}>
-                                        {heroProject.title}
-                                    </h3>
-                                    <p className="text-sm text-gray-400 leading-relaxed tracking-wide line-clamp-3 md:line-clamp-2 group-hover:text-gray-300 transition-colors">
-                                        {heroProject.description}
-                                    </p>
+                                <div className="min-w-0">
+                                    <p className={`text-[14px] ${T.muted}`}>{[heroProject.featured && ui.featured_project, heroProject.period].filter(Boolean).join(' · ')}</p>
+                                    <h3 className={`text-[22px] md:text-[26px] font-medium leading-[1.2] ${T.fg} ${T.hoverAcc} mt-1.5 mb-3 transition-colors`}>{heroProject.title}</h3>
+                                    <p className={`text-[15px] md:text-[16px] ${T.body} leading-[1.6]`}>{heroProject.description}</p>
                                     {heroProject.funding && heroProject.funding.length > 0 && (
-                                        <div className="mt-4 flex flex-wrap gap-2">
-                                            {heroProject.funding.map((f, i) => (
-                                                <span key={i} className="text-[10px] text-yellow-500/80 font-mono border border-yellow-500/20 px-2 py-0.5 rounded-sm tracking-wider">{f}</span>
-                                            ))}
-                                        </div>
+                                        <p className={`mt-3 text-[14px] ${T.muted}`}>{heroProject.funding.join(' · ')}</p>
                                     )}
-                                    <div className="mt-6 text-[10px] text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors flex items-center gap-2">
-                                        {ui.click_for_details}
-                                        <ArrowRightIcon className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                                    </div>
                                 </div>
                             </div>
                         ))}
@@ -3823,7 +3267,6 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
                 )}
             </AnimatePresence>
 
-            {/* Other Projects in Selected Category */}
             <AnimatePresence mode="wait">
                 {otherItems.length > 0 && (
                     <motion.div
@@ -3831,59 +3274,32 @@ const ProjectSliderSection = ({ content, setSelectedDetail, setPage, ui }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+                        transition={{ duration: 0.25 }}
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"
                     >
-                        {otherItems.map((item, index) => (
-                            <motion.div
+                        {otherItems.map((item) => (
+                            <TileCard
                                 key={`proj-${item.title}`}
-                                initial={{ opacity: 0, y: 15 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.35, delay: index * 0.06 }}
-                                whileHover={{ y: -4 }}
+                                image={item.image}
+                                aspect="aspect-video"
+                                eyebrow={[item.period, item.role].filter(Boolean).join(' · ')}
+                                title={item.title}
+                                text={item.description}
                                 onClick={() => setSelectedDetail(item)}
-                                data-hoverable="true"
-                                className="group cursor-pointer bg-white/[0.02] border border-white/10 hover:border-emerald-500/30 rounded-lg overflow-hidden hover:bg-white/[0.05] hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)] transition-all duration-300"
-                            >
-                                {item.image && (
-                                    <div className="aspect-[16/9] relative overflow-hidden">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-80 transition-all duration-700 scale-105 group-hover:scale-100"
-                                            loading="lazy" decoding="async"
-                                            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x225/171717/525252?text=Image+Not+Found'; }}
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                                    </div>
-                                )}
-                                <div className="p-5">
-                                    <h3 className="text-sm font-normal text-gray-200 group-hover:text-white transition-colors mb-2 leading-snug tracking-wide line-clamp-2">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-xs text-gray-400 leading-relaxed tracking-wide line-clamp-2">
-                                        {item.description}
-                                    </p>
-                                    {item.role && (
-                                        <span className="inline-block mt-3 text-[9px] text-emerald-400/70 font-mono tracking-widest uppercase border border-emerald-500/20 px-2 py-0.5 rounded-sm">{item.role}</span>
-                                    )}
-                                </div>
-                            </motion.div>
+                            />
                         ))}
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <div className="text-right mt-8">
-                <a onClick={() => setPage('all-projects')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
-                    <AnimatedText text={content.projects.view_all_button} />
-                </a>
+            <div className={`pt-5 border-t ${T.line}`}>
+                <a onClick={() => setPage('all-projects')} className={`text-[15px] ${T.acc} ${T.hoverFg} cursor-pointer transition-colors`}>{content.projects.view_all_button} →</a>
             </div>
         </ContentSection>
     );
 };
 
-// --- Insight Accordion Card (shared by InsightsSection and AllInsightsPage) ---
+
 const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
     const cardRef = useRef(null);
     const [folderImages, setFolderImages] = useState([]);
@@ -3896,7 +3312,6 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
         }
     }, [isExpanded]);
 
-    // Fetch folder-based images from manifest
     useEffect(() => {
         if (isExpanded && item.id) {
             fetch(process.env.PUBLIC_URL + '/images/insights/manifest.json')
@@ -3911,50 +3326,21 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
         }
     }, [isExpanded, item.id]);
 
+    const metaLine = [item.date, item.tags && item.tags.length > 0 ? item.tags.join(', ') : null].filter(Boolean).join(' · ');
+
     return (
-        <motion.div
-            ref={cardRef}
-            id={`insight-${item.id}`}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-            className={`bg-black/50 backdrop-blur-sm rounded-sm border transition-colors ${isExpanded ? 'border-emerald-500/30 bg-black/70' : 'border-white/5 hover:border-emerald-500/20 hover:bg-black/60'}`}
-        >
-            <div
-                onClick={onToggle}
-                data-hoverable="true"
-                className="p-6 md:p-8 cursor-pointer group"
-            >
+        <div ref={cardRef} id={`insight-${item.id}`} className={`border-t ${T.line}`}>
+            <div onClick={onToggle} className="py-5 md:py-6 cursor-pointer group">
                 <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                        <p className="text-xs text-emerald-500/80 font-mono mb-3 tracking-widest">
-                            <AnimatedText text={item.date} />
-                        </p>
-                        <h3 className="text-base md:text-lg font-normal text-gray-200 group-hover:text-white transition-colors tracking-wide font-['Syne',sans-serif] leading-relaxed mb-2">
-                            <AnimatedText text={item.title} />
-                        </h3>
+                    <div className="flex-1 min-w-0">
+                        <p className={`text-[14px] ${T.muted} tabular-nums`}>{metaLine}</p>
+                        <h3 className={`text-[18px] md:text-[20px] font-medium ${T.fg} ${T.hoverAcc} leading-[1.3] mt-1.5 transition-colors`}>{item.title}</h3>
                         {!isExpanded && item.summary && (
-                            <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors tracking-wide leading-6">
-                                <AnimatedText text={item.summary} />
-                            </p>
+                            <p className={`text-[15px] ${T.body} leading-[1.6] mt-2 max-w-[64ch]`}>{item.summary}</p>
                         )}
                     </div>
                     <ChevronDownIcon isExpanded={isExpanded} />
                 </div>
-
-                {!isExpanded && item.tags && item.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-4">
-                        {item.tags.map((tag, tagIndex) => (
-                            <span
-                                key={tagIndex}
-                                className="text-[10px] text-emerald-600/70 uppercase tracking-widest border border-emerald-900/30 px-2 py-0.5 rounded"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                )}
             </div>
 
             <AnimatePresence>
@@ -3963,36 +3349,17 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                        transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
                         className="overflow-hidden"
                     >
-                        <div className="px-6 md:px-8 pb-6 md:pb-8 border-t border-white/5 pt-6">
-                            {item.tags && item.tags.length > 0 && (
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {item.tags.map((tag, tagIndex) => (
-                                        <span key={tagIndex} className="text-[10px] text-emerald-600/70 uppercase tracking-widest border border-emerald-900/30 px-2 py-0.5 rounded">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
-
-                            <p className="text-sm text-gray-300 leading-7 tracking-wide whitespace-pre-line">
-                                {item.content}
-                            </p>
+                        <div className="pb-8">
+                            <p className={`text-[16px] ${T.body} leading-[1.7] whitespace-pre-line max-w-[64ch]`}>{item.content}</p>
 
                             {item.link && item.link.trim() !== "" && (
-                                <div className="mt-8">
-                                    <a
-                                        href={item.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        data-hoverable="true"
-                                        className="inline-flex items-center gap-2 text-sm text-emerald-500 hover:text-emerald-400 transition-colors uppercase tracking-widest font-mono group"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <span>{ui ? ui.view_website : "VIEW WEBSITE"}</span>
-                                        <ExternalLinkIcon className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                                <div className="mt-6">
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 text-[15px] ${T.acc} ${T.hoverFg} transition-colors`} onClick={(e) => e.stopPropagation()}>
+                                        <span>{ui ? ui.view_website : 'View website'}</span>
+                                        <ExternalLinkIcon className="w-4 h-4" />
                                     </a>
                                 </div>
                             )}
@@ -4000,15 +3367,9 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
                             {(() => {
                                 const allImages = [...folderImages, ...(item.images || [])];
                                 return allImages.length > 0 && (
-                                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-3xl">
                                         {allImages.map((img, imgIndex) => (
-                                            <img
-                                                key={imgIndex}
-                                                src={img}
-                                                alt={item.title}
-                                                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100 rounded-sm"
-                                                onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }}
-                                            />
+                                            <img key={imgIndex} src={img} alt={item.title} className="w-full h-auto" onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; }} />
                                         ))}
                                     </div>
                                 );
@@ -4017,68 +3378,49 @@ const InsightAccordionCard = ({ item, isExpanded, onToggle, index, ui }) => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.div>
+        </div>
     );
 };
 
-// --- Insights Section (Featured 3 Accordion + View All) ---
+const TagFilter = ({ allTags, selectedTag, setSelectedTag, ui }) => {
+    const base = 'text-[13px] px-3 py-1 rounded-full border transition-colors';
+    const on = 'bg-[#ede6d6] text-[#15140f] border-[#ede6d6]';
+    const off = `${T.line} ${T.muted} ${T.hoverFg} hover:border-[#6f6a5c]`;
+    return (
+        <div className="flex flex-wrap gap-2">
+            <button onClick={() => setSelectedTag(null)} className={`${base} ${!selectedTag ? on : off}`}>{ui?.all || 'All'}</button>
+            {allTags.map(tag => (
+                <button key={tag} onClick={() => setSelectedTag(tag === selectedTag ? null : tag)} className={`${base} ${selectedTag === tag ? on : off}`}>{tag}</button>
+            ))}
+        </div>
+    );
+};
+
+const useInsightTags = (items) => useMemo(() => {
+    const tags = new Set();
+    items.forEach(item => { if (item.tags) item.tags.forEach(tag => tags.add(tag)); });
+    return Array.from(tags).sort();
+}, [items]);
+
 const InsightsSection = ({ content, expandedInsightId, onInsightToggle, setPage, ui }) => {
     const [selectedTag, setSelectedTag] = useState(null);
-
-    const parseDate = (dateStr) => {
-        if (!dateStr) return new Date(0);
-        const parts = dateStr.split('.');
-        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
-        return new Date(dateStr);
-    };
-
-    const allTags = useMemo(() => {
-        const tags = new Set();
-        content.insights.items.forEach(item => {
-            if (item.tags) {
-                item.tags.forEach(tag => tags.add(tag));
-            }
-        });
-        return Array.from(tags).sort();
-    }, [content.insights.items]);
+    const allTags = useInsightTags(content.insights.items);
 
     const sortedInsights = useMemo(() => {
         let items = content.insights.items;
-        if (selectedTag) {
-            items = items.filter(item => item.tags && item.tags.includes(selectedTag));
-        }
-        return [...items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+        if (selectedTag) items = items.filter(item => item.tags && item.tags.includes(selectedTag));
+        return [...items].sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
     }, [content.insights.items, selectedTag]);
 
     return (
         <ContentSection id="insights" title={content.insights.title}>
-            <div className="text-center mb-12">
-                <p className="text-sm text-gray-300 tracking-[0.1em] leading-7 bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-5 py-3 inline-block whitespace-pre-line">
-                    <AnimatedText text={content.insights.description} />
-                </p>
+            <p className={`text-[16px] md:text-[17px] ${T.body} leading-[1.65] max-w-[64ch] whitespace-pre-line mb-6`}>{content.insights.description}</p>
+
+            <div className="mb-8">
+                <TagFilter allTags={allTags} selectedTag={selectedTag} setSelectedTag={setSelectedTag} ui={ui} />
             </div>
 
-            <div className="max-w-4xl mx-auto mb-10">
-                <div className="flex flex-wrap justify-center gap-2">
-                    <button
-                        onClick={() => setSelectedTag(null)}
-                        className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${!selectedTag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
-                    >
-                        {ui?.all || 'ALL'}
-                    </button>
-                    {allTags.map(tag => (
-                        <button
-                            key={tag}
-                            onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                            className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${selectedTag === tag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
-                        >
-                            {tag}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
-            <div className="max-w-4xl mx-auto flex flex-col gap-4">
+            <div className={`border-b ${T.line}`}>
                 {sortedInsights.slice(0, 3).map((item, index) => (
                     <InsightAccordionCard
                         key={item.id}
@@ -4090,60 +3432,32 @@ const InsightsSection = ({ content, expandedInsightId, onInsightToggle, setPage,
                     />
                 ))}
             </div>
-            <div className="text-right mt-12">
-                <a onClick={() => setPage('all-insights')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
-                    <AnimatedText text={content.insights.view_more_button} />
-                </a>
+            <div className="pt-5">
+                <a onClick={() => setPage('all-insights')} className={`text-[15px] ${T.acc} ${T.hoverFg} cursor-pointer transition-colors`}>{content.insights.view_more_button} →</a>
             </div>
         </ContentSection>
     );
 };
 
-// --- All Insights Page (all items as accordion) ---
 const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle, lang, setLang, setScrollToSectionId, ui }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedTag, setSelectedTag] = useState(null);
     const itemsPerPage = 9;
-
-    const parseDate = (dateStr) => {
-        if (!dateStr) return new Date(0);
-        const parts = dateStr.split('.');
-        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
-        return new Date(dateStr);
-    };
-
-    const allTags = useMemo(() => {
-        const tags = new Set();
-        content.insights.items.forEach(item => {
-            if (item.tags) {
-                item.tags.forEach(tag => tags.add(tag));
-            }
-        });
-        return Array.from(tags).sort();
-    }, [content.insights.items]);
+    const allTags = useInsightTags(content.insights.items);
 
     const filteredItems = useMemo(() => {
         let items = content.insights.items;
-        if (selectedTag) {
-            items = items.filter(item => item.tags && item.tags.includes(selectedTag));
-        }
-        return [...items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+        if (selectedTag) items = items.filter(item => item.tags && item.tags.includes(selectedTag));
+        return [...items].sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
     }, [content.insights.items, selectedTag]);
 
     const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = filteredItems.slice(indexOfLastItem - itemsPerPage, indexOfLastItem);
     const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [currentPage]);
-
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [selectedTag]);
+    useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
+    useEffect(() => { setCurrentPage(1); }, [selectedTag]);
 
     const handleBack = () => {
         setScrollToSectionId('insights');
@@ -4151,190 +3465,77 @@ const AllInsightsPage = ({ content, setPage, expandedInsightId, onInsightToggle,
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden"
-        >
-            {/* Background canvas is rendered globally at the App level */}
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
-
-            <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-32 relative z-10">
-                <div className="flex justify-between items-end mb-12 border-b border-white/10 pb-8">
-                    <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
-                        <AnimatedText text={content.insights.title} />
-                    </h1>
-                    <div className="flex items-center gap-6">
-                        {lang && setLang && (
-                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors mr-4">
-                                <GlobeIcon />
-                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
-                            </button>
-                        )}
-                        <button
-                            onClick={handleBack}
-                            data-hoverable="true"
-                            className="text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase"
-                        >
-                            <AnimatedText text={ui.back} />
-                        </button>
-                    </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2 mb-10">
-                    <button
-                        onClick={() => setSelectedTag(null)}
-                        className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${!selectedTag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
-                    >
-                        {ui?.all || 'ALL'}
-                    </button>
-                    {allTags.map(tag => (
-                        <button
-                            key={tag}
-                            onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                            className={`text-[10px] sm:text-xs uppercase tracking-widest px-4 py-1.5 rounded-full transition-all duration-300 border ${selectedTag === tag ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 font-medium shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'border-white/10 text-gray-400 hover:text-gray-200 hover:border-white/30 hover:bg-white/5'}`}
-                        >
-                            {tag}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="flex flex-col gap-6">
-                    {currentItems.map((item, index) => (
-                        <InsightAccordionCard
-                            key={item.id}
-                            item={item}
-                            index={index}
-                            isExpanded={expandedInsightId === item.id}
-                            onToggle={() => onInsightToggle(item.id)}
-                            ui={ui}
-                        />
-                    ))}
-                </div>
-
-                {totalPages > 1 && (
-                    <div className="flex justify-center items-center gap-4 mt-16">
-                        {Array.from({ length: totalPages }, (_, i) => (
-                            <button
-                                key={i + 1}
-                                onClick={() => paginate(i + 1)}
-                                className={`w-8 h-8 rounded-full text-xs font-mono transition-colors ${currentPage === i + 1
-                                    ? 'bg-white text-black'
-                                    : 'bg-neutral-900 text-gray-500 hover:text-white hover:bg-neutral-800'
-                                    }`}
-                                data-hoverable="true"
-                            >
-                                {i + 1}
-                            </button>
-                        ))}
-                    </div>
-                )}
+        <SubPage>
+            <SubPageHeader title={content.insights.title} lang={lang} setLang={setLang} onBack={handleBack} ui={ui} />
+            <div className="mb-8">
+                <TagFilter allTags={allTags} selectedTag={selectedTag} setSelectedTag={setSelectedTag} ui={ui} />
             </div>
-        </motion.div>
+            <div className={`border-b ${T.line}`}>
+                {currentItems.map((item, index) => (
+                    <InsightAccordionCard
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        isExpanded={expandedInsightId === item.id}
+                        onToggle={() => onInsightToggle(item.id)}
+                        ui={ui}
+                    />
+                ))}
+            </div>
+            <Pagination totalPages={totalPages} currentPage={currentPage} paginate={paginate} />
+        </SubPage>
     );
 };
 
-// --- Media Coverage Section ---
+
+const MediaRow = ({ item, ui }) => {
+    const hasLink = item.link && (typeof item.link === 'string' ? item.link.trim() !== '' : item.link.length > 0);
+    const hasImage = item.image && (typeof item.image === 'string' ? item.image.trim() !== '' : item.image.length > 0);
+    const href = hasLink ? (Array.isArray(item.link) ? item.link[0] : item.link) : hasImage ? (Array.isArray(item.image) ? item.image[0] : item.image) : null;
+    const label = hasLink ? (ui.view_website || 'Read article') : (ui.view || 'View');
+
+    return (
+        <article className={`grid md:grid-cols-[200px_1fr] gap-2 md:gap-8 py-5 border-b ${T.line}`}>
+            <div className={`text-[14px] ${T.muted} leading-[1.5]`}>
+                <p className={`${T.fg} font-medium`}>{item.mediaName}</p>
+                <p className="tabular-nums">{[item.type, item.date].filter(Boolean).join(' · ')}</p>
+            </div>
+            <div className="min-w-0">
+                <h3 className={`text-[18px] font-medium ${T.fg} leading-[1.3]`}>{item.title}</h3>
+                {item.description && <p className={`text-[15px] ${T.body} leading-[1.6] mt-2 max-w-[64ch]`}>{item.description}</p>}
+                {href && (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-1.5 mt-3 text-[14px] ${T.acc} ${T.hoverFg} transition-colors`}>
+                        {label} <ExternalLinkIcon className="w-3.5 h-3.5" />
+                    </a>
+                )}
+            </div>
+        </article>
+    );
+};
+
 const MediaSection = ({ content, ui, setPage }) => {
-    const parseDate = (dateStr) => {
-        if (!dateStr) return new Date(0);
-        const parts = dateStr.split('.');
-        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
-        return new Date(dateStr);
-    };
-    const sortedMedia = [...content.media.items].sort((a, b) => parseDate(b.date) - parseDate(a.date)).slice(0, 2);
+    const sortedMedia = [...content.media.items].sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date)).slice(0, 3);
 
     return (
         <ContentSection id="media" title={content.media.title}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {sortedMedia.map((item, index) => (
-                    <motion.div
-                        key={`media-${index}`}
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                        className="group relative bg-neutral-900/30 backdrop-blur-sm hover:bg-neutral-800/40 p-8 rounded-sm border border-white/5 hover:border-emerald-500/20 transition-all duration-500 flex flex-col justify-between"
-                    >
-                        <div>
-                            <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-[10px] text-emerald-500/80 font-mono tracking-widest uppercase border border-emerald-500/20 px-2 py-0.5 rounded-sm">
-                                        {item.type}
-                                    </span>
-                                    <span className="text-xs text-gray-400 font-medium tracking-wide">
-                                        {item.mediaName}
-                                    </span>
-                                </div>
-                                <span className="text-[10px] text-gray-600 font-mono tracking-wider">{item.date}</span>
-                            </div>
-                            <h3 className="text-base font-normal text-gray-200 group-hover:text-white transition-colors mb-4 tracking-wide leading-relaxed">
-                                <AnimatedText text={item.title} />
-                            </h3>
-                            <p className="text-xs text-gray-500 leading-relaxed tracking-wide group-hover:text-gray-400 transition-colors">
-                                <AnimatedText text={item.description} />
-                            </p>
-                            {/* Note: Media images are not displayed on the top page directly per requirement */}
-                        </div>
-                        {item.link && (typeof item.link === 'string' ? item.link.trim() !== '' : item.link.length > 0) ? (
-                            <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
-                                <a
-                                    href={Array.isArray(item.link) ? item.link[0] : item.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    data-hoverable="true"
-                                    className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer"
-                                >
-                                    {ui.view_website || "READ ARTICLE"} <ExternalLinkIcon className="w-3 h-3" />
-                                </a>
-                            </div>
-                        ) : (item.image && (typeof item.image === 'string' ? item.image.trim() !== '' : item.image.length > 0)) ? (
-                            <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
-                                <a
-                                    href={Array.isArray(item.image) ? item.image[0] : item.image}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    data-hoverable="true"
-                                    className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer"
-                                >
-                                    {ui.view || "VIEW"} <ExternalLinkIcon className="w-3 h-3" />
-                                </a>
-                            </div>
-                        ) : null}
-                    </motion.div>
-                ))}
+            <div className={`border-t ${T.line}`}>
+                {sortedMedia.map((item, index) => <MediaRow key={`media-${index}`} item={item} ui={ui} />)}
             </div>
-            <div className="text-right mt-12 max-w-5xl mx-auto">
-                <a onClick={() => setPage('all-media')} data-hoverable="true" className="inline-block text-xs text-gray-400 hover:text-emerald-400 border-b border-white/15 hover:border-emerald-400 pb-1 transition-all cursor-pointer tracking-[0.2em] uppercase">
-                    <AnimatedText text={content.news?.view_more_button || "VIEW ALL"} />
-                </a>
+            <div className="pt-5">
+                <a onClick={() => setPage('all-media')} className={`text-[15px] ${T.acc} ${T.hoverFg} cursor-pointer transition-colors`}>{content.news?.view_more_button || "View all"} →</a>
             </div>
         </ContentSection>
     );
 };
 
-
-
-// --- All Media Page ---
 const AllMediaPage = ({ content, setPage, lang, setLang, setScrollToSectionId, ui }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    const parseDate = (dateStr) => {
-        if (!dateStr) return new Date(0);
-        const parts = dateStr.split('.');
-        if (parts.length === 3) return new Date(parts[0], parts[1] - 1, parts[2]);
-        return new Date(dateStr);
-    };
-
-    const sortedItems = [...content.media.items].sort((a, b) => parseDate(b.date) - parseDate(a.date));
-
+    const sortedItems = [...content.media.items].sort((a, b) => parseNewsDate(b.date) - parseNewsDate(a.date));
     const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = sortedItems.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = sortedItems.slice(indexOfLastItem - itemsPerPage, indexOfLastItem);
     const totalPages = Math.ceil(sortedItems.length / itemsPerPage);
-
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
@@ -4345,66 +3546,22 @@ const AllMediaPage = ({ content, setPage, lang, setLang, setScrollToSectionId, u
     };
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-black min-h-[100dvh] text-gray-200 relative overflow-hidden flex flex-col">
-            {/* Background canvas is rendered globally at the App level */}
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm pointer-events-none z-0"></div>
-            <div className="flex-grow pt-32 pb-12 px-6 sm:px-8 lg:px-12 relative z-10">
-                <div className="max-w-6xl mx-auto flex justify-between items-end mb-20 border-b border-white/10 pb-8">
-                    <h1 className="text-xl md:text-3xl font-normal tracking-wider font-['Syne',sans-serif] text-gray-100">
-                        <AnimatedText text={content.media.title} />
-                    </h1>
-                    <div className="flex items-center gap-6">
-                        {lang && setLang && (
-                            <button data-hoverable="true" onClick={() => setLang(lang === 'ja' ? 'en' : 'ja')} className="text-xs text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors mr-4">
-                                <GlobeIcon />
-                                <AnimatedText text={lang === 'ja' ? 'EN' : 'JP'} />
-                            </button>
-                        )}
-                        <button onClick={handleBack} data-hoverable="true" className="text-xs text-gray-500 hover:text-white transition-colors tracking-widest uppercase">
-                            <AnimatedText text={ui.back} />
-                        </button>
-                    </div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={`min-h-[100dvh] ${T.fg} relative flex flex-col`}>
+            <div className="absolute inset-0 bg-[#15140f]/85 pointer-events-none z-0" />
+            <div className={`${CONTAINER} w-full flex-1 pt-28 pb-16 relative z-10`}>
+                <SubPageHeader title={content.media.title} lang={lang} setLang={setLang} onBack={handleBack} ui={ui} />
+                <div className={`border-t ${T.line}`}>
+                    {currentItems.map((item, index) => <MediaRow key={`all-media-${index}`} item={item} ui={ui} />)}
                 </div>
-
-                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {currentItems.map((item, index) => (
-                        <motion.div key={`all-media-${index}`} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: index * 0.05 }} className="group relative bg-neutral-900/30 backdrop-blur-sm hover:bg-neutral-800/40 p-8 rounded-sm border border-white/5 hover:border-emerald-500/20 transition-all duration-500 flex flex-col justify-between">
-                            <div>
-                                <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-4">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-[10px] text-emerald-500/80 font-mono tracking-widest uppercase border border-emerald-500/20 px-2 py-0.5 rounded-sm">{item.type}</span>
-                                        <span className="text-xs text-gray-400 font-medium tracking-wide">{item.mediaName}</span>
-                                    </div>
-                                    <span className="text-[10px] text-gray-600 font-mono tracking-wider">{item.date}</span>
-                                </div>
-                                <h3 className="text-base font-normal text-gray-200 group-hover:text-white transition-colors mb-4 tracking-wide leading-relaxed"><AnimatedText text={item.title} /></h3>
-                                <p className="text-xs text-gray-500 leading-relaxed tracking-wide group-hover:text-gray-400 transition-colors"><AnimatedText text={item.description} /></p>
-                            </div>
-                            {item.link && (typeof item.link === 'string' ? item.link.trim() !== '' : item.link.length > 0) ? (
-                                <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
-                                    <a href={Array.isArray(item.link) ? item.link[0] : item.link} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer">{ui.view_website || "READ ARTICLE"} <ExternalLinkIcon className="w-3 h-3" /></a>
-                                </div>
-                            ) : (item.image && (typeof item.image === 'string' ? item.image.trim() !== '' : item.image.length > 0)) ? (
-                                <div className="mt-8 pt-4 border-t border-white/5 flex justify-end">
-                                    <a href={Array.isArray(item.image) ? item.image[0] : item.image} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="text-[10px] text-emerald-500 group-hover:text-emerald-400 flex items-center gap-1 font-mono tracking-widest transition-colors uppercase cursor-pointer">{ui.view || "VIEW"} <ExternalLinkIcon className="w-3 h-3" /></a>
-                                </div>
-                            ) : null}
-                        </motion.div>
-                    ))}
-                </div>
-
-                {totalPages > 1 && (
-                    <div className="mt-20 flex justify-center gap-2">
-                        {Array.from({ length: totalPages }).map((_, idx) => (
-                            <button key={idx} onClick={() => paginate(idx + 1)} className={`w-2 h-2 rounded-full transition-all duration-300 ${currentPage === idx + 1 ? 'bg-white scale-125' : 'bg-white/20 hover:bg-white/50'}`} />
-                        ))}
-                    </div>
-                )}
+                <Pagination totalPages={totalPages} currentPage={currentPage} paginate={paginate} />
             </div>
-            <Footer content={content.footer} setPage={setPage} ui={ui} />
+            <div className="relative z-10">
+                <Footer content={content.footer} setPage={setPage} ui={ui} />
+            </div>
         </motion.div>
     );
 };
+
 
 // --- Main Content Component ---
 const MainContent = ({
@@ -4439,44 +3596,41 @@ const MainContent = ({
             <HeroSection content={currentContent} />
 
             <ContentSection id="profile" title={currentContent.profile.title}>
-                <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex flex-col md:flex-row items-center gap-8 md:gap-12 max-w-4xl mx-auto"
-                >
-                    <div className="flex-shrink-0">
-                        <div className="w-32 h-32 md:w-56 md:h-56 bg-neutral-900 rounded-full overflow-hidden grayscale opacity-90 mx-auto md:mx-0 shadow-2xl shadow-black/50 ring-1 ring-white/10">
-                            <img
-                                src={process.env.PUBLIC_URL + "/images/self.png"}
-                                alt="Profile"
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                                decoding="async"
-                                onError={(e) => { e.target.style.display = 'none'; }}
-                            />
+                {(() => {
+                    const parts = (currentContent.profile.description || '').split('\n\n');
+                    const lede = parts[0];
+                    const rest = parts.slice(1).join('\n\n');
+                    return (
+                        <div className="grid md:grid-cols-[160px_1fr] gap-8 md:gap-10 items-start">
+                            <div className={`w-[160px] aspect-[4/5] overflow-hidden ${T.surf}`}>
+                                <img
+                                    src={process.env.PUBLIC_URL + "/images/profile-isef.jpg"}
+                                    alt="Kazuhiro Komatsu"
+                                    className="w-full h-full object-cover"
+                                    loading="lazy"
+                                    decoding="async"
+                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                />
+                            </div>
+                            <div className="min-w-0">
+                                <h3 className={`text-[26px] md:text-[28px] font-medium ${T.fg} leading-tight`}>{currentContent.profile.name}</h3>
+                                <p className={`text-[15px] ${T.muted} mt-1 mb-5`}>{currentContent.profile.affiliation}</p>
+                                {lede && <p className={`text-[20px] md:text-[22px] leading-[1.4] ${T.fg} max-w-[40ch] mb-4 [text-wrap:balance]`}>{lede}</p>}
+                                {rest && <p className={`text-[16px] md:text-[17px] leading-[1.65] ${T.body} whitespace-pre-line max-w-[64ch] mb-6`}>{rest}</p>}
+                                <a href={cvUrl} target="_blank" rel="noopener noreferrer" className={`inline-block text-[15px] ${T.acc} ${T.hoverFg} border-b ${T.accBorder} pb-px transition-colors`}>
+                                    {currentContent.profile.cv_button}
+                                </a>
+                            </div>
                         </div>
-                    </div>
-
-                    <div className="flex-1 w-full">
-                        <div className="w-fit mx-auto md:mx-0 text-left">
-                            <p className="text-xl font-normal text-gray-100 mb-2 tracking-[0.05em] font-['Syne',sans-serif] pl-6"><AnimatedText text={currentContent.profile.name} /></p>
-                            <p className="text-xs text-emerald-500/90 mb-8 font-mono tracking-widest uppercase pl-6"><AnimatedText text={currentContent.profile.affiliation} /></p>
-                            <p className="text-sm text-gray-300 leading-7 tracking-wide mb-10 whitespace-pre-line bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-6 py-5 block"><AnimatedText text={currentContent.profile.description} /></p>
-                            <a href={cvUrl} target="_blank" rel="noopener noreferrer" data-hoverable="true" className="inline-block text-xs text-gray-300 border border-gray-700 px-8 py-3 rounded-full hover:bg-emerald-500 hover:text-black hover:border-emerald-500 hover:shadow-[0_0_24px_rgba(16,185,129,0.35)] transition-all duration-500 tracking-[0.2em] uppercase ml-6">
-                                <AnimatedText text={currentContent.profile.cv_button} />
-                            </a>
-                        </div>
-                    </div>
-                </motion.div>
+                    );
+                })()}
             </ContentSection>
 
             <ContentSection id="vision" title={currentContent.vision.title}>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.8 }} className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-xl md:text-2xl font-normal text-white leading-relaxed mb-8 tracking-[0.1em]"><AnimatedText text={currentContent.vision.heading} /></h2>
-                    <p className="text-sm text-gray-300 leading-7 tracking-wide whitespace-pre-line text-left bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-6 py-5 inline-block"><AnimatedText text={currentContent.vision.description} /></p>
-                </motion.div>
+                <div className="max-w-[64ch]">
+                    <h3 className={`text-[22px] md:text-[24px] font-medium ${T.fg} leading-snug mb-5`}>{currentContent.vision.heading}</h3>
+                    <p className={`text-[16px] md:text-[17px] leading-[1.7] ${T.body} whitespace-pre-line`}>{currentContent.vision.description}</p>
+                </div>
             </ContentSection>
 
             <NewsSection content={currentContent} onNewsSelect={handleNewsSelect} setPage={setPage} ui={currentContent.ui} />
@@ -4491,9 +3645,9 @@ const MainContent = ({
             <ResearchSection content={currentContent} onDetailSelect={setSelectedDetail} ui={currentContent.ui} />
 
             <ContentSection id="map" title={currentContent.map.title}>
-                <p className="text-center text-xs text-gray-400 mb-12 tracking-[0.2em] uppercase bg-black/40 backdrop-blur-[2px] rounded-md border border-white/5 px-5 py-3 w-fit mx-auto"><AnimatedText text={currentContent.map.description} /></p>
-                <div className="relative w-full max-w-4xl mx-auto aspect-video bg-transparent border border-white/5 overflow-hidden rounded-sm grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
-                    <img src={process.env.PUBLIC_URL + "/images/map.jpg"} alt="World Map" className="w-full h-full object-contain opacity-90 mix-blend-lighten" loading="lazy" decoding="async" />
+                <p className={`text-[16px] md:text-[17px] ${T.body} leading-[1.65] max-w-[64ch] mb-8`}>{currentContent.map.description}</p>
+                <div className={`relative w-full aspect-video border ${T.line} overflow-hidden`}>
+                    <img src={process.env.PUBLIC_URL + "/images/map.jpg"} alt="World map" className="w-full h-full object-contain opacity-70 mix-blend-lighten" loading="lazy" decoding="async" />
 
                     <svg className="absolute inset-0 w-full h-full pointer-events-none">
                         {currentContent.map.locations.slice(1).map((loc, i) => (
@@ -4501,28 +3655,27 @@ const MainContent = ({
                                 key={i}
                                 x1={`${currentContent.map.locations[0].x}%`} y1={`${currentContent.map.locations[0].y}%`}
                                 x2={`${loc.x}%`} y2={`${loc.y}%`}
-                                stroke="rgba(255, 255, 255, 0.2)"
-                                strokeWidth="1.5"
+                                stroke="rgba(237, 230, 214, 0.18)"
+                                strokeWidth="1"
                                 initial={{ pathLength: 0 }}
                                 whileInView={{ pathLength: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 1.5, delay: i * 0.2 }}
+                                transition={{ duration: 1.2, delay: i * 0.15 }}
                             />
                         ))}
                     </svg>
 
-
                     {currentContent.map.locations.map((loc, i) => {
                         const isHub = i === 0;
                         return (
-                            <motion.div key={loc.id} onClick={() => setSelectedDetail(loc)} className="absolute cursor-pointer group -translate-x-1/2 -translate-y-1/2" style={{ left: `${loc.x}%`, top: `${loc.y}%` }} data-hoverable="true">
-                                <motion.div className="relative flex items-center justify-center">
-                                    <div className={`w-4 h-4 border-2 border-white ${isHub ? 'bg-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.8)] animate-pulse' : 'bg-white shadow-[0_0_10px_rgba(255,255,255,0.6)]'} rounded-full group-hover:scale-125 group-hover:shadow-[0_0_20px_rgba(255,255,255,1)] transition-all duration-300`} />
-                                    <div className="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap tracking-widest uppercase bg-black/60 backdrop-blur-sm px-2 py-1 rounded-sm">
+                            <div key={loc.id} onClick={() => setSelectedDetail(loc)} className="absolute cursor-pointer group -translate-x-1/2 -translate-y-1/2" style={{ left: `${loc.x}%`, top: `${loc.y}%` }}>
+                                <div className="relative flex items-center justify-center">
+                                    <div className={`w-3 h-3 rounded-full ${isHub ? 'bg-[#a7b08f]' : 'bg-[#ede6d6]'} group-hover:scale-125 transition-transform duration-200`} />
+                                    <div className={`absolute top-3 left-1/2 -translate-x-1/2 text-[12px] ${T.fg} opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap ${T.bg} px-2 py-0.5`}>
                                         {loc.name}
                                     </div>
-                                </motion.div>
-                            </motion.div>
+                                </div>
+                            </div>
                         );
                     })}
                 </div>
@@ -4533,63 +3686,38 @@ const MainContent = ({
             <MediaSection content={currentContent} ui={currentContent.ui} setPage={setPage} />
 
             <ContentSection id="activities" title={currentContent.activities.title}>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
                     {currentContent.activities.items.map((item, index) => (
-                        <motion.div
+                        <TileCard
                             key={`activity-${index}`}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.5, delay: index * 0.05 }}
-                            className="group bg-neutral-900/40 rounded-lg border border-white/10 hover:border-emerald-500/30 relative overflow-hidden cursor-pointer hover:bg-neutral-800/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(16,185,129,0.08)] aspect-[4/3] flex flex-col justify-end p-6"
+                            image={item.image}
+                            eyebrow={item.year}
+                            title={item.title}
+                            text={item.event}
                             onClick={() => setSelectedDetail(item)}
-                            data-hoverable="true"
-                        >
-                            {item.image && (
-                                <>
-                                    <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-all duration-700 grayscale hover:grayscale-0" loading="lazy" decoding="async" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
-                                </>
-                            )}
-                            <div className="relative z-10">
-                                <div className="border-t border-white/10 pt-4 mb-4 flex justify-between items-start">
-                                    <span className="text-[10px] text-gray-500 font-mono tracking-widest">{item.year}</span>
-                                    {item.link && <ExternalLinkIcon className="w-3 h-3 text-gray-400 group-hover:text-white transition-colors" />}
-                                </div>
-                                <h3 className="text-lg font-normal text-gray-300 group-hover:text-white transition-colors mb-2 leading-tight line-clamp-2"><AnimatedText text={item.title} /></h3>
-                                <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors tracking-wide"><AnimatedText text={item.event} /></p>
-                            </div>
-                        </motion.div>
+                        />
                     ))}
                 </div>
             </ContentSection>
 
             <ContentSection id="contact" title={currentContent.contact.title}>
-                <div className="text-center">
-                    <p className="text-sm text-gray-400 mb-12 max-w-xl mx-auto whitespace-pre-line leading-8 tracking-wide"><AnimatedText text={currentContent.contact.description} /></p>
-                    <div className="flex flex-col items-center gap-8">
-                        <motion.a
-                            data-hoverable="true"
-                            onClick={handleCopyEmail}
-                            className="relative flex items-center gap-4 text-gray-300 hover:text-white transition-colors cursor-pointer text-sm md:text-base font-mono tracking-widest group"
-                        >
-                            <span>{currentContent.contact.email}</span>
-                            <span className="text-[10px] text-gray-600 border border-gray-800 px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">{currentContent.ui.copy}</span>
-                            <AnimatePresence>
-                                {copied && <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-emerald-500 text-[10px] tracking-widest uppercase">{currentContent.ui.copied}</motion.span>}
-                            </AnimatePresence>
-                        </motion.a>
+                <div className="max-w-[64ch]">
+                    <p className={`text-[16px] md:text-[17px] ${T.body} leading-[1.65] whitespace-pre-line mb-8`}>{currentContent.contact.description}</p>
+                    <button onClick={handleCopyEmail} className="group inline-flex flex-wrap items-baseline gap-x-3 gap-y-1 text-left">
+                        <span className={`text-[20px] md:text-[24px] font-medium ${T.fg} ${T.hoverAcc} transition-colors break-all`}>{currentContent.contact.email}</span>
+                        <span className={`text-[13px] ${copied ? T.acc : T.muted}`}>{copied ? currentContent.ui.copied : currentContent.ui.copy}</span>
+                    </button>
 
-                        <div className="flex gap-8 mt-12 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                            <motion.a data-hoverable="true" href="https://x.com/kazu_koma08" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "x-(twitter)" })}><TwitterIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.instagram.com/kazu.koma08/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "instagram" })}><InstagramIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.facebook.com/kazu.koma08" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "facebook" })}><FacebookIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://www.linkedin.com/in/kazukoma08/?locale=ja" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "linkedin" })}><LinkedinIcon /></motion.a>
-                            <motion.a data-hoverable="true" href="https://github.com/kazueuglena" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "github" })}><GitHubIcon /></motion.a>
-                        </div>
+                    <div className={`flex gap-6 mt-8 ${T.muted}`}>
+                        <a href="https://x.com/kazu_koma08" target="_blank" rel="noopener noreferrer" aria-label="X" className={`${T.hoverFg} transition-colors`} onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "x-(twitter)" })}><TwitterIcon /></a>
+                        <a href="https://www.instagram.com/kazu.koma08/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={`${T.hoverFg} transition-colors`} onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "instagram" })}><InstagramIcon /></a>
+                        <a href="https://www.facebook.com/kazu.koma08" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={`${T.hoverFg} transition-colors`} onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "facebook" })}><FacebookIcon /></a>
+                        <a href="https://www.linkedin.com/in/kazukoma08/?locale=ja" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={`${T.hoverFg} transition-colors`} onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "linkedin" })}><LinkedinIcon /></a>
+                        <a href="https://github.com/kazueuglena" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className={`${T.hoverFg} transition-colors`} onClick={() => ReactGA.event({ category: "External_Link", action: "Click", label: "github" })}><GitHubIcon /></a>
                     </div>
                 </div>
             </ContentSection>
+
 
             <Footer content={currentContent.footer} setPage={setPage} ui={currentContent.ui} />
         </>
@@ -4866,7 +3994,8 @@ export default function App() {
 
 
     return (
-        <div className="bg-black text-gray-200 font-['Noto_Sans_JP',_sans-serif] cursor-default md:cursor-none relative selection:bg-emerald-500/30 selection:text-white min-h-[100dvh]">
+        <div className="bg-[#15140f] text-[#ede6d6] relative selection:bg-[#a7b08f]/30 selection:text-[#ede6d6] min-h-[100dvh]">
+
             <AnimatePresence>
                 {showIntro && <NodeIntro onFinish={() => {
                     setShowIntro(false);
@@ -4880,8 +4009,6 @@ export default function App() {
             <AnimatePresence mode="wait">
                 {!showIntro && (
                     <motion.div key={page} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="relative z-10">
-                        <CustomCursor />
-                        <ScrollProgress />
                         <NewsModal newsItem={selectedNews} onClose={handleNewsClose} ui={currentContent.ui} />
 
                         <DetailModal item={selectedDetail} onClose={() => setSelectedDetail(null)} content={currentContent} handleDownload={handleDownload} ui={currentContent.ui} />
