@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 _preview
 _preview.tgz
+
+# local preview build
+/preview

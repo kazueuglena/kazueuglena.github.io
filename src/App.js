@@ -24,7 +24,7 @@ const getMediaImage = (fileName) => {
 // --- 多言語コンテンツ ---
 const content = {
     ja: {
-        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
+        nav: { profile: "Profile", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
         ui: {
             read_more: "Read more",
             click_for_details: "詳細を見る",
@@ -44,22 +44,12 @@ const content = {
             insight_details: "詳細",
             all: "すべて"
         },
-        hero: {
-            title: "Intelligence is Connection",
-            subtitle: "知能は、つながりから立ち現れるのか。",
-            name_label: "Kazuhiro Komatsu | Student"
-        },
         profile: {
             title: "Profile",
             name: "小松 和滉",
             affiliation: "長野県諏訪清陵高等学校",
             description: "異なる領域が繋がることでこそ、新たな「知」が生まれると信じています。\n\n私は、長野県を拠点に「生物学×情報工学」という学際的な視点からオジギソウの環境ストレスへの応答（馴化）を研究するとともに、地方と都市の教育格差を解消するための科学教育活動を展開してきました。脳を持たない植物が、いかに環境の変化を感じ取り、応答を最適化していくのか——その仕組みの解明は、気候変動が進む世界でも安定して実る作物の育種や、持続可能な食料生産という農学の課題へと必ずつながっていくと考えています。\n研究室の知見と社会の課題、最先端のテクノロジーと地方の子どもたち。それら分断されがちな世界を滑らかにつなぐ「架け橋」となることで、新たな可能性を拓いていきます。",
             cv_button: "CVを見る"
-        },
-        vision: {
-            title: "Vision",
-            heading: "知能の定義を、問い直す。",
-            description: "知能とは、脳や神経系を持つ生き物だけのものなのでしょうか。私はこの前提そのものを問い直したいと考えています。\n\nオジギソウは、脳という中枢を持たないまま、全身に広がる分散的なネットワークで刺激に応答し、馴化様の振る舞いを見せます。こうした現象は、統合情報理論や基底的認知（basal cognition）といった枠組みが投げかける問い——知能を器官にではなく、要素の相互作用というシステムの側に見いだせるか——と静かに響き合います。もちろん、植物が意識や感情を持つと主張するつもりはありません。応答の減弱が「学習」なのか、より単純な生理過程なのかも、まだ開かれた問いです。だからこそ私は、断定ではなく検証を積み重ね、生命に共通する情報処理の原理がありうるのかを、実証と理論の両面から確かめていきたいと思っています。\n\nそして、脳を持たない植物が環境ストレスに適応する原理を解き明かすことは、知能の謎に迫るだけにとどまりません。それは、気候変動が進む世界でも安定して実る作物の育種や、持続可能な食料生産という農学の課題へと確かにつながっており、私は基礎研究で得た知を、最終的には人類の食と農を支える力へと還元していきたいと考えています。",
         },
         news: {
             title: "News",
@@ -921,7 +911,7 @@ const content = {
         }
     },
     en: {
-        nav: { profile: "Profile", vision: "Vision", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
+        nav: { profile: "Profile", news: "News", research: "Research", projects: "Projects", map: "Map", insights: "Insights", activities: "Activities", media: "Media", contact: "Contact" },
         ui: {
             read_more: "Read more",
             click_for_details: "Click for details",
@@ -941,22 +931,12 @@ const content = {
             insight_details: "Details",
             all: "All"
         },
-        hero: {
-            title: "Intelligence is Connection",
-            subtitle: "The Rhizome of Intelligence",
-            name_label: "Kazuhiro Komatsu | Student"
-        },
         profile: {
             title: "Profile",
             name: "Kazuhiro Komatsu",
             affiliation: "Suwa Seiryo High School",
             description: "I believe that new 'intelligence' is born precisely when different fields connect.\n\nBased in Nagano, I research the environmental stress responses (habituation) of Mimosa pudica from the interdisciplinary perspective of 'Biology × Informatics,' while also leading science education initiatives to bridge the educational gap between rural and urban areas. How does a plant with no brain sense changes in its environment and optimize its responses? I believe unraveling this mechanism connects to the breeding of crops that yield reliably even in a changing climate, and to sustainable food production—challenges at the very heart of agricultural science.\nConnecting laboratory insights with social issues, and cutting-edge technology with children in rural regions. By acting as a 'bridge' that smoothly connects these often divided worlds, I aim to unlock new possibilities.",
             cv_button: "View CV"
-        },
-        vision: {
-            title: "Vision",
-            heading: "Rethinking Intelligence",
-            description: "Is intelligence something reserved only for animals with brains and nervous systems? I want to question this very premise.\n\nWithout a central brain, Mimosa pudica responds to stimuli through a distributed network spread across its whole body, showing habituation-like behavior. Phenomena like this resonate with the questions raised by frameworks such as Integrated Information Theory and basal cognition—whether intelligence might be found not in a specific organ, but on the side of the system, in the interaction of its elements. Of course, I do not claim that plants possess consciousness or emotions, and whether the observed decline in response reflects 'learning' or a simpler physiological process remains an open question. That is precisely why I want to accumulate evidence rather than assert conclusions, and examine—both empirically and theoretically—whether there might be principles of information processing common to all life.\n\nAnd understanding how brainless plants adapt to environmental stress is not only about approaching the riddle of intelligence. I am convinced it also connects to the challenges of agriculture—breeding crops that yield reliably even in a changing climate, and sustainable food production—and I hope to return the knowledge gained from basic research to supporting humanity's food and farming.",
         },
         news: {
             title: "News",
@@ -2588,7 +2568,7 @@ const Header = ({ lang, setLang, content, setPage }) => {
         <>
             <header className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b ${isScrolled ? `bg-[#15140f]/90 backdrop-blur-sm ${T.line}` : 'bg-transparent border-transparent'}`}>
                 <nav className={`${CONTAINER} flex items-center justify-between h-16`}>
-                    <span onClick={() => scrollToSection('hero')} className={`text-[15px] font-medium ${T.fg} cursor-pointer`}>Kazuhiro Komatsu</span>
+                    <span onClick={() => scrollToSection('profile')} className={`text-[15px] font-medium ${T.fg} cursor-pointer`}>Kazuhiro Komatsu</span>
                     <div className="flex items-center gap-6">
                         <div className="hidden lg:flex items-center gap-5">
                             {Object.entries(content.nav).map(([key, value]) => (
@@ -2648,33 +2628,6 @@ const Header = ({ lang, setLang, content, setPage }) => {
 };
 
 
-// --- Hero (bottom-right, one quiet fade) ---
-const HeroSection = ({ content }) => {
-    const words = content.hero.title.split(' ');
-    const leading = words.slice(0, -1).join(' ');
-    const lastWord = words[words.length - 1];
-
-    return (
-        <section id="hero" className="min-h-[100dvh] w-full relative flex items-end">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#15140f] via-transparent to-transparent pointer-events-none" />
-            <div className={`${CONTAINER} relative z-10 pb-20 md:pb-24 flex justify-start md:justify-end`}>
-                <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-left md:text-right max-w-2xl"
-                >
-                    <h1 className={`text-[38px] sm:text-[48px] md:text-[64px] font-medium leading-[1.02] tracking-[-0.015em] ${T.fg} mb-5 [text-wrap:balance]`}>
-                        {leading}{leading && ' '}<span className={T.acc}>{lastWord}</span>
-                    </h1>
-                    <p className={`text-[16px] md:text-[17px] ${T.muted}`}>{content.hero.subtitle}</p>
-                    <p className={`text-[15px] ${T.fg} mt-1.5`}>{content.hero.name_label}</p>
-                </motion.div>
-            </div>
-        </section>
-    );
-};
-
 
 // --- Research (year / title / result rows) ---
 const ResearchRow = ({ item, category, onDetailSelect }) => (
@@ -2728,8 +2681,8 @@ const ResearchSection = ({ content, onDetailSelect, ui }) => {
 // --- Section shell: big left-aligned heading with a rule ---
 const SectionTitle = ({ title }) => <span>{title}</span>;
 
-const ContentSection = ({ id, title, children }) => (
-    <section id={id.toLowerCase()} className="py-14 md:py-20 relative">
+const ContentSection = ({ id, title, children, first = false }) => (
+    <section id={id.toLowerCase()} className={`${first ? 'pt-28 md:pt-36' : 'pt-14 md:pt-20'} pb-14 md:pb-20 relative`}>
         <div className={`${CONTAINER} relative z-10`}>
             <h2 className={`text-[28px] md:text-[34px] font-medium tracking-[-0.01em] ${T.fg} pb-3 mb-8 md:mb-10 border-b ${T.line}`}>
                 <SectionTitle title={title} />
@@ -3593,16 +3546,14 @@ const MainContent = ({
     return (
         <>
             <Header lang={lang} setLang={setLang} content={currentContent} setPage={setPage} />
-            <HeroSection content={currentContent} />
-
-            <ContentSection id="profile" title={currentContent.profile.title}>
+            <ContentSection id="profile" title={currentContent.profile.title} first>
                 {(() => {
                     const parts = (currentContent.profile.description || '').split('\n\n');
                     const lede = parts[0];
                     const rest = parts.slice(1).join('\n\n');
                     return (
-                        <div className="grid md:grid-cols-[200px_1fr] gap-6 md:gap-12 items-start">
-                            <div className={`w-[140px] md:w-[200px] aspect-[4/5] overflow-hidden ${T.surf}`}>
+                        <div className="grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-6 md:gap-14 lg:gap-20 items-center">
+                            <div className={`w-[160px] md:w-full md:max-w-[420px] md:justify-self-end aspect-[4/5] overflow-hidden ${T.surf}`}>
                                 <img
                                     src={process.env.PUBLIC_URL + "/images/profile-isef.jpg"}
                                     alt="Kazuhiro Komatsu"
@@ -3624,13 +3575,6 @@ const MainContent = ({
                         </div>
                     );
                 })()}
-            </ContentSection>
-
-            <ContentSection id="vision" title={currentContent.vision.title}>
-                <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-4 md:gap-12 items-start">
-                    <h3 className={`text-[22px] md:text-[26px] font-medium ${T.fg} leading-snug [text-wrap:balance]`}>{currentContent.vision.heading}</h3>
-                    <p className={`text-[16px] md:text-[17px] leading-[1.7] ${T.body} whitespace-pre-line max-w-[70ch]`}>{currentContent.vision.description}</p>
-                </div>
             </ContentSection>
 
             <NewsSection content={currentContent} onNewsSelect={handleNewsSelect} setPage={setPage} ui={currentContent.ui} />
